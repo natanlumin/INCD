@@ -9,13 +9,37 @@ Research cut-off and access date 2026-10-06. Source identifiers resolve in the l
 
 ---
 
-## 1. What each platform carries
+## 1. The platform comparison
 
-Governance, platform-side controls, guaranteed metadata and distribution mechanism are tabulated in
-`../landscape/landscape-platform-comparison.md` and are not repeated here. This section answers the
-question that table does not: what is actually inside each platform, and in whose vocabulary.
+Columns are the four the Jira item names, plus the kind from the glossary (§1.1 of the style guide) and
+the source column. "Hands you" states which side of the in-possession / by-proxy line the platform sits on.
+The cloud-garden row is split into four provider rows in 1.1 because the four providers differ
+materially on scanning and signing; a single row would have to say "varies" in every cell.
 
-### 1.1 Hugging Face Hub
+| Platform | Kind (§1.1); hands you | Governance (who may publish; takedown) | Platform-side controls (scanning, conversion, signing, gating) | Guaranteed metadata (enforced fields, hashes, history) | Distribution mechanism | Source (class, date) |
+|---|---|---|---|---|---|---|
+| Hugging Face Hub | model repository; files (in possession). Inference Endpoints is the same company's by-proxy service: a hosted API, no file [HF-18] | Any natural person 13+ or registered legal entity may open an account and publish; the publisher is solely responsible for content [HF-01]. Content Policy (effective 2025-04-10) with five prohibited categories incl. malware; graduated moderation from edit request to account termination; removal at sole discretion [HF-01, HF-02]. DMCA: notice to dmca@huggingface.co, content disabled, uploader may counter-notify, 14 U.S. business days before restoration; appeals to safety@huggingface.co; public log of takedown notices [HF-02, HF-04]. Repository reports open a public discussion [HF-03] | ClamAV on every file at every commit; warning badge, no blocking statement [HF-05]. Pickle import scan on every pickled upload, suspicious imports highlighted; stated "not 100% foolproof", best-effort lists [HF-06]. Third-party scanners Protect AI Guardian and JFrog on all public repos, results shown, no blocking statement [HF-07, HF-08]. Secrets scanning, e-mail only [HF-09]. Safetensors conversion on request through a Space that opens a Pull Request the owner must merge [HF-10]. GPG commit signing optional, proves origin not safety [HF-06, HF-11]. Gating: login plus username and e-mail shared with the author, automatic or manual approval, author may revoke without notice, optional geo-restriction; licence acceptance runs through the gating prompt, not platform-wide [HF-12]. Scan status machine-readable via the API [HF-13] | Model-card YAML fields license, base_model, pipeline_tag, library_name are machine-read (filters, licence display, model tree) but author-supplied; license uses a controlled identifier list; no field is mandatory [HF-14, HF-15]. Model-tree relation (finetune, adapter, quantized, merge) is declared by the uploader and its type inferred; verification of the relation: not established [HF-14]. Every large file carries a SHA-256 in its LFS pointer, now backed by Xet with a Xet hash; commit API requires sha256 per file [HF-13, HF-16]. Full commit history with diffs; downloads pin to a full commit hash [HF-15, HF-17] | huggingface_hub library, the hf CLI, or git clone with git-xet and git-lfs; Xet storage with an LFS bridge for legacy clients; file contents served from separate CDN hostnames; chunk access bound to repository permissions [HF-16, HF-17] | S4, 2026-10-06; ToS dated 2022-09-15, Content Policy 2025-04-10, JFrog blog 2025-03-04 |
+| Kaggle Models | model repository; files (in possession) | Any registered user or Organization profile may publish via UI, kagglehub or CLI; pages for Hugging Face models are auto-created when a notebook uses them [KG-01, KG-07]. One account per user [KG-02]. Community Guidelines (updated 2026-03-04): no plagiarism, no misrepresenting the source licence; moderation by people and machine learning, report option on model pages, removal, suspension, ban, law-enforcement referral; appeal path and EU DSA option [KG-03]. IP complaints through Google's report-content troubleshooter; content removable without notice [KG-02] | Gating: user must accept an agreement, status banner, only "accepted" may download, Kaggle credentials required for gated downloads [KG-01]. Malware or pickle scanning, signing, format conversion: not established; the AUP (2025-06-22) only prohibits distributing malicious files [KG-04]. Pre-publication review of model files: not established, the Terms disclaim endorsement and warranty [KG-02] | Licence chosen from a fixed platform list at model and variation level; framework (enumerated), variation and numeric version are structural parts of every handle [KG-01, KG-05]. Relation to a parent model self-declared (modelInstanceType, baseModelInstance, externalBaseModelUrl, provenanceSources); verification not established [KG-05]. Each upload is a numbered version, earlier versions stay downloadable [KG-05]. Per-file hashes or signatures: not established [KG-05] | kagglehub (Python), the kaggle CLI, or a REST URL returning a tar.gz; no git or LFS; credentials only for gated or private models [KG-01, KG-06] | S4, 2026-10-06; Guidelines 2026-03-04, AUP 2025-06-22 |
+| ModelScope | model repository; files (in possession). Documented as a platform for independent uploads; a mirroring or syncing process for Hugging Face repositories is not established (see §4) [MS-04, MS-07] | CN site: registration by natural persons or legal entities with full civil capacity, not under sanctions, one account, mobile-phone registration [MS-01]; international site run by Alibaba Cloud (Singapore), under-18s barred [MS-02]. PRC-law content prohibitions; downloaders bound by each model's Custom License; platform may review content by technical or manual means and delete; accounts frozen on evidenced complaints [MS-01]. International Terms: "User Content is not verified or approved by us", removal at discretion [MS-02]. Takedown: written infringement notice with identity, proof of rights and URLs, forwarded to the uploader, removal "as appropriate", counter-notice route; Singapore Copyright Act 2021 notice on the international site [MS-01, MS-02] | Gating ("application-based" models): downloader accepts a download agreement and shares e-mail and username, optional custom licence link and phone, manual or automatic approval [MS-04]. Malware or pickle scanning, signing, format conversion, pre-publication review: not established; uploads of weight files are only auto-routed to Git LFS, and the international Terms disclaim screening [MS-05, MS-02] | Licence is a required form choice (create_model defaults to Apache-2.0 if omitted) and a README YAML field; base_model and base_model_relation (adapter, merge, quantized, finetune) are README fields parsed into a lineage view and may be inferred by the platform; verification of licence or lineage not established [MS-04]. Repositories are Git-backed with commit history; downloads pin a revision [MS-04, MS-06]. Per-file SHA-256 is returned by the repo-files API but no documentation page promises it or describes client-side verification (partial) [MS-07] | modelscope download CLI, Python SDK (snapshot_download, from_pretrained), or git clone with Git LFS; login only for private or application-gated models; default endpoint modelscope.cn, international site by environment variable [MS-06, MS-08] | S4, 2026-10-06; CN Terms effective 2025-08-27, intl Terms 2025-08-21, docs build 2026-09-01 |
+| Ollama library | package registry (GGUF); files pulled by a local runtime (in possession) | Any registered ollama.com user publishes under their own namespace after registering a public key; the un-prefixed official library namespace refuses user pushes, and the curation process for official models is not documented [OL-01, OL-03, OL-08]. Terms (updated May 2026): users 18+, prohibited unlawful or harmful content, suspension or termination; copyright notice to hello@ollama.com under 17 U.S.C. §512(c)(3), repeat-infringer policy; no counter-notice procedure or transparency log published [OL-02] | Pull verifies each layer's sha256 digest before writing the manifest; behaviour on mismatch not stated [OL-03]. Push requires an account plus a registered key; consumer-side signature verification not described [OL-03]. Scanning, review or licence check of pushed models: not established [OL-09]. GGUF imported as-is, no re-quantisation [OL-01] | Registry manifest is Docker-distribution-v2 style with sha256 content-addressed layers typed model, template, license, params [OL-04]. Modelfile records FROM, PARAMETER, TEMPLATE, SYSTEM and an optional free-text LICENSE; the parent survives only as a comment and a parent_model field that is empty for base models (partial) [OL-05]. Library page shows layers with digest prefixes, architecture, parameters, quantisation and licence names; no publisher identity beyond the namespace [OL-06] | ollama pull over HTTPS only into a local blob store; local REST API /api/pull and /api/push with an insecure flag for non-TLS registries [OL-07] | S4, 2026-10-06; Terms "Last updated: May 2026"; OL-08 is an issue-tracker item (S7), motivating only |
+| GitHub releases | package registry; files attached to a software release (in possession). GitHub Models, the by-proxy catalogue next to it, was fully retired on 2026-07-30 [GH-11] | Only users with write permission on the repository manage releases [GH-01]. Terms (effective 2026-04-27): human accounts 13+; refusal or removal of content violating law or policy [GH-02]. AUP bans unlawful content and direct support of active attack or malware campaigns; dual-use security research content explicitly allowed; removal as last resort [GH-03]. DMCA: about one business day to fix, counter-notice, forks not automatically disabled, redacted notices published at github/dmca [GH-04] | Malware scanning of release assets: not established [GH-10]. SHA-256 digest computed at upload for every asset since 2025-06-03, immutable, shown in UI, REST, GraphQL and the gh CLI [GH-05]. Opt-in immutable releases (GA 2025-10-28): assets and tag locked, Sigstore release attestation over tag, commit SHA and asset digests, verified with gh release verify [GH-06]. Opt-in artifact attestations (Sigstore, SLSA Build L2) for build provenance, "not a guarantee that an artifact is secure" [GH-07]. Asset size: under 2 GiB on Free, tied to the LFS plan limit up to 5 GB on Enterprise Cloud (two docs pages differ) [GH-01, GH-08] | Release bound to a Git tag with automatic source archives; tags movable unless immutable releases are on [GH-01, GH-06]. Per-asset SHA-256 [GH-05]. No model-specific metadata (licence, base model, parameters) is guaranteed: not established [GH-10] | Direct HTTPS download of assets or gh release download; git blocks files over 100 MiB and LFS is plan-limited, so weights go in releases [GH-08, GH-09] | S4, 2026-10-06; ToS 2026-04-27, digests changelog 2025-06-03, immutable releases 2025-10-28, GitHub Models retirement 2026-07-30 |
+| Cloud model gardens | model garden; redistributes a file published elsewhere, either as a deployment into the customer's cloud account (in possession of a copy) or as a provider-hosted endpoint (by proxy) | Provider-curated in all four; no community self-publishing path. See 1.1 | Differs by provider: from no documented pre-listing scanning (AWS) to documented malware scanning, safetensors-only enforcement and signed runtime containers (new Microsoft Foundry) and signed containers plus signed models with SBOM and VEX by digest (NVIDIA). See 1.1 | Model cards and version identifiers in all four; licence or EULA acceptance step in all four; digest, signing and SBOM guarantees only at NVIDIA. See 1.1 | Deploy into the customer's own project, account or cluster, or call a provider-hosted endpoint; raw weights obtainable only where stated. See 1.1 | S4, 2026-10-06; see 1.1 |
+
+### 1.1 The four cloud model gardens
+
+| Provider (current name) | Governance (who publishes; removal) | Platform-side controls | Guaranteed metadata | Distribution mechanism | Source (class, date) |
+|---|---|---|---|---|---|
+| Google, Model Garden (Vertex AI is now named "Gemini Enterprise Agent Platform") | Google-curated: models from Google and partners; popular Hugging Face models added automatically by Google; partner proprietary models licensed through Cloud Marketplace [CG-01]. Hugging Face models flagged as malware removed immediately; deprecation then retirement schedule for hosted open models; customer organisation policy can allow-list models [CG-01, CG-02] | Google vulnerability-scans its own serving containers; partner checkpoints get authenticity scans; Hugging Face models are scanned by Hugging Face and its third-party scanner, "unsafe" ones blocked from deployment, "suspicious" or remote-code ones flagged but still deployable; daily Hugging Face malware scan; Google states it does not guarantee the absence of vulnerabilities or malicious code [CG-01]. "Verified by Google" refers to deployment settings, not weights [CG-01]. Google-optimised serving containers (vLLM, Hex-LLM, SGLang, TGI, TensorRT-LLM); provider-prepared FP8 variants exist, converter not stated (partial) [CG-03] | Model card per listing; models addressed as publisher/model@version, containers by dated tag; immutability or digest guarantee not stated (partial); accept_eula at deploy; signing, digests, SBOM: not established [CG-03] | Serverless Google-hosted endpoints (by proxy) or self-deployment into the customer's project and VPC, Vertex endpoint or GKE (in possession of a copy); custom weights in Hugging Face format from Cloud Storage; partner-model weights cannot be exported; export of catalogue open-model weights only implied (partial) [CG-01, CG-03] | S4; pages last updated 2026-10-05 |
+| AWS, Amazon Bedrock with Bedrock Marketplace, and SageMaker JumpStart | AWS-curated: Bedrock serverless models from "leading AI companies"; Marketplace adds 100+ third-party models, public or proprietary; JumpStart "onboards and maintains" public models from third-party sources under the source's licence [CG-04, CG-06]. Bedrock lifecycle Active, Legacy (6 months or 45 days), EOL removed from all Regions [CG-05]; JumpStart delisted some models on 2026-03-13, existing endpoints keep working, licence information for delisted open-weight models "refer to the Hugging Face listing" [CG-06] | Pre-listing scanning of Marketplace or JumpStart models: not established [CG-04, CG-06]. Documented controls: all JumpStart models run in network isolation; Marketplace registration checks compatibility and requires network isolation; provider artefacts cannot be changed [CG-04, CG-06]. Custom Model Import: Bedrock detects the architecture, requires Hugging Face safetensors, pins a transformers version and overrides some config values [CG-07] | Model card per model incl. EOL policy; modelLifecycle API field; model_version pinning in JumpStart; semantic version in the hub-content ARN; explicit EULA acceptance per channel (accept_eula default False; Marketplace subscription accepts provider EULAs; first invocation of a serverless third-party model counts as agreement) [CG-04, CG-05, CG-06]. Signing, digests, SBOM: not established [CG-06] | Bedrock serverless = AWS-hosted endpoint (by proxy); Marketplace and JumpStart = SageMaker endpoint in the customer's account with own VPC, KMS and IAM, callable through Bedrock APIs (in possession of a copy); JumpStart artefacts served from an AWS-managed bucket; whether catalogue weights may be downloaded not stated (partial); bring-your-own weights via Custom Model Import [CG-04, CG-06, CG-07] | S4; lifecycle page applies to models launched on or after 2026-09-07; delisting notice 2026-03-13 |
+| Microsoft, Foundry Models (Azure AI Foundry is now "Microsoft Foundry"; classic and new portals differ) | Two tiers: "sold by Azure" (Microsoft evaluates, internal Responsible AI review) and "partners and community" (validated by the providers themselves); Hugging Face maintains its own collection; customers can only request additions [CG-08]. Lifecycle Preview, GA, Legacy, Deprecated, Retired (410 Gone); GA retirement set at launch (18 months, 12 for some partners); emergency retirement for security or compliance issues [CG-10] | New Foundry (preview): mandatory malware scanning of the Hugging Face collection, models needing trust_remote_code disallowed unless verified, safetensors-only enforcement, runtime validation; runtime containers built, CVE-scanned and signed by Microsoft; deployment templates pin runtime and quantisation; weights "pulled from Hugging Face once, validated" (conversion not stated, partial) [CG-09]. Classic: models needing remote code "aren't supported for security reasons"; Hugging Face models "aren't tested or evaluated by Microsoft" [CG-08] | Model card with a License tab; upstream licence metadata preserved; users accept licence terms; partner licences and billing via Azure Marketplace [CG-08, CG-09]. Registry asset IDs with versions; GA weights and APIs declared fixed; auto-upgrade configurable [CG-08, CG-10]. Containers signed [CG-09]; digests or SBOM published to customers: not established [CG-09] | Serverless Microsoft-hosted (by proxy); classic managed compute = weights deployed to VMs in the customer's subscription, downloaded from Hugging Face Hub at deploy time, not hosted on Azure and not usable as job inputs; new managed compute = Microsoft-owned GPU capacity with weights stored on Azure, no egress needed, gated Hugging Face models not available [CG-08, CG-09]. Customers cannot obtain the weights through the catalogue [CG-08, CG-09] | S4; ms.date 2026-07-28 (overview), 2026-06-16 and 2026-06-01 updated 2026-09-28 (new Foundry), 2026-09-21 (retirement schedule) |
+| NVIDIA, NGC Catalog and NIM | NVIDIA-curated; third-party ISVs through a partner programme with legal agreement, staging, security scanning, QA and sign-off; no community self-publishing [CG-11]. Support lifecycle: Feature Branch one month, Production Branch nine months; public end-of-life notices; explicit catalogue takedown policy not stated [CG-14] | Every image security-scanned under the NGC Container Security Policy; public images rescanned every 30 days, NIM images weekly; Security Scanning tab [CG-11, CG-12]. All NVIDIA container images signed since July 2023 (cosign), NIM pages show a Signed badge [CG-11, CG-12]. All NVIDIA models signed since April 2025 (OpenSSF Model Signing); NIM checksum-verifies downloaded files at startup [CG-11, CG-13]. Pre-built optimised profiles (vllm, sglang, trtllm at bf16, fp8, mxfp4, nvfp4), "curated weights": NVIDIA converts and quantises upstream models [CG-13] | SBOM (CycloneDX), VEX and scan results retrievable by image digest [CG-11]. Governing terms accepted once per NGC organisation before download; NIM self-hosting under the NVIDIA AI Enterprise licence; NIM page carries both the NVIDIA terms and the upstream Llama licence and links the upstream Hugging Face repository [CG-11, CG-12, CG-13]. Versioned tags, updated date, 64-character profile IDs [CG-12, CG-13] | Pull the signed container from nvcr.io with an NGC API key (keyless for eligible public NIMs) and run on any cloud or data centre (in possession); weights downloaded at startup from ngc://, hf://, s3://, gs://, modelscope:// or local://, mirrorable to the customer's bucket, own weights via NIM_MODEL_PATH; or call NVIDIA-hosted endpoints on build.nvidia.com (by proxy) [CG-13] | S4; lifecycle pages 2026-08-20 and 2026-09-09; NIM page updated 2026-09-16 |
+
+## 2. What each platform carries
+
+Section 1 gave each platform's governance, controls, metadata and distribution. This section answers
+what that table does not: what is actually inside each platform, and in whose vocabulary.
+
+### 2.1 Hugging Face Hub
 
 The only platform here that publishes a closed, machine-readable vocabulary for all three dimensions,
 and by a wide margin the largest: **3,127,450 model repositories** as at 2026-10-06 [LD-08].
@@ -59,7 +83,7 @@ format axis to serialisation formats alone.
 The Hub also publishes twelve parameter-size bands, from under one billion to over five hundred
 billion [LD-07], which is the closest thing in the ecosystem to a published scale axis.
 
-### 1.2 Kaggle Models
+### 2.2 Kaggle Models
 
 **Formats.** Kaggle treats framework structurally rather than as a tag: it is a mandatory segment of
 every model's address, so one logical model fans out into one artefact per framework [LD-10]. The
@@ -77,7 +101,7 @@ vocabulary, and a report cannot key a matrix off it.
 Face surface and resolve to links out rather than to files Kaggle holds [LD-13]. An organisation that
 believes it is sourcing from Kaggle may be sourcing from the Hub.
 
-### 1.3 ModelScope
+### 2.3 ModelScope
 
 **Modalities.** Six top-level groups, from the platform's own tag service: text, image, audio, video,
 multimodal and scientific computing [LD-15]. The last of these has no counterpart among the Hub's six
@@ -107,7 +131,7 @@ top of the distribution tells the story:
 platform they are the third-largest population and larger than every format except the two dominant
 ones. Any matrix that treats an adapter as a minor row misdescribes what is actually in circulation.
 
-### 1.4 Ollama library
+### 2.4 Ollama library
 
 **Formats.** Two accepted inputs, documented: a directory of safetensors weights, or a GGUF file,
 single or sharded. Ollama states it does not quantise GGUF models on import, so the compression is
@@ -125,7 +149,7 @@ That is the answer to what Ollama carries, and it is a different shape of answer
 is a few hundred curated entries described by what the runtime can do with them, not a taxonomy of
 what the models are.
 
-### 1.5 GitHub releases
+### 2.5 GitHub releases
 
 No taxonomy of any kind: not formats, not modalities, not tasks. The only constraints that shape the
 artefact are mechanical, up to a thousand assets per release and under two gibibytes per file, with no
@@ -136,7 +160,7 @@ This is the uncontrolled channel, and it is uncontrolled in a specific sense: no
 about content, but that it holds no description of what a file is. Everything a reader could key a
 matrix off has to come from outside the platform.
 
-### 1.6 Cloud model gardens
+### 2.6 Cloud model gardens
 
 The gardens enumerate deployment and commerce, not artefacts. None of the four publishes an artefact
 format vocabulary, because in a garden the weights are not the unit of distribution.
@@ -161,7 +185,7 @@ object detection, speech recognition, translation and synthesis, safety guardrai
 medical imaging, protein and molecular biology, weather and physics simulation [LD-29]. It is also the
 one whose unit of distribution is explicitly a container rather than a weight file [LD-30].
 
-### 1.7 What the comparison shows
+### 2.7 What the comparison shows
 
 **Only two platforms publish a closed task vocabulary**, the Hugging Face Hub with 63 and ModelScope
 with 219. Kaggle, Google, Microsoft and AWS all document that a task filter exists without publishing
@@ -179,14 +203,14 @@ catalogue [LD-18], and roughly three quarters of Hugging Face repositories carry
 [LD-08]. The ecosystem is mostly derivative artefacts, and the published taxonomies describe the
 minority.
 
-## 2. Artefact formats
+## 3. Artefact formats
 
 This section reworks the treatment in the ecosystems document. It keeps that document's definitions and
 adds three things the report needs and that document does not carry: what loading each format can do,
 how many files an artefact actually is, and which formats the platform controls of section 2 can
 actually read.
 
-### 2.1 The word "format" is being used for three different things
+### 3.1 The word "format" is being used for three different things
 
 Before any list, a distinction that the platforms themselves do not draw. Hugging Face's format filter
 enumerates fifty-four values in a single list [LD-04], and they are not the same kind of thing:
@@ -205,7 +229,7 @@ Only the first kind determines what happens when a file is opened. The rest desc
 compatibility. This report therefore uses **format** for the first kind only, and the segmentation in
 section 4 keys off that. Where a later chapter needs to say what can read a file, it says runtime.
 
-### 2.2 The four storage formats
+### 3.2 The four storage formats
 
 A model file arrives in one of four formats, and the format matters independently of the model inside
 it. Each entry below states what loading it can do, because that, not the layout of the bytes, is why
@@ -249,7 +273,7 @@ implementation of that operator is an arbitrary native library that the runtime 
 inference process [LD-38]. The format cannot execute code by itself; it can name code that will be
 executed. No repository control described in section 2 inspects that reference.
 
-### 2.3 Two things an organisation receives that are not storage formats
+### 3.3 Two things an organisation receives that are not storage formats
 
 **Container images** bundle a model with its runtime and its serving software into one deployable unit.
 What is received is not just the model but the stack around it, and a vulnerability in the stack
@@ -267,10 +291,10 @@ documents whether the original parameters can be recovered from one, and none cl
 protected; what is established is that the tools which inspect weight files cannot read it [LD-42].
 
 Both are built artefacts and neither is portable: a container pins the software around the model, an
-engine pins the hardware under it. Neither is a way of storing parameters, which is why section 3 keeps
+engine pins the hardware under it. Neither is a way of storing parameters, which is why section 4 keeps
 them off the format axis and treats them in 3.1 of the report as a question of distribution.
 
-### 2.4 What the format decides about assessment
+### 3.4 What the format decides about assessment
 
 Three consequences, and they are the reason this section exists at all.
 
@@ -290,7 +314,7 @@ evidence, does not. An organisation that receives a model only as an engine has 
 scanning opportunity; it has lost the ability to run a whole class of assessment, and the acceptance
 criteria have to say what happens then.
 
-## 3. The segmentation
+## 4. The segmentation
 
 The Jira item asks for one segmentation, used consistently across Parts I to IV, that every later
 matrix keys off. This section gives it, built in three parts that each answer one question: what kind
@@ -300,7 +324,7 @@ modality, qualifies the second rather than competing with it.
 They are kept apart deliberately. The version this replaces answered all three at once and produced
 rows that could not be compared with one another.
 
-### 3.1 Three kinds of model file
+### 4.1 Three kinds of model file
 
 What an organisation receives is a file. Three kinds circulate, and they differ in what they contain
 rather than in what the model does.
@@ -324,9 +348,9 @@ from the other three by containing something that is not the model at all.
 
 Two of these properties are readable from the file itself. Whether a set of weights is complete or a
 fragment is visible from the tensors present and the adapter configuration beside them; whether the
-numbers are at full or reduced precision is visible from their data types. That matters in 3.9.
+numbers are at full or reduced precision is visible from their data types. That matters in 4.9.
 
-### 3.2 Models by what they produce
+### 4.2 Models by what they produce
 
 The useful way to classify a model is by its output, because the output is what an attacker
 manipulates and what a test measures. Three classes.
@@ -346,9 +370,9 @@ is one whose output is the representation and nothing else.
 unbounded, which is what makes this class different in kind from prediction, and why most of the threat
 landscape concentrates here.
 
-There is no fourth row for instruction-tuned models, and 3.7 explains why.
+There is no fourth row for instruction-tuned models, and 4.7 explains why.
 
-### 3.3 Modality qualifies the output class; it is not an alternative to it
+### 4.3 Modality qualifies the output class; it is not an alternative to it
 
 Modality is a statement about what goes in and what comes out: text, image, audio, video, or a
 combination. Multimodal means more than one modality is involved on at least one side.
@@ -361,12 +385,12 @@ pairs: image-text-to-text, text-to-image, audio-text-to-text [LD-01].
 Treating multimodal as a row beside classification was a category error, and it is why vision-language
 models never sat comfortably anywhere. Modality therefore qualifies a row rather than forming one.
 
-### 3.4 Formats
+### 4.4 Formats
 
-The four serialisation formats of section 2 apply across every row: pickle, safetensors, GGUF and ONNX.
+The four serialisation formats of section 3 apply across every row: pickle, safetensors, GGUF and ONNX.
 They describe how the numbers are written to disk and say nothing about what the model does.
 
-### 3.5 The segmentation, and the rule that keeps it coherent
+### 4.5 The segmentation, and the rule that keeps it coherent
 
 **A row is content. A column is file manner. Nothing crosses the two.** The test is whether the
 property can be read from the bytes. You cannot tell from a file whether a model predicts or generates,
@@ -390,9 +414,9 @@ Qualifiers, recorded where they change the answer rather than as rows or columns
 - **Completeness**, on the file: whether the artefact assessed was a whole model or a model with an
   adapter loaded.
 
-### 3.6 What an adapter does to this
+### 4.6 What an adapter does to this
 
-An adapter is a file, classified in 3.1. But combining one with a parent produces an effective model
+An adapter is a file, classified in 4.1. But combining one with a parent produces an effective model
 whose output class may differ from the parent's. A low-rank adapter trained on a generative model to
 classify transactions yields a prediction model: the parent sits in one row, the product in another.
 
@@ -410,7 +434,7 @@ nothing to measure. If it is still generative but stripped, they apply and would
 is not what runs. Every recorded assessment therefore names the pair it was performed on, not the
 parent.
 
-### 3.7 Why the safeguard is not a row
+### 4.7 Why the safeguard is not a row
 
 The obvious fourth row would be the instruction-tuned generative model, distinguished from the plain
 generative one by carrying a refusal safeguard. It is deliberately absent, for two reasons.
@@ -438,7 +462,7 @@ publish bases at 1.6 trillion, 1 trillion and 110 billion respectively [SG-04, S
 republished. This is the finding, because the artefact claims one state and exhibits another: the
 lineage, the name and the model card all say instruction-tuned, and the behaviour does not.
 
-### 3.8 The evidence that removal is routine, and at every scale
+### 4.8 The evidence that removal is routine, and at every scale
 
 This subsection exists because the scale of the stripped population is the single strongest piece of
 evidence for why the report's acceptance criteria cannot rest on a publisher's claim.
@@ -479,7 +503,7 @@ far, including scales where the publisher deliberately tried to control release.
 segmentation above records safeguard state as a measurement and not as a declaration, and why Chapter 7
 cannot accept a model card as evidence of it.
 
-### 3.9 Readable against claimed
+### 4.9 Readable against claimed
 
 One split runs through all of the above, and Chapter 6 divides on exactly this line.
 
@@ -498,7 +522,7 @@ The segmentation is therefore partly verifiable and partly taken on trust, and t
 reader would not expect. The column side is verifiable. The row side, which decides which threats and
 which tests apply, rests on a publisher's declaration until something is measured.
 
-## 4. Source log
+## 5. Source log
 
 Every claim in this document resolves to a row below. Class per the citation policy: S1 standards and
 specifications, S4 vendor and platform documentation. Access date 2026-10-06 throughout, which is also
