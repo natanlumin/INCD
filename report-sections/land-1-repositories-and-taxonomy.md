@@ -328,7 +328,148 @@ criteria have to say what happens then.
 
 ## 4. The segmentation
 
-<!-- TAXONOMY -->
+The Jira item asks for one segmentation, used consistently across Parts I to IV, that every later
+matrix keys off. This section gives it. It is built in three parts, each answering one question, and
+they are deliberately kept apart because the version this replaces answered all three at once and
+produced rows that could not be compared with one another.
+
+The three questions are: what kind of file is this, what does the model produce, and how are the
+numbers written down. A fourth property, modality, qualifies the second rather than competing with it.
+
+### 4.1 Three kinds of model file
+
+What an organisation receives is a file. Three kinds circulate, and they differ in what they contain
+rather than in what the model does.
+
+**A model.** A complete set of weights, sufficient on its own to produce output once loaded by an
+inference server. This is the ordinary case and the one every control in section 2 is designed around.
+
+**An adapter.** A fragment: a collection of layers and weights that is not the whole model. It is
+produced by training, like a model, but only a small part is trained, which is why the file is
+megabytes where a parent is gigabytes. It is not runnable alone and is meaningful only against the
+parent it was computed from.
+
+**A quantised copy.** A complete set of weights at reduced numeric precision, produced by converting
+an existing model rather than by training it. The behaviour is close to the parent's and not identical.
+Quantisation-aware training, where the reduced precision is present during training, produces the same
+kind of artefact and does not change the classification.
+
+**And, alongside these, a container**, which packages any of the three together with the software that
+runs it. It belongs in this list because it is a thing an organisation receives in place of a weight
+file, and it is distinguished from the three by containing something that is not the model at all.
+
+Two of these are readable from the file itself. Whether a set of weights is complete or a fragment is
+visible from the tensors present and the adapter configuration beside them; whether the numbers are at
+full or reduced precision is visible from their data types. This matters in section 4.5.
+
+### 4.2 Models by what they produce
+
+The useful way to classify a model is by its output, because the output is what an attacker
+manipulates and what a test measures. Four classes.
+
+**Prediction.** The model maps an input to a value from a fixed space: a label, in classification, or a
+number, in regression. The output space is defined in advance and the model cannot leave it.
+
+**Embedding.** The model maps an input to a vector used for search, retrieval, clustering or
+similarity. The vector is the product, not an intermediate.
+
+One clarification belongs here, because it is a common confusion. *Every* model that processes text
+embeds it internally: text becomes vectors before any computation happens, in a classifier and a
+generative model alike. That internal step does not make a model an embedding model. An embedding model
+is one whose output is the representation and nothing else.
+
+**Generation.** The model produces free text, token by token, from a prompt. The output space is
+unbounded, which is the property that makes this class different in kind from prediction and the reason
+most of the threat landscape concentrates here.
+
+**Generation, instruct.** A generative model trained further to follow instructions and, as part of
+that training, to refuse certain requests. It is not a different task from generation; it is a
+generative model carrying an intrinsic safeguard.
+
+That last distinction carries more weight than its size suggests. **The safeguard exists only in this
+class.** A prediction model, an embedding model and a base generative model have no refusal behaviour,
+so the tests that measure the firmness of a safeguard are not merely likely to pass against them; they
+have nothing to measure. Any matrix that cannot express this cannot state which threats and which tests
+apply where.
+
+### 4.3 Modality qualifies the output class; it is not an alternative to it
+
+Modality is a statement about what goes in and what comes out: text, image, audio, video, or a
+combination. Multimodal means more than one modality is involved on at least one side.
+
+It is not a kind of model. A vision-language model is a generative model whose input includes images. A
+zero-shot image classifier is a prediction model whose input includes both an image and candidate
+labels. The platforms' own task names make this explicit by reading as input-to-output pairs:
+image-text-to-text, text-to-image, audio-text-to-text [LD-01].
+
+Treating multimodal as a row beside classification was a category error, and it is why vision-language
+models never sat comfortably anywhere. Modality therefore qualifies a row rather than forming one.
+
+### 4.4 Formats
+
+The four serialisation formats of section 3 apply across every row: pickle, safetensors, GGUF and ONNX.
+They describe how the numbers are written to disk and nothing about what the model does.
+
+### 4.5 The segmentation, and the rule that keeps it coherent
+
+**A row is content. A column is file manner. Nothing crosses the two.** The test is whether the property
+can be read from the bytes. You cannot tell from a file whether a model refuses, or whether it predicts
+or generates, so those are rows. You can tell whether it is pickle or safetensors, and whether its
+numbers are reduced, so those are columns.
+
+| Output class | pickle | safetensors | GGUF | ONNX |
+|---|---|---|---|---|
+| prediction (classification, regression) | C | C | P | P |
+| embedding | C | C | P | C |
+| generation | C | C | C | P |
+| generation, instruct | C | C | C | P |
+
+C common, P possible but uncommon, per the rule in the decision sheet. Evidence per cell in
+`../landscape/landscape-platform-comparison.md` §3.
+
+Qualifiers, recorded where they change the answer rather than as rows or columns of their own:
+
+- **Modality**, on the row: a generative row whose input is image and text.
+- **Precision**, on the columns: the same four formats carry quantised weights at P, C, C, P
+  respectively, which is a statement about the columns and not a fifth row.
+- **Completeness**, on the file: whether the artefact assessed was a whole model or a model with an
+  adapter loaded.
+
+### 4.6 What the adapter does to all of this
+
+An adapter is a file, classified in 4.1. But combining one with a parent produces an effective model
+whose output class may differ from the parent's. A low-rank adapter trained on a generative model to
+classify transactions yields a prediction model: the parent sits in one row, the product in another.
+
+Three consequences, and none is bookkeeping.
+
+**The row assessed need not be the row running.** An organisation assesses a generative instruct model,
+an adapter is loaded, and what serves requests is a prediction model, or a generative model whose
+safeguard has been suppressed. The parent file is unchanged throughout, with the same hash and the same
+signature.
+
+**The applicable tests change with the row.** If the product is a prediction model, the safeguard tests
+have nothing to measure. If it is still generative but stripped, they apply and would fail.
+
+**The pair is the only assessable unit**, since the adapter alone has no behaviour and the parent alone
+is not what runs. Every recorded assessment therefore has to name the pair it was performed on, not the
+parent.
+
+### 4.7 Readable against claimed
+
+One split runs through all of the above and is worth stating once, because Chapter 6 divides on exactly
+this line.
+
+**Readable from the file**: the serialisation format; whether the weights are complete or a fragment;
+the numeric precision. These can be verified by anyone holding the artefact.
+
+**Claimed, and not readable**: which model this derives from; whether a complete set of weights is a
+base model or an instruct model; what it was trained on. None of these can be determined from the bytes,
+and section 2 established that no repository verifies any of them.
+
+The segmentation above is therefore partly verifiable and partly taken on trust, and the line between
+the two is not where a reader would expect. The column side is verifiable. The row side, which decides
+which threats and which tests apply, rests on a publisher's declaration until something is measured.
 
 ## 5. Source log
 
