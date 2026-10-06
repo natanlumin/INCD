@@ -25,10 +25,11 @@ Face Hub counts, and the source log in Appendix E format (about 120 entries, cla
 remains is the agreement with Dan, the prose, and the corrections to the documents the research
 contradicted.
 
-Downstream: the threat x model-type matrix (4.5), the threat-to-control coverage matrix (5.3) and the
-acceptance criteria per test family and trust tier (7.5) use the taxonomy's row and column labels
-verbatim. Section 6.2 (publicly attestable properties) and section 4.2 (supply-chain and artefact-level
-threats) cite this item's platform table rather than re-researching the platforms.
+Downstream: the threat x model-type matrix (4.5) uses the taxonomy's row and column labels verbatim,
+and the threat-to-control coverage matrix (5.3) inherits the model-type axis from 4.5. Section 6.2
+(publicly attestable properties) and section 4.2 (supply-chain and artefact-level threats) cite this
+item's platform table rather than re-researching the platforms. The acceptance criteria in 7.5 are
+indexed by test family and trust tier, not by model type, so they do not key off the taxonomy.
 
 Open dependency: INCD's first question for the engagement - whether "open-source AI model" covers
 classification and embedding models or language models only - changes which taxonomy rows survive. The

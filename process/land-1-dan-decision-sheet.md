@@ -1,8 +1,8 @@
 # Taxonomy freeze: four decisions
 
 For the session with Dan. The segmentation below becomes the single one used across Parts I-IV of the
-report: the threat x model-type matrix (4.5), the threat-to-control coverage matrix (5.3) and the
-acceptance criteria per test family and trust tier (7.5) all use its row and column labels verbatim.
+report: the threat x model-type matrix (4.5) uses its row and column labels verbatim, and the
+threat-to-control coverage matrix (5.3) inherits the model-type axis from 4.5.
 Once frozen it carries a version and a date, and changing it later means reopening those three matrices.
 Evidence for every cell, with sources dated 2026-10-06, is in `landscape-platform-comparison.md` §3.
 

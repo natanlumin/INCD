@@ -60,7 +60,16 @@ Where the material answers a section of the report, and where it does not yet.
    credited with file hashes, and the producers table behind on Cohere and Gemma. Either the document
    is corrected or it stays frozen and `landscape/` carries the corrections.
 3. **Duplication.** The foundation's section 2 and the ecosystems document are word for word the same,
-   about 2,100 words. The glossaries have also drifted: the ecosystems document says *open-weight
-   model*, the style guide says *open-source model*.
-4. **INCD's own scope question** - whether classification and embedding models are in scope - decides
+   about 2,100 words, both tables included. Either the foundation keeps section 2 to stand alone as a
+   paper and one of the two is declared canonical so edits flow one way, or the two example tables
+   come out of the foundation, since those are the parts that go stale.
+4. **One vocabulary, two words.** The ecosystems document says *open-weight model*; the style guide
+   says *open-source model*. This may be deliberate rather than drift: the report INCD commissioned is
+   titled "Securing Open-Source AI Models", while *open-weight* is the more precise term for a file
+   whose parameters are public but whose licence, data and code may not be. The fix is probably to
+   define both and state the relationship once, not to pick one.
+5. **Five terms are missing from the governing glossary**: in possession, by proxy, producer,
+   repository and redistributor. They are defined in the ecosystems document and used throughout the
+   landscape material, but the style guide is the document that is supposed to fix vocabulary once.
+6. **INCD's own scope question** - whether classification and embedding models are in scope - decides
    which taxonomy rows survive, and therefore 3.5.
