@@ -53,8 +53,9 @@ model: a key, a request, an answer, a bill.
 
 This document describes the ecosystem on its own terms: who produces models, where they are
 published, how they are repackaged, the four ways an organisation consumes them, which resolve into
-the two sides of the distinction above, the classes of model in circulation, the formats the files
-take, and the derivatives that make up most of what is downloaded.
+the two sides of the distinction above, the software that executes a model once it has one, the
+classes of model in circulation, the formats the files take, and the derivatives that make up most
+of what is downloaded.
 
 ## 1. Producers
 
@@ -168,7 +169,37 @@ the hardware it runs on, the software that serves it and every component loaded 
 choice between these modes is usually made on cost, latency, data residency and control; it also
 decides, as a side effect, what the organisation is able to inspect and what it must take on trust.
 
-## 5. Large and small models
+## 5. What executes the model
+
+Everything above describes a file. A file does nothing. It is a large table of numbers, and
+producing an answer from it takes a second piece of software that loads those numbers and performs
+the arithmetic, token by token. That software is the **inference server**. The organisation chooses
+it, installs it, configures it and patches it separately from the model, and it has its own
+releases, its own defects and its own published vulnerabilities. Several are in common use: vLLM,
+SGLang, Text Generation Inference, and the llama.cpp family on which Ollama is built. They are not
+part of what the organisation received when it obtained the model, which is why they appear nowhere
+in the formats of section 7; they are the other half of what it takes to run one.
+
+Three consequences follow.
+
+The inference server decides what the outside world can reach. It is the component that exposes an
+interface, so it, rather than the model, determines whether a caller sees only generated text or can
+reach further.
+
+Loading a model is not a passive act. Each of these servers offers an option that runs code supplied
+alongside the model, documented by one vendor in these terms: it "will execute on your local machine
+arbitrary code present in the model repository". Each will also fall back to the older pickle format
+when a safe one is absent, so the risk described under pickle in section 7 reaches every runtime.
+
+On some hardware the file cannot be loaded at all until it has been compiled into a form built for
+that specific hardware. The software that performs that step is a **build toolchain**, and its
+output is a **compiled engine**. An engine is not interchangeable: by default it runs only on the
+device type, the library version and the host operating system it was built for, and relaxing any of
+those is possible only at a stated cost in performance. An engine can be received ready-made from a
+vendor rather than built locally, and when it is, none of the repository-side controls described in
+section 2 apply to it, because it does not travel through those repositories.
+
+## 6. Large and small models
 
 Open models span several orders of magnitude in size, and size determines where a model can run.
 Large language models, from tens to hundreds of billions of parameters, need multi-accelerator
@@ -184,7 +215,7 @@ which produce vectors for search and retrieval; and multimodal models, which tak
 audio or video together with text. Most of what is discussed as "an LLM" in production is a
 generative model, large or small, often with a multimodal path.
 
-## 6. Artefact formats
+## 7. Artefact formats
 
 A model file arrives in one of a few formats, and the format matters independently of the model
 inside it.
@@ -200,11 +231,18 @@ inside it.
   trained in, common for classification and embedding models in production pipelines.
 - **Container images** bundle a model with its runtime and serving software into one deployable
   unit.
+- **Compiled engines** are not a way of storing parameters but the output of building them for a
+  particular target, as described in section 5. They are listed here because an organisation can
+  receive one in place of a weight file. A compiled engine cannot be read by the tools that inspect
+  weight files, and no vendor documents whether the original parameters can be recovered from one.
+
+The first four are ways of storing parameters and are portable. The last two are built artefacts and
+are not: a container pins the software around the model, an engine pins the hardware under it.
 
 A safe format guarantees the safety of the container, not of its contents. A safetensors file can
 hold a model whose behaviour has been altered in any way its publisher chose.
 
-## 7. Derivatives and the model tree
+## 8. Derivatives and the model tree
 
 Most files in circulation are derivatives: files produced from another model file rather than
 trained from scratch. Four kinds account for nearly all of them.
@@ -246,6 +284,9 @@ publisher's reputation, rather than something the ecosystem supplies.
 | stripped fork | a copy from which the publisher's refusal behaviour was deliberately removed, then published; often labelled "uncensored" or "abliterated" |
 | large language model, small language model | tens to hundreds of billions of parameters, run on multi-accelerator servers; under one to a few billion, run on a single accelerator, a workstation or a device |
 | artefact format | how the parameters are stored on disk: pickle checkpoint, safetensors, GGUF, ONNX, container image |
+| inference server | software that loads a published model file and executes it, embedded as a library or run as a service exposing an API; chosen and patched separately from the model, and not part of what was received with it |
+| build toolchain | software that compiles a published checkpoint into a target-specific artefact that must exist before the model can run on that target |
+| compiled engine | the output of a build toolchain: an executable artefact bound to a hardware target, a library version and a host platform, which the tools that inspect weight files cannot read |
 
 ---
 
@@ -301,6 +342,17 @@ any cell of the tables above is cited in a deliverable.
 - Apache License 2.0: https://www.apache.org/licenses/LICENSE-2.0
 - MIT License: https://opensource.org/license/mit
 - Creative Commons BY-NC 4.0: https://creativecommons.org/licenses/by-nc/4.0
+
+**Inference servers, build toolchains and compiled engines**
+
+- vLLM, engine arguments and security: https://docs.vllm.ai/en/latest/configuration/engine_args.html and https://docs.vllm.ai/en/latest/usage/security.html
+- SGLang, server arguments: https://docs.sglang.io/docs/advanced_features/server_arguments.md
+- Text Generation Inference, launcher arguments: https://huggingface.co/docs/text-generation-inference/en/reference/launcher
+- Optimum Intel, export (the quoted statement that trusted remote code executes arbitrary code locally): https://huggingface.co/docs/optimum/en/intel/openvino/export
+- TensorRT-LLM, trtllm-build and checkpoint loading: https://nvidia.github.io/TensorRT-LLM/commands/trtllm-build.html and https://nvidia.github.io/TensorRT-LLM/features/checkpoint-loading.html
+- NVIDIA TensorRT, engine compatibility and support matrix (the three axes of non-portability): https://docs.nvidia.com/deeplearning/tensorrt/latest/inference-library/engine-compatibility.html and https://docs.nvidia.com/deeplearning/tensorrt/latest/getting-started/support-matrix.html
+- NVIDIA NIM, model profiles (pre-compiled engines downloaded per profile): https://docs.nvidia.com/nim/large-language-models/latest/deployment/model-profiles-and-selection.html
+- ONNX Runtime, custom operators: https://onnxruntime.ai/docs/reference/operators/add-custom-op.html
 
 **Artefact formats**
 
