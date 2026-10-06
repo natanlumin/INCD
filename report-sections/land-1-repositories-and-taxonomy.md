@@ -9,49 +9,13 @@ Research cut-off and access date 2026-10-06. Source identifiers resolve in the l
 
 ---
 
-## 1. Why the same four questions do not fit every platform
-
-A platform comparison that asks the same questions of every row produces a table full of cells that
-are true but pointless. Before the comparison, it is worth saying which questions each platform can
-even answer, because the differences are not small.
-
-The first question is what the platform hands over. A platform that hands over a file can be asked
-what formats it carries, what kinds of model, and what those models do. A platform that hands over an
-API key cannot: the organisation never sees a file, so the file's format is not a property of
-anything it holds. The second question is how much choice the platform leaves. A repository that
-accepts any upload in any format has a wide and genuinely informative format profile. A package
-registry built around one format has a format profile of one line, and asking about it tells the
-reader nothing they could not infer from the name.
-
-This is why the dimensions below are applied selectively, and why a cell may read *not applicable*
-with a reason rather than being filled for symmetry.
-
-| Platform | What it hands over | Is the format question informative? | Are modality, type and task informative? |
-|---|---|---|---|
-| Hugging Face Hub | files | Yes. The widest format range of any platform here, and the only one where the choice of format is routinely the publisher's | Yes. The broadest coverage, and the only platform with a published task taxonomy |
-| Kaggle Models | files | Yes, but narrower, and framework rather than format is the enumerated field | Partly |
-| ModelScope | files | Yes | Yes |
-| Ollama library | files, repackaged into the platform's own layers | Narrow rather than absent. Two formats are accepted on the way in, and what leaves is Ollama's own packaging, so the publisher's choice of format does not survive the trip | Partly, and the vocabulary is the runtime's capabilities rather than a task taxonomy |
-| GitHub releases | files, any content | No. There is no model convention at all, so the format is whatever the publisher attached | No |
-| Cloud model gardens | a deployment into the customer's account, or a provider-hosted endpoint | Partly. The provider selects and often converts, so the format reflects the provider's choice rather than the publisher's | Yes, but the catalogue is curated, so coverage describes the provider's selection |
-| Hosted inference providers | an API key | No. No file is received | Partly. Only what the provider has chosen to offer, and only as a menu |
-
-Two rows deserve the emphasis. **Ollama is the clearest case of a dimension changing shape rather than
-disappearing.** Its documentation accepts two formats on the way in, a safetensors directory or a GGUF
-file, and what the library then distributes is Ollama's own layered packaging [LD-14]. So the question
-worth asking is not which formats it carries but what the runtime can execute, and the platform answers
-that in capability labels rather than tasks. **The hosted providers are the clearest case of a dimension
-disappearing**: with no file, format is not merely uninformative but meaningless, and the organisation's
-exposure shifts entirely to what the provider discloses, which section 5 of the ecosystems document
-shows is usually nothing.
-
-## 2. What each platform carries
+## 1. What each platform carries
 
 Governance, platform-side controls, guaranteed metadata and distribution mechanism are tabulated in
 `../landscape/landscape-platform-comparison.md` and are not repeated here. This section answers the
 question that table does not: what is actually inside each platform, and in whose vocabulary.
 
-### 2.1 Hugging Face Hub
+### 1.1 Hugging Face Hub
 
 The only platform here that publishes a closed, machine-readable vocabulary for all three dimensions,
 and by a wide margin the largest: **3,127,450 model repositories** as at 2026-10-06 [LD-08].
@@ -95,7 +59,7 @@ format axis to serialisation formats alone.
 The Hub also publishes twelve parameter-size bands, from under one billion to over five hundred
 billion [LD-07], which is the closest thing in the ecosystem to a published scale axis.
 
-### 2.2 Kaggle Models
+### 1.2 Kaggle Models
 
 **Formats.** Kaggle treats framework structurally rather than as a tag: it is a mandatory segment of
 every model's address, so one logical model fans out into one artefact per framework [LD-10]. The
@@ -113,7 +77,7 @@ vocabulary, and a report cannot key a matrix off it.
 Face surface and resolve to links out rather than to files Kaggle holds [LD-13]. An organisation that
 believes it is sourcing from Kaggle may be sourcing from the Hub.
 
-### 2.3 ModelScope
+### 1.3 ModelScope
 
 **Modalities.** Six top-level groups, from the platform's own tag service: text, image, audio, video,
 multimodal and scientific computing [LD-15]. The last of these has no counterpart among the Hub's six
@@ -143,7 +107,7 @@ top of the distribution tells the story:
 platform they are the third-largest population and larger than every format except the two dominant
 ones. Any matrix that treats an adapter as a minor row misdescribes what is actually in circulation.
 
-### 2.4 Ollama library
+### 1.4 Ollama library
 
 **Formats.** Two accepted inputs, documented: a directory of safetensors weights, or a GGUF file,
 single or sharded. Ollama states it does not quantise GGUF models on import, so the compression is
@@ -161,7 +125,7 @@ That is the answer to what Ollama carries, and it is a different shape of answer
 is a few hundred curated entries described by what the runtime can do with them, not a taxonomy of
 what the models are.
 
-### 2.5 GitHub releases
+### 1.5 GitHub releases
 
 No taxonomy of any kind: not formats, not modalities, not tasks. The only constraints that shape the
 artefact are mechanical, up to a thousand assets per release and under two gibibytes per file, with no
@@ -172,7 +136,7 @@ This is the uncontrolled channel, and it is uncontrolled in a specific sense: no
 about content, but that it holds no description of what a file is. Everything a reader could key a
 matrix off has to come from outside the platform.
 
-### 2.6 Cloud model gardens
+### 1.6 Cloud model gardens
 
 The gardens enumerate deployment and commerce, not artefacts. None of the four publishes an artefact
 format vocabulary, because in a garden the weights are not the unit of distribution.
@@ -197,7 +161,7 @@ object detection, speech recognition, translation and synthesis, safety guardrai
 medical imaging, protein and molecular biology, weather and physics simulation [LD-29]. It is also the
 one whose unit of distribution is explicitly a container rather than a weight file [LD-30].
 
-### 2.7 What the comparison shows
+### 1.7 What the comparison shows
 
 **Only two platforms publish a closed task vocabulary**, the Hugging Face Hub with 63 and ModelScope
 with 219. Kaggle, Google, Microsoft and AWS all document that a task filter exists without publishing
@@ -215,14 +179,14 @@ catalogue [LD-18], and roughly three quarters of Hugging Face repositories carry
 [LD-08]. The ecosystem is mostly derivative artefacts, and the published taxonomies describe the
 minority.
 
-## 3. Artefact formats
+## 2. Artefact formats
 
 This section reworks the treatment in the ecosystems document. It keeps that document's definitions and
 adds three things the report needs and that document does not carry: what loading each format can do,
 how many files an artefact actually is, and which formats the platform controls of section 2 can
 actually read.
 
-### 3.1 The word "format" is being used for three different things
+### 2.1 The word "format" is being used for three different things
 
 Before any list, a distinction that the platforms themselves do not draw. Hugging Face's format filter
 enumerates fifty-four values in a single list [LD-04], and they are not the same kind of thing:
@@ -241,7 +205,7 @@ Only the first kind determines what happens when a file is opened. The rest desc
 compatibility. This report therefore uses **format** for the first kind only, and the segmentation in
 section 4 keys off that. Where a later chapter needs to say what can read a file, it says runtime.
 
-### 3.2 The four storage formats
+### 2.2 The four storage formats
 
 A model file arrives in one of four formats, and the format matters independently of the model inside
 it. Each entry below states what loading it can do, because that, not the layout of the bytes, is why
@@ -285,7 +249,7 @@ implementation of that operator is an arbitrary native library that the runtime 
 inference process [LD-38]. The format cannot execute code by itself; it can name code that will be
 executed. No repository control described in section 2 inspects that reference.
 
-### 3.3 Two things an organisation receives that are not storage formats
+### 2.3 Two things an organisation receives that are not storage formats
 
 **Container images** bundle a model with its runtime and its serving software into one deployable unit.
 What is received is not just the model but the stack around it, and a vulnerability in the stack
@@ -303,14 +267,14 @@ documents whether the original parameters can be recovered from one, and none cl
 protected; what is established is that the tools which inspect weight files cannot read it [LD-42].
 
 Both are built artefacts and neither is portable: a container pins the software around the model, an
-engine pins the hardware under it. Neither is a way of storing parameters, which is why section 4 keeps
+engine pins the hardware under it. Neither is a way of storing parameters, which is why section 3 keeps
 them off the format axis and treats them in 3.1 of the report as a question of distribution.
 
-### 3.4 What the format decides about assessment
+### 2.4 What the format decides about assessment
 
 Three consequences, and they are the reason this section exists at all.
 
-**The platform controls are pickle-shaped.** The scanning described in section 2 was built for the
+**The platform controls are pickle-shaped.** The scanning described in section 1 was built for the
 format that executes on load. It reads pickle imports, and it runs an antivirus engine over files.
 Nothing in it inspects an ONNX graph for custom-operator references, and nothing reads a compiled
 engine at all. So the value of a platform's controls depends on which format the organisation receives,
@@ -326,7 +290,7 @@ evidence, does not. An organisation that receives a model only as an engine has 
 scanning opportunity; it has lost the ability to run a whole class of assessment, and the acceptance
 criteria have to say what happens then.
 
-## 4. The segmentation
+## 3. The segmentation
 
 The Jira item asks for one segmentation, used consistently across Parts I to IV, that every later
 matrix keys off. This section gives it, built in three parts that each answer one question: what kind
@@ -336,13 +300,13 @@ modality, qualifies the second rather than competing with it.
 They are kept apart deliberately. The version this replaces answered all three at once and produced
 rows that could not be compared with one another.
 
-### 4.1 Three kinds of model file
+### 3.1 Three kinds of model file
 
 What an organisation receives is a file. Three kinds circulate, and they differ in what they contain
 rather than in what the model does.
 
 **A model.** A complete set of weights, sufficient on its own to produce output once loaded by an
-inference server. This is the ordinary case and the one every control in section 2 is designed around.
+inference server. This is the ordinary case and the one every control in section 1 is designed around.
 
 **An adapter.** A fragment: a collection of layers and weights that is not the whole model. It is
 produced by training, like a model, but only a small part is trained, which is why the file is
@@ -360,9 +324,9 @@ from the other three by containing something that is not the model at all.
 
 Two of these properties are readable from the file itself. Whether a set of weights is complete or a
 fragment is visible from the tensors present and the adapter configuration beside them; whether the
-numbers are at full or reduced precision is visible from their data types. That matters in 4.7.
+numbers are at full or reduced precision is visible from their data types. That matters in 3.9.
 
-### 4.2 Models by what they produce
+### 3.2 Models by what they produce
 
 The useful way to classify a model is by its output, because the output is what an attacker
 manipulates and what a test measures. Three classes.
@@ -382,9 +346,9 @@ is one whose output is the representation and nothing else.
 unbounded, which is what makes this class different in kind from prediction, and why most of the threat
 landscape concentrates here.
 
-There is no fourth row for instruction-tuned models, and 4.7 explains why.
+There is no fourth row for instruction-tuned models, and 3.7 explains why.
 
-### 4.3 Modality qualifies the output class; it is not an alternative to it
+### 3.3 Modality qualifies the output class; it is not an alternative to it
 
 Modality is a statement about what goes in and what comes out: text, image, audio, video, or a
 combination. Multimodal means more than one modality is involved on at least one side.
@@ -397,12 +361,12 @@ pairs: image-text-to-text, text-to-image, audio-text-to-text [LD-01].
 Treating multimodal as a row beside classification was a category error, and it is why vision-language
 models never sat comfortably anywhere. Modality therefore qualifies a row rather than forming one.
 
-### 4.4 Formats
+### 3.4 Formats
 
-The four serialisation formats of section 3 apply across every row: pickle, safetensors, GGUF and ONNX.
+The four serialisation formats of section 2 apply across every row: pickle, safetensors, GGUF and ONNX.
 They describe how the numbers are written to disk and say nothing about what the model does.
 
-### 4.5 The segmentation, and the rule that keeps it coherent
+### 3.5 The segmentation, and the rule that keeps it coherent
 
 **A row is content. A column is file manner. Nothing crosses the two.** The test is whether the
 property can be read from the bytes. You cannot tell from a file whether a model predicts or generates,
@@ -426,9 +390,9 @@ Qualifiers, recorded where they change the answer rather than as rows or columns
 - **Completeness**, on the file: whether the artefact assessed was a whole model or a model with an
   adapter loaded.
 
-### 4.6 What an adapter does to this
+### 3.6 What an adapter does to this
 
-An adapter is a file, classified in 4.1. But combining one with a parent produces an effective model
+An adapter is a file, classified in 3.1. But combining one with a parent produces an effective model
 whose output class may differ from the parent's. A low-rank adapter trained on a generative model to
 classify transactions yields a prediction model: the parent sits in one row, the product in another.
 
@@ -446,13 +410,13 @@ nothing to measure. If it is still generative but stripped, they apply and would
 is not what runs. Every recorded assessment therefore names the pair it was performed on, not the
 parent.
 
-### 4.7 Why the safeguard is not a row
+### 3.7 Why the safeguard is not a row
 
 The obvious fourth row would be the instruction-tuned generative model, distinguished from the plain
 generative one by carrying a refusal safeguard. It is deliberately absent, for two reasons.
 
 **It is not readable.** You cannot tell from a complete set of weights whether it was instruction-tuned.
-It is a publisher's claim, and section 2 established that no repository verifies such claims.
+It is a publisher's claim, and section 1 established that no repository verifies such claims.
 
 **It is what the assessment measures.** Putting safeguard state on the axis would mean taking the
 publisher's word for precisely the thing the tests in Chapter 7 exist to determine. A taxonomy should
@@ -474,7 +438,7 @@ publish bases at 1.6 trillion, 1 trillion and 110 billion respectively [SG-04, S
 republished. This is the finding, because the artefact claims one state and exhibits another: the
 lineage, the name and the model card all say instruction-tuned, and the behaviour does not.
 
-### 4.8 The evidence that removal is routine, and at every scale
+### 3.8 The evidence that removal is routine, and at every scale
 
 This subsection exists because the scale of the stripped population is the single strongest piece of
 evidence for why the report's acceptance criteria cannot rest on a publisher's claim.
@@ -515,7 +479,7 @@ far, including scales where the publisher deliberately tried to control release.
 segmentation above records safeguard state as a measurement and not as a declaration, and why Chapter 7
 cannot accept a model card as evidence of it.
 
-### 4.9 Readable against claimed
+### 3.9 Readable against claimed
 
 One split runs through all of the above, and Chapter 6 divides on exactly this line.
 
@@ -534,7 +498,7 @@ The segmentation is therefore partly verifiable and partly taken on trust, and t
 reader would not expect. The column side is verifiable. The row side, which decides which threats and
 which tests apply, rests on a publisher's declaration until something is measured.
 
-## 5. Source log
+## 4. Source log
 
 Every claim in this document resolves to a row below. Class per the citation policy: S1 standards and
 specifications, S4 vendor and platform documentation. Access date 2026-10-06 throughout, which is also
