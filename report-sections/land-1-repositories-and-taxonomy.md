@@ -217,7 +217,108 @@ minority.
 
 ## 3. Artefact formats
 
-<!-- FORMATS -->
+This section reworks the treatment in the ecosystems document. It keeps that document's definitions and
+adds three things the report needs and that document does not carry: what loading each format can do,
+how many files an artefact actually is, and which formats the platform controls of section 2 can
+actually read.
+
+### 3.1 The word "format" is being used for three different things
+
+Before any list, a distinction that the platforms themselves do not draw. Hugging Face's format filter
+enumerates fifty-four values in a single list [LD-04], and they are not the same kind of thing:
+
+- **Serialisation formats**, how the numbers are written to disk: safetensors, GGUF, ONNX, Core ML,
+  LiteRT, DDUF, and PyTorch's pickle.
+- **Training and modelling libraries**, which imply a format without being one: Transformers,
+  Diffusers, timm, PEFT, sentence-transformers.
+- **Consumption runtimes**, which are not properties of the file at all but of what can read it. These
+  appear in a second facet of seventeen values, among them llama.cpp, vLLM, SGLang, Ollama, LM Studio
+  and Docker Model Runner [LD-06].
+
+Kaggle collapses the same three into one mandatory path segment it calls the framework [LD-10].
+
+Only the first kind determines what happens when a file is opened. The rest describe provenance or
+compatibility. This report therefore uses **format** for the first kind only, and the segmentation in
+section 4 keys off that. Where a later chapter needs to say what can read a file, it says runtime.
+
+### 3.2 The four storage formats
+
+A model file arrives in one of four formats, and the format matters independently of the model inside
+it. Each entry below states what loading it can do, because that, not the layout of the bytes, is why
+the report cares.
+
+**Pickle checkpoints** (`.bin`, `.pt`, `.pth`, `.ckpt`) are serialised with Python's pickle module.
+Loading one can execute arbitrary code embedded in the file; Python's own documentation says the module
+is not secure and that data from an untrusted source should never be unpickled [LD-31]. It remains
+PyTorch's default serialisation, which is why it is still everywhere: 230,091 models on ModelScope
+carry it [LD-18], and it is present in about one text-generation repository in seven on the Hub [LD-32].
+The direction of travel is away from it. Safetensors has been the default save format in Transformers
+since version 4.35, the Hub's own client marks pickle saving deprecated, and PyTorch has loaded
+weights-only by default since version 2.6 [LD-33]. A C in this format's row means still in circulation,
+not still being produced.
+
+**safetensors** stores tensors and nothing else, so loading it cannot run code [LD-34]. It is the
+default for new uploads and the format repositories convert to. It is now the majority format
+wherever it is counted: 194,143 models on ModelScope [LD-18] and about four fifths of text-generation
+repositories on the Hub [LD-32]. The guarantee is precise and narrow, and worth stating because it is
+routinely overstated: the container cannot execute. It says nothing whatever about the behaviour of
+the model inside it.
+
+**GGUF** is a format for quantised models that carries its metadata inside the file, used by the
+llama.cpp family and by Ollama [LD-35]. Quantisation is not an option here but the normal state, since
+the quantisation scheme is expressed in the tensor types themselves. Two things the ecosystems
+treatment does not say. It is **not always one file**: a multimodal GGUF is the model plus a separate
+projector file, so an artefact that is scanned or hashed as a unit may be half the model [LD-36]. And
+it is a conversion endpoint rather than a format models are trained in, so a GGUF file is always a
+derivative of something, usually several steps removed.
+
+**ONNX** is a graph-based interchange format for running a model outside the framework it was trained
+in, common for classification and embedding models in production pipelines [LD-37]. It carries the
+load-time risk that is least discussed. A graph can reference an operator from a custom domain, and the
+implementation of that operator is an arbitrary native library that the runtime loads into the
+inference process [LD-38]. The format cannot execute code by itself; it can name code that will be
+executed. No repository control described in section 2 inspects that reference.
+
+### 3.3 Two things an organisation receives that are not storage formats
+
+**Container images** bundle a model with its runtime and its serving software into one deployable unit.
+What is received is not just the model but the stack around it, and a vulnerability in the stack
+arrives with it. They are listed here because an organisation can receive one in place of a weight
+file, and because their security properties run opposite to the storage formats: opaque to inspection,
+but signed, scanned and shipped with a software bill of materials in the one catalogue that documents
+it [LD-39].
+
+**Compiled engines** are the output of building a checkpoint for a particular target. By default a
+TensorRT engine runs only on the device type, the library version and the host platform it was built
+for, each relaxable only at a stated cost in performance [LD-40]. They are genuinely distributed, not
+merely built locally: NVIDIA's inference microservices download pre-compiled engines for their
+optimised profiles, falling back to local compilation only for generic ones [LD-41]. No vendor
+documents whether the original parameters can be recovered from one, and none claims they are
+protected; what is established is that the tools which inspect weight files cannot read it [LD-42].
+
+Both are built artefacts and neither is portable: a container pins the software around the model, an
+engine pins the hardware under it. Neither is a way of storing parameters, which is why section 4 keeps
+them off the format axis and treats them in 3.1 of the report as a question of distribution.
+
+### 3.4 What the format decides about assessment
+
+Three consequences, and they are the reason this section exists at all.
+
+**The platform controls are pickle-shaped.** The scanning described in section 2 was built for the
+format that executes on load. It reads pickle imports, and it runs an antivirus engine over files.
+Nothing in it inspects an ONNX graph for custom-operator references, and nothing reads a compiled
+engine at all. So the value of a platform's controls depends on which format the organisation receives,
+and the platform that scans most thoroughly scans the format that is on its way out.
+
+**A safe format is a statement about the container, not the contents.** A safetensors file can hold a
+model whose behaviour has been altered in any way its publisher chose. This is the boundary the six
+tests exist to cross, and it is why no amount of format hygiene substitutes for behavioural testing.
+
+**The format decides what can be tested at all.** The tests in Chapter 7 that need weights or internal
+activations need a file that exposes them. A storage format does. A compiled engine, on present
+evidence, does not. An organisation that receives a model only as an engine has not merely lost a
+scanning opportunity; it has lost the ability to run a whole class of assessment, and the acceptance
+criteria have to say what happens then.
 
 ## 4. The segmentation
 
