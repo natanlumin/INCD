@@ -15,6 +15,7 @@ here belongs there.
 | `governing/` | the style guide: glossary, citation policy and source-quality bar, figure and table style, the English QA passes | agreed; to be posted to the shared workspace |
 | `foundation/` | the theory. The six-tests foundation paper, its two earlier editions, the content-organization master, and the open-weight ecosystems document | content agreed |
 | `landscape/` | the sourced landscape research: platform comparison, producers, taxonomy evidence, source log | research complete at cut-off 2026-10-06 |
+| `landscape/serving-and-compiled-artefacts.md` | the layer between the file and the answer: inference servers, build toolchains, compiled engines, and the reader-facing passage explaining them | research complete at cut-off 2026-10-06 |
 | `report-sections/` | drafted sections of the report itself, named by their skeleton number | 3.1 drafted |
 | `process/` | Jira item drafts and decision sheets | LAND-1 drafted |
 | `lay-package/` | the customer-facing explainer, cards, map, concept notes and writing brief | done |
@@ -32,7 +33,8 @@ Where the material answers a section of the report, and where it does not yet.
 | 3.3 Release trends and ecosystem growth | nothing | needs its own measurement |
 | 3.4 Licensing and provenance in practice | `landscape/` producers table | partly; model-card completeness unmeasured |
 | 3.5 Ecosystem outlook | nothing | blocked on INCD's scope question |
-| 4.2 Supply-chain and artefact-level threats | `landscape/` format evidence | input only |
+| 4.2 Supply-chain and artefact-level threats | `landscape/` format evidence; the MLC model library case | input only |
+| 4.4 Inference-time and runtime threats | `landscape/serving-and-compiled-artefacts.md` | input only; this is where the serving layer earns its pages |
 | 4.5 Threat x model-type matrix | the frozen taxonomy supplies both axes | blocked on the freeze |
 | 5.3 Threat-to-control coverage | inherits the model-type axis from 4.5 | blocked |
 | 6.2 Publicly attestable properties | `landscape/` controls and metadata columns | largely answered, undrafted |
