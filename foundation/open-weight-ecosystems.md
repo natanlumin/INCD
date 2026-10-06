@@ -182,6 +182,16 @@ in the formats of section 7; they are the other half of what it takes to run one
 
 Three consequences follow.
 
+Whether the organisation chooses the inference server or simply receives it depends on which of the
+four modes above it is in, and that answer decides whose problem the server's defects are.
+
+| How the model is consumed | Who chooses the inference server | Whose defects are they |
+|---|---|---|
+| hosted API, the model by proxy | the provider, which need not say which it uses or when it changes | the provider's; the organisation cannot inspect them and usually cannot tell when they are patched |
+| self-hosted on own accelerators | the organisation, explicitly, along with its version and its configuration | the organisation's, in full |
+| vendor-packaged, self-run | the vendor, which selects and pins it inside the container; the organisation chooses the bundle, not its contents | shared: the vendor builds and patches the stack, the organisation runs it and owns the host |
+| local or edge | implied by the channel: choosing Ollama chooses the llama.cpp family underneath it | the organisation's, often without its realising a choice was made |
+
 The inference server decides what the outside world can reach. It is the component that exposes an
 interface, so it, rather than the model, determines whether a caller sees only generated text or can
 reach further.
@@ -319,10 +329,6 @@ any cell of the tables above is cited in a deliverable.
 - Azure AI model catalogue: https://learn.microsoft.com/azure/ai-foundry/how-to/model-catalog-overview
 - NVIDIA NIM: https://developer.nvidia.com/nim and hosted endpoints at https://build.nvidia.com
 - Ollama: https://ollama.com and https://github.com/ollama/ollama
-- llama.cpp: https://github.com/ggml-org/llama.cpp
-- vLLM: https://docs.vllm.ai
-- Text Generation Inference: https://huggingface.co/docs/text-generation-inference
-- SGLang: https://docs.sglang.ai
 - Rafay: https://rafay.co
 - Together AI: https://www.together.ai
 - Fireworks AI: https://fireworks.ai
@@ -344,6 +350,16 @@ any cell of the tables above is cited in a deliverable.
 - Creative Commons BY-NC 4.0: https://creativecommons.org/licenses/by-nc/4.0
 
 **Inference servers, build toolchains and compiled engines**
+
+Project documentation, for a reader who wants to know what each of these is:
+
+- vLLM: https://docs.vllm.ai
+- SGLang: https://docs.sglang.io (the address https://docs.sglang.ai redirects here)
+- Text Generation Inference: https://huggingface.co/docs/text-generation-inference
+- llama.cpp: https://github.com/ggml-org/llama.cpp
+- TensorRT-LLM: https://nvidia.github.io/TensorRT-LLM
+
+The specific statements cited in section 5:
 
 - vLLM, engine arguments and security: https://docs.vllm.ai/en/latest/configuration/engine_args.html and https://docs.vllm.ai/en/latest/usage/security.html
 - SGLang, server arguments: https://docs.sglang.io/docs/advanced_features/server_arguments.md
