@@ -329,12 +329,12 @@ criteria have to say what happens then.
 ## 4. The segmentation
 
 The Jira item asks for one segmentation, used consistently across Parts I to IV, that every later
-matrix keys off. This section gives it. It is built in three parts, each answering one question, and
-they are deliberately kept apart because the version this replaces answered all three at once and
-produced rows that could not be compared with one another.
+matrix keys off. This section gives it, built in three parts that each answer one question: what kind
+of file is this, what does the model produce, and how are the numbers written down. A fourth property,
+modality, qualifies the second rather than competing with it.
 
-The three questions are: what kind of file is this, what does the model produce, and how are the
-numbers written down. A fourth property, modality, qualifies the second rather than competing with it.
+They are kept apart deliberately. The version this replaces answered all three at once and produced
+rows that could not be compared with one another.
 
 ### 4.1 Three kinds of model file
 
@@ -346,26 +346,26 @@ inference server. This is the ordinary case and the one every control in section
 
 **An adapter.** A fragment: a collection of layers and weights that is not the whole model. It is
 produced by training, like a model, but only a small part is trained, which is why the file is
-megabytes where a parent is gigabytes. It is not runnable alone and is meaningful only against the
+megabytes where its parent is gigabytes. It is not runnable alone and is meaningful only against the
 parent it was computed from.
 
-**A quantised copy.** A complete set of weights at reduced numeric precision, produced by converting
-an existing model rather than by training it. The behaviour is close to the parent's and not identical.
-Quantisation-aware training, where the reduced precision is present during training, produces the same
+**A quantised copy.** A complete set of weights at reduced numeric precision, produced by converting an
+existing model rather than by training one. Behaviour is close to the parent's and not identical.
+Quantisation-aware training, where the reduced precision is present during training, yields the same
 kind of artefact and does not change the classification.
 
-**And, alongside these, a container**, which packages any of the three together with the software that
-runs it. It belongs in this list because it is a thing an organisation receives in place of a weight
-file, and it is distinguished from the three by containing something that is not the model at all.
+**Alongside these, a container**, which packages any of the three together with the software that runs
+it. It belongs in the list because it is received in place of a weight file, and it is distinguished
+from the other three by containing something that is not the model at all.
 
-Two of these are readable from the file itself. Whether a set of weights is complete or a fragment is
-visible from the tensors present and the adapter configuration beside them; whether the numbers are at
-full or reduced precision is visible from their data types. This matters in section 4.5.
+Two of these properties are readable from the file itself. Whether a set of weights is complete or a
+fragment is visible from the tensors present and the adapter configuration beside them; whether the
+numbers are at full or reduced precision is visible from their data types. That matters in 4.7.
 
 ### 4.2 Models by what they produce
 
 The useful way to classify a model is by its output, because the output is what an attacker
-manipulates and what a test measures. Four classes.
+manipulates and what a test measures. Three classes.
 
 **Prediction.** The model maps an input to a value from a fixed space: a label, in classification, or a
 number, in regression. The output space is defined in advance and the model cannot leave it.
@@ -373,24 +373,16 @@ number, in regression. The output space is defined in advance and the model cann
 **Embedding.** The model maps an input to a vector used for search, retrieval, clustering or
 similarity. The vector is the product, not an intermediate.
 
-One clarification belongs here, because it is a common confusion. *Every* model that processes text
-embeds it internally: text becomes vectors before any computation happens, in a classifier and a
+One clarification belongs here, because the confusion is common. *Every* model that processes text
+embeds it internally: text becomes vectors before any computation happens, in a classifier and in a
 generative model alike. That internal step does not make a model an embedding model. An embedding model
 is one whose output is the representation and nothing else.
 
 **Generation.** The model produces free text, token by token, from a prompt. The output space is
-unbounded, which is the property that makes this class different in kind from prediction and the reason
-most of the threat landscape concentrates here.
+unbounded, which is what makes this class different in kind from prediction, and why most of the threat
+landscape concentrates here.
 
-**Generation, instruct.** A generative model trained further to follow instructions and, as part of
-that training, to refuse certain requests. It is not a different task from generation; it is a
-generative model carrying an intrinsic safeguard.
-
-That last distinction carries more weight than its size suggests. **The safeguard exists only in this
-class.** A prediction model, an embedding model and a base generative model have no refusal behaviour,
-so the tests that measure the firmness of a safeguard are not merely likely to pass against them; they
-have nothing to measure. Any matrix that cannot express this cannot state which threats and which tests
-apply where.
+There is no fourth row for instruction-tuned models, and 4.7 explains why.
 
 ### 4.3 Modality qualifies the output class; it is not an alternative to it
 
@@ -399,8 +391,8 @@ combination. Multimodal means more than one modality is involved on at least one
 
 It is not a kind of model. A vision-language model is a generative model whose input includes images. A
 zero-shot image classifier is a prediction model whose input includes both an image and candidate
-labels. The platforms' own task names make this explicit by reading as input-to-output pairs:
-image-text-to-text, text-to-image, audio-text-to-text [LD-01].
+labels. The platforms' own task names make the decomposition explicit by reading as input-to-output
+pairs: image-text-to-text, text-to-image, audio-text-to-text [LD-01].
 
 Treating multimodal as a row beside classification was a category error, and it is why vision-language
 models never sat comfortably anywhere. Modality therefore qualifies a row rather than forming one.
@@ -408,69 +400,228 @@ models never sat comfortably anywhere. Modality therefore qualifies a row rather
 ### 4.4 Formats
 
 The four serialisation formats of section 3 apply across every row: pickle, safetensors, GGUF and ONNX.
-They describe how the numbers are written to disk and nothing about what the model does.
+They describe how the numbers are written to disk and say nothing about what the model does.
 
 ### 4.5 The segmentation, and the rule that keeps it coherent
 
-**A row is content. A column is file manner. Nothing crosses the two.** The test is whether the property
-can be read from the bytes. You cannot tell from a file whether a model refuses, or whether it predicts
-or generates, so those are rows. You can tell whether it is pickle or safetensors, and whether its
-numbers are reduced, so those are columns.
+**A row is content. A column is file manner. Nothing crosses the two.** The test is whether the
+property can be read from the bytes. You cannot tell from a file whether a model predicts or generates,
+so that is a row. You can tell whether it is pickle or safetensors, and whether its numbers are reduced,
+so those are columns.
 
 | Output class | pickle | safetensors | GGUF | ONNX |
 |---|---|---|---|---|
 | prediction (classification, regression) | C | C | P | P |
 | embedding | C | C | P | C |
 | generation | C | C | C | P |
-| generation, instruct | C | C | C | P |
 
-C common, P possible but uncommon, per the rule in the decision sheet. Evidence per cell in
+C common, P possible but uncommon, under the rule in the decision sheet. Evidence per cell in
 `../landscape/landscape-platform-comparison.md` §3.
 
 Qualifiers, recorded where they change the answer rather than as rows or columns of their own:
 
 - **Modality**, on the row: a generative row whose input is image and text.
 - **Precision**, on the columns: the same four formats carry quantised weights at P, C, C, P
-  respectively, which is a statement about the columns and not a fifth row.
+  respectively, which is a statement about the columns and not a fourth row.
 - **Completeness**, on the file: whether the artefact assessed was a whole model or a model with an
   adapter loaded.
 
-### 4.6 What the adapter does to all of this
+### 4.6 What an adapter does to this
 
 An adapter is a file, classified in 4.1. But combining one with a parent produces an effective model
 whose output class may differ from the parent's. A low-rank adapter trained on a generative model to
 classify transactions yields a prediction model: the parent sits in one row, the product in another.
 
-Three consequences, and none is bookkeeping.
+Three consequences, none of them bookkeeping.
 
-**The row assessed need not be the row running.** An organisation assesses a generative instruct model,
-an adapter is loaded, and what serves requests is a prediction model, or a generative model whose
+**The row assessed need not be the row running.** An organisation assesses a generative model, an
+adapter is loaded, and what serves requests is a prediction model, or a generative model whose
 safeguard has been suppressed. The parent file is unchanged throughout, with the same hash and the same
 signature.
 
-**The applicable tests change with the row.** If the product is a prediction model, the safeguard tests
-have nothing to measure. If it is still generative but stripped, they apply and would fail.
+**The applicable tests change with the row.** If the product is a prediction model, safeguard tests have
+nothing to measure. If it is still generative but stripped, they apply and would fail.
 
 **The pair is the only assessable unit**, since the adapter alone has no behaviour and the parent alone
-is not what runs. Every recorded assessment therefore has to name the pair it was performed on, not the
+is not what runs. Every recorded assessment therefore names the pair it was performed on, not the
 parent.
 
-### 4.7 Readable against claimed
+### 4.7 Why the safeguard is not a row
 
-One split runs through all of the above and is worth stating once, because Chapter 6 divides on exactly
-this line.
+The obvious fourth row would be the instruction-tuned generative model, distinguished from the plain
+generative one by carrying a refusal safeguard. It is deliberately absent, for two reasons.
+
+**It is not readable.** You cannot tell from a complete set of weights whether it was instruction-tuned.
+It is a publisher's claim, and section 2 established that no repository verifies such claims.
+
+**It is what the assessment measures.** Putting safeguard state on the axis would mean taking the
+publisher's word for precisely the thing the tests in Chapter 7 exist to determine. A taxonomy should
+not pre-classify its own measurement.
+
+So safeguard state is recorded as a result, not a row, and it has three values.
+
+**Present.** The model refuses as its publisher describes. The question for Chapter 7 is how firmly,
+which is what the tests report.
+
+**Absent by design.** A base model, published without instruction tuning, has no refusal behaviour
+because none was ever trained in. This is not a finding. It is the specification, and the publisher
+claimed nothing else. Such models exist at the largest scales: Mistral publishes a 675-billion-parameter
+base described on its own card as "the base pre-trained version, not fine-tuned for instruction or
+reasoning tasks" [SG-02]; NVIDIA publishes a 550-billion base [SG-03]; DeepSeek, Moonshot and Z.AI
+publish bases at 1.6 trillion, 1 trillion and 110 billion respectively [SG-04, SG-05, SG-06].
+
+**Absent by removal.** An instruction-tuned model whose refusal behaviour was deliberately stripped and
+republished. This is the finding, because the artefact claims one state and exhibits another: the
+lineage, the name and the model card all say instruction-tuned, and the behaviour does not.
+
+### 4.8 The evidence that removal is routine, and at every scale
+
+This subsection exists because the scale of the stripped population is the single strongest piece of
+evidence for why the report's acceptance criteria cannot rest on a publisher's claim.
+
+At 100 billion parameters and above, as at 2026-10-06 [SG-01]:
+
+| Hub query | Repositories listed |
+|---|---|
+| matching "abliterated" | 365 |
+| matching "uncensored" | 262 |
+
+Counts are repositories rather than distinct models, since community quantisations of the same strip
+dominate. The figure to take from them is that this is a routine practice at flagship scale, not a
+marginal one.
+
+**The largest is a 2.8-trillion-parameter strip**, whose own card states that "more than 98% of the
+safeguards have been removed", with removal percentages given per attention projection, expert layer
+and embedding token [SG-07]. Strips exist throughout the range below it, at 763, 756, 753 and 561
+billion [SG-08].
+
+Three cases are worth naming, because each defeats a different assumption.
+
+**Withholding the base does not withhold the capability.** DeepSeek publishes no base variant for V4.1
+at 763 billion [SG-09]. Four independent stripped republications of it exist at 753 to 763 billion
+[SG-08]. A lab that declines to release the safeguard-free version does not thereby prevent one
+existing.
+
+**A vendor safety process does not survive republication.** NVIDIA's 550-billion release has an
+abliterated derivative at full 561-billion weight [SG-10].
+
+**Nor does a delayed release.** Z.AI held back the weights of its 753-billion model for a two-week
+safety evaluation with vetted partners, on the grounds that its skill at finding and exploiting
+software vulnerabilities warranted testing first [SG-11]. Stripped versions of it are published [SG-08].
+
+The conclusion the report should draw is narrow and well supported: **an intrinsic safeguard is not a
+property the file carries, but a property someone can remove from the file**, at any scale reached so
+far, including scales where the publisher deliberately tried to control release. That is why the
+segmentation above records safeguard state as a measurement and not as a declaration, and why Chapter 7
+cannot accept a model card as evidence of it.
+
+### 4.9 Readable against claimed
+
+One split runs through all of the above, and Chapter 6 divides on exactly this line.
 
 **Readable from the file**: the serialisation format; whether the weights are complete or a fragment;
-the numeric precision. These can be verified by anyone holding the artefact.
+the numeric precision. Any holder of the artefact can verify these.
 
 **Claimed, and not readable**: which model this derives from; whether a complete set of weights is a
-base model or an instruct model; what it was trained on. None of these can be determined from the bytes,
-and section 2 established that no repository verifies any of them.
+base or an instruction-tuned model; what it was trained on; whether a safeguard is present. None can be
+determined from the bytes, and no repository verifies any of them.
 
-The segmentation above is therefore partly verifiable and partly taken on trust, and the line between
-the two is not where a reader would expect. The column side is verifiable. The row side, which decides
-which threats and which tests apply, rests on a publisher's declaration until something is measured.
+A practical warning follows from the same evidence. Card metadata is not a reliable discriminator even
+where it appears to be: Qwen's base repositories carry the same training-stage field as its
+instruction-tuned ones, so an automated census built on that field will misclassify [SG-12].
+
+The segmentation is therefore partly verifiable and partly taken on trust, and the line falls where a
+reader would not expect. The column side is verifiable. The row side, which decides which threats and
+which tests apply, rests on a publisher's declaration until something is measured.
 
 ## 5. Source log
 
-<!-- LOG -->
+Every claim in this document resolves to a row below. Class per the citation policy: S1 standards and
+specifications, S4 vendor and platform documentation. Access date 2026-10-06 throughout, which is also
+the research cut-off. Tags: [CHECKED] the page states the claim; [PARTIAL] implied but not stated, with
+the gap named; [NOT ESTABLISHED] no page states it after the searches named.
+
+Method note. Several platform pages are JavaScript applications that return only a shell to a plain
+fetch; those were rendered through a headless-render proxy at the same address, and where a list was
+collapsed in the rendering it was read from the page's own embedded data. Where huggingface.co
+rate-limited, the same documentation files were read from their public source repository. Counts drawn
+from live catalogue pages are quoted as at the access date and will drift.
+
+### Platform coverage (LD-01 to LD-30)
+
+| ID | Class | Source | URL | Tag | Verified |
+|---|---|---|---|---|---|
+| LD-01 | S4 | Tasks, Hugging Face | https://huggingface.co/tasks | [CHECKED] | 63 task names in six modality groups: multimodal 9, natural language processing 12, computer vision 19, audio 4, tabular 2, reinforcement learning 1; names read as input-to-output pairs |
+| LD-02 | S4 | Model Cards, Hugging Face Hub docs | https://huggingface.co/docs/hub/model-cards | [CHECKED] | the task is declared per repository as `pipeline_tag`, drives filtering, and selects the widget and API |
+| LD-03 | S4 | Model Cards, Hugging Face Hub docs | https://huggingface.co/docs/hub/model-cards | [CHECKED] | format declared as `library_name`; where absent the Hub infers it from files present |
+| LD-04 | S4 | Models index, libraries facet | https://huggingface.co/models | [CHECKED] | 54 values mixing serialisation formats, training libraries and other tooling; read from the page's own data because the rendering collapses the list |
+| LD-05 | S4 | Libraries, Hugging Face Hub docs | https://huggingface.co/docs/hub/models-libraries | [CHECKED] | parallel documented table of integrated libraries |
+| LD-06 | S4 | Models index, apps facet | https://huggingface.co/models | [CHECKED] | 17 downstream runners and applications including llama.cpp, vLLM, SGLang, Ollama, LM Studio, Docker Model Runner |
+| LD-07 | S4 | Models index, parameter facet | https://huggingface.co/models | [CHECKED] | 12 published parameter bands from under 1B to over 500B |
+| LD-08 | S4 | Models index, filtered counts | https://huggingface.co/models?pipeline_tag=… | [CHECKED] | total 3,127,450; text generation 420,432; text classification 123,517; text to image 111,121; image-text to text 41,388; speech recognition 37,185; feature extraction 21,283; object detection 6,931. Live counters, quoted as at the access date |
+| LD-09 | S4 | Kaggle CLI model metadata | https://raw.githubusercontent.com/Kaggle/kaggle-cli/main/docs/models_metadata.md | [PARTIAL] | the framework field is enumerated only as examples ending in an ellipsis; no closed list is published |
+| LD-10 | S4 | Models Documentation, Kaggle | https://www.kaggle.com/docs/models | [CHECKED] | framework is a mandatory path segment of every handle, so one model fans out into one artefact per framework |
+| LD-11 | S4 | Find Pre-trained Models, Kaggle | https://www.kaggle.com/models | [PARTIAL] | nine filter groups including a task facet and a data-type facet; the values inside are not published |
+| LD-12 | S4 | Models Documentation, Kaggle | https://www.kaggle.com/docs/models | [CHECKED] | task treated as free-text guidance for naming a variation, not a controlled vocabulary; GGUF observed as a framework value in the catalogue |
+| LD-13 | S4 | Kaggle models index and Hugging Face integration blog | https://www.kaggle.com/models ; https://www.kaggle.com/blog/kaggle-hugging-face-integration | [CHECKED] | a distinct Hugging Face surface whose entries are links out rather than Kaggle-held files |
+| LD-14 | S4 | Importing a Model, Ollama | https://docs.ollama.com/import | [CHECKED] | two documented inputs, a safetensors directory or a GGUF file, single or sharded; GGUF not quantised on import |
+| LD-15 | S4 | ModelScope tag service | https://www.modelscope.cn/api/v1/tags | [CHECKED] | six top-level modality groups: text, image, audio, video, multimodal, scientific computing |
+| LD-16 | S4 | ModelScope toolkit, constant definitions | https://raw.githubusercontent.com/modelscope/modelscope/master/modelscope/utils/constant.py | [CHECKED] | 219 task strings across five fields: 130 computer vision, 47 natural language processing, 21 audio, 20 multimodal, 1 science |
+| LD-17 | S4 | ModelScope models index | https://www.modelscope.cn/models | [NOT ESTABLISHED] | a task filter tab exists but its values do not render and no catalogue facet returns them; the toolkit of LD-16 is the vocabulary of record |
+| LD-18 | S4 | ModelScope catalogue aggregation | https://www.modelscope.cn/api/v1/dolphin/models | [CHECKED] | 69 library values over 264,794 models: PyTorch 230,091; safetensors 194,143; LoRA 114,361; GGUF 20,918; MLX 9,823; ONNX 7,353. Also an architecture facet and a science facet |
+| LD-19 | S4 | Ollama documentation index | https://docs.ollama.com/llms.txt | [CHECKED] | eight capabilities: streaming, thinking, structured outputs, decision, vision, embeddings, tool calling, web search |
+| LD-20 | S4 | Vision, Ollama | https://docs.ollama.com/capabilities/vision | [CHECKED] | image-input multimodal models are served |
+| LD-21 | S4 | Embeddings, Ollama | https://docs.ollama.com/capabilities/embeddings | [CHECKED] | dedicated embedding models distributed with their own API endpoint |
+| LD-22 | S4 | Ollama model library | https://ollama.com/library | [CHECKED] | capability labels across the index: tools 94, thinking 44, vision 41, cloud 16, embedding 12, decision 4, audio 1 |
+| LD-23 | S4 | About releases, GitHub | https://docs.github.com/en/repositories/releasing-projects-on-github/about-releases | [CHECKED] | no format, modality or task taxonomy; up to 1000 assets per release, each under 2 GiB, no total size or bandwidth limit |
+| LD-24 | S4 | ListFoundationModels, Amazon Bedrock API reference | https://docs.aws.amazon.com/bedrock/latest/APIReference/API_ListFoundationModels.html | [CHECKED] | output modality enumeration is TEXT, IMAGE, EMBEDDING; input and output modality exposed per model |
+| LD-25 | S4 | Models at a glance, Amazon Bedrock | https://docs.aws.amazon.com/bedrock/latest/userguide/model-cards.html | [CHECKED] | catalogue organised by provider across 18 rows and wider than the filter enumeration, covering video, speech, embedding and reranking. The former modality page now redirects here |
+| LD-26 | S4 | Microsoft Foundry Models overview | https://learn.microsoft.com/en-us/azure/foundry-classic/concepts/foundry-models-overview | [PARTIAL] | over 10,000 models, about 50 new a month; two commercial tiers; eight filter axes including inference tasks, whose values are given only as examples |
+| LD-27 | S4 | as LD-26 | as LD-26 | [CHECKED] | the catalogue includes a Hugging Face collection served on managed compute |
+| LD-28 | S4 | Overview of Model Garden, Google Cloud | https://docs.cloud.google.com/vertex-ai/generative-ai/docs/model-garden/explore-models | [PARTIAL] | three catalogue categories and a four-axis filter pane; task and feature values not published. Also states that Hugging Face models deemed unsafe by that platform's scanners are blocked from deployment while suspicious or remote-code ones are flagged and remain deployable |
+| LD-29 | S4 | NVIDIA NIM documentation index | https://docs.nvidia.com/nim/index.html | [CHECKED] | 17 model families spanning language, vision-language, embedding, reranking, optical character recognition, object detection, speech, safety, digital human, medical imaging, molecular biology, weather and simulation |
+| LD-30 | S4 | as LD-29 | as LD-29 | [CHECKED] | the unit of distribution is a containerised microservice rather than a weight file |
+
+### Formats (LD-31 to LD-42)
+
+| ID | Class | Source | URL | Tag | Verified |
+|---|---|---|---|---|---|
+| LD-31 | S1 | pickle, Python documentation | https://docs.python.org/3/library/pickle.html | [CHECKED] | "The pickle module is not secure. Only unpickle data you trust." |
+| LD-32 | S4 | Hugging Face models index, format counts by task | https://huggingface.co/models?pipeline_tag=…&library=… | [CHECKED] | for text generation: safetensors 328,892, pickle-bearing 56,780, GGUF 39,152, ONNX 2,310 of 420,353; equivalents for classification, embedding and multimodal tasks |
+| LD-33 | S1, S4 | PyTorch serialization semantics; Transformers model documentation; Hugging Face Hub client serialization | https://docs.pytorch.org/docs/2.14/notes/serialization.html ; https://huggingface.co/docs/transformers/v4.35.0/en/main_classes/model ; https://huggingface.co/docs/huggingface_hub/en/package_reference/serialization | [CHECKED] | pickle is PyTorch's default; weights-only loading is the default since 2.6; safetensors has been the default save format since Transformers v4.35; the Hub client marks pickle saving deprecated |
+| LD-34 | S4 | Safetensors documentation | https://huggingface.co/docs/safetensors/index | [CHECKED] | stores tensors only, as opposed to pickle |
+| LD-35 | S1 | GGUF specification | https://github.com/ggml-org/ggml/blob/master/docs/gguf.md | [CHECKED] | single-file format for GGML executors; quantisation expressed in the tensor types; a LoRA file type and an mmproj sidecar are named |
+| LD-36 | S4 | Multimodal, llama.cpp | https://github.com/ggml-org/llama.cpp/blob/master/docs/multimodal.md | [CHECKED] | multimodal use requires the model plus a separate projector file |
+| LD-37 | S4 | Export to ONNX, Transformers; Optimum exporter task manager | https://huggingface.co/docs/optimum/exporters/onnx/overview | [CHECKED] | graph-based interchange format; exporter task coverage includes generation, classification and feature extraction |
+| LD-38 | S4 | Custom operators, ONNX Runtime | https://onnxruntime.ai/docs/reference/operators/add-custom-op.html | [CHECKED] | a session registers a custom-operator library by path; the shared library is loaded into the inference process |
+| LD-39 | S4 | NGC Catalog User Guide | https://docs.nvidia.com/ngc/latest/ngc-catalog-user-guide.html | [CHECKED] | container images signed since July 2023 and models since April 2025; software bill of materials, vulnerability-exchange documents and scan results retrievable by image digest |
+| LD-40 | S4 | Engine Compatibility; Support Matrix, NVIDIA TensorRT | https://docs.nvidia.com/deeplearning/tensorrt/latest/inference-library/engine-compatibility.html ; …/getting-started/support-matrix.html | [CHECKED] | by default an engine is compatible only with the TensorRT version, the device type and the host platform it was built on, each relaxable at a stated performance cost |
+| LD-41 | S4 | Model Profiles, NVIDIA NIM for LLMs | https://docs.nvidia.com/nim/large-language-models/1.8.0/profiles.html | [CHECKED] | pre-compiled engines are downloaded for optimised profiles; generic profiles download raw weights and compile locally |
+| LD-42 | S4 | Refitting an Engine, NVIDIA TensorRT | https://docs.nvidia.com/deeplearning/tensorrt/latest/inference-library/refitting-engines.html | [NOT ESTABLISHED] | writing weights into a plan and omitting them are documented; no page states whether the original parameters can be recovered from an ordinary engine, and none claims they are protected |
+
+### Safeguard state at scale (SG-01 to SG-12)
+
+| ID | Class | Source | URL | Tag | Verified |
+|---|---|---|---|---|---|
+| SG-01 | S4 | Hugging Face models index, filtered by parameter count | https://huggingface.co/models?search=abliterated&num_parameters=min:100B ; …?search=uncensored&num_parameters=min:100B | [CHECKED] | 365 and 262 repositories respectively at 100B and above. The parameter facet is driven by a `num_parameters` range parameter; the index page itself does not expose the parameter name, which was established by construction and confirmed by the band the page then reported |
+| SG-02 | S4 | Mistral Large 3 675B Base | https://huggingface.co/mistralai/Mistral-Large-3-675B-Base-2512 | [CHECKED] | "the base pre-trained version, not fine-tuned for instruction or reasoning tasks"; the card carries no statement about absent refusal behaviour |
+| SG-03 | S4 | NVIDIA Nemotron 3 Ultra 550B Base | https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Ultra-550B-A55B-Base-BF16 | [CHECKED] | pre-training stage only, 550B total with 55B active. The unsuffixed repository name returns unauthorised, so the publicly readable one is the suffixed variant |
+| SG-04 | S4 | DeepSeek organisation listing | https://huggingface.co/models?search=deepseek-ai%2FDeepSeek-V4 | [CHECKED] | base checkpoints published at V4: 292B and 1.6T |
+| SG-05 | S4 | Moonshot organisation listing | https://huggingface.co/models?search=moonshotai%2FKimi | [CHECKED] | a 1T base published for the K2 generation; none for K3, K2.5, K2.6 or K2.7 |
+| SG-06 | S4 | Z.AI organisation listing | https://huggingface.co/models?search=zai-org%2FGLM | [CHECKED] | one base at 110B; none for the 753B flagship line |
+| SG-07 | S4 | Kimi K3 abliterated | https://huggingface.co/Uniboshi/Kimi-K3-Abliterated-V1 | [CHECKED] | 2.8T parameters; "more than 98% of the safeguards have been removed", with per-layer removal percentages |
+| SG-08 | S4 | Hugging Face models index, filtered | as SG-01 | [CHECKED] | strips at 763B, 756B, 755B, 753B and 561B across DeepSeek V4.1, GLM 5.3 and Nemotron Ultra; further strips throughout the 100B to 400B band |
+| SG-09 | S4 | DeepSeek listing and V4.1-Flash card | https://huggingface.co/models?search=deepseek-ai%2FDeepSeek-V4 ; https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash | [CHECKED] | no base variant published at V4.1; the released model is described through its post-training pipeline |
+| SG-10 | S4 | Hugging Face search, Nemotron Ultra | https://huggingface.co/models?search=Nemotron-3-Ultra-550B | [CHECKED] | an abliterated derivative at 561B |
+| SG-11 | S7, motivating only | trade reporting of a vendor statement on GLM 5.3 | https://www.deeplearning.ai/the-batch/glm-5-3-makes-cybersecurity-gains | [PARTIAL] | weights released only after a two-week safety evaluation with vetted partners, on the grounds that the model's skill at finding and exploiting software vulnerabilities warranted testing first. The vendor's own page did not render, so this is not first-party and is not admissible for a technical claim |
+| SG-12 | S4 | Qwen base and instruct model cards | https://huggingface.co/Qwen/Qwen3.5-9B-Base ; https://huggingface.co/Qwen/Qwen3.5-122B-A10B | [CHECKED] | the training-stage field reads identically on base and instruction-tuned cards; the reliable discriminators are the name suffix and the sentence describing the repository as containing the pre-trained only model |
+
+### Unreachable, redirected or otherwise noted
+
+The former Bedrock modality page now redirects to a provider-organised catalogue. Google's Model Garden
+documentation resolves under a renamed product path, Vertex AI having become Gemini Enterprise Agent
+Platform, and Azure AI Foundry having become Microsoft Foundry, with separate classic and current
+portals that differ in substance. ModelScope's documented metadata page returns navigation only on both
+its domains. The unsuffixed Nemotron Ultra base repository returns unauthorised. The Z.AI blog post that
+is the primary source for SG-11 returns an empty body. Counts from live catalogue pages drift between
+readings and are quoted as at the access date.
