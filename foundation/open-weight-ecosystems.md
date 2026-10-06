@@ -169,7 +169,7 @@ the hardware it runs on, the software that serves it and every component loaded 
 choice between these modes is usually made on cost, latency, data residency and control; it also
 decides, as a side effect, what the organisation is able to inspect and what it must take on trust.
 
-## 5. What executes the model
+## 5. Inference: how we execute a model
 
 Everything above describes a file. A file does nothing. It is a large table of numbers, and
 producing an answer from it takes a second piece of software that loads those numbers and performs
