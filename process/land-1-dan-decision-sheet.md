@@ -49,6 +49,12 @@ answered different questions:
 | numeric precision | full; quantised | the file |
 | serialisation | pickle, safetensors, GGUF, ONNX | the file |
 
+**The governing rule, which decides everything below: a row is content, a column is file manner.** The
+test is whether the property can be read off the bytes. You cannot tell from a file whether a model
+refuses, or whether it classifies or generates; that is content and it belongs in a row. You can tell
+whether it is pickle or safetensors, and whether the numbers are at full or reduced precision; that is
+file manner and it belongs in a column. A property that is neither does not belong in the table at all.
+
 Three consequences follow, and all three are improvements.
 
 **Multimodal was never a peer of classification.** One says what goes in, the other what comes out, so
@@ -56,8 +62,10 @@ a multimodal model is also a generative or a classification model. Listing them 
 why vision-language models never fitted anywhere cleanly. Hugging Face's own task names confirm the
 decomposition: they are input-to-output pairs, such as image-text-to-text and text-to-image.
 
-**Quantised belongs on the file side.** It describes how the numbers are stored, exactly as the format
-does, and GGUF is quantised by construction. It moves next to the format and leaves the model axis.
+**Quantised belongs on the column side, not as a row.** It describes how the numbers are stored, which
+is what the columns already describe, so putting it in a row would cross a file property with a file
+property and ask what file manner a file manner has. It becomes a qualifier on the format columns,
+where GGUF being quantised by construction shows it always belonged.
 
 **Instruct is a derivation of base, not a sibling of it.** An instruct model is a base model trained
 further to follow instructions, so the pair sits on the derivation dimension rather than the task one.
@@ -79,8 +87,9 @@ Proposed: **the rows are what comes out, plus the safeguard flag**, giving four:
 | classification | |
 | embedding | |
 
-and the other three properties are recorded as qualifiers where they change the answer, not as rows:
-input modality, numeric precision, and whether the artefact is standalone or an adapter.
+Input modality stays a qualifier on the row, since it is content but not what the row is keyed on.
+Numeric precision becomes a qualifier on the columns, since it is file manner. The adapter is not in
+the table at all, for the reason in B3.
 
 Why this split rather than another. The threats in Chapter 4 divide most sharply on what a model
 produces and on whether it has a safeguard to attack. They divide far less on what it ingests. And
@@ -109,13 +118,15 @@ pair. It can suppress a model's refusal behaviour while the parent file keeps it
 signature. On ModelScope it is 114,361 of 264,794 models, forty-three per cent, so it is not a corner
 case.
 
-Three options. Treat it as a fifth row, which is what the current table does and which is wrong in kind.
-Treat it as a qualifier, so that every row can be marked as standalone or adapter-modified. Or give it
-its own short treatment in the text, on the grounds that the unit of assessment is always the pair and
-never the file.
+Under the rule in A3 it cannot be a row, because it is not content: a delta has no behaviour of its own
+to describe. Nor is it a column, because its file question is the same as any other safetensors file's.
+It is a relation between two artefacts, and the only honest description of it is that the unit of
+assessment is the pair.
 
-My own view is the second plus the third: a qualifier in the matrices, and a paragraph that says the
-pair is the unit.
+Proposed: it leaves the table and gets its own treatment in the text, plus a qualifier on each row
+saying whether the model as assessed was standalone or adapter-modified. What we need from you is
+whether that treatment sits in Chapter 3, as a fact about what circulates, or in Chapter 7, as a rule
+about what must be tested together.
 
 ## B4. If a chapter needs a task vocabulary, whose?
 
@@ -140,9 +151,11 @@ weighting is the point.
 | classification | C | C | P | P |
 | embedding | C | C | P | C |
 
-Qualifiers recorded per model rather than as rows: input modality; numeric precision, where quantised
-reads P, C, C, P across the same four formats; and standalone against adapter-modified, where an
-adapter reads C, C, P, P.
+Rows are content, columns are file manner, and nothing crosses the two. Input modality qualifies a row:
+a vision-language model is a generative row whose input is image and text. Numeric precision qualifies
+a column: the same four formats carry quantised weights at P, C, C, P respectively, which is a
+statement about the columns and not a fifth row. The adapter does not appear, because it is a relation
+rather than a model.
 
 ## What is needed from the session
 
