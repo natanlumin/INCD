@@ -182,6 +182,26 @@ in the formats of section 7; they are the other half of what it takes to run one
 
 Three consequences follow.
 
+These names are not alternatives a reader has to choose between. They are the engines already running
+underneath the products of sections 2 and 3, usually without being named on the box. The same three
+or four appear nearly everywhere.
+
+| Where an organisation meets it | What runs underneath |
+|---|---|
+| Ollama | llama.cpp, named as its supported backend |
+| NVIDIA NIM | vLLM, SGLang or TensorRT-LLM, one per profile, selected when the container starts |
+| Google's Model Garden | vLLM, SGLang, Text Generation Inference, TensorRT-LLM and Google's own Hex-LLM, in containers Google optimises |
+| Microsoft Foundry managed compute | vLLM or SGLang, pinned together with the quantisation by a deployment template |
+| Amazon SageMaker large-model-inference containers | vLLM and TensorRT-LLM |
+| Hugging Face Inference Endpoints | vLLM, Text Generation Inference, or a container the customer supplies |
+| hosted providers such as Together, Fireworks and Groq | not stated; Groq names only its own hardware |
+
+Two things are worth taking from that table. The first is that an organisation using a cloud garden,
+a vendor container and a laptop runtime is not using three unrelated technologies; it is using two or
+three engines, in three wrappers, and a defect in one of those engines reaches all three. The second
+is the last row. Where a provider holds the file, it need not say what serves it, and in practice
+does not.
+
 Whether the organisation chooses the inference server or simply receives it depends on which of the
 four modes above it is in, and that answer decides whose problem the server's defects are.
 
@@ -358,6 +378,16 @@ Project documentation, for a reader who wants to know what each of these is:
 - Text Generation Inference: https://huggingface.co/docs/text-generation-inference
 - llama.cpp: https://github.com/ggml-org/llama.cpp
 - TensorRT-LLM: https://nvidia.github.io/TensorRT-LLM
+
+Which engine runs underneath which product:
+
+- Ollama, supported backends (llama.cpp): https://github.com/ollama/ollama
+- NVIDIA NIM, model profiles and selection: https://docs.nvidia.com/nim/large-language-models/latest/deployment/model-profiles-and-selection.html
+- Google, open models serving options: https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/open-models/choose-serving-option
+- Microsoft Foundry, managed compute: https://learn.microsoft.com/en-us/azure/foundry/concepts/managed-compute-overview
+- Amazon SageMaker, large model inference containers: https://docs.aws.amazon.com/sagemaker/latest/dg/large-model-inference-container-docs.html and https://docs.djl.ai/master/docs/serving/serving/docs/lmi/index.html
+- Hugging Face Inference Endpoints: https://huggingface.co/docs/inference-endpoints
+- Groq: https://groq.com
 
 The specific statements cited in section 5:
 
