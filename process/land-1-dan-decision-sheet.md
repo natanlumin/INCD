@@ -118,15 +118,33 @@ pair. It can suppress a model's refusal behaviour while the parent file keeps it
 signature. On ModelScope it is 114,361 of 264,794 models, forty-three per cent, so it is not a corner
 case.
 
-Under the rule in A3 it cannot be a row, because it is not content: a delta has no behaviour of its own
-to describe. Nor is it a column, because its file question is the same as any other safetensors file's.
-It is a relation between two artefacts, and the only honest description of it is that the unit of
-assessment is the pair.
+Under the rule in A3 it cannot be a row, because a delta has no behaviour of its own to describe. Nor
+is it a column, because its file question is the same as any other safetensors file's. But it does not
+leave the table either, because it determines which row applies.
 
-Proposed: it leaves the table and gets its own treatment in the text, plus a qualifier on each row
-saying whether the model as assessed was standalone or adapter-modified. What we need from you is
-whether that treatment sits in Chapter 3, as a fact about what circulates, or in Chapter 7, as a rule
-about what must be tested together.
+**An adapter is an operator on models, not a model.** It takes a parent and produces a new effective
+model, and that product has its own content row, which need not be the parent's. A low-rank adapter
+trained on a generative model to classify transactions produces a classifier: parent in one row,
+product in another. The adapter has moved the model across the axis.
+
+Three consequences, and each is a finding rather than a bookkeeping detail.
+
+**The row assessed is not necessarily the row running.** An organisation assesses a generative instruct
+model, an adapter is loaded, and what serves requests is a classifier, or a generative model whose
+safeguard has been suppressed. The parent file is unchanged throughout, with the same hash and the same
+signature.
+
+**The applicable tests change with the row.** If the product is a classifier, tests that measure an
+intrinsic refusal safeguard may not apply to it at all. If the product is still generative but
+stripped, they apply and would fail. Either way a verdict on the parent does not transfer to the pair.
+
+**The pair is the only assessable unit**, since an adapter alone has no behaviour to measure and the
+parent alone is not what runs.
+
+Proposed treatment: the adapter is a transformation between rows rather than an entry in the table, the
+taxonomy states that the row is determined by the pair and not the parent, and each recorded assessment
+names which pair it was performed on. What we need from you is where that rule is stated: in Chapter 3,
+as a fact about what circulates, or in Chapter 7, as a condition on what an acceptance result covers.
 
 ## B4. If a chapter needs a task vocabulary, whose?
 
@@ -154,8 +172,8 @@ weighting is the point.
 Rows are content, columns are file manner, and nothing crosses the two. Input modality qualifies a row:
 a vision-language model is a generative row whose input is image and text. Numeric precision qualifies
 a column: the same four formats carry quantised weights at P, C, C, P respectively, which is a
-statement about the columns and not a fifth row. The adapter does not appear, because it is a relation
-rather than a model.
+statement about the columns and not a fifth row. The adapter is not an entry at all but a movement
+between rows, and every assessment therefore records which pair it was performed on.
 
 ## What is needed from the session
 
