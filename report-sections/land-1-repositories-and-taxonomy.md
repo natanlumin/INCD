@@ -247,8 +247,14 @@ A model file arrives in one of four formats, and the format matters independentl
 it. Each entry below states what loading it can do, because that, not the layout of the bytes, is why
 the report cares.
 
-**Pickle checkpoints** (`.bin`, `.pt`, `.pth`, `.ckpt`) are serialised with Python's pickle module.
-Loading one can execute arbitrary code embedded in the file; Python's own documentation says the module
+**Pickle checkpoints** (`.bin`, `.pt`, `.pth`, `.ckpt`) are serialised with Python's pickle module. The
+extension is a convention and not a guarantee in either direction: `pytorch_model.bin` and
+`adapter_model.bin` are pickle, while other toolchains write `.bin` files that are raw tensor data and
+contain no pickle at all. What makes a file pickle is its content, which is why the Hub's scanner
+extracts the import list from anything pickled rather than trusting the name, and why a control keyed
+on the extension would both miss and over-flag.
+
+Loading a pickle file can execute arbitrary code embedded in it; Python's own documentation says the module
 is not secure and that data from an untrusted source should never be unpickled [LD-31]. It remains
 PyTorch's default serialisation, which is why it is still everywhere: 230,091 models on ModelScope
 carry it [LD-18], and it is present in about one text-generation repository in seven on the Hub [LD-32].
