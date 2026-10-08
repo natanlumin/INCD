@@ -16,8 +16,8 @@ here belongs there.
 | `foundation/` | the theory. The six-tests foundation paper, its two earlier editions, the content-organization master, the open-weight ecosystems document, and `demonstration-terms.md`, the six-tests and doors vocabulary moved out of the glossary on 2026-10-07 | content agreed |
 | `landscape/` | the sourced landscape research: platform comparison, producers, taxonomy evidence, source log | research complete at cut-off 2026-10-06 |
 | `landscape/serving-and-compiled-artefacts.md` | the layer between the file and the answer: inference servers, build toolchains, compiled engines, and the reader-facing passage explaining them | research complete at cut-off 2026-10-06 |
-| `report-sections/` | drafted sections of the report itself, named by their skeleton number | 3.1 drafted |
-| `process/` | Jira item drafts, decision sheets, the LAND-1 subtasks (`land-1-subtasks.md`), `scrum-281/` with the style-guide item's subtask texts and the glossary change log, and `scrum-280/` with the landscape item's subtask texts and its deliverable `scrum280.md` | SCRUM-281 and SCRUM-280 drafted; decision sheet needs v4 |
+| `report-sections/` | text meant to enter the report, named by its skeleton number; filled at assembly. Its README says where each drafted subsection currently lives | empty; 3.1 and 3.2 drafted in `process/scrum-280/scrum280.md` |
+| `process/` | Jira item drafts and decision sheets, one folder per item: `scrum-281/` (style guide) and `scrum-280/` (platforms and taxonomy), each with its subtask texts and its deliverable; `scrum-280/development/` holds that item's superseded working files | SCRUM-281 and SCRUM-280 drafted; decision sheet needs v4 |
 | `lay-package/` | the customer-facing explainer, cards, map, concept notes and writing brief | done |
 
 ## Map to the skeleton
@@ -28,8 +28,8 @@ Where the material answers a section of the report, and where it does not yet.
 |---|---|---|
 | 2.1 Scope and definitions | `foundation/open-weight-ecosystems.md`, `governing/` glossary | have |
 | 2.4 Evidence standards and research cut-off | `governing/` citation policy; cut-off 2026-10-06 | have |
-| 3.1 Repositories and hosting platforms | `report-sections/report-section-3-1-draft.md`, `landscape/` | drafted |
-| 3.2 Model types, tasks and artefact formats | `landscape/` taxonomy evidence | awaiting the freeze |
+| 3.1 Repositories and hosting platforms | `process/scrum-280/scrum280.md` section 1 (Tables 1 to 3), `landscape/` | drafted |
+| 3.2 Model types, tasks and artefact formats | `process/scrum-280/scrum280.md` section 2 (Table 4 with rule and evidence per cell) | drafted; awaiting the freeze |
 | 3.3 Release trends and ecosystem growth | nothing | needs its own measurement |
 | 3.4 Licensing and provenance in practice | `landscape/` producers table | partly; model-card completeness unmeasured |
 | 3.5 Ecosystem outlook | nothing | blocked on INCD's scope question |
@@ -55,7 +55,8 @@ Where the material answers a section of the report, and where it does not yet.
 
 ## Open decisions
 
-1. **The taxonomy freeze.** Four questions for Dan, in `process/land-1-dan-decision-sheet.md`. Blocks
+1. **The taxonomy freeze.** Four questions for Dan, in `process/scrum-280/scrum280.md` section 2.2 (the
+   decision sheet `process/land-1-dan-decision-sheet.md` v3 is superseded by it). Blocks
    sections 3.2, 4.5 and 5.3.
 2. **Four claims in the ecosystems document** are contradicted by the sourced research: ModelScope
    described as a mirror, GitHub Models listed as live when it was retired on 30 July 2026, Kaggle

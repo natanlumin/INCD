@@ -77,9 +77,8 @@ glossary is the place where the expansions are listed for the whole report.
 
 ### 1.1 The repositories
 
-Published models live in three model repositories: the Hugging Face Hub, the largest and the
-ecosystem's default address, and Kaggle Models and ModelScope for most of the rest. A producer that
-attaches its file to a GitHub release is using a package registry, which 1.2 covers.
+Published models live in three model repositories: the Hugging Face Hub, Kaggle Models and ModelScope.
+A producer that attaches its file to a GitHub release is using a package registry, which 1.2 covers.
 
 An entry holds the files, a commit history, a model card, a licence field and, where the producer
 declares it, the relation to a parent model: fine-tune, adapter, merge or quantisation. Three facts
@@ -138,8 +137,6 @@ resolve in section 3.
 | Microsoft, Foundry Models (Azure AI Foundry now "Microsoft Foundry") | Two tiers, Microsoft-evaluated or provider-validated; a Hugging Face collection; lifecycle ending in retirement [CG-08, CG-10] | New Foundry: mandatory malware scan, remote-code models disallowed, safetensors only, signed runtime containers [CG-09]. Classic: Hugging Face models "not tested or evaluated" [CG-08] | Versioned registry assets; GA weights fixed [CG-08, CG-10]. Card and licence tab provider-filled: not guaranteed. Digests or SBOM to customers: not established [CG-09] | Serverless endpoint (by proxy) or managed compute in the customer's subscription (in possession); weights not obtainable through the catalogue [CG-08, CG-09] |
 | NVIDIA, NGC Catalog and NIM | NVIDIA-curated; partners through a programme with scanning and sign-off; branch lifecycle; takedown policy not stated [CG-11, CG-14] | Images scanned on a schedule and signed since 2023; models signed since 2025; NIM verifies checksums at start [CG-11, CG-12, CG-13]. NVIDIA converts and quantises upstream models [CG-13] | SBOM, VEX and scan results by image digest; terms accepted once per organisation [CG-11, CG-12, CG-13]. Upstream licence shown, not verified: not guaranteed [CG-13] | Signed container from nvcr.io, run anywhere (in possession); weights fetched at start from several stores; or hosted endpoints (by proxy) [CG-13] |
 
-Each cell is a summary; the full statement behind it, with every source, is in the landscape evidence file.
-
 ### 1.3 What the platform controls establish, and what they do not
 
 Three findings follow from Table 1 to Table 3.
@@ -176,9 +173,9 @@ claims.
 
 One segmentation, reused verbatim by every later matrix; every cell carries a dated source; frozen with
 a version and a date after agreement with Dan (2.2). The axes and labels are the glossary's: of the six
-types the item names, classification, embedding and generative are the rows; multimodal, quantised and
-adapters are the glossary's three qualifiers, modality on the generative row, precision on the columns,
-completeness on the file. A cell holds one of three values:
+types the item names, classification, embedding and generative are the rows; multimodal is the glossary's modality
+qualifier on the generative row; quantised model and adapter are the glossary's file kinds, not types, and
+appear in Table 6 only. A cell holds one of three values:
 
 - **C, common.** A documented first-class path exists in an official source, and the format appears
   in at least one repository in twenty of that type on the Hugging Face Hub, measured as 5 per cent of
@@ -192,46 +189,44 @@ The share is read from Table 5, the Hub's model search by task tag and library t
 on text-generation, the embedding row on both of its tags, the modality qualifier on image-text-to-text
 and the precision qualifier on the 4-bit tag across all tasks.
 
-**Table 4. The segmentation: model type against artefact format.** C, P and – as defined above; the
-evidence for every cell and qualifier line is in Table 6. Proposed, pending agreement with Dan.
+**Table 4. The segmentation: model type against artefact format.** Row and column terms as the glossary
+defines them; modality is the glossary's qualifier on the generative row. C, P and – as defined above; the
+evidence for every row is in Table 6. Proposed, pending agreement with Dan.
 
-| Model type | pickle | safetensors | GGUF | ONNX |
+| Model type | pickle checkpoint | safetensors | GGUF | ONNX |
 |---|---|---|---|---|
 | classification model | C | C | P | P |
 | embedding model | C | C | P | C |
 | generative model | C | C | C | P |
-
-- **Modality**, on the generative row: image-and-text input leaves the four values unchanged; it raises
-  the GGUF share above the text-only one and makes the GGUF artefact two files.
-- **Precision**, on the columns: quantised weights sit in the four formats at P, C, C, P.
-- **Completeness**, on the file: an adapter sits in the four formats at C, C, P, P.
+| qualifier: modality on the generative row, image and text input | C | C | C | P |
 
 **Table 5. Hugging Face Hub repositories by task tag and library tag.** Counts as at 6 October 2026
 [TX-01].
 
-| Task tag | safetensors | PyTorch (pickle) | GGUF | ONNX | PEFT |
-|---|---|---|---|---|---|
-| text-generation | 328,892 | 56,780 | 39,152 | 2,310 | 42,227 |
-| text-classification | 76,892 | 39,688 | 424 | 1,644 | 1,542 |
-| feature-extraction | 11,532 | 7,402 | 696 | 1,033 | 96 |
-| sentence-similarity | 16,192 | 3,204 | 530 | 980 | – |
-| image-text-to-text | 32,525 | 2,399 | 5,765 | 235 | 909 |
-| 4-bit, all tasks | 47,666 | 3,013 | – | 96 | – |
+| Task tag | safetensors | PyTorch (pickle) | GGUF | ONNX |
+|---|---|---|---|---|
+| text-generation | 328,892 | 56,780 | 39,152 | 2,310 |
+| text-classification | 76,892 | 39,688 | 424 | 1,644 |
+| feature-extraction | 11,532 | 7,402 | 696 | 1,033 |
+| sentence-similarity | 16,192 | 3,204 | 530 | 980 |
+| image-text-to-text | 32,525 | 2,399 | 5,765 | 235 |
+| 4-bit, all tasks | 47,666 | 3,013 | – | 96 |
 
 ### 2.1 The evidence per cell
 
 **Table 6. Evidence per cell, in the shape of Table 4.** Each cell gives the value, the share (the format's
 count as a fraction of the row's safetensors count in Table 5; "base" marks the denominator itself), the
-documented path, and the sources. Access date 6 October 2026.
+documented path, and the sources. The last two rows evidence the glossary's two file kinds, quantised
+model and adapter, which are not model types and so are not rows of Table 4. Access date 6 October 2026.
 
-| Row of Table 4 | pickle | safetensors | GGUF | ONNX |
+| Row of Table 4 | pickle checkpoint | safetensors | GGUF | ONNX |
 |---|---|---|---|---|
 | classification model | **C** 52 %. PyTorch default for the older classifier population [TX-01, TX-03] | **C** base. Transformers default since 4.35 [TX-01, TX-04] | **P** 0.6 %. Rerankers and small heads; llama.cpp serves rerankers [TX-01, TX-13] | **P** 2.1 %. Export through Optimum and Transformers.js; below one in twenty [TX-01, TX-08] |
 | embedding model | **C** 64 % and 20 % on the two tags [TX-01, TX-03] | **C** base [TX-01, TX-04] | **P** 6 % and 3 %. llama.cpp embedding endpoint; one tag above the threshold, one below [TX-01, TX-13] | **C** 9 % and 6 %. sentence-transformers ONNX backend with quantised variants [TX-01, TX-08] |
 | generative model | **C** 17 %. PyTorch default, trend away: safetensors the Transformers default since 4.35, pickle saving deprecated, weights-only loading since PyTorch 2.6. In circulation, not produced [TX-01, TX-03, TX-04] | **C** base. Transformers default [TX-01, TX-04, TX-05] | **C** 12 %. The local-inference distribution: Ollama, llama.cpp, Docker Model Runner [TX-01, TX-07, TX-11] | **P** 0.7 %. ONNX Runtime GenAI runs the major families [TX-01, TX-09] |
-| modality: image and text input | **C** 7 % [TX-01] | **C** base [TX-01] | **C** 18 %, above the text-only share; the artefact is two files, model and projector [TX-01, TX-06, TX-13] | **P** 0.7 %. ONNX Runtime GenAI vision models [TX-01, TX-09] |
-| precision: quantised weights | **P** 6 % of 4-bit repositories. Pickle path version-gated in bitsandbytes [TX-01, TX-15] | **C** 94 % of 4-bit repositories. Every method Transformers can serialise saves safetensors [TX-01, TX-15] | **C** Quantisation is the normal state of a GGUF file; tensor types in the specification; Ollama's default pull is 4-bit [TX-06, TX-07] | **P** 0.2 % of 4-bit repositories, a lower bound: int4 and int8 ONNX exist but rarely carry the tag [TX-01, TX-08, TX-09] |
-| completeness: adapter | **C** share not measured. PEFT saves a pickle adapter as the alternative to safetensors, interchangeably [TX-14] | **C** PEFT default [TX-14] | **P** no Hub count. llama.cpp converts a PEFT adapter to the GGUF adapter file type and loads it beside the model [TX-06, TX-13] | **P** no Hub count. ONNX Runtime GenAI loads adapters converted to its own file type [TX-09] |
+| modality, on the generative row: image and text input | **C** 7 % [TX-01] | **C** base [TX-01] | **C** 18 %, above the text-only share; the artefact is two files, model and projector [TX-01, TX-06, TX-13] | **P** 0.7 %. ONNX Runtime GenAI vision models [TX-01, TX-09] |
+| quantised model: precision, on the columns | **P** 6 % of 4-bit repositories. Pickle path version-gated in bitsandbytes [TX-01, TX-15] | **C** 94 % of 4-bit repositories. Every method Transformers can serialise saves safetensors [TX-01, TX-15] | **C** Quantisation is the normal state of a GGUF file; tensor types in the specification; Ollama's default pull is 4-bit [TX-06, TX-07] | **P** 0.2 % of 4-bit repositories, a lower bound: int4 and int8 ONNX exist but rarely carry the tag [TX-01, TX-08, TX-09] |
+| adapter: completeness, on the file | **C** share not measured. PEFT saves a pickle adapter as the alternative to safetensors, interchangeably [TX-14] | **C** PEFT default [TX-14] | **P** no Hub count. llama.cpp converts a PEFT adapter to the GGUF adapter file type and loads it beside the model [TX-06, TX-13] | **P** no Hub count. ONNX Runtime GenAI loads adapters converted to its own file type [TX-09] |
 
 ### 2.2 To settle with Dan at the freeze
 
@@ -241,8 +236,8 @@ documented path, and the sources. Access date 6 October 2026.
    pickle at 6 per cent, and the modality pickle share at 7 per cent.
 2. **The pickle column.** Whether the frozen table carries a marker that C in this column means in
    circulation and not in production, given the evidence in the generative × pickle row of Table 6.
-3. **The modality qualifier.** Whether image-and-text input stays a qualifier line, as proposed, or
-   becomes a row of its own in the frozen table because its GGUF artefact is two files, which changes
+3. **The modality qualifier.** Whether image-and-text input stays a qualifier row, as proposed, or
+   becomes a model type of its own in the frozen table because its GGUF artefact is two files, which changes
    what a scan or a hash covers.
 4. **The generative row.** Whether it needs a base-only count. The Hub shows a base-only toggle but
    exposes no URL parameter for it, so no count is obtainable and the row covers base and instruct
@@ -375,6 +370,5 @@ The former Bedrock modality page now redirects to a provider-organised catalogue
 documentation resolves under a renamed product path, Vertex AI having become Gemini Enterprise Agent
 Platform, and Azure AI Foundry having become Microsoft Foundry, with separate classic and current
 portals that differ in substance. ModelScope's documented metadata page returns navigation only on both
-its domains. The unsuffixed Nemotron Ultra base repository returns unauthorised. The Z.AI blog post that
-is the primary source for SG-11 returns an empty body. Counts from live catalogue pages drift between
+its domains. Counts from live catalogue pages drift between
 readings and are quoted as at the access date.

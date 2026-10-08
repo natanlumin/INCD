@@ -22,8 +22,7 @@ property; it is never inferred from another platform.
 
 ## The repositories
 
-Published models live in three model repositories: the Hugging Face Hub, the largest and the
-ecosystem's default address, and Kaggle Models and ModelScope for most of the rest. A producer that
+Published models live in three model repositories: the Hugging Face Hub, Kaggle Models and ModelScope. A producer that
 attaches its file to a GitHub release is using a package registry, which 1.2 covers.
 
 An entry holds the files, a commit history, a model card, a licence field and, where the producer
@@ -58,7 +57,7 @@ named beside it in the foundation document, were not examined.
 
 [Table 3: the four cloud model gardens, columns as Table 1; from the SCRUM-280 deliverable]
 
-Each cell is a summary; the full statement behind it, with every source, is in the landscape evidence file.
+
 
 ## What the platform controls establish, and what they do not
 
