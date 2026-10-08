@@ -7,98 +7,70 @@ the source log; the full evidence, including the four-provider breakdown of the 
 
 ---
 
-An open model is not a product bought from one vendor. It is a file that moves through an ecosystem of
-publishers, repositories, redistributors, runtimes and hosted providers, changing hands and sometimes
-changing form at each step. This section describes where the file lives, how it reaches an
-organisation, and what each platform along the way does to it.
+This section answers three questions about an open model before any threat is discussed: where its
+file is published, which is the subject of 1.1; through which channels it reaches an organisation and in
+what form, which is 1.2; and what each platform does to the file on the way, which Table 1 and Table 2
+record in 1.3 and 1.4 interprets. Four properties are recorded for every platform, and they are the
+columns of Table 1: governance, platform-side controls, guaranteed metadata, and distribution mechanism.
 
-One distinction frames the whole chapter, and it is the one most often lost when an organisation says
-it uses open models. **An open model in possession** means the organisation holds the file and runs it
-on accelerators it pays for, choosing and operating the serving software. **An open model by proxy**
-means the organisation holds an API key to a provider's copy of the same file: it sends requests,
-receives answers, and never touches the file or the software that serves it. The licence is identical
-in both cases. What differs is possession, and with it what the organisation can inspect, what it is
-accountable for, and which of the risks in Chapter 4 are its own. The distinction recurs in section 7.4,
-where it decides which tests an organisation is able to run at all.
-
-The distinction cuts across platforms rather than between them, and it is not always visible from the
-name. Hugging Face hosts files and also sells a hosted API over those same files [HF-18]. NVIDIA
-publishes containers an organisation can pull and run, and hosts endpoints serving the same models
-[CG-13]. The cloud gardens do both, depending on which deployment option the customer picks [CG-01,
-CG-04, CG-08]. The useful question is never "is this platform open" but "does this platform hand me a
-file or a key".
+**Notation.** Terms fixed in the report's glossary are used as defined there and are not redefined here;
+in this section they are producer, model repository, redistributor, platform-side control, guaranteed
+metadata, distribution mechanism, inference server, in possession and by proxy. A bracketed identifier
+such as [HF-18] names a row of the source log in section 3, and every factual statement carries one. A
+cell or sentence that reads *not established* means that no page published by the platform states the
+property; it is never inferred from another platform.
 
 ## The repositories
 
-Published models live in a small number of repositories that host the files, their metadata and their
-revision history. The Hugging Face Hub is the largest and functions as the default address of the
-ecosystem; Kaggle Models and ModelScope hold most of the rest, with plain GitHub releases and the
-package registries for the remainder.
+Published models live in a small number of model repositories that host the files, their metadata and
+their revision history: the Hugging Face Hub, the largest and the ecosystem's default address; Kaggle
+Models and ModelScope for most of the rest; plain GitHub releases and the package registries for the
+remainder.
 
-A repository entry contains the files themselves, a commit history, a model card written by the
-publisher, a licence field, and, where the publisher declares it, the relation to a parent model. The
-declared relations - fine-tune, adapter, merge, quantisation - link entries into a tree, so that a
-popular base model may have thousands of descendants. Three properties of that tree matter for the rest
-of the report. The relation is declared by the publisher and not verified by the repository: no
-platform examined states that it checks whether a file said to derive from a given parent actually does
-[HF-14, KG-05, MS-04]. Many publishers do not declare it at all, since no repository requires it
-[HF-15]. And a derivative is a different model from its parent, so a verdict on the parent does not
-carry to the child.
+An entry holds the files, a commit history, a model card, a licence field and, where the producer
+declares it, the relation to a parent model. The declared relations, fine-tune, adapter, merge and
+quantisation, link entries into a tree in which a popular base model may have thousands of descendants.
+Three properties of that tree carry through the report. The relation is declared by the producer and
+verified by no repository examined [HF-14, KG-05, MS-04]. Many producers do not declare it, since no
+repository requires it [HF-15]. And a derivative is a different model from its parent, so a verdict on
+the parent does not carry to the child.
 
-Repositories do apply controls of their own, and they differ more than their similar appearance
-suggests. The Hugging Face Hub scans every file at every commit with an antivirus engine, extracts and
-displays the import list of every pickle file, and adds two third-party scanners across all public
-repositories [HF-05, HF-06, HF-07, HF-08]. It offers conversion of pickled weights into a safe
-container format through a service that opens a pull request the repository owner must merge [HF-10],
-and it supports optional signed commits, which establish origin rather than safety [HF-06, HF-11].
-Kaggle and ModelScope document no scanning, signing or conversion of model files at all; Kaggle's
-acceptable-use policy prohibits distributing malicious files but describes no mechanism, and
-ModelScope's international terms state expressly that user content is not verified or approved
-[KG-04, KG-02, MS-02, MS-05]. The Ollama library verifies each layer's digest on download but documents
-no review of what is pushed [OL-03, OL-09]. GitHub computes a digest for every release asset and offers
-opt-in immutable releases with a signed attestation over the tag, commit and asset digests, but
-documents no malware scanning of the assets themselves [GH-05, GH-06, GH-10].
+What each repository does to the files it hosts is in Table 1, and the range is wide. The Hugging Face
+Hub scans every file at every commit and extracts the imports of every pickle file [HF-05, HF-06].
+Kaggle and ModelScope document no scanning, signing or conversion at all [KG-04, MS-02, MS-05]. The
+Ollama library and GitHub verify digests but document no review of content [OL-03, OL-09, GH-05, GH-10].
 
-Two of these platforms warrant a note. ModelScope is commonly described as a mirror of the Hugging Face
-Hub; its own documentation describes no mirroring or syncing process, and the organisation that holds
-most of the re-uploaded models publishes them as ordinary user uploads, with ModelScope's own hashes
-[MS-04, MS-07]. Provenance must therefore be re-established rather than assumed to carry across. And
-GitHub Models, the catalogue of hosted endpoints that sat beside GitHub releases, was fully retired on
-30 July 2026 [GH-11]; it appears here only because material written before that date refers to it.
+Two cautions. ModelScope documents no mirroring of the Hugging Face Hub; its re-uploads are ordinary
+user uploads carrying ModelScope's own hashes, so provenance must be re-established rather than assumed
+to carry across [MS-04, MS-07]. GitHub Models, the hosted catalogue beside GitHub releases, was retired
+on 30 July 2026 [GH-11] and appears here only because earlier material refers to it.
 
 ## Distribution channels beyond the repositories
 
 Between the repository and the organisation that runs a model sit redistributors, which repackage a
-published model for a particular way of running it. They fall into five kinds, and each changes what
-the organisation receives.
+published model for a particular way of running it. What they hand over is either a file or a key: the
+organisation then holds the model in possession, running it on an inference server it operates, or by
+proxy, calling a provider's copy through an API. The licence is the same in both cases. What differs is
+what the organisation can inspect, what it is accountable for, which of the risks in Chapter 4 are its
+own and, in section 7.4, which tests it can run at all. The line runs through platforms, not between
+them: Hugging Face hands out files and sells an API over them [HF-18], NVIDIA ships containers and hosts
+endpoints for the same models [CG-13], and the cloud gardens do both [CG-01, CG-04, CG-08].
 
-**Cloud model gardens.** The major providers curate catalogues that deploy into a customer's account in
-a few clicks: Google's Model Garden, Amazon Bedrock with its marketplace and SageMaker JumpStart, the
-Microsoft Foundry catalogue, and NVIDIA's NGC. The provider selects what to list, often optimises or
-quantises the model, and hosts the copy the customer deploys [CG-01, CG-03, CG-07, CG-09, CG-13]. None
-of the four offers a community publishing path. Their platform-side controls differ more than any other
-group examined, which is why section 3.1 of the appendix table breaks them out: at one end, no
-pre-listing scanning of marketplace or catalogue models is documented at all [CG-04, CG-06]; at the
-other, container images and model files are both signed, with a software bill of materials and
-vulnerability-exchange documents retrievable by image digest [CG-11].
+Five kinds of redistributor, each placed in Table 1 by what it hands over:
 
-**Packaged inference microservices.** NVIDIA's NIM distributes models as containers bundling the file,
-an optimised runtime and a serving API. The same model is available as a container to pull or as a
-hosted endpoint to call, which places one product on both sides of the possession line [CG-13].
-
-**Local runtimes with their own libraries.** Ollama and the wider llama.cpp family distribute models in
-the GGUF format, usually quantised, through libraries of their own and run them on a workstation or a
-single server [OL-01, OL-06]. They are the entry point for most individual and small-team use, and the
-only channel in this section where the default artefact is a compressed derivative rather than the
-publisher's original.
-
-**Deployment and orchestration platforms.** Platforms that manage fleets of accelerators and the
-deployment of serving workloads onto them. The organisation chooses the model and the serving stack;
-the platform provisions and operates the infrastructure.
-
-**Hosted inference providers.** Services that serve open models behind a pay-per-token API. The
-organisation sends requests and receives answers exactly as it would with a closed commercial model,
-and never handles the file.
+- **Cloud model gardens.** Google's Model Garden, Amazon Bedrock with SageMaker JumpStart, Microsoft
+  Foundry and NVIDIA's NGC: provider-curated catalogues with no community publishing path, deploying a
+  copy the provider often optimises or quantises [CG-01, CG-03, CG-07, CG-09, CG-13]. Their controls
+  differ more than any other group's, which is why Table 2 breaks them out.
+- **Packaged inference microservices.** NVIDIA's NIM: the model, an inference server and a serving API
+  in one container, available to pull or to call [CG-13].
+- **Local inference servers with their own libraries.** Ollama and the llama.cpp family, distributing
+  quantised GGUF files for a workstation or a single server [OL-01, OL-06]; the one channel whose default
+  artefact is a derivative rather than the producer's original.
+- **Deployment and orchestration platforms.** Manage the accelerators and the serving workloads; the
+  organisation chooses the model and the serving stack.
+- **Hosted inference providers.** Open models behind a pay-per-token API; the organisation never handles
+  the file.
 
 ## The comparison
 

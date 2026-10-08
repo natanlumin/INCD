@@ -13,11 +13,11 @@ here belongs there.
 |---|---|---|
 | `skeleton/` | the INCD table of contents, v0.2 of 12 September 2026. The target structure; the oracle for where everything goes | reference, not ours to edit |
 | `governing/` | the style guide: glossary, citation policy and source-quality bar, figure and table style, the English QA passes | agreed; to be posted to the shared workspace |
-| `foundation/` | the theory. The six-tests foundation paper, its two earlier editions, the content-organization master, and the open-weight ecosystems document | content agreed |
+| `foundation/` | the theory. The six-tests foundation paper, its two earlier editions, the content-organization master, the open-weight ecosystems document, and `demonstration-terms.md`, the six-tests and doors vocabulary moved out of the glossary on 2026-10-07 | content agreed |
 | `landscape/` | the sourced landscape research: platform comparison, producers, taxonomy evidence, source log | research complete at cut-off 2026-10-06 |
 | `landscape/serving-and-compiled-artefacts.md` | the layer between the file and the answer: inference servers, build toolchains, compiled engines, and the reader-facing passage explaining them | research complete at cut-off 2026-10-06 |
 | `report-sections/` | drafted sections of the report itself, named by their skeleton number | 3.1 drafted |
-| `process/` | Jira item drafts and decision sheets | LAND-1 drafted |
+| `process/` | Jira item drafts, decision sheets, the LAND-1 subtasks (`land-1-subtasks.md`), `scrum-281/` with the style-guide item's subtask texts and the glossary change log, and `scrum-280/` with the landscape item's subtask texts and its deliverable `scrum280.md` | SCRUM-281 and SCRUM-280 drafted; decision sheet needs v4 |
 | `lay-package/` | the customer-facing explainer, cards, map, concept notes and writing brief | done |
 
 ## Map to the skeleton
