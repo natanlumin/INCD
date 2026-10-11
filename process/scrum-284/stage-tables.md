@@ -14,7 +14,7 @@ Every symbol in the figure and the tables is defined here before it is used. Ter
 | Symbol | Reads as | Definition |
 |---|---|---|
 | S1, S2, S3, S4 | stage | The four lifecycle stages in order: S1 selection, S2 adjustment, S3 deployment, S4 runtime detection. Each is a point at which a question about the model is answered |
-| Q, Qn.k | question | A question answered at stage Sn; k numbers the questions of that stage (Q1.1 is the first question of selection) |
+| Q, Qn.k | question | A question about the model answered at stage Sn; k numbers the questions of that stage (Q1.1 is the first question of selection) |
 | en.k a, b, c | evidence item | One item of evidence for question Qn.k, lettered within the question; each item carries exactly one kind, guaranteed, declared, readable or testable, and the kind alone decides who answers it, where it exists and which family establishes it (the rule table) |
 | A | answerer | Who answers the question: the platform, the publisher, the provider, or the organisation that selects, adjusts, deploys or runs the model |
 | E, En | evidence | What exists at stage Sn that can answer a question. Evidence accumulates: En includes everything in En-1 plus what the stage adds, written En = En-1 ∪ {additions} |
@@ -50,7 +50,7 @@ Two consequences for every stage. By proxy, the organisation can establish only 
 
 ## S1 Selection
 
-The stage asks seven questions. Each evidence item carries its kind; the four columns after it apply the rule above to the letters and nothing else.
+The stage asks six questions about the model. Each evidence item carries its kind; the four columns after it apply the rule above to the letters and nothing else.
 
 | # | Question | Evidence items, with kind | Who answers | In possession | By proxy | Test family |
 |---|---|---|---|---|---|---|
@@ -60,9 +60,10 @@ The stage asks seven questions. Each evidence item carries its kind; the four co
 | Q1.4 | May we use it? | a. declared: licence and usage terms<br>b. guaranteed: gating, where the platform enforces it | a: publisher; by proxy, provider<br>b: platform | a, b | a | a: none, gap<br>b: provenance |
 | Q1.5 | Which row and column of the segmentation is it, and so which threats apply? | a. readable: column (format), precision, completeness<br>b. declared: row (what it produces), modality qualifier | a: organisation<br>b: publisher; by proxy, provider | a, b | b | a: static<br>b: none, gap |
 | Q1.6 | Does it behave as described, and is the safeguard present? | a. testable, outputs: measured behaviour on the organisation's inputs<br>b. testable, internals: checks on the file while it runs | a, b: organisation | a, b | a | a: behavioural<br>b: dynamic |
-| Q1.7 | File or key? | none: the decision that closes the stage, taken on Q1.1 to Q1.6; it sets the access state for S2 to S4 | organisation | decision | decision | none |
 
-Reading the stage off the rule. In possession, every item exists and all four families run at selection. By proxy, only the declared items and Q1.6 a exist: Q1.3 has nothing left for the organisation, Q1.2 keeps only the provider's word, and the behavioural family is the only one that still measures anything. The gaps of selection are the four declared items, Q1.1 b, Q1.2 c, Q1.4 a and Q1.5 b, under both access states. Q1.6 recurs after adjustment (S2) and as drift at runtime (S4); Q1.2 and Q1.3 recur at deployment (S3) with the provider as answerer when the state is by proxy.
+Selection closes with the first answer to the access question, file or key, which the figure carries as the access line H. It is a decision about the organisation, not a question about the model, so it is not a row; it is settled no later than deployment and governs which items exist from S2 onward.
+
+Reading the stage off the rule. In possession, every item exists and all four families run at selection. By proxy, only the declared items and Q1.6 a exist: Q1.3 has nothing left for the organisation, Q1.2 keeps only the provider's word, and the behavioural family is the only one that still measures anything. The gaps of selection are the four declared items, Q1.1 b, Q1.2 c, Q1.4 a and Q1.5 b, under both access states. Q1.6 recurs after adjustment (S2) and as drift at runtime (S4); Q1.2 and Q1.3 recur at deployment (S3) with the provider as answerer when the access state is by proxy.
 
 ## S2 Adjustment
 
