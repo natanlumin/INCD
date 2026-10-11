@@ -17,7 +17,7 @@ here belongs there.
 | `landscape/` | the sourced landscape research: platform comparison, producers, taxonomy evidence, source log | research complete at cut-off 2026-10-06 |
 | `landscape/serving-and-compiled-artefacts.md` | the layer between the file and the answer: inference servers, build toolchains, compiled engines, and the reader-facing passage explaining them | research complete at cut-off 2026-10-06 |
 | `report-sections/` | text meant to enter the report, named by its skeleton number; filled at assembly. Its README says where each drafted subsection currently lives | empty; 3.1 and 3.2 drafted in `process/scrum-280/scrum280.md` |
-| `process/` | Jira item drafts and decision sheets, one folder per item: `scrum-281/` (style guide) and `scrum-280/` (platforms and taxonomy), each with its subtask texts and its deliverable; `scrum-280/development/` holds that item's superseded working files | SCRUM-281 and SCRUM-280 drafted; decision sheet needs v4 |
+| `process/` | Jira item drafts and decision sheets, one folder per item: `scrum-281/` (style guide), `scrum-280/` (platforms and taxonomy) and `scrum-284/` (lifecycle assessment framework), each with its subtask texts and its deliverable or working file; `scrum-280/development/` holds that item's superseded working files | SCRUM-281 and SCRUM-280 drafted; SCRUM-284 in progress; decision sheet needs v4 |
 | `lay-package/` | the customer-facing explainer, cards, map, concept notes and writing brief | done |
 
 ## Map to the skeleton
@@ -37,6 +37,7 @@ Where the material answers a section of the report, and where it does not yet.
 | 4.4 Inference-time and runtime threats | `landscape/serving-and-compiled-artefacts.md` | input only; this is where the serving layer earns its pages |
 | 4.5 Threat x model-type matrix | the frozen taxonomy supplies both axes | blocked on the freeze |
 | 5.3 Threat-to-control coverage | inherits the model-type axis from 4.5 | blocked |
+| 6.1 Lifecycle assessment framework | `process/scrum-284/stage-tables.md` (notation, figure, rule, stage tables; selection drafted) | in progress |
 | 6.2 Publicly attestable properties | `landscape/` controls and metadata columns | largely answered, undrafted |
 | 7.x Testing and acceptance | `foundation/` six-tests papers | have, unmapped to 7.x |
 | Appendix D Glossary | `governing/` | have |

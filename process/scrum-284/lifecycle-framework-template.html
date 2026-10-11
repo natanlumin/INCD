@@ -1,0 +1,70 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Lifecycle assessment framework, template</title>
+<style>body{margin:0;background:#fff;font-family:Helvetica,Arial,sans-serif}</style></head><body>
+<svg xmlns="http://www.w3.org/2000/svg" width="1180" height="640" viewBox="0 0 1180 640" font-family="Helvetica, Arial, sans-serif">
+  <defs><marker id="ar" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#333"/></marker></defs>
+  <text x="40" y="40" font-size="20" font-weight="bold" fill="#111">Lifecycle assessment framework: template with symbolic names</text>
+  <text x="40" y="62" font-size="12.5" fill="#444">Four stages S1 to S4. At each stage one question Q is answered by an answerer A on the evidence E that exists at that point. Methods M map to stages.</text>
+  <g font-size="13">
+    <rect x="40" y="110" width="250" height="230" rx="6" fill="#f4f6fa" stroke="#334" stroke-width="1.4"/>
+    <rect x="40" y="110" width="250" height="36" rx="6" fill="#334"/>
+    <text x="165" y="134" text-anchor="middle" font-size="15" font-weight="bold" fill="#fff">S1  Selection</text>
+    <text x="56" y="172" font-weight="bold">Q1</text><text x="90" y="172">question answered here</text>
+    <text x="56" y="200" font-weight="bold">A1</text><text x="90" y="200">who answers it</text>
+    <text x="56" y="228" font-weight="bold">E1</text><text x="90" y="228">evidence that exists</text>
+    <text x="90" y="246" font-size="11.5" fill="#555">at this point: E1 = {e1.1, e1.2, …}</text>
+    <text x="56" y="290" font-weight="bold">M→S1</text><text x="110" y="290">methods that run here</text>
+    <text x="110" y="308" font-size="11.5" fill="#555">{Mi : Mi maps to S1}</text>
+    <rect x="330" y="110" width="250" height="230" rx="6" fill="#f4f6fa" stroke="#334" stroke-width="1.4"/>
+    <rect x="330" y="110" width="250" height="36" rx="6" fill="#334"/>
+    <text x="455" y="134" text-anchor="middle" font-size="15" font-weight="bold" fill="#fff">S2  Adjustment</text>
+    <text x="346" y="172" font-weight="bold">Q2</text><text x="380" y="172">question answered here</text>
+    <text x="346" y="200" font-weight="bold">A2</text><text x="380" y="200">who answers it</text>
+    <text x="346" y="228" font-weight="bold">E2</text><text x="380" y="228">evidence that exists</text>
+    <text x="380" y="246" font-size="11.5" fill="#555">E2 = E1 ∪ {what adjustment adds}</text>
+    <text x="346" y="290" font-weight="bold">M→S2</text><text x="400" y="290">methods that run here</text>
+    <text x="400" y="308" font-size="11.5" fill="#555">{Mi : Mi maps to S2}</text>
+    <rect x="620" y="110" width="250" height="230" rx="6" fill="#f4f6fa" stroke="#334" stroke-width="1.4"/>
+    <rect x="620" y="110" width="250" height="36" rx="6" fill="#334"/>
+    <text x="745" y="134" text-anchor="middle" font-size="15" font-weight="bold" fill="#fff">S3  Deployment</text>
+    <text x="636" y="172" font-weight="bold">Q3</text><text x="670" y="172">question answered here</text>
+    <text x="636" y="200" font-weight="bold">A3</text><text x="670" y="200">who answers it</text>
+    <text x="636" y="228" font-weight="bold">E3</text><text x="670" y="228">evidence that exists</text>
+    <text x="670" y="246" font-size="11.5" fill="#555">E3 = E2 ∪ {what deployment adds}</text>
+    <text x="636" y="290" font-weight="bold">M→S3</text><text x="690" y="290">methods that run here</text>
+    <text x="690" y="308" font-size="11.5" fill="#555">{Mi : Mi maps to S3}</text>
+    <rect x="910" y="110" width="250" height="230" rx="6" fill="#f4f6fa" stroke="#334" stroke-width="1.4"/>
+    <rect x="910" y="110" width="250" height="36" rx="6" fill="#334"/>
+    <text x="1035" y="134" text-anchor="middle" font-size="15" font-weight="bold" fill="#fff">S4  Runtime detection</text>
+    <text x="926" y="172" font-weight="bold">Q4</text><text x="960" y="172">question answered here</text>
+    <text x="926" y="200" font-weight="bold">A4</text><text x="960" y="200">who answers it</text>
+    <text x="926" y="228" font-weight="bold">E4</text><text x="960" y="228">evidence that exists</text>
+    <text x="960" y="246" font-size="11.5" fill="#555">E4 = E3 ∪ {observed behaviour}</text>
+    <text x="926" y="290" font-weight="bold">M→S4</text><text x="980" y="290">methods that run here</text>
+    <text x="980" y="308" font-size="11.5" fill="#555">{Mi : Mi maps to S4}</text>
+  </g>
+  <g stroke="#333" stroke-width="1.6" fill="none" marker-end="url(#ar)">
+    <line x1="290" y1="225" x2="328" y2="225"/>
+    <line x1="580" y1="225" x2="618" y2="225"/>
+    <line x1="870" y1="225" x2="908" y2="225"/>
+  </g>
+  <g>
+    <line x1="40" y1="380" x2="1160" y2="380" stroke="#a33" stroke-width="2" stroke-dasharray="8 5"/>
+    <text x="40" y="372" font-size="12.5" fill="#a33" font-weight="bold">Access line H: what the organisation holds, decided at or before S3</text>
+    <rect x="40" y="396" width="540" height="72" rx="6" fill="#fff6f6" stroke="#a33" stroke-width="1.2"/>
+    <text x="56" y="420" font-size="13" font-weight="bold" fill="#111">H = file  (in possession)</text>
+    <text x="56" y="440" font-size="12" fill="#333">evidence E may include the file and its internals: white-box methods available</text>
+    <text x="56" y="458" font-size="12" fill="#333">E(S) = E_guaranteed(S) ∪ E_declared(S) ∪ E_readable(S) ∪ E_testable(S)</text>
+    <rect x="620" y="396" width="540" height="72" rx="6" fill="#fff6f6" stroke="#a33" stroke-width="1.2"/>
+    <text x="636" y="420" font-size="13" font-weight="bold" fill="#111">H = key  (by proxy)</text>
+    <text x="636" y="440" font-size="12" fill="#333">evidence E limited to the provider's statements and observed behaviour: black-box only</text>
+    <text x="636" y="458" font-size="12" fill="#333">E(S) = E_declared(S) ∪ E_testable(S)</text>
+  </g>
+  <g>
+    <rect x="40" y="500" width="1120" height="110" rx="6" fill="#f7f7f2" stroke="#776" stroke-width="1.2"/>
+    <text x="56" y="524" font-size="13.5" font-weight="bold" fill="#111">Methods M, grouped by test family F, each mapped to at least one stage</text>
+    <text x="56" y="548" font-size="12.5" fill="#222">F1 static  · F2 dynamic  · F3 behavioural  · F4 provenance      Mi ∈ some Fj ;  map(Mi) ⊆ {S1, S2, S3, S4},  map(Mi) ≠ ∅</text>
+    <text x="56" y="572" font-size="12.5" fill="#222">each Mi carries: what it detects, what it cannot, the access it needs (white-box needs H = file; black-box runs under either H)</text>
+    <text x="56" y="596" font-size="12.5" fill="#222">rule: a method whose access need is not met at a stage does not map to that stage</text>
+  </g>
+</svg>
+</body></html>
