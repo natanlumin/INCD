@@ -1,7 +1,7 @@
 # SCRUM-284 working file: lifecycle stage tables
 
-Status 12 October 2026: selection and adjustment agreed; deployment drafted, first version, pending the user's
-review; runtime detection to follow in the same shape. Vocabulary is the glossary's (SCRUM-281): lifecycle stage, test
+Status 12 October 2026: all four stages drafted and reviewed, selection, adjustment and deployment agreed, runtime
+detection under review. Vocabulary is the glossary's (SCRUM-281): lifecycle stage, test
 family, acceptance criterion, gap, in possession, by proxy, attestable and testable properties. Within
 attestable, evidence is marked guaranteed (the platform enforces or verifies it), declared (the producer
 states it) or readable (read from the file); testable evidence is measured. No sources yet; sources are
