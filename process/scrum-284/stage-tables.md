@@ -1,7 +1,7 @@
 # SCRUM-284 working file: lifecycle stage tables
 
-Status 11 October 2026: selection agreed, adjustment drafted and pending the user's review; deployment and
-runtime detection to follow in the same shape. Vocabulary is the glossary's (SCRUM-281): lifecycle stage, test
+Status 12 October 2026: selection and adjustment agreed; deployment drafted, first version, pending the user's
+review; runtime detection to follow in the same shape. Vocabulary is the glossary's (SCRUM-281): lifecycle stage, test
 family, acceptance criterion, gap, in possession, by proxy, attestable and testable properties. Within
 attestable, evidence is marked guaranteed (the platform enforces or verifies it), declared (the publisher
 states it) or readable (read from the file); testable evidence is measured. No sources yet; sources are
@@ -14,12 +14,13 @@ Every symbol in the figure and the tables is defined here before it is used. Ter
 | Symbol | Reads as | Definition |
 |---|---|---|
 | S1, S2, S3, S4 | stage | The four lifecycle stages in order: S1 selection, S2 adjustment, S3 deployment, S4 runtime detection. Each is a point at which a question about the model is answered |
-| Q, Qn.k | question | A question about the model answered at stage Sn; k numbers the questions of that stage (Q1.1 is the first question of selection) |
+| Q, Qn.k | question | A question answered at stage Sn about the model, or about what that stage puts around it (its serving software, configuration and access); k numbers the questions of that stage (Q1.1 is the first question of selection) |
 | en.k | evidence item | One item of the evidence that exists at stage Sn, numbered k, listed in that stage's inventory table with its kind, what it is and where it comes from; a question cites the items it draws on, and the kind alone decides who answers it, where it exists and which family establishes it (the rule table) |
 | A | answerer | Who answers the question: the platform, the publisher, the provider, or the organisation that selects, adjusts, deploys or runs the model |
 | E, En | evidence | The set of items that exist at stage Sn and can answer a question, listed in the stage's inventory table. Evidence accumulates: En includes everything in En-1 plus what the stage adds, written En = En-1 ∪ {additions} |
 | guaranteed, declared, readable | attestable evidence | The glossary's attestable properties, split by who vouches for them: guaranteed, the platform enforces or verifies it; declared, the publisher or provider states it and nothing verifies it; readable, read from the file itself |
 | testable | testable evidence | The glossary's testable properties: a property no metadata reveals, established only by running the model; split into outputs, measured black-box, and internals, measured white-box |
+| testable, outputs; testable, internals | the two testable kinds | Outputs: what the model returns on the organisation's inputs, measured black-box through a file or a key, so possible under both access states. Internals: the weights, activations and the like inside the model, measured white-box, so in possession only |
 | H | access line | What the organisation holds, decided once, at or before S3, and in force for every stage after: H = file, in possession; H = key, by proxy |
 | E(S) under H | evidence available | In possession: guaranteed, declared, readable and testable evidence can all exist. By proxy: only declared and testable, because there is no file and the platform's guarantees do not travel with the key |
 | M, Mi | method | One assessment method; i numbers the methods once the later chapters name them |
@@ -69,7 +70,7 @@ Selection closes with the first answer to the access question, file or key, whic
 
 - Q1.6 recurs after adjustment as Q2.3 and at runtime as drift; each time it is answered on new measured evidence against e1.9.
 - Q1.2 and Q1.3 recur at deployment when the access state is by proxy, with the provider as answerer, because by proxy nothing of them is left to the organisation at selection.
-- e1.2, the model card, is cited by four of the six questions; its parent relation is the gap that adjustment can close, e2.1 with e2.2, and that no other stage can.
+- e1.2, the model card, is cited by four of the six questions; its parent relation is the gap that adjustment can close, e2.2 with e2.1, and that no other stage can.
 
 ### E1: the evidence that exists at selection
 
@@ -106,10 +107,10 @@ The full list of what the selection questions above cite. Each item has one kind
 
 **Two facts that set the evidence.** Who made the change and what came back are independent, and E2 follows from both.
 
-- Who made it decides the record. The organisation's own change leaves its own record, e2.1, readable. A change made at its request leaves that party's account, e2.5, declared: the party is never the producer, so its statement of the base rests on the same declared parent relation as e1.2.
+- Who made it decides the record. The organisation's own change leaves its own record, e2.2, readable. A change made at its request leaves that party's account, e2.3, declared: the party is never the producer, so its statement of the base rests on the same declared parent relation as e1.2.
 - What came back decides the access state. A file, as from the Hub's conversion, or a container received instead of a file, as from a packaged inference microservice, is in possession. A key to a changed copy, as from a hosted provider's customisation service, is by proxy: the organisation never holds the adjusted copy, and what remains of the evidence is read off E2 by the rule.
 
-**Who answers.** Because the adjusted copy is the organisation's own, the who-answers column names the organisation where selection named the publisher. The organisation answers every item it produced, e2.1 to e2.4, and always the behaviour, e2.3; the party that made the change answers the record, e2.5, whenever that party is not the organisation.
+**Who answers.** Because the adjusted copy is the organisation's own, the who-answers column names the organisation where selection named the publisher. The organisation answers every item it produced, e2.1, e2.2 and e2.4, and always the behaviour, e2.5; the party that made the change answers the account, e2.3, whenever that party is not the organisation.
 
 ### The adjustment questions
 
@@ -117,16 +118,16 @@ The evidence column cites the items of E2, listed in full at the end of the stag
 
 | # | Question | Evidence from E2 | Who answers | In possession | By proxy | Test family |
 |---|---|---|---|---|---|---|
-| Q2.1 | What was changed, and from which base? | e2.2 base hash matches e1.3<br>e2.1 the change itself, when the organisation made it<br>e2.5 the account of the party that made it, otherwise | e2.1, e2.2: organisation<br>e2.5: the party that made the change | e2.2, and e2.1 or e2.5 | e2.5 | e2.1, e2.2: static<br>e2.5: none, gap |
-| Q2.2 | Did the change carry in anything we did not intend? | e2.1 data and recipe inspected<br>e2.4 where weights and activations moved<br>e2.3 probes for triggers and planted content | e2.1, e2.3, e2.4: organisation | e2.1, e2.3, e2.4 | e2.3 | e2.1: static<br>e2.4: dynamic<br>e2.3: behavioural |
-| Q2.3 | Is the safeguard still present after the change? | e2.3 against e1.9<br>e2.4 the safeguard's mechanism against the base | e2.3, e2.4: organisation | e2.3, e2.4 | e2.3 | e2.3: behavioural<br>e2.4: dynamic |
-| Q2.4 | Is the adjusted artefact still what the segmentation says, and does it still do what the base was selected for? | e2.2 against e1.4<br>e2.3 task behaviour against e1.9<br>e2.5 the format and precision as the party that made the change states them | e2.2, e2.3: organisation<br>e2.5: the party that made the change | e2.2, e2.3, and e2.5 when another party made the change | e2.3, e2.5 | e2.2: static<br>e2.3: behavioural<br>e2.5: none, gap |
+| Q2.1 | What was changed, and from which base? | e2.1 base hash matches e1.3<br>e2.2 the change itself, when the organisation made it<br>e2.3 the account of the party that made it, otherwise | e2.2, e2.1: organisation<br>e2.3: the party that made the change | e2.1, and e2.2 or e2.3 | e2.3 | e2.2, e2.1: static<br>e2.3: none, gap |
+| Q2.2 | Did the change carry in anything we did not intend? | e2.2 data and recipe inspected<br>e2.4 where weights and activations moved<br>e2.5 probes for triggers and planted content | e2.2, e2.5, e2.4: organisation | e2.2, e2.5, e2.4 | e2.5 | e2.2: static<br>e2.4: dynamic<br>e2.5: behavioural |
+| Q2.3 | Is the safeguard still present after the change? | e2.5 against e1.9<br>e2.4 the safeguard's mechanism against the base | e2.5, e2.4: organisation | e2.5, e2.4 | e2.5 | e2.5: behavioural<br>e2.4: dynamic |
+| Q2.4 | Is the adjusted artefact still what the segmentation says, and does it still do what the base was selected for? | e2.1 against e1.4<br>e2.5 task behaviour against e1.9<br>e2.3 the format and precision as the party that made the change states them | e2.1, e2.5: organisation<br>e2.3: the party that made the change | e2.1, e2.5, and e2.3 when another party made the change | e2.5, e2.3 | e2.1: static<br>e2.5: behavioural<br>e2.3: none, gap |
 
 **Links to the other stages.**
 
-- Q2.3 is Q1.6 asked again on new evidence, e2.3 against e1.9; that pair is what the acceptance criterion for adjustment will compare.
-- Q2.1 ties the stage to selection: an adjusted copy whose base hash, e2.2, does not match e1.3 is not the selected model, and the lifecycle restarts at S1.
-- e2.1 with e2.2 is the one place in the framework where a readable record replaces a declared claim, the parent relation that S1 could not verify; it exists only when the organisation made the change itself.
+- Q2.3 is Q1.6 asked again on new evidence, e2.5 against e1.9; that pair is what the acceptance criterion for adjustment will compare.
+- Q2.1 ties the stage to selection: an adjusted copy whose base hash, e2.1, does not match e1.3 is not the selected model, and the lifecycle restarts at S1.
+- e2.2 with e2.1 is the one place in the framework where a readable record replaces a declared claim, the parent relation that S1 could not verify; it exists only when the organisation made the change itself.
 
 ### E2: the evidence that exists at adjustment
 
@@ -134,15 +135,59 @@ The full list of what the adjustment questions above cite. E2 is all of E1, whic
 
 | Id | Kind | What it is | Where it comes from | In possession | By proxy |
 |---|---|---|---|---|---|
-| e2.1 | readable | the organisation's record of the change: training data, recipe, adapter or changed tensors | the organisation, when it made the change itself | yes | no |
-| e2.2 | readable | the adjusted artefact: format, completeness, precision, and its base hash against e1.3 | the adjusted file | yes | no |
-| e2.3 | testable, outputs | behaviour on the adjusted model, same inputs as e1.9 | running or calling the adjusted model | yes | yes |
+| e2.1 | readable | the adjusted artefact: format, completeness, precision, and its base hash against e1.3 | the adjusted file | yes | no |
+| e2.2 | readable | the organisation's record of the change: training data, recipe, adapter or changed tensors | the organisation, when it made the change itself | yes | no |
+| e2.3 | declared | the account of the change, its base and the served format, from the party that made it | the platform or redistributor that made the change, when it was not the organisation | yes, as a statement | yes, as a statement |
 | e2.4 | testable, internals | the adjusted weights and activations against the base | running both files | yes | no |
-| e2.5 | declared | the account of the change, its base and the served format, from the party that made it | the platform or redistributor that made the change, when it was not the organisation | yes, as a statement | yes, as a statement |
+| e2.5 | testable, outputs | behaviour on the adjusted model, same inputs as e1.9 | running or calling the adjusted model | yes | yes |
 
 ## S3 Deployment
 
-To do.
+**Definition.** Deployment is putting the assessed model, selected and, where S2 applied, adjusted, into service. It fixes three things around weights that no longer change: the serving software and hardware the model runs on, the configuration that surrounds it, and who may reach it. In possession, the organisation runs the file, or a container or engine received instead of a file, on software it chooses. By proxy, the organisation configures a provider's endpoint, model identifier, version and settings, and the provider runs it.
+
+**Scope.** Three rules fix what the stage covers.
+
+- The weights are fixed. Any change to them is adjustment and sends the model back to S2; deployment changes only what is around the model.
+- Configuration is deployment. System prompt, retrieval, tools, guardrails and serving settings such as sampling are set here, and the model is assessed with them in place, because they change what the deployed system does without changing the model.
+- The access line is settled here at the latest. Whether the organisation holds the file or a key is fixed by what it deploys, and from this stage on the by-proxy column is not a possibility but a fact.
+
+**What the stage adds.** Two kinds of evidence that did not exist before.
+
+- The served thing itself: which artefact is actually in service and under what software and configuration, readable in possession, declared by the provider by proxy.
+- Behaviour through the whole stack: the deployed system measured on the organisation's inputs, with its configuration in place, against the measurements of S1 and S2.
+
+**Who answers.** The organisation answers what it configured and what it measured. By proxy the provider answers for the endpoint, which model and version it serves, what surrounds it, and who can reach it, and those answers are declared.
+
+### The deployment questions
+
+The evidence column cites the items of E3, listed in full at the end of the stage. Where an earlier item is named as the baseline of a comparison, e1.3, e1.9, e2.1 and e2.5, it keeps the columns it has in its own stage and is not repeated here.
+
+| # | Question | Evidence from E3 | Who answers | In possession | By proxy | Test family |
+|---|---|---|---|---|---|---|
+| Q3.1 | Is the model in service the model we assessed? | e3.1 the served artefact's hash against e1.3, or e2.1 after adjustment<br>e3.2 the provider's model identifier and version for the endpoint | e3.1: organisation<br>e3.2: provider | e3.1 | e3.2 | e3.1: static<br>e3.2: none, gap |
+| Q3.2 | What surrounds the model, and does it change what the model does? | e3.3 the serving software and its version, the container or engine contents, and the configuration: system prompt, retrieval, tools, guardrails, serving settings<br>e3.4 the provider's statement of the endpoint's configuration and filters | e3.3: organisation<br>e3.4: provider | e3.3 | e3.4 | e3.3: static<br>e3.4: none, gap |
+| Q3.3 | Does the deployed system give the outputs the assessed model gave on the same inputs? | e3.5 outputs through the deployed endpoint against e1.9, or e2.5 after adjustment | e3.5: organisation | e3.5 | e3.5 | e3.5: behavioural |
+| Q3.4 | Who can reach the model and its file? | e3.6 the organisation's access configuration for the endpoint, the file at rest and the container<br>e3.7 the provider's statements of access control and isolation | e3.6: organisation<br>e3.7: provider | e3.6 | e3.7 | e3.6: static<br>e3.7: none, gap |
+
+**Links to the other stages.**
+
+- Q3.1 is where Q1.2 returns by proxy: the organisation could not read the file at selection, and at deployment the provider's identifier and version, e3.2, is all it has in place of the hash. Q1.3 returns the same way, inside e3.4, as the provider's word that what it loaded was safe.
+- Q3.3 is the third measurement of the same behaviour, after e1.9 and e2.5, and the first with the configuration in place; it is the baseline that runtime detection compares against.
+- Q3.2 is the one place where the glossary's warning against assessing the model without the software around it is acted on: the container or engine contents, e3.3, are read here and nowhere else.
+
+### E3: the evidence that exists at deployment
+
+The full list of what the deployment questions above cite. E3 is all of E2, which stays available, plus these eight items.
+
+| Id | Kind | What it is | Where it comes from | In possession | By proxy |
+|---|---|---|---|---|---|
+| e3.1 | readable | the served artefact's hash, against the file assessed at S1 or S2 | the file, container or engine in service | yes | no |
+| e3.2 | declared | the model identifier and version the endpoint serves | the provider | not applicable | yes, as a statement |
+| e3.3 | readable | the serving software and its version, the container or engine contents, and the configuration around the model | the organisation's deployment | yes | no |
+| e3.4 | declared | the endpoint's configuration, filters and loading, as the provider states them | the provider | not applicable | yes, as a statement |
+| e3.5 | testable, outputs | behaviour through the deployed endpoint on the organisation's inputs, configuration in place | calling the deployed endpoint | yes | yes |
+| e3.6 | readable | the organisation's access configuration for the endpoint, the file at rest and the container | the organisation's deployment | yes | no |
+| e3.7 | declared | access control and isolation, as the provider states them | the provider | not applicable | yes, as a statement |
 
 ## S4 Runtime detection
 
