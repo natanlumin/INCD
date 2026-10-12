@@ -1,10 +1,10 @@
 # SCRUM-284 working file: lifecycle stage tables
 
 Status 12 October 2026: all four stages drafted and reviewed, selection, adjustment and deployment agreed, runtime
-detection under review. Vocabulary is the glossary's (SCRUM-281): lifecycle stage, test
-family, acceptance criterion, gap, in possession, by proxy, attestable and testable properties. Within
+detection under review. Vocabulary is the glossary's (SCRUM-281, v1.3): lifecycle stage, test
+family, acceptance criterion, gap, in possession, by proxy, producer, serving provider, attestable and testable properties, outputs and internals. Within
 attestable, evidence is marked guaranteed (the platform enforces or verifies it), declared (the producer
-states it) or readable (read from the file); testable evidence is measured. No sources yet; sources are
+states it) or readable (read from the artefact, or from the organisation's own deployment of it); testable evidence is measured. No sources yet; sources are
 added when the subsection is drafted.
 
 ## Notation
@@ -18,11 +18,11 @@ Every symbol in the figure and the tables is defined here before it is used. Ter
 | en.k | evidence item | One item of the evidence that exists at stage Sn, numbered k, listed in that stage's inventory table with its kind, what it is and where it comes from; a question cites the items it draws on, and the kind alone decides who answers it, where it exists and which family establishes it (the rule table) |
 | A | answerer | Who answers the question: the platform, the producer, the serving provider, or the organisation that selects, adjusts, deploys or runs the model |
 | producer | the model's producer | The glossary's producer: the organisation that trains a model and first publishes its file. Its statements are about the model: parent, training data, licence, what it produces. They are made once, at S1, and do not change later |
-| serving provider | the party that serves the endpoint | The platform or redistributor that runs the copy of the model a key opens and returns its outputs to the organisation: a hosted inference provider, a cloud model garden's endpoint, or the producer's own API. Its statements are about the endpoint, not the model: which model and version it serves, how the endpoint is configured, who reaches it. It is the only party besides the organisation that answers at S3 and S4, and only by proxy. A producer that serves its own model holds both roles and answers each separately |
+| serving provider | the party that serves the endpoint | The glossary's serving provider: the platform or redistributor that runs the copy a key opens; it answers for the endpoint, never for the model. The only party besides the organisation that answers at S3 and S4, and only by proxy |
 | E, En | evidence | The set of items that exist at stage Sn and can answer a question, listed in the stage's inventory table. Evidence accumulates: En includes everything in En-1 plus what the stage adds, written En = En-1 ∪ {additions} |
-| guaranteed, declared, readable | attestable evidence | The glossary's attestable properties, split by who vouches for them: guaranteed, the platform enforces or verifies it; declared, the producer states it about the model, or the serving provider about the endpoint, and nothing verifies it; readable, read from the file itself |
+| guaranteed, declared, readable | attestable evidence | The glossary's attestable properties, split by who vouches for them: guaranteed, the platform enforces or verifies it; declared, the producer states it about the model, or the serving provider about the endpoint, and nothing verifies it; readable, read from the artefact itself or from the organisation's own deployment of it, with no one's word in between |
 | testable | testable evidence | The glossary's testable properties: a property no metadata reveals, established only by running the model; split into outputs, measured black-box, and internals, measured white-box |
-| testable, outputs; testable, internals | the two testable kinds | Outputs: what the model returns on inputs, the organisation's own in a test or those arriving in service, measured black-box through a file or a key, so possible under both access states. Internals: the weights, activations and the like inside the model, measured white-box, so in possession only |
+| testable, outputs; testable, internals | the two testable kinds | The glossary's outputs and internals: outputs are measured black-box through a file or a key, so under both access states; internals white-box, so in possession only |
 | H | access line | What the organisation holds, decided once, at or before S3, and in force for every stage after: H = file, in possession; H = key, by proxy |
 | E(S) under H | evidence available | In possession: guaranteed, declared, readable and testable evidence can all exist. By proxy: only declared and testable, because there is no file and the platform's guarantees do not travel with the key |
 | M, Mi | method | One assessment method; i numbers the methods once the later chapters name them |
@@ -45,7 +45,7 @@ Every evidence item has one kind. The kind fixes who answers it, whether it exis
 |---|---|---|---|---|
 | guaranteed | the platform, which enforces or verifies it | yes | no: the platform's guarantee does not travel with the key | provenance |
 | declared | the producer, about the model; by proxy also the serving provider, about the endpoint | yes, as a statement | yes, as a statement | none: nothing verifies it, so it is recorded as an assessment gap |
-| readable | the organisation, from the file | yes | no: there is no file | static |
+| readable | the organisation, from the file or from its own deployment | yes | no: there is no file and no deployment of its own | static |
 | testable, outputs | the organisation, by running or calling the model | yes | yes, black-box | behavioural |
 | testable, internals | the organisation, by running the file | yes | no: white-box needs the file | dynamic |
 
@@ -61,7 +61,7 @@ Six questions about the model. The evidence column cites the items of E1, listed
 |---|---|---|---|---|---|---|
 | Q1.1 | Where does the model live and who published it? | e1.1 account, date, hashes<br>e1.2 parent, training data, organisation | e1.1: platform<br>e1.2: producer; by proxy, serving provider | e1.1, e1.2 | e1.2 | e1.1: provenance<br>e1.2: none, gap |
 | Q1.2 | Is the file what the page says it is? | e1.3 hash or signature matches<br>e1.4 format, completeness, precision, configuration agree with the page<br>e1.2 derivation and training claims, which the file cannot confirm | e1.3: platform<br>e1.4: organisation<br>e1.2: producer; by proxy, serving provider | e1.3, e1.4, e1.2 | e1.2 | e1.3: provenance<br>e1.4: static<br>e1.2: none, gap |
-| Q1.3 | Can loading it harm us? | e1.4 format, pickle or not<br>e1.5 platform scan results<br>e1.6 own scan | e1.4, e1.6: organisation<br>e1.5: platform | e1.4, e1.5, e1.6 | none; the question passes to the serving provider | e1.4, e1.6: static<br>e1.5: provenance |
+| Q1.3 | Can loading it harm us? | e1.4 format, pickle or not, and custom modelling code the file asks to run on load, the second path to code execution beside pickle<br>e1.5 platform scan results<br>e1.6 own scan | e1.4, e1.6: organisation<br>e1.5: platform | e1.4, e1.5, e1.6 | none; the question passes to the serving provider | e1.4, e1.6: static<br>e1.5: provenance |
 | Q1.4 | May we use it? | e1.7 licence and terms<br>e1.8 gating | e1.7: producer; by proxy, serving provider<br>e1.8: platform | e1.7, e1.8 | e1.7 | e1.7: none, gap<br>e1.8: provenance |
 | Q1.5 | Which row and column of the segmentation is it, and so which threats apply? | e1.4 column: format, precision, completeness<br>e1.2 row: what it produces, modality | e1.4: organisation<br>e1.2: producer; by proxy, serving provider | e1.4, e1.2 | e1.2 | e1.4: static<br>e1.2: none, gap |
 | Q1.6 | Does it behave as described, and is the safeguard present? | e1.9 measured behaviour<br>e1.10 internals while it runs | e1.9, e1.10: organisation | e1.9, e1.10 | e1.9 | e1.9: behavioural<br>e1.10: dynamic |
@@ -83,7 +83,7 @@ The full list of what the selection questions above cite. Each item has one kind
 | e1.1 | guaranteed | producer account, upload date, file hashes | the platform page | yes | no |
 | e1.2 | declared | the model card: parent model, training data, organisation behind the account, what the model produces, modality | the producer; by proxy the serving provider's catalogue entry | yes | yes |
 | e1.3 | guaranteed | the downloaded file's hash or signature against the page | the platform and the file | yes | no |
-| e1.4 | readable | format, whole model or adapter, precision, configuration | the file | yes | no |
+| e1.4 | readable | format, whole model or adapter, precision, configuration, and the code and templates that ship with the file: custom modelling code, tokenizer, chat template, generation defaults | the file | yes | no |
 | e1.5 | guaranteed | malware and pickle scan results, advisory | the platform page | yes | no |
 | e1.6 | readable | the organisation's own scan of the file | the file, through the organisation's scanner | yes | no |
 | e1.7 | declared | licence and usage terms | the card; by proxy the serving provider's terms | yes | yes |
@@ -93,13 +93,14 @@ The full list of what the selection questions above cite. Each item has one kind
 
 ## S2 Adjustment
 
-**Definition.** Adjustment is a change to the selected model that the organisation makes itself, or has a platform or redistributor make at its request, between selection and serving. It is one of five kinds:
+**Definition.** Adjustment is a change to the selected model that the organisation makes itself, or has a platform or redistributor make at its request, between selection and serving. It is one of six kinds:
 
 - fine-tuning, which changes the weights;
 - an adapter, which adds weights beside the base;
 - a merge, which combines the weights of two or more models;
 - quantisation, which changes the precision of the weights;
-- conversion, which changes the artefact format.
+- conversion, which changes the artefact format;
+- a change to the code or templates that execute the weights: the forward function, the chat template, the generation defaults, whether they shipped with the artefact or came from the library. The weights are untouched, but what the model does is not.
 
 **Scope.** Three rules fix what the stage covers.
 
@@ -147,11 +148,12 @@ The full list of what the adjustment questions above cite. E2 is all of E1, whic
 
 **Definition.** Deployment is putting the assessed model, selected and, where S2 applied, adjusted, into service. It fixes three things around weights that no longer change: the serving software and hardware the model runs on, the configuration that surrounds it, and who may reach it. In possession, the organisation runs the file, or a container or engine received instead of a file, on software it chooses. By proxy, the organisation configures a serving provider's endpoint, model identifier, version and settings, and the serving provider runs it.
 
-**Scope.** Three rules fix what the stage covers.
+**Scope.** Four rules fix what the stage covers.
 
 - The weights are fixed. Any change to them is adjustment and sends the model back to S2; deployment changes only what is around the model.
-- Configuration is deployment. System prompt, retrieval, tools, guards and serving settings such as sampling are set here, and the model is assessed with them in place, because they change what the deployed system does without changing the model.
+- Configuration is deployment. System prompt, retrieval, tools, guards and serving settings such as sampling, together what is often called the harness or scaffolding around the model, are set here, and the model is assessed with them in place, because they change what the deployed system does without changing the model.
 - The access line is settled here at the latest. Whether the organisation holds the file or a key is fixed by what it deploys, and from this stage on the by-proxy column is not a possibility but a fact.
+- The surroundings are frozen on exit. Serving software, configuration and access are set here and do not change in service; any change to them is a redeployment and returns the model to this stage. By proxy the freeze is a serving provider's statement, e3.2 and e3.4, and finding that it was broken is the first job of runtime detection.
 
 **What the stage adds.** Two kinds of evidence that did not exist before.
 
@@ -185,7 +187,7 @@ The full list of what the deployment questions above cite. E3 is all of E2, whic
 |---|---|---|---|---|---|
 | e3.1 | readable | the served artefact's hash, against the file assessed at S1 or S2 | the file, container or engine in service | yes | no |
 | e3.2 | declared | the model identifier and version the endpoint serves | the serving provider | not applicable | yes, as a statement |
-| e3.3 | readable | the serving software and its version, the container or engine contents, and the configuration around the model | the organisation's deployment | yes | no |
+| e3.3 | readable | the serving software and its version: inference engine and its own forward implementation, kernels and numerics, serving layer (batching, caching, speculative decoding); the container base image and drivers, or the compiled engine and its hardware target; and the configuration around the model: system prompt, retrieval, tools, guards, serving settings | the organisation's deployment | yes | no |
 | e3.4 | declared | the endpoint's configuration, filters and loading, as the serving provider states them | the serving provider | not applicable | yes, as a statement |
 | e3.5 | testable, outputs | behaviour through the deployed endpoint on the organisation's inputs, configuration in place | calling the deployed endpoint | yes | yes |
 | e3.6 | readable | the organisation's access configuration for the endpoint, the file at rest and the container | the organisation's deployment | yes | no |
@@ -216,7 +218,7 @@ The evidence column cites the items of E4, listed in full at the end of the stag
 | # | Question | Evidence from E4 | Who answers | In possession | By proxy | Test family |
 |---|---|---|---|---|---|---|
 | Q4.1 | Has what deployment fixed been changed since, the model, its serving software or its configuration? | e4.1 the served artefact's hash, the serving software and the configuration re-read against e3.1 and e3.3<br>e4.2 the serving provider's version and change notices against e3.2 and e3.4 | e4.1: organisation<br>e4.2: serving provider | e4.1 | e4.2 | e4.1: static<br>e4.2: none, gap |
-| Q4.2 | What is the model given in service, and what does it return? | e4.3 the inputs arriving at the endpoint, user, retrieved content and tool outputs, and the outputs returned | e4.3: organisation | e4.3 | e4.3 | e4.3: behavioural |
+| Q4.2 | Are the inputs arriving in service turning the model against its use, and does it comply? | e4.3 the inputs arriving at the endpoint, user, retrieved content and tool outputs, and the outputs returned | e4.3: organisation | e4.3 | e4.3 | e4.3: behavioural |
 | Q4.3 | Does the model still give the outputs it gave at deployment? | e4.4 the inputs of e3.5 sent again, against e3.5 | e4.4: organisation | e4.4 | e4.4 | e4.4: behavioural |
 | Q4.4 | Who is reaching the model and its file, and how much? | e4.5 the organisation's access record for the endpoint, the file at rest and the container against e3.6<br>e4.6 the serving provider's access and usage records | e4.5: organisation<br>e4.6: serving provider | e4.5 | e4.6 | e4.5: static<br>e4.6: none, gap |
 
@@ -239,3 +241,35 @@ The full list of what the runtime detection questions above cite. E4 is all of E
 | e4.4 | testable, outputs | behaviour on the inputs of e3.5, measured again, against e3.5 | calling the deployed endpoint again | yes | yes |
 | e4.5 | readable | the organisation's access record for the endpoint, the file at rest and the container, against e3.6 | the organisation's deployment | yes | no |
 | e4.6 | declared | access and usage to the endpoint, as the serving provider records them | the serving provider | not applicable | yes, as a statement |
+
+## M: methods to stages
+
+The mapping rule is in the notation: map(Mi) is the set of stages whose inventory En holds an item of the kind the method reads, at which the method's access need is met. It is never empty. The mapping is derived from the inventories above and nothing else, so it changes only when an inventory does. The test families are defined where the skeleton defines them; here they are labels.
+
+### Family to stage
+
+The family column follows the rule table: a family reads one evidence kind.
+
+| Family | Reads | Items by stage | In possession | By proxy |
+|---|---|---|---|---|
+| F1 static | readable | S1: e1.4, e1.6; S2: e2.1, e2.2; S3: e3.1, e3.3, e3.6; S4: e4.1, e4.5 | S1, S2, S3, S4 | none: no readable item exists |
+| F2 dynamic | testable, internals | S1: e1.10; S2: e2.4 | S1, S2 | none: white-box needs the file |
+| F3 behavioural | testable, outputs | S1: e1.9; S2: e2.5; S3: e3.5; S4: e4.3, e4.4 | S1, S2, S3, S4 | S1, S2, S3, S4 |
+| F4 provenance | guaranteed | S1: e1.1, e1.3, e1.5, e1.8 | S1 | none: the guarantee does not travel with the key |
+
+Two readings. By proxy the whole framework rests on F3 and on declared statements; every other family drops out at every stage. F2 and F4 are front-loaded: internals are measured only while the organisation holds a file it has not yet put behind serving software, and guarantees exist only where the platform is, at selection.
+
+### Tooling kind to stage
+
+The kinds the skeleton names for the tooling comparison, placed by the same rule. Each method the report describes later is added here as a row under its kind, with the items it reads, when it is drafted.
+
+| Tooling kind | Family | Items it reads | Stages | Note |
+|---|---|---|---|---|
+| scanners (file, format, code) | F1 static | e1.4, e1.6; e2.1; e3.3 | S1, S2, S3 | at S3 the object scanned is the container or engine contents, not the file alone |
+| provenance verifiers (hash, signature, account, gating) | F4 provenance; F1 static for the re-reads | e1.1, e1.3, e1.8; e2.1, e3.1, e4.1 against e1.3 | S1; the re-reads at S2, S3, S4 | the guarantee is established once, at S1; later stages compare a readable hash against it |
+| red-team frameworks | F3 behavioural | e1.9, e2.5, e3.5, e4.4 | S1, S2, S3, S4 | the same inputs at every stage are what make the four measurements comparable |
+| runtime monitors | F3 behavioural | e4.3, e4.4 | S4 | the only kind that reads live inputs; where the inference-time and runtime threats are detected |
+| guards | none: not an assessment method | set as configuration, e3.3; their effect is measured through e3.5 and e4.3 | S3 as a thing assessed; S4 as a thing watched | a guard is a control, assessed with the model, not a method that assesses it |
+| white-box analysis (internals) | F2 dynamic | e1.10, e2.4 | S1, S2 | in possession only; not available once the model is behind serving software, see the cut of internals from S3 |
+
+Acceptance for the Jira item, "every assessment method described later maps to at least one lifecycle stage", is met by construction: a method that reads some evidence kind maps to every stage holding that kind, and every kind occurs at S1.

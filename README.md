@@ -17,7 +17,7 @@ here belongs there.
 | `landscape/` | the sourced landscape research: platform comparison, producers, taxonomy evidence, source log | research complete at cut-off 2026-10-06 |
 | `landscape/serving-and-compiled-artefacts.md` | the layer between the file and the answer: inference servers, build toolchains, compiled engines, and the reader-facing passage explaining them | research complete at cut-off 2026-10-06 |
 | `report-sections/` | text meant to enter the report, named by its skeleton number; filled at assembly. Its README says where each drafted subsection currently lives | empty; 3.1 and 3.2 drafted in `process/scrum-280/scrum280.md` |
-| `process/` | Jira item drafts and decision sheets, one folder per item: `scrum-281/` (style guide), `scrum-280/` (platforms and taxonomy) and `scrum-284/` (lifecycle assessment framework), each with its subtask texts and its deliverable or working file; `scrum-280/development/` holds that item's superseded working files | SCRUM-281 and SCRUM-280 drafted; SCRUM-284 in progress; decision sheet needs v4 |
+| `process/` | Jira item drafts and decision sheets, one folder per item: `scrum-281/` (style guide), `scrum-280/` (platforms and taxonomy), `scrum-284/` (lifecycle assessment framework) and `scrum-286/` (ecosystem quantification), each with its subtask texts and its deliverable or working file; `scrum-280/development/` holds that item's superseded working files | SCRUM-281 and SCRUM-280 drafted; SCRUM-284 in progress; decision sheet needs v4 |
 | `lay-package/` | the customer-facing explainer, cards, map, concept notes and writing brief | done |
 
 ## Map to the skeleton
@@ -30,14 +30,14 @@ Where the material answers a section of the report, and where it does not yet.
 | 2.4 Evidence standards and research cut-off | `governing/` citation policy; cut-off 2026-10-06 | have |
 | 3.1 Repositories and hosting platforms | `process/scrum-280/scrum280.md` section 1 (Tables 1 to 3), `landscape/` | drafted |
 | 3.2 Model types, tasks and artefact formats | `process/scrum-280/scrum280.md` section 2 (Table 4 with rule and evidence per cell) | drafted; awaiting the freeze |
-| 3.3 Release trends and ecosystem growth | nothing | needs its own measurement |
-| 3.4 Licensing and provenance in practice | `landscape/` producers table | partly; model-card completeness unmeasured |
-| 3.5 Ecosystem outlook | nothing | blocked on INCD's scope question |
+| 3.3 Release trends and ecosystem growth | `process/scrum-286/` (subtask 2) | planned |
+| 3.4 Licensing and provenance in practice | `process/scrum-286/` (subtask 3) | planned |
+| 3.5 Ecosystem outlook | `process/scrum-286/` (subtask 4) | planned |
 | 4.2 Supply-chain and artefact-level threats | `landscape/` format evidence; the MLC model library case | input only |
 | 4.4 Inference-time and runtime threats | `landscape/serving-and-compiled-artefacts.md` | input only; this is where the serving layer earns its pages |
 | 4.5 Threat x model-type matrix | the frozen taxonomy supplies both axes | blocked on the freeze |
 | 5.3 Threat-to-control coverage | inherits the model-type axis from 4.5 | blocked |
-| 6.1 Lifecycle assessment framework | `process/scrum-284/stage-tables.md` (notation, figure, rule, stage tables; selection drafted) | in progress |
+| 6.1 Lifecycle assessment framework | `process/scrum-284/scrum284.md` (subsection, figure, summary tables, source log) with `stage-tables.md` (full stage tables, method-to-stage mapping) | drafted |
 | 6.2 Publicly attestable properties | `landscape/` controls and metadata columns | largely answered, undrafted |
 | 7.x Testing and acceptance | `foundation/` six-tests papers | have, unmapped to 7.x |
 | Appendix D Glossary | `governing/` | have |
