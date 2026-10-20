@@ -1,0 +1,11 @@
+field,present,models,share
+base model field,False,322520,0.511
+base model field,True,308609,0.489
+card front matter present,False,67004,0.1062
+card front matter present,True,564125,0.8938
+datasets field,False,540469,0.8564
+datasets field,True,90660,0.1436
+language field,False,444194,0.7038
+language field,True,186935,0.2962
+licence field,False,325264,0.5154
+licence field,True,305865,0.4846

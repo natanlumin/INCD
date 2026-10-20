@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="560" viewBox="0 0 1000 560" font-family="Helvetica, Arial, sans-serif" style="background:#fff">
+<text x="90" y="30" font-size="16" font-weight="bold" fill="#111">Share of new repositories that declare a typed parent relation, by model repository</text>
+<text x="90" y="50" font-size="11.5" fill="#444">Fine-tune, quantised, adapter or merged, as the repository records it; the rest are base models and derivatives with no declared parent. Pulls of 2026-10-12.</text>
+<line x1="90" y1="450.0" x2="970" y2="450.0" stroke="#ddd"/><text x="82" y="454.0" font-size="11" text-anchor="end" fill="#333">0%</text>
+<line x1="90" y1="374.0" x2="970" y2="374.0" stroke="#ddd"/><text x="82" y="378.0" font-size="11" text-anchor="end" fill="#333">20%</text>
+<line x1="90" y1="298.0" x2="970" y2="298.0" stroke="#ddd"/><text x="82" y="302.0" font-size="11" text-anchor="end" fill="#333">40%</text>
+<line x1="90" y1="222.0" x2="970" y2="222.0" stroke="#ddd"/><text x="82" y="226.0" font-size="11" text-anchor="end" fill="#333">60%</text>
+<line x1="90" y1="146.0" x2="970" y2="146.0" stroke="#ddd"/><text x="82" y="150.0" font-size="11" text-anchor="end" fill="#333">80%</text>
+<line x1="90" y1="70.0" x2="970" y2="70.0" stroke="#ddd"/><text x="82" y="74.0" font-size="11" text-anchor="end" fill="#333">100%</text>
+<rect x="107.6" y="446.7" width="68.4" height="3.3" fill="#1b4f72"/>
+<rect x="178.0" y="450.0" width="68.4" height="0.0" fill="#f39c12"/>
+<text x="178.0" y="466" font-size="10.5" text-anchor="middle" fill="#333">2022</text>
+<rect x="283.6" y="399.5" width="68.4" height="50.5" fill="#1b4f72"/>
+<rect x="354.0" y="448.9" width="68.4" height="1.1" fill="#f39c12"/>
+<text x="354.0" y="466" font-size="10.5" text-anchor="middle" fill="#333">2023</text>
+<rect x="459.6" y="321.1" width="68.4" height="128.9" fill="#1b4f72"/>
+<rect x="530.0" y="347.7" width="68.4" height="102.3" fill="#f39c12"/>
+<text x="530.0" y="466" font-size="10.5" text-anchor="middle" fill="#333">2024</text>
+<rect x="635.6" y="254.3" width="68.4" height="195.7" fill="#1b4f72"/>
+<rect x="706.0" y="238.9" width="68.4" height="211.1" fill="#f39c12"/>
+<text x="706.0" y="466" font-size="10.5" text-anchor="middle" fill="#333">2025</text>
+<rect x="811.6" y="185.0" width="68.4" height="265.0" fill="#1b4f72"/>
+<rect x="882.0" y="181.0" width="68.4" height="269.0" fill="#f39c12"/>
+<text x="882.0" y="466" font-size="10.5" text-anchor="middle" fill="#333">2026</text>
+<rect x="90" y="486" width="12" height="12" fill="#1b4f72"/><text x="106" y="496" font-size="11" fill="#222">Hugging Face Hub</text>
+<rect x="280" y="486" width="12" height="12" fill="#f39c12"/><text x="296" y="496" font-size="11" fill="#222">ModelScope</text>
+<text x="90" y="522" font-size="10.5" fill="#555">A declared relation is the uploader's statement, not verified by the repository. Higher = more declared derivatives.</text></svg>

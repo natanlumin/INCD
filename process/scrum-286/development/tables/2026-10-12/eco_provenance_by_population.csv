@@ -1,0 +1,7 @@
+platform,population,models,licence_field,base_model_field,datasets_field,licence_and_base_model,all_three,download_threshold
+Hugging Face Hub,all,631129,0.4846,0.489,0.1436,0.3434,0.082,0
+Hugging Face Hub,top 1000 by downloads,1000,0.879,0.534,0.128,0.492,0.051,130168
+Hugging Face Hub,top 100 by downloads,100,0.96,0.46,0.1,0.45,0.04,1905903
+ModelScope,all,61600,0.7716,0.5546,0.1336,0.4167,0.0689,0
+ModelScope,top 1000 by downloads,1000,0.902,0.46,0.08,0.445,0.034,10776
+ModelScope,top 100 by downloads,100,0.96,0.5,0.04,0.5,0.0,676020

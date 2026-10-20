@@ -1,0 +1,19 @@
+platform,licence_family,models,share
+Hugging Face Hub,copyleft,2647,0.0042
+Hugging Face Hub,no licence field,325264,0.5154
+Hugging Face Hub,non-commercial,9609,0.0152
+Hugging Face Hub,open rail,2129,0.0034
+Hugging Face Hub,other named licence,1779,0.0028
+Hugging Face Hub,"other, stated as 'other'",27749,0.044
+Hugging Face Hub,permissive,236505,0.3747
+Hugging Face Hub,producer licence,24956,0.0395
+Hugging Face Hub,stated as unknown,491,0.0008
+ModelScope,copyleft,249,0.004
+ModelScope,no licence field,14068,0.2284
+ModelScope,non-commercial,1468,0.0238
+ModelScope,open rail,324,0.0053
+ModelScope,other named licence,8977,0.1457
+ModelScope,"other, stated as 'other'",4923,0.0799
+ModelScope,permissive,26900,0.4367
+ModelScope,producer licence,4670,0.0758
+ModelScope,stated as unknown,21,0.0003

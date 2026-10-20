@@ -1,0 +1,13 @@
+platform,field,present,models,share
+Hugging Face Hub,base model field,False,322520,0.511
+Hugging Face Hub,base model field,True,308609,0.489
+Hugging Face Hub,datasets field,False,540469,0.8564
+Hugging Face Hub,datasets field,True,90660,0.1436
+Hugging Face Hub,licence field,False,325264,0.5154
+Hugging Face Hub,licence field,True,305865,0.4846
+ModelScope,base model field,False,27435,0.4454
+ModelScope,base model field,True,34165,0.5546
+ModelScope,datasets field,False,53373,0.8664
+ModelScope,datasets field,True,8227,0.1336
+ModelScope,licence field,False,14068,0.2284
+ModelScope,licence field,True,47532,0.7716

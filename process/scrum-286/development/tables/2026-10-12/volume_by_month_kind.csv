@@ -1,0 +1,238 @@
+month,derivative_kind,models_created
+2022-03,fine-tune,69
+2022-03,no typed relation,10130
+2022-03,quantised,4
+2022-04,fine-tune,11
+2022-04,no typed relation,1723
+2022-05,fine-tune,11
+2022-05,no typed relation,1946
+2022-06,fine-tune,18
+2022-06,no typed relation,1910
+2022-06,quantised,3
+2022-07,fine-tune,17
+2022-07,no typed relation,1159
+2022-08,fine-tune,16
+2022-08,no typed relation,1087
+2022-09,fine-tune,15
+2022-09,no typed relation,1166
+2022-10,fine-tune,14
+2022-10,no typed relation,1386
+2022-11,fine-tune,20
+2022-11,no typed relation,2210
+2022-12,fine-tune,21
+2022-12,no typed relation,1945
+2023-01,fine-tune,53
+2023-01,no typed relation,2674
+2023-01,quantised,2
+2023-02,fine-tune,25
+2023-02,no typed relation,2405
+2023-02,quantised,1
+2023-03,fine-tune,23
+2023-03,no typed relation,3801
+2023-04,adapter,1
+2023-04,fine-tune,31
+2023-04,no typed relation,3764
+2023-04,quantised,1
+2023-05,adapter,3
+2023-05,fine-tune,39
+2023-05,no typed relation,4692
+2023-05,quantised,59
+2023-06,adapter,5
+2023-06,fine-tune,36
+2023-06,no typed relation,4837
+2023-06,quantised,40
+2023-07,adapter,26
+2023-07,fine-tune,416
+2023-07,no typed relation,4428
+2023-07,quantised,53
+2023-08,adapter,15
+2023-08,fine-tune,800
+2023-08,no typed relation,4801
+2023-08,quantised,154
+2023-09,adapter,14
+2023-09,fine-tune,893
+2023-09,no typed relation,4774
+2023-09,quantised,550
+2023-10,adapter,36
+2023-10,fine-tune,1188
+2023-10,no typed relation,5544
+2023-10,quantised,401
+2023-11,adapter,31
+2023-11,fine-tune,1365
+2023-11,no typed relation,10394
+2023-11,quantised,533
+2023-12,adapter,57
+2023-12,fine-tune,1612
+2023-12,merged,12
+2023-12,no typed relation,7342
+2023-12,quantised,642
+2024-01,adapter,53
+2024-01,fine-tune,1747
+2024-01,merged,327
+2024-01,no typed relation,9930
+2024-01,quantised,653
+2024-02,adapter,655
+2024-02,fine-tune,1690
+2024-02,merged,413
+2024-02,no typed relation,9246
+2024-02,quantised,238
+2024-03,adapter,49
+2024-03,fine-tune,2280
+2024-03,merged,648
+2024-03,no typed relation,9589
+2024-03,quantised,510
+2024-04,adapter,54
+2024-04,fine-tune,2804
+2024-04,merged,1593
+2024-04,no typed relation,11231
+2024-04,quantised,642
+2024-05,adapter,56
+2024-05,fine-tune,3145
+2024-05,merged,442
+2024-05,no typed relation,15290
+2024-05,quantised,1009
+2024-06,adapter,35
+2024-06,fine-tune,3025
+2024-06,merged,377
+2024-06,no typed relation,12314
+2024-06,quantised,960
+2024-07,adapter,112
+2024-07,fine-tune,2517
+2024-07,merged,176
+2024-07,no typed relation,9962
+2024-07,quantised,872
+2024-08,adapter,33
+2024-08,fine-tune,1416
+2024-08,merged,203
+2024-08,no typed relation,5935
+2024-08,quantised,943
+2024-09,adapter,48
+2024-09,fine-tune,2580
+2024-09,merged,347
+2024-09,no typed relation,4615
+2024-09,quantised,1171
+2024-10,adapter,40
+2024-10,fine-tune,2618
+2024-10,merged,473
+2024-10,no typed relation,4909
+2024-10,quantised,1445
+2024-11,adapter,52
+2024-11,fine-tune,3946
+2024-11,merged,404
+2024-11,no typed relation,7012
+2024-11,quantised,3233
+2024-12,adapter,70
+2024-12,fine-tune,5409
+2024-12,merged,762
+2024-12,no typed relation,5724
+2024-12,quantised,2030
+2025-01,adapter,206
+2025-01,fine-tune,6368
+2025-01,merged,726
+2025-01,no typed relation,6677
+2025-01,quantised,2004
+2025-02,adapter,151
+2025-02,fine-tune,4719
+2025-02,merged,905
+2025-02,no typed relation,9274
+2025-02,quantised,1898
+2025-03,adapter,119
+2025-03,fine-tune,6138
+2025-03,merged,1049
+2025-03,no typed relation,8705
+2025-03,quantised,2066
+2025-04,adapter,130
+2025-04,fine-tune,8878
+2025-04,merged,812
+2025-04,no typed relation,11360
+2025-04,quantised,1901
+2025-05,adapter,128
+2025-05,fine-tune,5591
+2025-05,merged,372
+2025-05,no typed relation,7997
+2025-05,quantised,2661
+2025-06,adapter,113
+2025-06,fine-tune,4875
+2025-06,merged,177
+2025-06,no typed relation,7977
+2025-06,quantised,2560
+2025-07,adapter,969
+2025-07,fine-tune,4101
+2025-07,merged,382
+2025-07,no typed relation,7560
+2025-07,quantised,1617
+2025-08,adapter,967
+2025-08,fine-tune,5510
+2025-08,merged,286
+2025-08,no typed relation,5880
+2025-08,quantised,1612
+2025-09,adapter,1078
+2025-09,fine-tune,4331
+2025-09,merged,313
+2025-09,no typed relation,7064
+2025-09,quantised,1225
+2025-10,adapter,1265
+2025-10,fine-tune,3434
+2025-10,merged,115
+2025-10,no typed relation,6835
+2025-10,quantised,1814
+2025-11,adapter,1447
+2025-11,fine-tune,4422
+2025-11,merged,124
+2025-11,no typed relation,7440
+2025-11,quantised,1614
+2025-12,adapter,1944
+2025-12,fine-tune,4200
+2025-12,merged,188
+2025-12,no typed relation,6705
+2025-12,quantised,1791
+2026-01,adapter,2741
+2026-01,fine-tune,4527
+2026-01,merged,185
+2026-01,no typed relation,6218
+2026-01,quantised,1596
+2026-02,adapter,7125
+2026-02,fine-tune,4977
+2026-02,merged,154
+2026-02,no typed relation,4208
+2026-02,quantised,2351
+2026-03,adapter,5000
+2026-03,fine-tune,4811
+2026-03,merged,140
+2026-03,no typed relation,5157
+2026-03,quantised,3877
+2026-04,adapter,3831
+2026-04,fine-tune,6171
+2026-04,merged,164
+2026-04,no typed relation,7020
+2026-04,quantised,3494
+2026-05,adapter,4294
+2026-05,fine-tune,5617
+2026-05,merged,119
+2026-05,no typed relation,7677
+2026-05,quantised,3611
+2026-06,adapter,2748
+2026-06,fine-tune,5015
+2026-06,merged,175
+2026-06,no typed relation,5391
+2026-06,quantised,3945
+2026-07,adapter,3266
+2026-07,fine-tune,5852
+2026-07,merged,165
+2026-07,no typed relation,5342
+2026-07,quantised,3925
+2026-08,adapter,3696
+2026-08,fine-tune,6275
+2026-08,merged,140
+2026-08,no typed relation,5313
+2026-08,quantised,5676
+2026-09,adapter,3161
+2026-09,fine-tune,7144
+2026-09,merged,143
+2026-09,no typed relation,6853
+2026-09,quantised,5000
+2026-10,adapter,1557
+2026-10,fine-tune,3603
+2026-10,merged,87
+2026-10,no typed relation,2751
+2026-10,quantised,2555

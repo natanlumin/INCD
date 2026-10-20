@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="560" viewBox="0 0 1000 560" font-family="Helvetica, Arial, sans-serif" style="background:#fff">
+<text x="90" y="30" font-size="16" font-weight="bold" fill="#111">Model repositories created per year, by model repository</text>
+<text x="90" y="50" font-size="11.5" fill="#444">Five task tags of the report's segmentation; creation date of the repository record. Pulls of 2026-10-12.</text>
+<line x1="90" y1="450.0" x2="970" y2="450.0" stroke="#ddd"/><text x="82" y="454.0" font-size="11" text-anchor="end" fill="#333">0</text>
+<line x1="90" y1="374.0" x2="970" y2="374.0" stroke="#ddd"/><text x="82" y="378.0" font-size="11" text-anchor="end" fill="#333">50,000</text>
+<line x1="90" y1="298.0" x2="970" y2="298.0" stroke="#ddd"/><text x="82" y="302.0" font-size="11" text-anchor="end" fill="#333">100,000</text>
+<line x1="90" y1="222.0" x2="970" y2="222.0" stroke="#ddd"/><text x="82" y="226.0" font-size="11" text-anchor="end" fill="#333">150,000</text>
+<line x1="90" y1="146.0" x2="970" y2="146.0" stroke="#ddd"/><text x="82" y="150.0" font-size="11" text-anchor="end" fill="#333">200,000</text>
+<line x1="90" y1="70.0" x2="970" y2="70.0" stroke="#ddd"/><text x="82" y="74.0" font-size="11" text-anchor="end" fill="#333">250,000</text>
+<rect x="107.6" y="412.2" width="68.4" height="37.8" fill="#1b4f72"/>
+<rect x="178.0" y="449.9" width="68.4" height="0.1" fill="#f39c12"/>
+<text x="178.0" y="466" font-size="10.5" text-anchor="middle" fill="#333">2022</text>
+<rect x="283.6" y="345.8" width="68.4" height="104.2" fill="#1b4f72"/>
+<rect x="354.0" y="449.0" width="68.4" height="1.0" fill="#f39c12"/>
+<text x="354.0" y="466" font-size="10.5" text-anchor="middle" fill="#333">2023</text>
+<rect x="459.6" y="206.7" width="68.4" height="243.3" fill="#1b4f72"/>
+<rect x="530.0" y="435.4" width="68.4" height="14.6" fill="#f39c12"/>
+<text x="530.0" y="466" font-size="10.5" text-anchor="middle" fill="#333">2024</text>
+<rect x="635.6" y="157.0" width="68.4" height="293.0" fill="#1b4f72"/>
+<rect x="706.0" y="403.5" width="68.4" height="46.5" fill="#f39c12"/>
+<text x="706.0" y="466" font-size="10.5" text-anchor="middle" fill="#333">2025</text>
+<rect x="811.6" y="169.0" width="68.4" height="281.0" fill="#1b4f72"/>
+<rect x="882.0" y="418.5" width="68.4" height="31.5" fill="#f39c12"/>
+<text x="882.0" y="466" font-size="10.5" text-anchor="middle" fill="#333">2026</text>
+<rect x="90" y="486" width="12" height="12" fill="#1b4f72"/><text x="106" y="496" font-size="11" fill="#222">Hugging Face Hub</text>
+<rect x="280" y="486" width="12" height="12" fill="#f39c12"/><text x="296" y="496" font-size="11" fill="#222">ModelScope</text>
+<text x="90" y="522" font-size="10.5" fill="#555">2026 covers 1 January to 12 October. Higher = more models created.</text></svg>

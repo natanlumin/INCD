@@ -1,0 +1,5 @@
+population,models,licence_field,base_model_field,datasets_field,card_front_matter,licence_and_base_model,licence_base_model_and_datasets
+all models in the index,631129,0.4846,0.489,0.1436,0.8938,0.3434,0.082
+widely used: top 1000 by 30-day downloads,1000,0.879,0.534,0.128,0.991,0.492,0.051
+top 100 by 30-day downloads,100,0.96,0.46,0.1,1.0,0.45,0.04
+top 10000 by 30-day downloads,10000,0.8603,0.6782,0.1701,0.9849,0.6167,0.105

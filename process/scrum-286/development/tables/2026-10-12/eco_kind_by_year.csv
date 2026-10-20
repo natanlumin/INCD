@@ -1,0 +1,42 @@
+platform,year,kind,models
+Hugging Face Hub,2022,fine-tune,212
+Hugging Face Hub,2022,no typed relation,24662
+Hugging Face Hub,2022,quantised,7
+Hugging Face Hub,2023,adapter,188
+Hugging Face Hub,2023,fine-tune,6481
+Hugging Face Hub,2023,merged,12
+Hugging Face Hub,2023,no typed relation,59456
+Hugging Face Hub,2023,quantised,2436
+Hugging Face Hub,2024,adapter,1257
+Hugging Face Hub,2024,fine-tune,33177
+Hugging Face Hub,2024,merged,6165
+Hugging Face Hub,2024,no typed relation,105757
+Hugging Face Hub,2024,quantised,13706
+Hugging Face Hub,2025,adapter,8517
+Hugging Face Hub,2025,fine-tune,62567
+Hugging Face Hub,2025,merged,5449
+Hugging Face Hub,2025,no typed relation,93474
+Hugging Face Hub,2025,quantised,22763
+Hugging Face Hub,2026,adapter,37419
+Hugging Face Hub,2026,fine-tune,53992
+Hugging Face Hub,2026,merged,1472
+Hugging Face Hub,2026,no typed relation,55930
+Hugging Face Hub,2026,quantised,36030
+ModelScope,2022,no typed relation,68
+ModelScope,2023,fine-tune,2
+ModelScope,2023,no typed relation,660
+ModelScope,2024,adapter,11
+ModelScope,2024,fine-tune,909
+ModelScope,2024,merged,104
+ModelScope,2024,no typed relation,7002
+ModelScope,2024,quantised,1556
+ModelScope,2025,adapter,492
+ModelScope,2025,fine-tune,7028
+ModelScope,2025,merged,1026
+ModelScope,2025,no typed relation,13595
+ModelScope,2025,quantised,8441
+ModelScope,2026,adapter,1107
+ModelScope,2026,fine-tune,3838
+ModelScope,2026,merged,219
+ModelScope,2026,no typed relation,6046
+ModelScope,2026,quantised,9496

@@ -1,0 +1,1001 @@
+downloads_30d,model,task_tag,licence,base_model,datasets,card,derivative_kind
+221180273,sentence-transformers/all-MiniLM-L6-v2,sentence-similarity,True,True,True,True,quantised
+59936117,BAAI/bge-small-en-v1.5,feature-extraction,True,False,False,True,no typed relation
+48032209,sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2,sentence-similarity,True,False,False,True,no typed relation
+32815892,BAAI/bge-m3,sentence-similarity,True,False,False,True,no typed relation
+30604529,Qwen/Qwen3-0.6B,text-generation,True,True,False,True,fine-tune
+18032033,sentence-transformers/all-mpnet-base-v2,sentence-similarity,True,False,True,True,no typed relation
+16000331,BAAI/bge-reranker-v2-m3,text-classification,True,False,False,True,no typed relation
+15675425,openai-community/gpt2,text-generation,True,False,False,True,no typed relation
+12909216,nomic-ai/nomic-embed-text-v1.5,sentence-similarity,True,False,False,True,no typed relation
+12345694,Qwen/Qwen3-4B,text-generation,True,True,False,True,fine-tune
+11524713,google/gemma-4-26B-A4B-it,image-text-to-text,True,True,False,True,fine-tune
+10213009,intfloat/multilingual-e5-small,sentence-similarity,True,False,False,True,no typed relation
+10032899,BAAI/bge-large-en-v1.5,feature-extraction,True,False,False,True,no typed relation
+9647139,Qwen/Qwen3-8B,text-generation,True,True,False,True,fine-tune
+9567999,sentence-transformers/paraphrase-multilingual-mpnet-base-v2,sentence-similarity,True,False,False,True,no typed relation
+9503078,google/gemma-4-31B-it,image-text-to-text,True,True,False,True,fine-tune
+9218929,BAAI/bge-base-en-v1.5,feature-extraction,True,False,False,True,no typed relation
+8602204,Qwen/Qwen3-VL-8B-Instruct,image-text-to-text,True,False,False,True,no typed relation
+8516975,Qwen/Qwen3-Embedding-0.6B,feature-extraction,True,True,False,True,fine-tune
+8339155,Qwen/Qwen3.5-9B,image-text-to-text,True,True,False,True,fine-tune
+7887451,Qwen/Qwen3.5-4B,image-text-to-text,True,True,False,True,fine-tune
+7631037,Qwen/Qwen2.5-7B-Instruct,text-generation,True,True,False,True,fine-tune
+6895303,Qwen/Qwen3.8-27B,image-text-to-text,True,False,False,True,no typed relation
+6796277,intfloat/multilingual-e5-large,feature-extraction,True,False,False,True,no typed relation
+6788211,intfloat/multilingual-e5-base,sentence-similarity,True,False,False,True,no typed relation
+6774617,meta-llama/Llama-3.2-1B-Instruct,text-generation,True,False,False,True,no typed relation
+6632317,Qwen/Qwen2.5-0.5B-Instruct,text-generation,True,True,False,True,fine-tune
+6489462,zai-org/GLM-5.3-Flash,image-text-to-text,True,False,False,True,no typed relation
+6226098,Qwen/Qwen2.5-1.5B-Instruct,text-generation,True,True,False,True,fine-tune
+6164691,Qwen/Qwen3-14B,text-generation,True,True,False,True,fine-tune
+5954407,facebook/opt-125m,text-generation,True,False,False,True,no typed relation
+5939163,trl-internal-testing/tiny-Qwen2ForCausalLM-2.5,text-generation,False,False,False,True,no typed relation
+5896789,openai/gpt-oss-20b,text-generation,True,False,False,True,no typed relation
+5858450,meta-llama/Llama-3.1-8B-Instruct,text-generation,True,True,False,True,fine-tune
+5724892,RadixArk/Kimi-K3-DSpark,text-generation,False,False,False,True,no typed relation
+5226849,Qwen/Qwen2.5-VL-7B-Instruct,image-text-to-text,True,False,False,True,no typed relation
+5225333,ibm-granite/granite-embedding-small-english-r2,feature-extraction,True,False,False,True,no typed relation
+5099697,ornith-ai/Ornith-1.5-9B-GGUF,text-generation,True,False,False,True,no typed relation
+4778968,nvidia/Qwen3.6-35B-A3B-NVFP4,text-generation,True,True,False,True,quantised
+4719079,deepseek-ai/DeepSeek-V3.2,text-generation,True,True,False,True,fine-tune
+4671912,dphn/dolphin-2.9.1-yi-1.5-34b,text-generation,True,True,True,True,fine-tune
+4615462,prism-ml/Ternary-Bonsai-2-27B-gguf,text-generation,True,True,False,True,quantised
+4483727,Qwen/Qwen3.8-27B-FP8,image-text-to-text,True,True,False,True,quantised
+4446916,deepseek-ai/DeepSeek-V4-Flash-0731,text-generation,True,False,False,True,no typed relation
+4413142,ISTA-DASLab/Qwen3.8-Flash-Next-GSQ-RCO-GGUF,image-text-to-text,True,True,False,True,quantised
+4346199,ProsusAI/finbert,text-classification,True,False,False,True,no typed relation
+4297090,Qwen/Qwen2.5-3B-Instruct,text-generation,True,True,False,True,fine-tune
+4279694,unsloth/Qwen3-Coder-30B-A3B-Instruct-GGUF,text-generation,True,True,False,True,quantised
+4198236,Xenova/all-MiniLM-L6-v2,feature-extraction,True,True,False,True,quantised
+4157243,Qwen/Qwen3.6-35B-A3B-FP8,image-text-to-text,True,True,False,True,quantised
+4118520,lmstudio-community/Qwen3.8-27B-MLX-4bit,image-text-to-text,True,True,False,True,quantised
+4085177,BAAI/bge-small-zh-v1.5,feature-extraction,True,False,False,True,no typed relation
+3948154,lmstudio-community/Qwen3.8-27B-MLX-8bit,image-text-to-text,True,True,False,True,quantised
+3931165,lmstudio-community/Qwen3.8-27B-MLX-6bit,image-text-to-text,True,True,False,True,quantised
+3915381,lmstudio-community/Qwen3.8-27B-MLX-5bit,image-text-to-text,True,True,False,True,quantised
+3904013,datasocietyco/bge-base-en-v1.5-course-recommender-v5,sentence-similarity,False,True,False,True,fine-tune
+3880580,SamLowe/roberta-base-go_emotions,text-classification,True,False,True,True,no typed relation
+3864287,BAAI/bge-reranker-base,text-classification,True,False,False,True,no typed relation
+3713805,Qwen/Qwen3-1.7B,text-generation,True,True,False,True,fine-tune
+3656665,ornith-ai/Ornith-1.5-35B-A3B-GGUF,text-generation,True,False,False,True,no typed relation
+3644353,openai/gpt-oss-120b,text-generation,True,False,False,True,no typed relation
+3581595,Qwen/Qwen3.6-35B-A3B,image-text-to-text,True,False,False,True,no typed relation
+3559615,cdiamond/Qwen3.8-27B-iMatrix-NVFP4-MTP-GGUF,image-text-to-text,True,True,False,True,quantised
+3510682,Qwen/Qwen3-4B-Instruct-2507,text-generation,True,False,False,True,no typed relation
+3486861,google/embeddinggemma-300m,sentence-similarity,True,False,False,True,no typed relation
+3449181,EleutherAI/pythia-160m,text-generation,True,False,True,True,no typed relation
+3307050,Qwen/Qwen3-32B,text-generation,True,False,False,True,no typed relation
+3162183,Qwen/Qwen3.5-2B,image-text-to-text,True,True,False,True,fine-tune
+3145951,Qwen/Qwen3-VL-4B-Instruct,image-text-to-text,True,False,False,True,no typed relation
+3041686,sentence-transformers/all-MiniLM-L12-v2,sentence-similarity,True,True,True,True,quantised
+2940005,microsoft/Florence-2-base,image-text-to-text,True,False,False,True,no typed relation
+2925368,Qwen/Qwen3-14B-AWQ,text-generation,True,True,False,True,quantised
+2747612,sentence-transformers/all-distilroberta-v1,sentence-similarity,True,False,True,True,no typed relation
+2737390,meta-llama/Prompt-Guard-86M,text-classification,True,False,False,True,no typed relation
+2703470,distilbert/distilbert-base-uncased-finetuned-sst-2-english,text-classification,True,False,True,True,no typed relation
+2642347,Qwen/Qwen3.5-0.8B,image-text-to-text,True,True,False,True,fine-tune
+2605845,google/gemma-3-1b-it,text-generation,True,True,False,True,fine-tune
+2553472,cardiffnlp/twitter-roberta-base-sentiment-latest,text-classification,True,False,True,True,no typed relation
+2539378,CMSManhattan/JiRackUltra_1b,text-generation,True,False,False,True,no typed relation
+2519426,nomic-ai/nomic-embed-text-v1,sentence-similarity,True,False,False,True,no typed relation
+2487824,Qwen/Qwen3-VL-2B-Instruct,image-text-to-text,True,False,False,True,no typed relation
+2417870,Qwen/Qwen2.5-7B-Instruct-AWQ,text-generation,True,True,False,True,quantised
+2414655,ornith-ai/Ornith-1.0-9B-GGUF,text-generation,True,False,False,True,no typed relation
+2411985,JonathanColetti/Qwen3.8-27B-Uncensored-GGUF,text-generation,True,True,False,True,quantised
+2352124,Xenova/bge-base-en-v1.5,feature-extraction,True,True,False,True,quantised
+2325529,vikhyatk/moondream2,image-text-to-text,True,False,False,True,no typed relation
+2262208,BAAI/bge-reranker-large,feature-extraction,True,False,False,True,no typed relation
+2248192,Qwen/Qwen3.6-27B,image-text-to-text,True,False,False,True,no typed relation
+2241701,HauhauCS/Qwen3.8-27B-Uncensored-HauhauCS-Aggressive-MTP-GGUF,image-text-to-text,True,True,False,True,quantised
+2240485,Qwen/Qwen3-8B-AWQ,text-generation,True,True,False,True,quantised
+2231889,huihui-ai/Huihui-Qwen3.8-27B-abliterated-GGUF,image-text-to-text,True,True,False,True,quantised
+2205602,ggml-org/Qwen3.8-27B-GGUF,image-text-to-text,True,True,False,True,quantised
+2176708,Qwen/Qwen3-Embedding-8B,feature-extraction,True,True,False,True,fine-tune
+2092603,Qwen/Qwen2.5-VL-3B-Instruct,image-text-to-text,False,False,False,True,no typed relation
+2042351,deepseek-ai/DeepSeek-OCR,image-text-to-text,True,False,False,True,no typed relation
+2025498,DavidAU/Qwen3.8-27B-TURBO-Fable-Cold-Fusion-735-882-Heretic-Uncensored-NEO-CODER-MAX-MTP-GGUF,image-text-to-text,True,True,True,True,quantised
+2024381,DavidAU/Qwen3.5-9B-The-Defiant-Fable-Uncensored-Heretic-NEO-IMATRIX-MAX-MTP-GGUF,image-text-to-text,True,True,False,True,quantised
+2019580,BAAI/bge-base-en,feature-extraction,True,False,False,True,no typed relation
+1934542,Qwen/Qwen3.8-Flash-Next,image-text-to-text,True,False,False,True,no typed relation
+1905903,mixedbread-ai/mxbai-embed-large-v1,feature-extraction,True,False,False,True,no typed relation
+1874818,distilbert/distilgpt2,text-generation,True,False,True,True,no typed relation
+1868848,Qwen/Qwen3.5-27B,image-text-to-text,True,False,False,True,no typed relation
+1856415,jinaai/jina-embeddings-v3,feature-extraction,True,False,False,True,no typed relation
+1830673,Qwen/Qwen3-Embedding-4B,feature-extraction,True,True,False,True,fine-tune
+1807010,peculiar-ragdoll/Tiel-Coder-35B-A3B-GGUF-MTP,image-text-to-text,True,True,False,True,quantised
+1707778,zai-org/GLM-5.3,text-generation,True,False,False,True,no typed relation
+1701812,Qwen/Qwen2.5-32B-Instruct,text-generation,True,True,False,True,fine-tune
+1689008,Qwen/Qwen2.5-Coder-14B-Instruct,text-generation,True,True,False,True,fine-tune
+1683947,Qwen/Qwen2.5-Coder-7B-Instruct,text-generation,True,True,False,True,fine-tune
+1677469,unsloth/gemma-4-12b-it-GGUF,image-text-to-text,True,True,False,True,quantised
+1677441,datalab-to/chandra-ocr-2,image-text-to-text,True,False,False,True,no typed relation
+1672799,sentence-transformers/paraphrase-mpnet-base-v2,sentence-similarity,True,False,False,True,no typed relation
+1668273,Qwen/Qwen2.5-14B-Instruct-AWQ,text-generation,True,True,False,True,quantised
+1658531,Qwen/Qwen2.5-VL-7B-Instruct-AWQ,image-text-to-text,True,True,False,True,quantised
+1647272,mistralai/Mistral-7B-Instruct-v0.2,text-generation,True,False,False,True,no typed relation
+1626754,nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B-NVFP4,text-generation,True,True,True,True,quantised
+1593614,Qwen/Qwen3-VL-8B-Instruct-FP8,image-text-to-text,True,True,False,True,quantised
+1592870,Qwen/Qwen2-VL-7B-Instruct-AWQ,image-text-to-text,True,True,False,True,quantised
+1575783,intfloat/multilingual-e5-large-instruct,feature-extraction,True,False,False,True,no typed relation
+1570561,ornith-ai/Ornith-1.0-35B-GGUF,text-generation,True,False,False,True,no typed relation
+1568204,nvidia/Qwen2.5-VL-7B-Instruct-NVFP4,text-generation,True,True,False,True,quantised
+1566659,nvidia/NVIDIA-Nemotron-3-Nano-4B-BF16,text-generation,True,True,True,True,fine-tune
+1563663,HuggingFaceTB/SmolLM2-135M,text-generation,True,False,False,True,no typed relation
+1550455,autotrust/JEV-27B-VL,image-text-to-text,True,True,True,True,adapter
+1541620,HuggingFaceTB/SmolLM2-135M-Instruct,text-generation,True,True,False,True,quantised
+1530926,Qwen/Qwen3.6-27B-FP8,image-text-to-text,True,True,False,True,quantised
+1523576,Qdrant/bge-small-en-v1.5-onnx-Q,sentence-similarity,True,False,False,True,no typed relation
+1482471,ISTA-DASLab/Qwen3.8-27B-GSQ-RCO-GGUF,image-text-to-text,True,True,False,True,quantised
+1471763,antirez/deepseek-v4-gguf,text-generation,True,True,False,True,quantised
+1470538,peculiar-ragdoll/Dirk-Qwen3.8-27B-GGUF,image-text-to-text,True,True,False,True,quantised
+1468032,meta-llama/Llama-3.2-3B-Instruct,text-generation,True,False,False,True,no typed relation
+1462141,Qwen/Qwen3-VL-Embedding-8B,sentence-similarity,True,True,False,True,fine-tune
+1454731,Qdrant/all-MiniLM-L6-v2-onnx,sentence-similarity,True,False,False,True,no typed relation
+1453213,deepseek-ai/DeepSeek-V3,text-generation,False,False,False,True,no typed relation
+1451984,cambridgeltl/SapBERT-from-PubMedBERT-fulltext,feature-extraction,True,False,False,True,no typed relation
+1449521,Alibaba-NLP/gte-multilingual-base,sentence-similarity,True,False,False,True,no typed relation
+1446069,Qwen/Qwen3.5-35B-A3B,image-text-to-text,True,True,False,True,fine-tune
+1430942,Alibaba-NLP/gte-large-en-v1.5,sentence-similarity,True,False,True,True,no typed relation
+1425573,datalab-to/surya-ocr-2,image-text-to-text,True,False,False,True,no typed relation
+1419815,sentence-transformers/multi-qa-mpnet-base-dot-v1,sentence-similarity,False,False,True,True,no typed relation
+1416494,sentence-transformers/paraphrase-MiniLM-L6-v2,sentence-similarity,True,False,False,True,no typed relation
+1404961,ornith-ai/Ornith-1.0-35B,text-generation,True,False,False,True,no typed relation
+1397640,zai-org/GLM-4.7-Flash,text-generation,True,False,False,True,no typed relation
+1377080,HauhauCS/Gemma-4-E4B-Uncensored-HauhauCS-Aggressive,image-text-to-text,True,True,False,True,no typed relation
+1375801,EleutherAI/pythia-70m-deduped,text-generation,True,False,True,True,no typed relation
+1374846,Qwen/Qwen2.5-0.5B,text-generation,True,False,False,True,no typed relation
+1357422,byteshape/Qwen3.8-27B-GGUF,image-text-to-text,True,True,False,True,quantised
+1348236,deepseek-ai/DeepSeek-V3-0324,text-generation,True,False,False,True,no typed relation
+1310504,Qwen/Qwen3-30B-A3B,text-generation,True,True,False,True,fine-tune
+1310297,sentence-transformers/distiluse-base-multilingual-cased-v1,sentence-similarity,True,False,False,True,no typed relation
+1294550,deepseek-ai/DeepSeek-V4.1-Flash,image-text-to-text,True,False,False,True,no typed relation
+1293963,HuggingFaceTB/SmolVLM2-500M-Video-Instruct,image-text-to-text,True,True,True,True,quantised
+1278419,openbmb/MiniCPM5-2B,text-generation,True,False,True,True,no typed relation
+1272046,Qwen/Qwen3.5-35B-A3B-FP8,image-text-to-text,True,True,False,True,quantised
+1270719,nvidia/Gemma-4-31B-IT-NVFP4,text-generation,True,True,False,True,quantised
+1270002,deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B,text-generation,True,False,False,True,no typed relation
+1256645,unsloth/Qwen3.8-Flash-Next-GGUF,image-text-to-text,True,True,False,True,quantised
+1252710,yiyanghkust/finbert-tone,text-classification,False,False,False,True,no typed relation
+1251220,facebook/w2v-bert-2.0,feature-extraction,True,False,False,True,no typed relation
+1241472,bigscience/bloomz-560m,text-generation,True,False,True,True,no typed relation
+1232794,llava-hf/llava-1.5-7b-hf,image-text-to-text,True,False,True,True,no typed relation
+1217057,livekit/turn-detector,text-classification,True,True,False,True,quantised
+1216802,sentence-transformers-testing/stsb-bert-tiny-safetensors,sentence-similarity,False,False,False,True,no typed relation
+1215535,unsloth/Qwen3.5-9B-GGUF,image-text-to-text,True,True,False,True,quantised
+1205646,baidu/Unlimited-OCR,image-text-to-text,True,False,False,True,no typed relation
+1204720,Qwen/Qwen2-VL-2B-Instruct,image-text-to-text,True,True,False,True,fine-tune
+1202604,unsloth/Qwen3.5-4B-GGUF,image-text-to-text,True,True,False,True,quantised
+1201612,unsloth/Qwen3.6-35B-A3B-GGUF,image-text-to-text,True,True,False,True,quantised
+1173284,TinyLlama/TinyLlama-1.1B-Chat-v1.0,text-generation,True,False,True,True,no typed relation
+1171300,google/gemma-3-4b-it,image-text-to-text,True,True,False,True,fine-tune
+1168590,ornith-ai/Ornith-1.5-397B-GGUF,text-generation,True,False,False,True,no typed relation
+1166732,Qwen/Qwen2.5-14B-Instruct,text-generation,True,True,False,True,fine-tune
+1152615,nomic-ai/nomic-embed-text-v2-moe,sentence-similarity,True,True,False,True,fine-tune
+1147960,deepseek-ai/DeepSeek-R1,text-generation,True,False,False,True,no typed relation
+1144082,Qwen/Qwen3-4B-Instruct-2507-FP8,text-generation,True,True,False,True,quantised
+1137627,laion/clap-htsat-unfused,feature-extraction,True,False,False,True,no typed relation
+1128586,NeuML/pubmedbert-base-embeddings,sentence-similarity,True,True,False,True,fine-tune
+1126077,0bserverx/Qwen3.8-27B-Heretic-Abliterated-Uncensored-GGUF,text-generation,True,True,False,True,quantised
+1120636,moonshotai/Kimi-K3,image-text-to-text,True,False,False,True,no typed relation
+1109465,ornith-ai/Ornith-1.5-35B-A3B-NVFP4,text-generation,True,False,False,True,no typed relation
+1095474,prism-ml/Ternary-Bonsai-27B-mlx-2bit,text-generation,True,True,False,True,fine-tune
+1091341,thinkingmachines/Inkling,image-text-to-text,True,False,False,True,no typed relation
+1091287,sahilchachra/Unlimited-OCR-AWQ,image-text-to-text,True,True,False,True,quantised
+1086361,intfloat/e5-large-v2,sentence-similarity,True,False,False,True,no typed relation
+1083131,prism-ml/Bonsai-27B-mlx-1bit,text-generation,True,True,False,True,fine-tune
+1081709,sshleifer/tiny-gpt2,text-generation,False,False,False,False,no typed relation
+1059065,Qwen/Qwen2.5-32B-Instruct-AWQ,text-generation,True,True,False,True,quantised
+1053926,Qwen/Qwen3-VL-Embedding-2B,sentence-similarity,True,True,False,True,fine-tune
+1047456,openbmb/MiniCPM5-2B-DSpark,text-generation,True,False,True,True,no typed relation
+1025186,autotrust/GEV-26B-Decide,text-classification,True,True,False,True,adapter
+1020621,thenlper/gte-small,sentence-similarity,True,False,False,True,no typed relation
+1018399,SC117/Qwen3.8-Flash-Next-GSQ-RCO-abliterated-GGUF,image-text-to-text,True,True,False,True,quantised
+1011207,openai-community/gpt2-large,text-generation,True,False,False,True,no typed relation
+1007470,unsloth/Qwen3.6-35B-A3B-MTP-GGUF,image-text-to-text,True,True,False,True,quantised
+1005908,unitary/unbiased-toxic-roberta,text-classification,True,False,False,True,no typed relation
+1002049,nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-BF16,text-generation,True,False,True,True,no typed relation
+998928,Qwen/Qwen3-Coder-30B-A3B-Instruct-FP8,text-generation,True,False,False,True,no typed relation
+998093,Qwen/Qwen3-30B-A3B-Instruct-2507,text-generation,True,False,False,True,no typed relation
+994451,gaunernst/gemma-3-27b-it-int4-awq,image-text-to-text,True,True,False,True,quantised
+994198,Qwen/Qwen3-Coder-Next-FP8,text-generation,True,False,False,True,no typed relation
+991347,gabor-hosu/e5-mistral-7b-instruct-bnb-4bit,feature-extraction,True,True,False,True,quantised
+980174,jinaai/jina-embeddings-v2-small-en,feature-extraction,True,False,True,True,no typed relation
+976169,Arunavaonly/Bangla-twoclass-Sentiment-Analyzer,text-classification,True,True,False,True,fine-tune
+970672,allenai/specter2_base,feature-extraction,True,False,True,True,no typed relation
+970358,shibing624/text2vec-base-chinese,sentence-similarity,True,False,True,True,no typed relation
+969292,LGAI-EXAONE/EXAONE-3.5-7.8B-Instruct-AWQ,text-generation,True,True,False,True,no typed relation
+967692,LiquidAI/LFM2.5-2.6B-GGUF,text-generation,True,True,False,True,quantised
+966866,RedHatAI/Qwen3.6-35B-A3B-NVFP4,image-text-to-text,True,True,False,True,quantised
+966336,farbodtavakkoli/OTel-2.0-LLM-31B-IT,text-generation,True,True,False,True,no typed relation
+962791,nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B-BF16,text-generation,True,False,True,True,no typed relation
+959204,Qdrant/bm25,sentence-similarity,True,False,False,True,no typed relation
+957192,RedHatAI/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-FP8,text-generation,False,True,False,True,quantised
+953249,HauhauCS/Gemma4-12B-QAT-Uncensored-HauhauCS-Balanced,image-text-to-text,True,True,False,True,quantised
+944148,Qwen/Qwen2.5-Coder-32B-Instruct-AWQ,text-generation,True,True,False,True,quantised
+936687,unslothai/1,feature-extraction,False,False,False,True,no typed relation
+936234,dots-studio/dots.ocr,image-text-to-text,True,False,False,True,no typed relation
+936191,unsloth/GLM-5.3-Flash-GGUF,text-generation,True,True,False,True,quantised
+927757,tencent/HunyuanOCR,image-text-to-text,True,False,False,True,no typed relation
+926667,Qwen/Qwen3-32B-AWQ,text-generation,True,True,False,True,quantised
+920149,RedHatAI/gemma-4-26B-A4B-it-FP8-dynamic,image-text-to-text,True,True,False,True,quantised
+917398,unsloth/Qwen3.5-35B-A3B-GGUF,image-text-to-text,True,True,False,True,quantised
+899036,jinaai/jina-embeddings-v5-omni-small,feature-extraction,True,False,False,True,no typed relation
+890616,cyankiwi/gemma-4-26B-A4B-it-AWQ-4bit,image-text-to-text,True,True,False,True,quantised
+889409,unsloth/Qwen3.6-27B-NVFP4,image-text-to-text,True,True,False,True,quantised
+878028,ornith-ai/Ornith-1.0-9B,text-generation,True,False,False,True,no typed relation
+875776,google/gemma-2-9b-it,text-generation,True,True,False,True,fine-tune
+873679,empero-ai/Qwen3.8-35B-A3B-Distill-GGUF,text-generation,True,True,False,True,quantised
+862660,Snowflake/snowflake-arctic-embed-l,sentence-similarity,True,False,False,True,no typed relation
+857178,nvidia/Gemma-4-26B-A4B-NVFP4,text-generation,True,True,False,True,quantised
+850364,Snowflake/snowflake-arctic-embed-l-v2.0,sentence-similarity,True,False,False,True,no typed relation
+849728,HauhauCS/Qwen3.6-35B-A3B-Uncensored-HauhauCS-Aggressive,image-text-to-text,True,True,False,True,quantised
+842873,deepseek-ai/DeepSeek-V4-Flash,text-generation,True,False,False,True,no typed relation
+841618,intfloat/e5-small-v2,sentence-similarity,True,False,False,True,no typed relation
+841261,sentence-transformers/distiluse-base-multilingual-cased-v2,sentence-similarity,True,False,False,True,no typed relation
+840720,nvidia/NVIDIA-Nemotron-3-Ultra-550B-A55B-BF16,text-generation,True,False,True,True,no typed relation
+834525,casperhansen/llama-3.3-70b-instruct-awq,text-generation,True,True,False,True,quantised
+831539,nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-NVFP4,text-generation,True,False,False,True,no typed relation
+829059,intfloat/e5-base-v2,sentence-similarity,True,False,False,True,no typed relation
+826892,nvidia/Qwen3.5-122B-A10B-NVFP4,text-generation,True,True,False,True,quantised
+823369,naver/splade-cocondenser-selfdistil,feature-extraction,True,False,True,True,no typed relation
+819271,unsloth/Qwen3.6-35B-A3B-NVFP4-Fast,image-text-to-text,True,True,False,True,quantised
+816995,bartowski/endless-frontier_BigBang-v1-GGUF,image-text-to-text,True,True,False,True,quantised
+815744,ukisai/Swift-1.5-Qwen3.8-27B-GSQ-RCO-GGUF,text-generation,True,True,False,True,quantised
+815082,unsloth/Inkling-Small-GGUF,image-text-to-text,True,True,False,True,quantised
+815002,nvidia/dragon-multiturn-context-encoder,feature-extraction,True,False,False,True,no typed relation
+814928,nvidia/dragon-multiturn-query-encoder,feature-extraction,True,False,False,True,no typed relation
+809355,intfloat/e5-base,sentence-similarity,True,False,False,True,no typed relation
+806812,unslothai/repeat,feature-extraction,False,False,False,True,no typed relation
+805355,cyankiwi/Qwen3-Coder-30B-A3B-Instruct-AWQ-4bit,text-generation,True,True,False,True,quantised
+804077,trl-internal-testing/tiny-Qwen3ForCausalLM,text-generation,False,False,False,True,no typed relation
+799673,bartowski/Qwen2.5-32B-Instruct-GGUF,text-generation,True,True,False,True,quantised
+793989,Qwen/Qwen2.5-Coder-32B-Instruct,text-generation,True,True,False,True,fine-tune
+792935,RadixArk/Qwen3.8-27B-NVFP4,image-text-to-text,True,True,False,True,quantised
+790405,deepseek-ai/DeepSeek-Coder-V2-Lite-Instruct,text-generation,True,False,False,True,no typed relation
+782877,cyankiwi/Qwen3.6-27B-AWQ-INT4,image-text-to-text,True,True,False,True,quantised
+781379,Qwen/Qwen2.5-7B,text-generation,True,False,False,True,no typed relation
+778158,CMSManhattan/JiRackUltra_14b,text-generation,True,False,False,True,no typed relation
+777663,Qwen/Qwen2.5-VL-32B-Instruct,image-text-to-text,True,False,False,True,no typed relation
+774112,meta-models/Muse-Glimmer-30B-GGUF,image-text-to-text,True,True,False,True,quantised
+763421,AtomicChat/Qwen3.8-Flash-Next-GGUF,text-generation,True,True,False,True,quantised
+760904,Qwen/Qwen-72B,text-generation,True,False,False,True,no typed relation
+760822,nvidia/Qwen3.6-27B-NVFP4,text-generation,True,True,False,True,quantised
+759810,WhereIsAI/UAE-Large-V1,feature-extraction,True,False,False,True,no typed relation
+757712,Qwen/Qwen3-8B-Base,text-generation,True,False,False,True,no typed relation
+756479,cardiffnlp/twitter-xlm-roberta-base-sentiment,text-classification,False,False,False,True,no typed relation
+754406,Infomaniak-AI/vllm-translategemma-4b-it,image-text-to-text,True,False,False,True,no typed relation
+747558,Orion-zhen/Qwen2.5-Coder-7B-Instruct-AWQ,text-generation,True,True,True,True,quantised
+745486,google/medgemma-4b-it,image-text-to-text,True,True,False,True,fine-tune
+744511,ornith-ai/Ornith-1.5-9B-NVFP4,text-generation,True,False,False,True,no typed relation
+740561,HuggingFaceTB/SmolLM3-3B,text-generation,True,True,False,True,fine-tune
+734200,Octen/Octen-Embedding-8B,sentence-similarity,True,True,False,True,fine-tune
+733008,esatapedico/Qwen3.8-27B-NVFP4-MTP-GGUF,text-generation,True,True,False,True,quantised
+730017,Qdrant/all_miniLM_L6_v2_with_attentions,sentence-similarity,True,False,False,True,no typed relation
+729585,ISTA-DASLab/gemma-3-27b-it-GPTQ-4b-128g,image-text-to-text,True,True,False,True,quantised
+729174,unsloth/gemma-4-26B-A4B-it-GGUF,image-text-to-text,True,True,False,True,quantised
+729046,trl-internal-testing/tiny-Qwen2ForSequenceClassification-2.5,text-classification,False,False,False,True,no typed relation
+722617,QuantTrio/Qwen3.6-35B-A3B-AWQ,image-text-to-text,True,True,False,True,quantised
+722487,meta-llama/Llama-2-7b-hf,text-generation,True,False,False,True,no typed relation
+721899,mlx-community/Qwen3.8-27B-4bit,image-text-to-text,True,True,False,True,quantised
+720320,unsloth/Qwen3.6-35B-A3B-NVFP4,image-text-to-text,True,True,False,True,quantised
+720184,MiniMaxAI/MiniMax-M2.7,text-generation,True,False,False,True,no typed relation
+719533,Qwen/Qwen2.5-Coder-7B-Instruct-AWQ,text-generation,True,True,False,True,quantised
+716848,sentence-transformers/multi-qa-MiniLM-L6-cos-v1,sentence-similarity,False,False,True,True,no typed relation
+707782,cl-nagoya/ruri-v3-310m,sentence-similarity,True,True,True,True,fine-tune
+707487,Qwen/Qwen3-0.6B-Base,text-generation,True,False,False,True,no typed relation
+702073,datalab-to/surya-ocr-2-gguf,image-text-to-text,True,False,False,True,no typed relation
+700828,ISTA-DASLab/Qwen3.8-Flash-Next-GSQ-RCO-Coder-GGUF,image-text-to-text,True,True,False,True,quantised
+699496,swiss-ai/Apertus-v1.5-8B,image-text-to-text,True,False,False,True,no typed relation
+692852,nlptown/bert-base-multilingual-uncased-sentiment,text-classification,True,False,False,True,no typed relation
+691424,meta-llama/Meta-Llama-3-8B-Instruct,text-generation,True,False,False,True,no typed relation
+691035,protectai/deberta-v3-base-prompt-injection-v2,text-classification,True,True,True,True,quantised
+689342,Qwen/Qwen3.5-4B-Base,image-text-to-text,True,False,False,True,no typed relation
+688921,deepseek-ai/DeepSeek-OCR-2,image-text-to-text,True,False,False,True,no typed relation
+683956,google/diffusiongemma-26B-A4B-it,image-text-to-text,True,False,False,True,no typed relation
+683182,EleutherAI/pythia-14m,text-generation,True,False,True,True,no typed relation
+683141,microsoft/Phi-3.5-vision-instruct,image-text-to-text,True,False,False,True,no typed relation
+683075,microsoft/wavlm-large,feature-extraction,False,False,False,True,no typed relation
+682781,sentence-transformers/paraphrase-albert-small-v2,sentence-similarity,True,False,True,True,no typed relation
+681188,sentence-transformers/paraphrase-MiniLM-L3-v2,sentence-similarity,True,False,True,True,no typed relation
+680583,meta-llama/Llama-3.1-8B,text-generation,True,False,False,True,no typed relation
+679899,thinkingmachines/Inkling-Small,image-text-to-text,True,False,False,True,no typed relation
+674112,meta-llama/Llama-3.2-1B,text-generation,True,False,False,True,no typed relation
+668920,Inferact/Qwen3.8-27B-NVFP4,image-text-to-text,True,True,False,True,quantised
+668035,sentence-transformers/nli-mpnet-base-v2,sentence-similarity,True,False,False,True,no typed relation
+665496,peft-internal-testing/tiny-random-OPTForCausalLM,text-generation,False,False,False,True,no typed relation
+662014,Qwen/Qwen2-VL-7B-Instruct,image-text-to-text,True,True,False,True,fine-tune
+658241,unsloth/Llama-3.2-1B-Instruct,text-generation,True,True,False,True,fine-tune
+656624,zai-org/GLM-5,text-generation,True,False,False,True,no typed relation
+655710,nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-NVFP4,text-generation,True,False,True,True,no typed relation
+654534,Qwen/Qwen2.5-1.5B,text-generation,True,False,False,True,no typed relation
+639235,Xenova/ms-marco-MiniLM-L-6-v2,text-classification,False,True,False,True,quantised
+634238,OpenGVLab/InternVL3_5-GPT-OSS-20B-A4B-Preview-HF,image-text-to-text,True,True,True,True,merged
+629886,orcarouter/Qwen3.8-Flash-Next-Uncensored-GGUF,image-text-to-text,True,True,False,True,quantised
+628163,nvidia/Qwen3.8-27B-NVFP4,text-generation,True,True,False,True,quantised
+625105,OpenGVLab/InternVL2-1B,image-text-to-text,True,True,False,True,merged
+623267,bartowski/MiMo-V2.6-Distill-Qwen-9B-GGUF,image-text-to-text,False,True,False,True,quantised
+623236,j-hartmann/emotion-english-distilroberta-base,text-classification,False,False,False,True,no typed relation
+622829,nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-BF16,text-generation,True,False,True,True,no typed relation
+622211,MiniMaxAI/MiniMax-M2.5,text-generation,True,False,False,True,no typed relation
+619575,jhgan/ko-sroberta-multitask,sentence-similarity,False,False,False,True,no typed relation
+616349,nvidia/Cosmos-Reason2-2B,image-text-to-text,True,True,False,True,fine-tune
+612583,lmstudio-community/Qwen3.5-9B-MLX-4bit,image-text-to-text,True,True,False,True,quantised
+611149,Qwen/Qwen3.5-122B-A10B,image-text-to-text,True,False,False,True,no typed relation
+607441,nlpai-lab/KURE-v1,feature-extraction,True,True,False,True,fine-tune
+605016,OBLITERATUS/Qwen3.8-27B-OBLITERATED,text-generation,True,True,False,True,quantised
+604054,LuffyTheFox/Qwen3.6-35B-A3B-Uncensored-Genesis-Hermes-GGUF,image-text-to-text,True,True,True,True,quantised
+603335,cyankiwi/MiniCPM-SALA-AWQ-8bit,text-generation,True,True,False,True,quantised
+601869,deepseek-ai/DeepSeek-V4-Flash-Vision-Exp,image-text-to-text,True,False,False,True,no typed relation
+600475,dealignai/Ornith-1.5-9B-UNCENSORED-GGUF,image-text-to-text,True,True,False,True,quantised
+595217,ibm-granite/granite-4.1-3b,text-generation,True,False,False,True,no typed relation
+594609,zai-org/GLM-5.2,text-generation,True,False,False,True,no typed relation
+594408,unsloth/gemma-4-E4B-it-GGUF,image-text-to-text,True,True,False,True,quantised
+592629,zai-org/GLM-4.5-Air,text-generation,True,False,False,True,no typed relation
+591347,Qwen/Qwen3-Coder-Next,text-generation,True,False,False,True,no typed relation
+590515,Qwen/Qwen3-4B-Thinking-2507,text-generation,True,False,False,True,no typed relation
+590321,prism-ml/Ternary-Bonsai-27B-gguf,text-generation,True,True,False,True,quantised
+588146,unsloth/Qwen3.6-27B-GGUF,image-text-to-text,True,True,False,True,quantised
+583513,Qwen/Qwen3-Coder-480B-A35B-Instruct-FP8,text-generation,True,False,False,True,no typed relation
+581713,sentence-transformers/all-roberta-large-v1,sentence-similarity,True,False,False,True,no typed relation
+581514,deepseek-ai/deepseek-coder-7b-instruct-v1.5,text-generation,True,False,False,True,no typed relation
+576714,Qwen/Qwen3-4B-Base,text-generation,True,False,False,True,no typed relation
+576206,lmstudio-community/Qwen3.5-9B-MLX-8bit,image-text-to-text,True,True,False,True,quantised
+575038,yuxinlu1/gemma-4-12B-agentic-fable5-composer2.5-v2-3.5x-tau2-GGUF,text-generation,True,True,False,True,quantised
+572237,llamafactory/tiny-random-Llama-3,text-generation,True,False,False,True,no typed relation
+570613,deepseek-ai/DeepSeek-R1-0528-Qwen3-8B,text-generation,True,False,False,True,no typed relation
+568038,Qwen/Qwen3-8B-GGUF,text-generation,True,True,False,True,quantised
+566936,empero-ai/Qwen3.8-9B-Distill-GGUF,text-generation,True,True,False,True,quantised
+564756,microsoft/phi-2,text-generation,True,False,False,True,no typed relation
+564676,Qwen/Qwen3-1.7B-Base,text-generation,True,False,False,True,no typed relation
+560805,Qwen/Qwen3-8B-FP8,text-generation,True,True,False,True,quantised
+559996,Qwen/Qwen3-4B-GGUF,text-generation,True,True,False,True,quantised
+557627,Xenova/bge-small-en-v1.5,feature-extraction,False,True,False,True,quantised
+556490,YituTech/conv-bert-base,feature-extraction,False,False,False,False,no typed relation
+556292,CMSManhattan/JiRackDeltaNet_27b,text-generation,True,False,False,True,no typed relation
+551726,TaylorAI/bge-micro-v2,sentence-similarity,True,False,False,True,no typed relation
+551673,sentence-transformers/LaBSE,sentence-similarity,True,False,False,True,no typed relation
+551621,unsloth/Qwen3.6-27B-MTP-GGUF,image-text-to-text,True,True,False,True,quantised
+548658,shibing624/macbert4csc-base-chinese,text-generation,True,False,True,True,no typed relation
+548425,Qwen/Qwen2.5-72B-Instruct-AWQ,text-generation,True,True,False,True,quantised
+544898,empero-ai/Qwen3.8-4B-Distill-GGUF,text-generation,True,True,False,True,quantised
+539863,RedHatAI/Qwen3.8-27B-INT4,image-text-to-text,True,True,False,True,quantised
+534833,FINAL-Bench/POCKET-35B-GGUF,text-generation,True,True,False,True,quantised
+534030,Salesforce/blip2-opt-2.7b,image-text-to-text,True,False,False,True,no typed relation
+532201,openbmb/MiniCPM5-2B-MLX,text-generation,True,False,True,True,no typed relation
+531390,PrimeIntellect/Qwen3-0.6B,text-generation,True,True,False,True,fine-tune
+530400,Accio-Lab/occamy-1.0-GGUF,image-text-to-text,True,True,False,True,quantised
+529363,trl-internal-testing/tiny-random-LlamaForCausalLM,text-generation,False,False,False,True,no typed relation
+523068,Qwen/Qwen2.5-Math-PRM-7B,text-classification,True,True,False,True,fine-tune
+522782,tencent/Hy3,text-generation,True,False,False,True,no typed relation
+521264,ornith-ai/Ornith-1.5-35B-A3B-FP8,text-generation,True,False,False,True,no typed relation
+520898,onnx-community/embeddinggemma-300m-ONNX,sentence-similarity,True,True,False,True,quantised
+519601,Jackrong/Qwopus3.8-27B-Flash-V2-GGUF,image-text-to-text,True,True,False,True,fine-tune
+517352,setu4993/LaBSE,sentence-similarity,True,False,True,True,no typed relation
+515258,allenai/Olmo-3-7B-Instruct,text-generation,True,True,True,True,fine-tune
+514342,RedHatAI/Llama-3.2-3B-Instruct-FP8-dynamic,text-generation,True,True,False,True,quantised
+512264,cyankiwi/Qwen3.8-27B-AWQ-INT4,image-text-to-text,True,True,False,True,quantised
+511085,sentence-transformers/msmarco-bert-base-dot-v5,sentence-similarity,False,False,False,True,no typed relation
+509651,NousResearch/Hermes-3-Llama-3.1-8B,text-generation,True,True,False,True,fine-tune
+506283,ncbi/MedCPT-Cross-Encoder,text-classification,True,False,False,True,no typed relation
+505386,Qwen/Qwen3.5-122B-A10B-FP8,image-text-to-text,True,True,False,True,quantised
+505122,lxyuan/distilbert-base-multilingual-cased-sentiments-student,text-classification,True,False,True,True,no typed relation
+504512,abenzerps/Apodex-1.1-mini-GGUF,text-generation,True,True,False,True,quantised
+501126,Qwen/Qwen2.5-Coder-3B-Instruct,text-generation,True,True,False,True,fine-tune
+500991,QuantTrio/Qwen3-VL-30B-A3B-Instruct-AWQ,text-generation,True,True,False,True,quantised
+498557,bartowski/Meta-Llama-3.1-8B-Instruct-GGUF,text-generation,True,True,False,True,quantised
+497463,empero-ai/Qwythos-9B-Claude-Mythos-5-1M-GGUF,image-text-to-text,True,True,False,True,quantised
+495598,EleutherAI/pythia-6.9b,text-generation,True,False,True,True,no typed relation
+494834,EleutherAI/gpt-neo-125m,text-generation,True,False,True,True,no typed relation
+494114,Qwen/Qwen3.5-397B-A17B,image-text-to-text,True,False,False,True,no typed relation
+493012,unsloth/gpt-oss-20b-GGUF,text-generation,True,True,False,True,quantised
+491079,stelterlab/Qwen3-30B-A3B-Instruct-2507-AWQ,text-generation,True,True,False,True,quantised
+490250,allenai/Olmo-3-7B-Think,text-generation,True,True,True,True,fine-tune
+489874,deepvk/USER2-base,sentence-similarity,True,True,True,True,quantised
+489631,BAAI/bge-base-zh-v1.5,feature-extraction,True,False,False,True,no typed relation
+487778,bottlecapai/ThinkingCap-Qwen3.8-27B-GGUF,image-text-to-text,True,True,False,True,quantised
+485601,unsloth/Qwen3-4B-GGUF,text-generation,True,True,False,True,quantised
+484754,bkai-foundation-models/vietnamese-bi-encoder,sentence-similarity,True,False,False,True,no typed relation
+484567,Qwen/Qwen2.5-32B-Instruct-GPTQ-Int4,text-generation,True,True,False,True,quantised
+484227,BoldingBuilds/orcarouter_GLM-5.3-Flash-Uncensored-GGUF,text-generation,True,True,False,True,quantised
+483781,stepfun-ai/GOT-OCR2_0,image-text-to-text,True,False,False,True,no typed relation
+482565,Qwen/Qwen3-VL-8B-Instruct-GGUF,image-text-to-text,True,True,False,True,quantised
+482506,ukisai/Swift-Qwen3.8-27B-GGUF,image-text-to-text,True,True,False,True,quantised
+482405,Qwen/Qwen3.5-0.8B-Base,image-text-to-text,True,False,False,True,no typed relation
+482326,rinna/japanese-gpt-neox-small,text-generation,True,False,True,True,no typed relation
+482275,XHToken/Spark-X2.5-4B-GGUF,text-generation,True,True,False,True,quantised
+481631,apple/OpenELM-1_1B-Instruct,text-generation,True,False,False,True,no typed relation
+479887,empero-ai/Qwen3.8-2B-Distill-GGUF,text-generation,True,True,False,True,quantised
+479709,LeaderboardModel1/zeta-2.1-autoround-W4A16,text-generation,False,True,False,True,quantised
+476697,google/gemma-4-31B,image-text-to-text,True,False,False,True,no typed relation
+476298,peculiar-ragdoll/Cyber-Tiel-Coder-35B-A3B-GGUF-MTP,image-text-to-text,True,True,False,True,quantised
+475943,bartowski/Qwen3.8-27B-GGUF,image-text-to-text,False,True,False,True,quantised
+474981,Bahushruth/Qwen3.6-35B-A3B-abliterated-v4,text-generation,True,True,True,True,fine-tune
+474570,Qwen/Qwen3-235B-A22B,text-generation,True,False,False,True,no typed relation
+474473,LiquidAI/LFM2.5-230M-GGUF,text-generation,True,True,False,True,quantised
+474355,Qwen/Qwen2.5-Coder-1.5B-Instruct,text-generation,True,True,False,True,fine-tune
+472984,MilaNLProc/xlm-emo-t,text-classification,False,False,False,True,no typed relation
+472726,meta-llama/Llama-3.1-405B-FP8,text-generation,True,False,False,True,no typed relation
+471947,ElKulako/cryptobert,text-classification,True,False,True,True,no typed relation
+471844,Qwen/Qwen2.5-VL-3B-Instruct-AWQ,image-text-to-text,False,True,False,True,quantised
+469663,DavidAU/Qwen3.6-27B-Fable-Fusion-711-Uncensored-Heretic-NM-DAU-NEO-MAX-MTP-GGUF,image-text-to-text,True,True,True,True,quantised
+469446,unslothai/lambda,feature-extraction,False,False,False,False,no typed relation
+467686,OpenGVLab/InternVL2-2B,image-text-to-text,True,True,False,True,merged
+466503,indobenchmark/indobert-base-p1,feature-extraction,True,False,True,True,no typed relation
+462880,Alibaba-NLP/gte-Qwen2-1.5B-instruct,sentence-similarity,True,False,False,True,no typed relation
+462123,pysentimiento/robertuito-sentiment-analysis,text-classification,False,False,False,True,no typed relation
+460058,RedHatAI/gemma-4-31B-it-FP8-block,image-text-to-text,True,True,False,True,quantised
+459841,thenlper/gte-large,sentence-similarity,True,False,False,True,no typed relation
+459234,Qwen/Qwen2-1.5B-Instruct,text-generation,True,False,False,True,no typed relation
+457658,Alibaba-NLP/gte-base-en-v1.5,sentence-similarity,True,False,False,True,no typed relation
+449452,ornith-ai/Ornith-1.5-9B,text-generation,True,False,False,True,no typed relation
+445851,swiss-ai/Apertus-8B-Instruct-2509,text-generation,True,True,False,True,fine-tune
+445297,neroued/Qwen3.8-27B-NInfer,image-text-to-text,True,True,False,True,quantised
+444038,E-MIMIC/inclusively-classification,text-classification,True,False,False,True,no typed relation
+443104,nomic-ai/nomic-embed-code,sentence-similarity,True,True,True,True,fine-tune
+441969,Qwen/Qwen2.5-Coder-7B-Instruct-GPTQ-Int4,text-generation,True,True,False,True,quantised
+441538,google/gemma-2-2b-it,text-generation,True,True,False,True,fine-tune
+441124,ai-sage/Giga-Embeddings-instruct,feature-extraction,True,False,False,True,no typed relation
+437860,unsloth/GLM-5.3-GGUF,text-generation,True,True,False,True,quantised
+432105,Qdrant/multilingual-e5-large-onnx,sentence-similarity,True,False,False,True,no typed relation
+431940,sakamakismile/Qwen3.8-27B-MTP-NVFP4,text-generation,True,True,False,True,quantised
+428921,QuantTrio/GLM-4.7-Flash-AWQ,text-generation,True,True,False,True,quantised
+423742,Qwen/Qwen2.5-3B-Instruct-AWQ,text-generation,True,True,False,True,quantised
+421333,llava-hf/llava-onevision-qwen2-0.5b-ov-hf,image-text-to-text,True,False,True,True,no typed relation
+420664,migtissera/Tess-4-27B-GGUF,image-text-to-text,True,True,False,True,quantised
+419249,ornith-ai/Ornith-1.5-397B-NVFP4,text-generation,True,False,False,True,no typed relation
+418679,google/gemma-3-27b-it,image-text-to-text,True,True,False,True,fine-tune
+418256,zai-org/GLM-5.1,text-generation,True,False,False,True,no typed relation
+417822,GSAI-ML/LLaDA-8B-Instruct,text-generation,True,False,False,True,no typed relation
+415309,google/gemma-3-12b-it,image-text-to-text,True,True,False,True,fine-tune
+414459,Qwen/Qwen2.5-Coder-1.5B,text-generation,True,True,False,True,fine-tune
+413406,hmellor/tiny-random-LlamaForCausalLM,text-generation,False,False,False,True,no typed relation
+412868,FremyCompany/BioLORD-2023,sentence-similarity,True,False,True,True,no typed relation
+410208,unsloth/inkling-GGUF,image-text-to-text,True,True,False,True,quantised
+410170,moonshotai/Kimi-K2.6,image-text-to-text,True,False,False,True,no typed relation
+409987,oliverguhr/german-sentiment-bert,text-classification,True,False,False,True,no typed relation
+409256,peculiar-ragdoll/Sharp-Spark-X2.5-4B-GGUF,text-generation,True,True,False,True,quantised
+408202,bigscience/bloom-560m,text-generation,True,False,False,True,no typed relation
+408139,RedHatAI/Qwen3-32B-NVFP4,text-generation,True,True,False,True,quantised
+404985,QuantTrio/Qwen3.5-9B-AWQ,image-text-to-text,True,True,False,True,quantised
+404801,k-chirkunov/gemma4-e4b-claims-comparison,text-generation,True,True,False,True,no typed relation
+404248,unsloth/gemma-4-26B-A4B-it-qat-GGUF,image-text-to-text,True,True,False,True,quantised
+403346,Xenova/multilingual-e5-small,feature-extraction,False,True,False,True,quantised
+401653,agentionai/Qwen3.8-27B-AP-GGUF,image-text-to-text,True,True,False,True,quantised
+401408,prism-ml/Bonsai-27B-gguf,text-generation,True,True,False,True,quantised
+401050,IlyaGusev/saiga_llama3_8b,text-generation,True,False,True,True,no typed relation
+400099,sanskar003/Qwen3.5-4B-AWQ,image-text-to-text,True,True,False,True,quantised
+399806,deepseek-ai/DeepSeek-R1-Distill-Qwen-32B,text-generation,True,False,False,True,no typed relation
+399274,TimKond/S-PubMedBert-MedQuAD,sentence-similarity,True,False,False,True,no typed relation
+398658,neroued/Qwen3.8-27B-nvfp4-NInfer,image-text-to-text,True,True,False,True,quantised
+397266,codellama/CodeLlama-7b-hf,text-generation,True,False,False,True,no typed relation
+393889,unslothai/vram-16,feature-extraction,False,False,False,True,no typed relation
+392369,gittensor-model-hub/Qwen3.8-27B-NVFP4-RTX5090,image-text-to-text,True,True,False,True,quantised
+391785,HauhauCS/Gemma4-26B-A4B-QAT-Uncensored-HauhauCS-Balanced-MTP,image-text-to-text,True,True,False,True,quantised
+390837,empero-ai/Qwythos-9B-v2-GGUF,image-text-to-text,True,True,False,True,quantised
+389202,boboliu/bge-reranker-v2.5-gemma2-lightweight-gptq,text-generation,False,False,False,True,no typed relation
+388504,nvidia/GLM-5.2-NVFP4,text-generation,True,True,False,True,quantised
+387086,Snowflake/snowflake-arctic-embed-m,sentence-similarity,True,False,False,True,no typed relation
+386393,HuggingFaceTB/SmolLM2-360M,text-generation,True,False,False,True,no typed relation
+386097,Qwen/Qwen3-Coder-30B-A3B-Instruct,text-generation,True,False,False,True,no typed relation
+383525,BAAI/bge-large-zh-v1.5,feature-extraction,True,False,False,True,no typed relation
+383248,nm-testing/SmolLM-1.7B-Instruct-quantized.w4a16,text-generation,True,False,False,True,no typed relation
+382057,deepseek-ai/DeepSeek-V4-Pro,text-generation,True,False,False,True,no typed relation
+378576,poolside/Laguna-XS.2,text-generation,True,False,False,True,no typed relation
+375852,emrecan/bert-base-turkish-cased-mean-nli-stsb-tr,sentence-similarity,True,False,True,True,no typed relation
+373797,microsoft/Phi-3-mini-4k-instruct,text-generation,True,False,False,True,no typed relation
+372849,AxionML/Qwen3.5-9B-NVFP4,image-text-to-text,True,True,False,True,quantised
+372259,microsoft/phi-4,text-generation,True,False,False,True,no typed relation
+372111,Qwen/Qwen3-235B-A22B-Instruct-2507-FP8,text-generation,True,True,False,True,quantised
+371887,unsloth/gemma-4-E2B-it-GGUF,image-text-to-text,True,True,False,True,quantised
+370331,z-lab/Qwen3.8-27B-DFlash2-GGUF,text-generation,True,True,False,True,quantised
+369992,mistralai/Mistral-7B-v0.1,text-generation,True,False,False,True,no typed relation
+368966,unsloth/mistral-7b-v0.3-bnb-4bit,text-generation,True,True,False,True,quantised
+367373,microsoft/Florence-2-large,image-text-to-text,True,False,False,True,no typed relation
+367055,deepvk/USER-bge-m3,sentence-similarity,True,False,True,True,no typed relation
+366631,prism-ml/Ternary-Bonsai-8B-gguf,text-generation,True,True,False,True,quantised
+365388,Snowflake/snowflake-arctic-embed-xs,sentence-similarity,False,False,False,True,no typed relation
+364613,nvidia/Qwen3.8-Flash-Next-NVFP4,image-text-to-text,True,True,False,True,quantised
+362463,unsloth/Qwen3.5-2B-GGUF,image-text-to-text,True,True,False,True,quantised
+361779,Qwen/Qwen2.5-Coder-14B-Instruct-AWQ,text-generation,True,True,False,True,quantised
+361542,microsoft/Phi-3.5-mini-instruct,text-generation,True,False,False,True,no typed relation
+361365,openbmb/MiniCPM5-1B,text-generation,True,False,True,True,no typed relation
+360472,Qwen/Qwen2.5-Coder-7B,text-generation,True,True,False,True,fine-tune
+358676,deepseek-ai/DeepSeek-V3.1,text-generation,True,True,False,True,quantised
+358488,jinaai/jina-embeddings-v2-base-en,feature-extraction,True,False,True,True,no typed relation
+357473,nvidia/llama-nemotron-embed-1b-v2,feature-extraction,True,False,False,True,no typed relation
+356625,meta-llama/Llama-2-7b-chat-hf,text-generation,True,False,False,True,no typed relation
+356491,microsoft/Phi-4-mini-instruct,text-generation,True,False,False,True,no typed relation
+356370,hmellor/tiny-random-Gemma2ForCausalLM,text-generation,False,False,False,True,no typed relation
+356078,poolside/Laguna-M.1,text-generation,True,False,False,True,no typed relation
+355324,lightonai/LightOnOCR-2-1B,image-text-to-text,True,False,False,True,no typed relation
+352485,autotrust/JEV-9B,text-classification,True,True,True,True,fine-tune
+352042,unsloth/Qwen3-VL-4B-Instruct-GGUF,image-text-to-text,True,True,False,True,quantised
+350933,bartowski/google_gemma-4-E2B-it-GGUF,image-text-to-text,True,True,False,True,quantised
+350204,google/gemma-4-31B-it-qat-w4a16-ct,image-text-to-text,True,True,False,True,quantised
+350120,philbert440/Qwen3.8-27B-Uncensored-Cyber-GGUF,image-text-to-text,True,True,False,True,quantised
+349696,michaelw9999/Qwen3.6-35B-A3B-NVFP4-MTP-GGUF,text-generation,False,True,False,True,quantised
+349086,ukisai/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-GGUF,image-text-to-text,True,True,False,True,quantised
+348226,lmstudio-community/gemma-4-26B-A4B-it-QAT-MLX-4bit,image-text-to-text,True,True,False,True,no typed relation
+347853,ByteDance-Seed/UI-TARS-1.5-7B,image-text-to-text,True,False,False,True,no typed relation
+347825,abenzerps/Spark-X2.5-4B-GGUF,text-generation,True,True,False,True,quantised
+346467,OrdalieTech/Solon-embeddings-large-0.1,feature-extraction,True,False,False,True,no typed relation
+345061,huihui-ai/Huihui-DeepSeek-V4-Flash-0731-abliterated-GGUF,text-generation,True,True,False,True,quantised
+344665,cyankiwi/Qwen3-VL-8B-Instruct-AWQ-4bit,image-text-to-text,True,True,False,True,quantised
+344116,DavidAU/Qwen3.8-27B-Cold-Fusion-GAIN-V1.1-NM-DAU-NEO-MAX-MTP-GGUF,image-text-to-text,True,True,True,True,quantised
+341990,voyageai/voyage-4-nano,feature-extraction,True,False,False,True,no typed relation
+341979,Jackrong/Qwopus3.6-35B-A3B-Coder-MTP-GGUF,image-text-to-text,True,True,False,True,adapter
+341843,Qwen/Qwen3.5-122B-A10B-GPTQ-Int4,image-text-to-text,True,False,False,True,no typed relation
+340487,FastFlowLM/GPT-OSS-20B-NPU2,text-generation,True,True,False,True,quantised
+340256,ibm-granite/granite-3.3-2b-instruct,text-generation,True,True,False,True,fine-tune
+339162,huihui-ai/Huihui-Qwen3.8-Flash-Next-abliterated-GGUF,image-text-to-text,True,True,False,True,quantised
+339145,LiquidAI/LFM2.5-1.2B-Instruct-GGUF,text-generation,True,True,False,True,quantised
+338441,Voicelab/vlt5-base-keywords,text-generation,True,False,True,True,no typed relation
+338420,HuggingFaceTB/SmolVLM-256M-Instruct,image-text-to-text,True,True,True,True,quantised
+338413,sentence-transformers/msmarco-distilbert-base-tas-b,sentence-similarity,True,False,True,True,no typed relation
+336291,llava-hf/llava-v1.6-mistral-7b-hf,image-text-to-text,True,False,False,True,no typed relation
+335665,datalab-to/chandra,image-text-to-text,True,False,False,True,no typed relation
+335461,nomic-ai/nomic-embed-text-v1.5-GGUF,sentence-similarity,True,True,False,True,quantised
+335432,deepseek-ai/DeepSeek-R1-Distill-Qwen-7B,text-generation,True,False,False,True,no typed relation
+335288,mlx-community/gemma-3-12b-it-4bit,image-text-to-text,True,True,False,True,fine-tune
+335221,OBLITERATUS/Ornith-1.5-9B-OBLITERATED,text-generation,True,True,False,True,quantised
+334759,tvall43/Qwen3.6-14B-A3B-FableVibes-GGUF,text-generation,True,True,True,True,quantised
+334745,ornith-ai/Ornith-1.5-397B-FP8,text-generation,True,False,False,True,no typed relation
+333955,Qwen/Qwen3.5-397B-A17B-FP8,image-text-to-text,True,True,False,True,quantised
+332155,moonshotai/Kimi-K2.5,image-text-to-text,True,False,False,True,no typed relation
+331874,Qwen/Qwen3-30B-A3B-Instruct-2507-FP8,text-generation,True,True,False,True,quantised
+331829,Mapika/decider-2b,text-classification,True,True,False,True,fine-tune
+330260,deepseek-ai/DeepSeek-V4-Flash-DSpark,text-generation,True,False,False,True,no typed relation
+329016,unsloth/Ornith-1.0-9B-GGUF,text-generation,True,True,False,True,quantised
+328880,Jackrong/Qwopus3.6-27B-Coder-Compat-MTP-GGUF,image-text-to-text,True,True,True,True,quantised
+328383,deepseek-ai/DeepSeek-R1-Distill-Qwen-14B,text-generation,True,False,False,True,no typed relation
+327503,laion/larger_clap_general,feature-extraction,True,False,False,True,no typed relation
+325373,bartowski/thomsonreuters_Thomson-1.0-Small-GGUF,image-text-to-text,True,True,False,True,quantised
+324976,Qwen/Qwen3-0.6B-GGUF,text-generation,True,True,False,True,quantised
+323920,trl-internal-testing/tiny-GptOssForCausalLM,text-generation,False,False,False,True,no typed relation
+323848,Qwen/Qwen2-0.5B,text-generation,True,False,False,True,no typed relation
+323512,ggml-org/gemma-4-26B-A4B-it-GGUF,image-text-to-text,True,True,False,True,quantised
+321744,RedHatAI/gemma-4-26B-A4B-it-NVFP4,image-text-to-text,True,True,False,True,quantised
+321424,RadixArk/Qwen3.8-Flash-Next-NVFP4,image-text-to-text,True,True,False,True,quantised
+320292,Qwen/Qwen3.5-9B-Base,image-text-to-text,True,False,False,True,no typed relation
+319709,unsloth/Kimi-K3-GGUF,image-text-to-text,True,True,False,True,quantised
+319024,moonshotai/Kimi-K2-Instruct,text-generation,True,False,False,True,no typed relation
+318800,Qwen/Qwen2.5-1.5B-Instruct-GGUF,text-generation,True,True,False,True,quantised
+318453,ornith-ai/Ornith-1.5-35B-A3B-MLX,text-generation,False,False,False,True,no typed relation
+318350,peculiar-ragdoll/Tiel-Coder-35B-A3B-GGUF,image-text-to-text,True,True,False,True,quantised
+318135,Qwen/Qwen2.5-Coder-7B-Instruct-GGUF,text-generation,True,True,False,True,quantised
+316329,google/gemma-4-31B-it-qat-q4_0-unquantized,image-text-to-text,True,True,False,True,fine-tune
+315783,tiiuae/falcon-7b,text-generation,True,False,True,True,no typed relation
+314357,nvidia/Qwen3-14B-NVFP4,text-generation,True,True,False,True,quantised
+314083,papluca/xlm-roberta-base-language-detection,text-classification,True,True,True,True,fine-tune
+313870,poolside/Laguna-XS-2.1,text-generation,True,False,False,True,no typed relation
+313756,microsoft/deberta-large-mnli,text-classification,True,False,False,True,no typed relation
+313306,llmfan46/gemma-4-Ortenzya-The-Creative-Wordsmith-31B-it-uncensored-heretic-GGUF,image-text-to-text,True,True,False,True,quantised
+309706,empero-ai/Qwen3.8-27B-Ridge-GGUF,image-text-to-text,True,True,False,True,quantised
+309030,ai-forever/FRIDA,feature-extraction,True,True,True,True,fine-tune
+308731,trl-internal-testing/tiny-Qwen2_5_VLForConditionalGeneration,image-text-to-text,False,False,False,True,no typed relation
+308401,EleutherAI/gpt-neox-20b,text-generation,True,False,True,True,no typed relation
+306677,nvidia/NVIDIA-Nemotron-Nano-9B-v2,text-generation,True,True,True,True,fine-tune
+306483,mixedbread-ai/deepset-mxbai-embed-de-large-v1,feature-extraction,True,False,False,True,no typed relation
+306125,unsloth/Qwen-AgentWorld-35B-A3B-GGUF,text-generation,True,True,True,True,quantised
+305688,Qwen/Qwen3.5-2B-Base,image-text-to-text,True,False,False,True,no typed relation
+305680,Lorbus/Qwen3.6-27B-int4-AutoRound,image-text-to-text,True,True,False,True,quantised
+305191,LiquidAI/LFM2.5-8B-A1B-GGUF,text-generation,True,True,False,True,quantised
+304694,unsloth/Kimi-K2.7-Code-GGUF,image-text-to-text,True,True,False,True,quantised
+302454,Qwen/Qwen3-VL-32B-Instruct,image-text-to-text,True,False,False,True,no typed relation
+301555,openai-community/roberta-base-openai-detector,text-classification,True,False,True,True,no typed relation
+300574,XLabs-AI/xflux_text_encoders,text-generation,True,False,False,True,no typed relation
+299933,lmstudio-community/Qwen3.6-27B-MLX-4bit,image-text-to-text,True,True,False,True,quantised
+299169,Qwen/Qwen3-VL-235B-A22B-Instruct,image-text-to-text,True,False,False,True,no typed relation
+298585,huihui-ai/Qwen2.5-VL-7B-Instruct-abliterated,image-text-to-text,True,True,False,True,fine-tune
+298350,janhq/Jan-v3.5-4B-gguf,text-generation,True,True,False,True,quantised
+297980,meta-llama/Llama-3.3-70B-Instruct,text-generation,True,True,False,True,fine-tune
+296749,Qdrant/paraphrase-multilingual-MiniLM-L12-v2-onnx-Q,sentence-similarity,True,False,False,True,no typed relation
+296158,llm-jp/llm-jp-4-33b-thinking-gguf,text-generation,True,False,False,True,no typed relation
+295775,microsoft/wavlm-base-plus,feature-extraction,False,False,False,True,no typed relation
+294392,nvidia/LocateAnything-3B,image-text-to-text,True,True,False,True,fine-tune
+294012,cybersectony/phishing-email-detection-distilbert_v2.4.1,text-classification,True,True,True,True,fine-tune
+292751,microsoft/harrier-oss-v1-0.6b,feature-extraction,True,False,False,True,no typed relation
+291734,google/gemma-4-26B-A4B-it-qat-q4_0-gguf,image-text-to-text,True,True,False,True,quantised
+291249,lmstudio-community/Qwen3.6-27B-MLX-8bit,image-text-to-text,True,True,False,True,quantised
+290000,unsloth/GLM-5.2-GGUF,text-generation,True,True,False,True,quantised
+289943,Xenova/paraphrase-multilingual-MiniLM-L12-v2,feature-extraction,False,True,False,True,quantised
+289796,Qwen/Qwen2.5-72B-Instruct,text-generation,True,True,False,True,fine-tune
+289619,cyankiwi/Qwen3.5-4B-AWQ-4bit,image-text-to-text,True,True,False,True,quantised
+288955,EleutherAI/gpt-j-6b,text-generation,True,False,True,True,no typed relation
+288874,ornith-ai/Ornith-1.5-9B-MLX-8bit,text-generation,False,False,False,True,no typed relation
+288826,lmstudio-community/Qwen3.6-27B-MLX-6bit,image-text-to-text,True,True,False,True,quantised
+288755,nanonets/Nanonets-OCR2-3B,image-text-to-text,False,True,False,True,fine-tune
+288618,lmstudio-community/Qwen3.6-27B-MLX-5bit,image-text-to-text,True,True,False,True,quantised
+288542,RedHatAI/Qwen3-Coder-Next-FP8-dynamic,text-generation,True,True,False,True,quantised
+288489,ornith-ai/Ornith-1.5-9B-MLX,text-generation,False,False,False,True,no typed relation
+287562,allenai/OLMo-2-0425-1B,text-generation,True,False,False,True,no typed relation
+287371,ibm-granite/granite-docling-258M,image-text-to-text,True,False,True,True,no typed relation
+285861,sakamakismile/Huihui-Qwen3.6-27B-abliterated-NVFP4-MTP,text-generation,True,False,False,True,no typed relation
+285301,cointegrated/rubert-tiny2,sentence-similarity,True,False,False,True,no typed relation
+281403,QuantTrio/Qwen3-Coder-30B-A3B-Instruct-AWQ,text-generation,True,True,False,True,quantised
+280287,Qwen/Qwen3-VL-30B-A3B-Instruct,image-text-to-text,True,False,False,True,no typed relation
+279538,typhoon-ai/typhoon-ocr1.5-2b,image-text-to-text,True,True,False,True,fine-tune
+278267,Qwen/Qwen2-0.5B-Instruct,text-generation,True,True,False,True,fine-tune
+278046,Qwen/Qwen2-7B-Instruct,text-generation,True,True,False,True,fine-tune
+277417,incoai/Qwen3.8-27B-DFlash2,text-generation,True,True,False,True,fine-tune
+275082,unsloth/gemma-4-31B-it-GGUF,image-text-to-text,True,True,False,True,quantised
+275069,meta-llama/Llama-3.2-3B,text-generation,True,False,False,True,no typed relation
+274329,mesolitica/llama2-embedding-1b-8k,feature-extraction,False,False,False,True,no typed relation
+274202,Qwen/Qwen3-VL-32B-Instruct-FP8,image-text-to-text,True,True,False,True,quantised
+274156,empero-ai/Qwythos-27B-v1-GGUF,image-text-to-text,True,True,False,True,quantised
+273335,KyleHessling1/Qwopus3.6-27B-Fusion-GGUF,text-generation,True,True,False,True,quantised
+268346,yuxinlu1/gemma-4-12B-coder-fable5-composer2.5-v1-GGUF,text-generation,True,True,False,True,quantised
+267890,ibm-research/PowerMoE-3b,text-generation,True,False,False,True,no typed relation
+267628,facebook/fasttext-language-identification,text-classification,True,False,False,True,no typed relation
+267250,facebook/bart-base,feature-extraction,True,False,False,True,no typed relation
+267180,alpindale/Llama-Guard-3-1B,text-generation,True,False,False,True,no typed relation
+265790,poolside/Laguna-S-2.1,text-generation,True,False,False,True,no typed relation
+265730,mrm8488/distilroberta-finetuned-financial-news-sentiment-analysis,text-classification,True,False,True,True,no typed relation
+264987,ornith-ai/Ornith-1.0-397B-FP8,text-generation,True,False,False,True,no typed relation
+264841,superwhisper/s1-mini-GGUF,text-generation,True,True,False,True,quantised
+263447,lmstudio-community/Qwen3.6-35B-A3B-MLX-4bit,image-text-to-text,True,True,False,True,quantised
+262867,BDRC/tibetan-ocr,image-text-to-text,True,True,False,True,fine-tune
+262443,bartowski/Kwaipilot_KAT-Coder-V2.5-Dev-GGUF,text-generation,True,True,False,True,quantised
+262185,zenosai/MonkeyOCRv2-B-Parsing,image-text-to-text,True,False,True,True,no typed relation
+262059,nvidia/NVIDIA-Nemotron-Nano-12B-v2-VL-NVFP4-QAD,image-text-to-text,True,False,False,True,no typed relation
+261704,sentence-transformers/bert-base-nli-mean-tokens,sentence-similarity,True,False,False,True,no typed relation
+261550,unslothai/other,feature-extraction,False,False,False,True,no typed relation
+260473,trl-internal-testing/tiny-Qwen3MoeForCausalLM,text-generation,False,False,False,True,no typed relation
+260256,bloomer010/Ling-3.0-tiny-GGUF,text-generation,True,True,False,True,quantised
+259431,nvidia/Kimi-K2.5-NVFP4,text-generation,True,True,False,True,quantised
+259122,RadixArk/Qwen3.8-27B-NVFP4-BF16-LMHead,image-text-to-text,True,True,False,True,quantised
+258541,BAAI/bge-multilingual-gemma2,feature-extraction,True,False,False,True,no typed relation
+258425,ornith-ai/Ornith-1.5-35B-A3B,text-generation,True,False,False,True,no typed relation
+258415,hkunlp/instructor-large,sentence-similarity,True,False,False,True,no typed relation
+258099,ibm-research/MoLFormer-XL-both-10pct,feature-extraction,True,False,False,True,no typed relation
+257801,naver/splade-cocondenser-ensembledistil,feature-extraction,True,False,True,True,no typed relation
+256781,stepfun-ai/Step-3.5-Flash,text-generation,True,True,False,True,no typed relation
+256289,state-spaces/mamba-130m-hf,text-generation,False,False,False,True,no typed relation
+255895,mlx-community/Qwen2.5-Coder-7B-Instruct-4bit,text-generation,True,True,False,True,fine-tune
+254338,hunkim/sentence-transformer-klue,sentence-similarity,False,False,False,True,no typed relation
+254099,Qwen/Qwen2.5-0.5B-Instruct-GGUF,text-generation,True,True,False,True,quantised
+253733,AnkitAI/Parable-Qwen3-8B-Claude-Fable-5-GGUF,text-generation,True,True,True,True,fine-tune
+253144,Qwen/Qwen2.5-7B-Instruct-GPTQ-Int4,text-generation,True,True,False,True,quantised
+252921,huggyllama/llama-7b,text-generation,True,False,False,True,no typed relation
+252292,webAI-Official/TwIL-LM3,text-generation,True,True,False,True,adapter
+252187,DavidAU/Qwen3-8B-64k-Context-2X-Josiefied-Uncensored,text-generation,False,True,False,True,fine-tune
+251327,ATH-MaaS/OvisOCR2,image-text-to-text,True,True,False,True,fine-tune
+251285,LGAI-EXAONE/EXAONE-3.5-7.8B-Instruct,text-generation,True,False,False,True,no typed relation
+250943,opendatalab/MinerU2.5-Pro-2605-1.2B,image-text-to-text,True,False,False,True,no typed relation
+250865,unsloth/gemma-4-31B-it-qat-GGUF,image-text-to-text,True,True,False,True,quantised
+249574,cis-lmu/glotlid,text-classification,True,False,True,True,no typed relation
+249247,zai-org/GLM-5.2-FP8,text-generation,True,False,False,True,no typed relation
+247801,perplexity-ai/pplx-embed-v1-0.6b,feature-extraction,True,False,False,True,no typed relation
+247736,bartowski/DeepSeek-Coder-V2-Lite-Instruct-GGUF,text-generation,True,False,False,True,no typed relation
+247184,jimmy31chen/RVN-Qwen3.8-Flash-Next-Abliterated-Uncensored-IQ3_S-Strata,text-generation,True,True,False,True,quantised
+247147,meta-models/Muse-Glimmer-30B,image-text-to-text,True,False,False,True,no typed relation
+245950,Qwen/Qwen3-Next-80B-A3B-Instruct,text-generation,True,False,False,True,no typed relation
+245937,XHToken/Spark-X2.5-1.7B-GGUF,text-generation,True,True,False,True,quantised
+245410,unsloth/diffusiongemma-26B-A4B-it-GGUF,image-text-to-text,True,True,False,True,quantised
+244974,lmstudio-community/Qwen3.6-35B-A3B-MLX-8bit,image-text-to-text,True,True,False,True,quantised
+244815,google/paligemma-3b-pt-224,image-text-to-text,True,False,False,True,no typed relation
+243978,cardiffnlp/twitter-roberta-base-sentiment,text-classification,False,False,True,True,no typed relation
+243885,AnkitAI/Parable-Qwen3-4B-Claude-Fable-5-GGUF,text-generation,True,True,True,True,quantised
+243811,MaziyarPanahi/Qwen3-0.6B-GGUF,text-generation,False,True,False,True,quantised
+243140,sdadas/mmlw-retrieval-roberta-large,sentence-similarity,True,False,False,True,no typed relation
+242400,Qwen/Qwen2.5-3B,text-generation,True,False,False,True,no typed relation
+242329,ConwayResearch/Underdog-Saluki-27B-1.0,text-generation,True,True,False,True,quantised
+241994,utter-project/EuroLLM-22B-Instruct-2512,text-generation,True,True,False,True,fine-tune
+241322,cyjin-yl/Qwen3.8-27B-Uncensored-Cyber-agentic-imatrix-GGUF,image-text-to-text,True,True,False,True,quantised
+241050,lmstudio-community/Qwen3.6-35B-A3B-MLX-6bit,image-text-to-text,True,True,False,True,quantised
+239740,Qwen/Qwen3.8-Flash-Next-FP8,image-text-to-text,True,True,False,True,quantised
+238696,FINAL-Bench/POCKET-26B-GGUF,text-generation,True,True,False,True,quantised
+238618,cl-nagoya/ruri-v3-30m,sentence-similarity,True,True,True,True,fine-tune
+238287,unsloth/Llama-3.2-3B-Instruct,text-generation,True,True,False,True,fine-tune
+238020,GnLOLot/MiniCPM5-1B-Claude-Opus-Fable5-Thinking-GGUF,text-generation,True,True,False,True,quantised
+237914,HuggingFaceTB/SmolLM2-360M-Instruct,text-generation,True,True,False,True,quantised
+237870,peft-internal-testing/opt-125m,text-generation,False,False,False,True,no typed relation
+237023,ornith-ai/Ornith-1.5-9B-MLX-4bit,text-generation,False,False,False,True,no typed relation
+236501,AtomicChat/Ling-3.0-flash-GGUF,text-generation,True,True,False,True,quantised
+235556,GnLOLot/MiniCPM5-1B-Claude-Opus-Fable5-V2-Thinking-GGUF,text-generation,True,True,False,True,quantised
+235470,bartowski/Qwen_Qwen3-4B-GGUF,text-generation,False,True,False,True,quantised
+235328,kyutai/mimi,feature-extraction,True,False,False,True,no typed relation
+234784,lmstudio-community/DeepSeek-R1-0528-Qwen3-8B-MLX-4bit,text-generation,True,True,False,True,quantised
+233950,nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B-FP8,text-generation,True,True,True,True,quantised
+233238,RedHatAI/gemma-3-27b-it-quantized.w4a16,image-text-to-text,True,True,False,True,quantised
+232733,Qwen/Qwen3-0.6B-FP8,text-generation,True,True,False,True,quantised
+232435,AngelSlim/Hy3-GGUF,text-generation,True,True,False,True,quantised
+232327,Qwen/Qwen2.5-Math-1.5B,text-generation,True,True,False,True,fine-tune
+231882,cyankiwi/Qwen3.6-35B-A3B-AWQ-4bit,image-text-to-text,True,True,False,True,quantised
+231064,utter-project/EuroLLM-1.7B-Instruct,text-generation,True,True,False,True,fine-tune
+230073,bigcode/tiny_starcoder_py,text-generation,True,False,True,True,no typed relation
+229873,microsoft/deberta-xlarge-mnli,text-classification,True,False,False,True,no typed relation
+229805,leliuga/all-MiniLM-L6-v2-GGUF,sentence-similarity,True,True,True,True,quantised
+228217,InternScience/Agents-A1-4B-Q8_0-GGUF,text-generation,True,True,False,True,quantised
+227738,dots-studio/dots.mocr,image-text-to-text,True,False,False,True,no typed relation
+227456,MaziyarPanahi/Qwen3-14B-GGUF,text-generation,False,True,False,True,quantised
+226169,openbmb/MiniCPM5-2B-GGUF,text-generation,True,False,True,True,no typed relation
+223770,Qwen/Qwen2.5-VL-32B-Instruct-AWQ,image-text-to-text,True,True,False,True,quantised
+223260,HuggingFaceTB/SmolLM2-1.7B-Instruct,text-generation,True,True,False,True,quantised
+223189,MaziyarPanahi/Qwen3-4B-GGUF,text-generation,False,True,False,True,quantised
+223072,VoVanPhuc/sup-SimCSE-VietNamese-phobert-base,sentence-similarity,False,False,False,True,no typed relation
+222996,ornith-ai/Ornith-1.0-35B-FP8,text-generation,True,False,False,True,no typed relation
+222757,MiniMaxAI/MiniMax-M2,text-generation,True,False,False,True,no typed relation
+221762,QuantTrio/Qwen3.5-4B-AWQ,image-text-to-text,True,True,False,True,quantised
+221675,orcarouter/GLM-5.3-Flash-Uncensored-FP8,text-generation,True,True,False,True,fine-tune
+221366,Qwen/Qwen2.5-Math-1.5B-Instruct,text-generation,True,True,False,True,fine-tune
+219708,EleutherAI/pythia-410m,text-generation,True,False,True,True,no typed relation
+219615,MaziyarPanahi/Qwen3-1.7B-GGUF,text-generation,False,True,False,True,quantised
+219276,laion/larger_clap_music_and_speech,feature-extraction,True,False,False,True,no typed relation
+219112,LilaRest/gemma-4-31B-it-NVFP4-turbo,text-generation,True,True,False,True,quantised
+218633,openai-community/gpt2-medium,text-generation,True,False,False,True,no typed relation
+218248,MaziyarPanahi/Qwen3-8B-GGUF,text-generation,False,True,False,True,quantised
+217544,mlx-community/gpt-oss-20b-MXFP4-Q8,text-generation,True,True,False,True,quantised
+217410,unsloth/Qwen3.5-0.8B-GGUF,image-text-to-text,True,True,False,True,quantised
+217225,google/gemma-4-31B-it-qat-q4_0-gguf,image-text-to-text,True,True,False,True,quantised
+215860,ornith-ai/Ornith-1.5-397B,text-generation,True,False,False,True,no typed relation
+215187,microsoft/codebert-base,feature-extraction,False,False,False,False,no typed relation
+215130,ChristianAzinn/mxbai-embed-large-v1-gguf,feature-extraction,True,True,False,True,quantised
+215099,microsoft/unixcoder-base,feature-extraction,True,False,False,True,no typed relation
+214776,MaziyarPanahi/Qwen3-30B-A3B-GGUF,text-generation,False,True,False,True,quantised
+214360,HauhauCS/Qwen3.5-122B-A10B-Uncensored-HauhauCS-Aggressive,image-text-to-text,True,True,False,True,quantised
+214248,Qwen/Qwen3-4B-AWQ,text-generation,True,True,False,True,quantised
+214038,MaziyarPanahi/Qwen3-32B-GGUF,text-generation,False,True,False,True,quantised
+213947,lmstudio-community/DeepSeek-R1-0528-Qwen3-8B-MLX-8bit,text-generation,True,True,False,True,quantised
+211972,Hcompany/Holo-3.1-35B-A3B-GGUF,image-text-to-text,True,True,False,True,quantised
+211821,stelterlab/Mistral-Small-24B-Instruct-2501-AWQ,text-generation,True,True,False,True,quantised
+211777,farbodtavakkoli/OTel-LLM-E4B-IT,text-generation,True,True,True,True,fine-tune
+211626,circulus/koelectra-polite-v1,text-classification,False,False,False,False,no typed relation
+211269,microsoft/Florence-2-base-ft,image-text-to-text,True,False,False,True,no typed relation
+210862,cyankiwi/Qwen3-30B-A3B-Instruct-2507-AWQ-4bit,text-generation,True,True,False,True,quantised
+210238,sentence-transformers/msmarco-MiniLM-L6-v3,sentence-similarity,True,False,False,True,no typed relation
+209820,unsloth/bge-small-en-v1.5,feature-extraction,True,False,False,True,no typed relation
+209415,laion/larger_clap_music,feature-extraction,True,False,False,True,no typed relation
+208918,openbmb/MiniCPM-V-4.6,image-text-to-text,True,False,False,True,no typed relation
+208825,yujiepan/kimi-linear-tiny-random,text-generation,False,True,False,True,fine-tune
+208779,roneneldan/TinyStories-1M,text-generation,False,False,True,True,no typed relation
+208728,inclusionAI/LLaDA2.0-mini,text-generation,True,False,False,True,no typed relation
+208686,moonshotai/Kimi-Linear-48B-A3B-Instruct,text-generation,True,False,False,True,no typed relation
+208303,DavidAU/Qwen3.8-27B-TWIN-TURBO-Fable-Cold-Fusion-709-L-Uncensored-NM-DAU-NEO-MTP-GGUF,image-text-to-text,True,True,True,True,quantised
+208271,unsloth/Qwen2.5-Coder-7B-Instruct,text-generation,True,True,False,True,fine-tune
+205548,Qwen/Qwen3.5-35B-A3B-GPTQ-Int4,image-text-to-text,True,True,False,True,quantised
+205126,QCRI/Fanar-2-27B-Instruct,text-generation,True,True,False,True,fine-tune
+205124,nvidia/NVIDIA-Nemotron-Nano-9B-v2-FP8,text-generation,True,True,True,True,fine-tune
+205064,Stern5497/sbert-legal-xlm-roberta-base,sentence-similarity,False,False,False,True,no typed relation
+204939,Qwen/Qwen2.5-3B-Instruct-GGUF,text-generation,True,True,False,True,quantised
+203646,trl-internal-testing/small-Qwen3ForCausalLM,text-generation,False,False,False,True,no typed relation
+202550,Qwen/Qwen3-14B-GGUF,text-generation,True,True,False,True,quantised
+202378,Qwen/Qwen2-7B,text-generation,True,False,False,True,no typed relation
+202228,ukisai/Swift-1.5-Qwen3.8-27B-GGUF,image-text-to-text,True,True,False,True,quantised
+202065,microsoft/DialoGPT-medium,text-generation,True,False,False,True,no typed relation
+201814,trl-internal-testing/tiny-LlamaForCausalLM-3.2,text-generation,False,False,False,True,no typed relation
+201809,unsloth/Meta-Llama-3.1-8B-Instruct,text-generation,True,True,False,True,fine-tune
+201533,unsloth/Qwen2.5-14B-bnb-4bit,text-generation,True,True,False,True,quantised
+201391,peft-internal-testing/tiny-dummy-qwen2,text-generation,False,False,False,True,no typed relation
+200233,jitesh/emotion-english,text-classification,True,False,False,True,no typed relation
+200109,InternScience/Agents-A1-4B,text-generation,True,False,False,True,no typed relation
+200039,unsloth/Muse-Glimmer-30B-GGUF,image-text-to-text,True,True,False,True,quantised
+199929,blanchefort/rubert-base-cased-sentiment-rusentiment,text-classification,False,False,True,True,no typed relation
+199871,tiny-random/qwen3.5-moe,image-text-to-text,False,True,False,True,fine-tune
+199596,MiniMaxAI/MiniMax-M3,image-text-to-text,True,False,False,True,no typed relation
+199135,unitary/toxic-bert,text-classification,True,False,False,True,no typed relation
+198785,stepfun-ai/Step-3.7-Flash-NVFP4,image-text-to-text,True,False,False,True,no typed relation
+198305,XiaomiMiMo/MiMo-V2.5,text-generation,True,False,False,True,no typed relation
+198286,bartowski/XYZAILab_XYZ-Aquila-mini-GGUF,image-text-to-text,True,True,False,True,quantised
+197846,bartowski/Qwen2.5-7B-Instruct-GGUF,text-generation,True,True,False,True,quantised
+197122,intfloat/e5-mistral-7b-instruct,feature-extraction,True,False,False,True,no typed relation
+197120,philbert440/Qwen3.8-27B-W4A16-AWQ,image-text-to-text,True,True,False,True,quantised
+196617,zhx123/ftrobertallm,text-classification,True,False,False,True,no typed relation
+196541,GuardrailsAI/prompt-saturation-attack-detector,text-classification,False,True,False,True,fine-tune
+195263,RedHatAI/gemma-4-31B-it-FP8-dynamic,image-text-to-text,True,True,False,True,quantised
+194672,thenlper/gte-base,sentence-similarity,True,False,False,True,no typed relation
+194167,cambridgeltl/SapBERT-UMLS-2020AB-all-lang-from-XLMR,feature-extraction,False,False,False,False,no typed relation
+194161,ornith-ai/Ornith-1.5-9B-MLX-6bit,text-generation,False,False,False,True,no typed relation
+193834,antirez/qwen3.8-flash-next-gguf,text-generation,True,True,False,True,quantised
+193452,meta-llama/Llama-2-13b-chat-hf,text-generation,True,False,False,True,no typed relation
+193143,DavidAU/Qwen3.6-40B-Claude-4.6-Opus-Deckard-Heretic-Uncensored-Thinking-NEO-CODE-Di-IMatrix-MAX-GGUF,image-text-to-text,True,True,True,True,quantised
+192987,pritamdeka/S-PubMedBert-MS-MARCO,sentence-similarity,True,False,False,True,no typed relation
+192676,xlnet/xlnet-base-cased,text-generation,True,False,True,True,no typed relation
+192293,NousResearch/Meta-Llama-3.1-8B-Instruct,text-generation,True,False,False,True,no typed relation
+192144,QuantTrio/Qwen3.5-27B-AWQ,image-text-to-text,True,True,False,True,quantised
+192059,ibm-granite/granite-4.1-30b,text-generation,True,False,False,True,no typed relation
+191818,unsloth/Qwen2.5-VL-7B-Instruct-GGUF,image-text-to-text,True,True,False,True,quantised
+190761,meta-llama/Meta-Llama-3-8B,text-generation,True,False,False,True,no typed relation
+190478,cardiffnlp/twitter-xlm-roberta-base-sentiment-multilingual,text-classification,False,False,True,True,no typed relation
+189975,unsloth/Qwen2.5-7B-Instruct,text-generation,True,True,False,True,fine-tune
+189012,RedHatAI/Llama-3.2-1B-Instruct-FP8-dynamic,text-generation,True,True,False,True,quantised
+188088,jinaai/jina-embeddings-v3-hf,feature-extraction,True,False,False,True,no typed relation
+187574,FacebookAI/roberta-large-mnli,text-classification,True,False,True,True,no typed relation
+187467,BAAI/bge-small-en,feature-extraction,True,False,False,True,no typed relation
+187441,Qwen/Qwen2.5-Coder-0.5B-Instruct,text-generation,True,True,False,True,fine-tune
+186615,NousResearch/Meta-Llama-3.1-8B,text-generation,True,False,False,True,no typed relation
+186454,ibm-granite/granite-vision-4.1-4b,image-text-to-text,True,False,False,True,no typed relation
+186028,autotrust/JEV-27B,text-classification,True,True,True,True,fine-tune
+185301,RedHatAI/Llama-3.2-3B-Instruct-FP8,text-generation,True,True,False,True,quantised
+185059,poolside/Laguna-XS-2.1-GGUF,text-generation,True,True,False,True,quantised
+184733,AnkitAI/Parable-Granite-4.1-3B-Claude-Fable-5-GGUF,text-generation,True,True,True,True,fine-tune
+184631,cyankiwi/Qwen3.5-27B-AWQ-4bit,image-text-to-text,True,True,False,True,quantised
+184403,lmstudio-community/GLM-4.7-Flash-MLX-8bit,text-generation,True,True,False,True,quantised
+184317,imvladikon/sentence-transformers-alephbert,sentence-similarity,False,False,False,True,no typed relation
+184311,Myric/Laguna-S-2.1-APEX-GGUF,text-generation,True,True,False,True,quantised
+184192,nvidia/Kimi-K2-Thinking-NVFP4,text-generation,True,True,False,True,quantised
+183889,optimum-intel-internal-testing/tiny-random-distilbert,text-classification,False,False,False,True,no typed relation
+183216,Qwen/Qwen3Guard-Gen-0.6B,text-generation,True,True,False,True,fine-tune
+183079,unslothai/vram-24,feature-extraction,False,False,False,True,no typed relation
+182989,nvidia/Nemotron-3-Embed-1B-BF16,sentence-similarity,True,True,False,True,fine-tune
+182825,AnkitAI/Parable-Granite-4.1-8B-Claude-Fable-5-GGUF,text-generation,True,True,True,True,fine-tune
+182334,Jackrong/Qwopus3.6-27B-Coder-MTP-GGUF,image-text-to-text,True,True,True,True,adapter
+182245,LazarusNLP/all-indo-e5-small-v4,sentence-similarity,False,False,True,True,no typed relation
+182159,unsloth/Qwen3-1.7B-GGUF,text-generation,True,True,False,True,quantised
+181599,InternScience/Agents-A1-4B-Q4_K_M-GGUF,text-generation,True,True,False,True,quantised
+180835,omlab/VLX-Seek-1.5-10B,image-text-to-text,True,False,False,True,no typed relation
+179659,Qwen/Qwen2.5-Coder-1.5B-Instruct-GGUF,text-generation,True,True,False,True,quantised
+179523,deepseek-ai/DeepSeek-R1-0528,text-generation,True,False,False,True,no typed relation
+178878,joe32140/ModernBERT-base-msmarco,sentence-similarity,False,True,True,True,fine-tune
+178606,unsloth/Qwen3-VL-8B-Instruct-GGUF,image-text-to-text,True,True,False,True,quantised
+178587,llm-jp/llm-jp-3-150m,text-generation,True,False,False,True,no typed relation
+177616,boboliu/Qwen3-Reranker-4B-W4A16-G128,text-classification,True,True,False,True,quantised
+177484,Qwen/Qwen3-VL-4B-Instruct-GGUF,image-text-to-text,True,True,False,True,quantised
+177306,ornith-ai/Ornith-1.0-397B,text-generation,True,False,False,True,no typed relation
+177179,finiteautomata/bertweet-base-sentiment-analysis,text-classification,False,False,False,True,no typed relation
+176516,microsoft/Phi-3-mini-128k-instruct,text-generation,True,False,False,True,no typed relation
+176355,Zyphra/Zamba2-1.2B-instruct,text-generation,True,True,True,True,fine-tune
+176250,ggml-org/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-GGUF,text-generation,True,True,False,True,quantised
+175914,allegro/herbert-base-cased,feature-extraction,True,False,False,True,no typed relation
+175164,facebook/hubert-base-ls960,feature-extraction,True,False,True,True,no typed relation
+174268,jinaai/jina-embeddings-v5-text-small,feature-extraction,True,True,False,True,fine-tune
+173972,lmstudio-community/GLM-4.7-Flash-MLX-6bit,text-generation,True,True,False,True,quantised
+172447,ornith-ai/Ornith-1.5-35B-A3B-MLX-8bit,text-generation,False,False,False,True,no typed relation
+172338,skt/A.X-K2-NVFP4,text-generation,True,True,True,True,quantised
+172317,moonshotai/Kimi-VL-A3B-Instruct,image-text-to-text,True,True,False,True,fine-tune
+171830,ptouch/phishing-distilbert-cyber207,text-classification,False,False,False,True,no typed relation
+171389,openai-community/openai-gpt,text-generation,True,False,False,True,no typed relation
+171074,Qwen/Qwen2.5-14B-Instruct-GPTQ-Int4,text-generation,True,True,False,True,quantised
+169611,deepseek-ai/DeepSeek-V2-Lite,text-generation,True,False,False,True,no typed relation
+169392,mixedbread-ai/mxbai-embed-2d-large-v1,feature-extraction,True,False,False,True,no typed relation
+168423,Snowflake/snowflake-arctic-embed-m-v1.5,sentence-similarity,True,False,False,True,no typed relation
+168280,optimum-intel-internal-testing/tiny-random-llava,image-text-to-text,False,False,False,True,no typed relation
+168068,abhishekchohan/gemma-3-12b-it-quantized-W4A16,image-text-to-text,True,True,False,True,quantised
+167544,nvidia/Cosmos-Reason2-8B,image-text-to-text,True,True,False,True,fine-tune
+167357,unsloth/GLM-4.7-Flash-GGUF,text-generation,True,True,False,True,quantised
+167089,mistral-experimental/pixtral-12b,image-text-to-text,True,False,False,True,no typed relation
+166826,Qwen/Qwen3.5-27B-FP8,image-text-to-text,True,True,False,True,quantised
+166211,ornith-ai/Ornith-1.5-35B-A3B-MLX-4bit,text-generation,False,False,False,True,no typed relation
+165903,ggml-org/gpt-oss-20b-GGUF,text-generation,True,True,False,True,quantised
+164419,OS-Software/Ternary-Bonsai-2-27B-Uncensored-Heretic-GGUF,text-generation,True,True,False,True,quantised
+164261,bartowski/Qwen_Qwen3.5-27B-GGUF,image-text-to-text,True,True,False,True,quantised
+164208,McGill-NLP/LLM2Vec-Meta-Llama-3-8B-Instruct-mntp,sentence-similarity,True,False,False,True,no typed relation
+163957,christian-phu/bert-finetuned-japanese-sentiment,text-classification,True,False,False,True,no typed relation
+163852,MaziyarPanahi/Qwen3-4B-Instruct-2507-GGUF,text-generation,False,True,False,True,quantised
+163747,ai-sage/GigaChat3.1-Audio-10B-A1.8B,text-generation,True,True,False,True,fine-tune
+163274,Qwen/Qwen3-235B-A22B-Instruct-2507,text-generation,True,False,False,True,no typed relation
+163132,meta-llama/Llama-4-Scout-17B-16E-Instruct,image-text-to-text,True,True,False,True,fine-tune
+162979,microsoft/harrier-oss-v1-270m,feature-extraction,True,False,False,True,no typed relation
+162875,bartowski/Llama-3.2-3B-Instruct-GGUF,text-generation,True,True,False,True,quantised
+162841,google/gemma-2-2b,text-generation,True,False,False,True,no typed relation
+162772,tabularisai/multilingual-sentiment-analysis,text-classification,True,True,True,True,fine-tune
+161256,pfnet/plamo-embedding-1b,sentence-similarity,True,False,False,True,no typed relation
+161053,Qwen/Qwen3-30B-A3B-FP8,text-generation,True,True,False,True,quantised
+160216,thinkingmachines/Inkling-Small-NVFP4,image-text-to-text,True,True,False,True,quantised
+160147,bartowski/Qwen_Qwen3.6-35B-A3B-GGUF,image-text-to-text,True,True,False,True,quantised
+159841,Qwen/Qwen2.5-7B-Instruct-GGUF,text-generation,True,True,False,True,quantised
+159707,QuantTrio/Qwen3-Coder-30B-A3B-Instruct-GPTQ-Int8,text-generation,True,True,False,True,quantised
+159426,hugging-quants/Meta-Llama-3.1-70B-Instruct-AWQ-INT4,text-generation,True,False,False,True,no typed relation
+158551,huihui-ai/Huihui-DeepSeek-V4-Flash-Vision-Exp-abliterated-GGUF,image-text-to-text,True,True,False,True,quantised
+158388,JetBrains/Mellum2-12B-A2.5B-Instruct-GGUF-Q8_0,text-generation,True,True,False,True,quantised
+158348,bartowski/gemma-2-27b-it-GGUF,text-generation,True,True,False,True,quantised
+157772,raxcore-dev/Rax-4.5,image-text-to-text,True,True,False,True,fine-tune
+157742,Qwen/Qwen1.5-MoE-A2.7B,text-generation,True,False,False,True,no typed relation
+157714,deepseek-ai/DeepSeek-R1-Distill-Llama-8B,text-generation,True,False,False,True,no typed relation
+157514,datalab-to/lift,image-text-to-text,True,False,False,True,no typed relation
+157376,orcarouter/Qwen3.8-27B-Uncensored-FP8,image-text-to-text,True,True,False,True,quantised
+157357,Qwen/Qwen1.5-1.8B-Chat,text-generation,True,False,False,True,no typed relation
+157206,nomic-ai/modernbert-embed-base,sentence-similarity,True,True,False,True,fine-tune
+157190,nreimers/TinyBERT_L-4_H-312_v2,feature-extraction,False,False,False,False,no typed relation
+157101,jinaai/jina-embeddings-v2-base-code,feature-extraction,True,False,True,True,no typed relation
+157000,lmstudio-community/gemma-4-26B-A4B-it-MLX-4bit,image-text-to-text,True,True,False,True,quantised
+155625,batiai/Qwen3.6-27B-GGUF,text-generation,True,True,False,True,quantised
+155513,PirateXX/AI-Content-Detector,text-classification,True,False,False,True,no typed relation
+155114,unslothai/vram-96,feature-extraction,False,False,False,True,no typed relation
+155069,google/gemma-3n-E2B-it,image-text-to-text,True,True,False,True,fine-tune
+155013,Zyphra/ZAYA1-VL-8B,image-text-to-text,True,True,False,True,fine-tune
+154583,MaziyarPanahi/Meta-Llama-3-8B-Instruct-GGUF,text-generation,False,True,False,True,quantised
+154564,EleutherAI/pythia-1b,text-generation,True,False,True,True,no typed relation
+154415,LSX-UniWue/LLaMmlein_1B_prerelease,text-generation,True,False,True,True,no typed relation
+154333,bartowski/Llama-3.2-1B-Instruct-GGUF,text-generation,True,True,False,True,quantised
+153716,MaziyarPanahi/Mistral-7B-v0.1-GGUF,text-generation,True,True,False,True,quantised
+153685,nvidia/NVIDIA-Nemotron-3-Ultra-550B-A55B-NVFP4,text-generation,True,False,True,True,no typed relation
+153246,sentence-transformers/multi-qa-MiniLM-L6-dot-v1,sentence-similarity,False,False,False,True,no typed relation
+152576,ibm-granite/granite-embedding-311m-multilingual-r2,feature-extraction,True,False,False,True,no typed relation
+151677,ReadyArt/gemma-4-31B-it-scotoma-2-GGUF,text-generation,True,True,False,True,quantised
+151647,sentence-transformers/msmarco-MiniLM-L12-cos-v5,sentence-similarity,False,False,False,True,no typed relation
+151314,rapid-mlx/Ling-3.0-tiny-MLX-4bit,text-generation,True,True,False,True,quantised
+150560,zai-org/GLM-4.1V-9B-Thinking,image-text-to-text,True,True,False,True,fine-tune
+150540,unsloth/Llama-3.1-8B-Instruct,text-generation,True,True,False,True,fine-tune
+150536,lmstudio-community/gemma-4-26B-A4B-it-MLX-8bit,image-text-to-text,True,True,False,True,quantised
+150093,chatdb/natural-sql-7b,text-generation,True,True,False,True,fine-tune
+149474,bytkim/Qwen3.6-27B-MTP-pi-tune-GGUF,text-generation,True,True,False,True,fine-tune
+149442,HuggingFaceH4/tiny-random-LlamaForCausalLM,text-generation,False,False,False,True,no typed relation
+149311,lmstudio-community/gemma-4-26B-A4B-it-MLX-6bit,image-text-to-text,True,True,False,True,quantised
+149119,unsloth/gemma-4-26B-A4B-it-NVFP4,image-text-to-text,True,True,False,True,quantised
+148829,BAAI/bge-reranker-v2.5-gemma2-lightweight,text-classification,True,False,False,True,no typed relation
+148755,lmstudio-community/gemma-4-26B-A4B-it-MLX-5bit,image-text-to-text,True,True,False,True,quantised
+148548,cyankiwi/Qwen3-VL-30B-A3B-Instruct-AWQ-4bit,image-text-to-text,True,True,False,True,quantised
+148251,ahmedrachid/FinancialBERT-Sentiment-Analysis,text-classification,False,False,True,True,no typed relation
+148107,jinaai/jina-embeddings-v5-text-nano,feature-extraction,True,True,False,True,fine-tune
+148085,bartowski/Qwen_Qwen3.5-9B-GGUF,image-text-to-text,True,True,False,True,quantised
+147921,MaziyarPanahi/Mistral-Small-Instruct-2409-GGUF,text-generation,False,True,False,True,quantised
+147847,EleutherAI/pythia-1.4b,text-generation,True,False,True,True,no typed relation
+147441,facebook/bart-large,feature-extraction,True,False,False,True,no typed relation
+147002,Qwen/Qwen3-1.7B-GGUF,text-generation,True,True,False,True,quantised
+146979,LLMSafety/Qwen2.5-Math-7B-4bit,text-generation,False,False,False,True,no typed relation
+146902,OpenMOSS-Team/MOSS-Audio-Tokenizer-Nano,feature-extraction,True,False,False,True,no typed relation
+146835,ukisai/Swift-1.5-Qwen3.8-Flash-Next-GGUF,image-text-to-text,True,True,True,True,quantised
+146820,ornith-ai/Ornith-1.5-35B-A3B-MLX-6bit,text-generation,False,False,False,True,no typed relation
+146804,facebook/hubert-large-ll60k,feature-extraction,True,False,True,True,no typed relation
+146802,MaziyarPanahi/Mistral-Nemo-Instruct-2407-GGUF,text-generation,False,True,False,True,quantised
+146428,madhurjindal/autonlp-Gibberish-Detector-492513457,text-classification,True,True,True,True,quantised
+146046,ai-forever/ru-en-RoSBERTa,feature-extraction,True,True,False,True,fine-tune
+145391,gmunkhtur/paraphrase-multilingual-minilm-l12-v3-mn,sentence-similarity,False,True,False,True,fine-tune
+144913,Cactus-Compute/needle3,text-generation,True,False,False,True,no typed relation
+144811,ggml-org/gpt-oss-120b-GGUF,text-generation,True,True,False,True,quantised
+144530,unslothai/vram-40,feature-extraction,False,False,False,True,no typed relation
+144345,unsloth/Qwen3-Coder-Next-GGUF,text-generation,True,True,False,True,quantised
+144166,Alibaba-NLP/gte-modernbert-base,sentence-similarity,True,True,False,True,fine-tune
+144058,ai-forever/sbert_large_nlu_ru,feature-extraction,True,False,False,True,no typed relation
+144044,hfmlsoc/ncii-guard-v02,text-classification,False,True,False,True,merged
+144043,MaziyarPanahi/firefunction-v2-GGUF,text-generation,True,True,False,True,quantised
+143152,mlx-community/Qwen3-8B-4bit,text-generation,True,True,False,True,quantised
+142993,unsloth/Qwen3-14B-unsloth-bnb-4bit,text-generation,True,True,False,True,quantised
+142843,mistralai/Mistral-7B-Instruct-v0.1,text-generation,True,True,False,True,fine-tune
+142768,Qwen/Qwen3.5-35B-A3B-Base,image-text-to-text,True,False,False,True,no typed relation
+142475,unsloth/Qwen3-0.6B-GGUF,text-generation,True,True,False,True,quantised
+142386,redis/langcache-embed-v1,sentence-similarity,False,True,False,True,quantised
+142302,nvidia/NV-Embed-v2,feature-extraction,True,False,False,True,no typed relation
+141727,allenai/Olmo-3-1025-7B,text-generation,True,False,True,True,no typed relation
+141319,facebook/opt-350m,text-generation,True,False,False,True,no typed relation
+141261,trl-internal-testing/dummy-GPT2-correct-vocab,text-generation,False,False,False,True,no typed relation
+140974,nvidia/NVIDIA-Nemotron-Parse-v1.1,image-text-to-text,True,False,False,True,no typed relation
+140676,avsolatorio/GIST-all-MiniLM-L6-v2,sentence-similarity,True,False,False,True,no typed relation
+140523,allenai/wildguard,text-generation,True,False,True,True,no typed relation
+140165,MaziyarPanahi/Qwen2-7B-Instruct-GGUF,text-generation,False,True,False,True,quantised
+139969,google/canine-c,feature-extraction,True,False,True,True,no typed relation
+139949,onnx-community/distilbert-multilingual-toxicity-classifier-ONNX,text-classification,True,True,True,True,quantised
+139835,Qwen/Qwen3-VL-4B-Instruct-FP8,image-text-to-text,True,True,False,True,quantised
+139608,trl-internal-testing/tiny-MistralForCausalLM-0.2,text-generation,False,False,False,True,no typed relation
+139058,second-state/All-MiniLM-L6-v2-Embedding-GGUF,feature-extraction,True,True,False,True,quantised
+138935,TIGER-Lab/VLM2Vec-Full,text-generation,True,True,True,True,fine-tune
+138791,MaziyarPanahi/Mistral-7B-Instruct-v0.3-GGUF,text-generation,True,True,False,True,quantised
+137241,RedHatAI/Meta-Llama-3.1-70B-Instruct-FP8,text-generation,True,True,False,True,quantised
+137239,iarfmoose/bert-base-cased-qa-evaluator,text-classification,False,False,False,False,no typed relation
+136888,DavidAU/Qwen3.5-9B-Claude-4.6-HighIQ-INSTRUCT-HERETIC-UNCENSORED,image-text-to-text,True,True,False,True,fine-tune
+136842,MaziyarPanahi/Llama-3.2-1B-Instruct-GGUF,text-generation,False,True,False,True,quantised
+136836,QuantTrio/Qwen3-VL-32B-Instruct-AWQ,image-text-to-text,True,True,False,True,quantised
+136641,MaziyarPanahi/Phi-3.5-mini-instruct-GGUF,text-generation,False,True,False,True,quantised
+136577,LongSafari/hyenadna-medium-450k-seqlen-hf,text-generation,True,False,False,True,no typed relation
+136403,gaunernst/gemma-3-12b-it-int4-awq,image-text-to-text,True,True,False,True,quantised
+136381,MaziyarPanahi/phi-4-GGUF,text-generation,False,True,False,True,quantised
+136255,sentence-transformers/sentence-t5-base,sentence-similarity,True,False,False,True,no typed relation
+136015,MaziyarPanahi/Meta-Llama-3.1-8B-Instruct-GGUF,text-generation,True,True,False,True,quantised
+135983,snunlp/KR-SBERT-V40K-klueNLI-augSTS,sentence-similarity,False,False,False,True,no typed relation
+135902,HuggingFaceTB/SmolVLM2-2.2B-Instruct,image-text-to-text,True,True,True,True,fine-tune
+135622,MaziyarPanahi/Mixtral-8x22B-v0.1-GGUF,text-generation,True,True,False,True,quantised
+135599,MaziyarPanahi/solar-pro-preview-instruct-GGUF,text-generation,False,True,False,True,quantised
+135339,nvidia/Qwen3-8B-NVFP4,text-generation,True,True,False,True,quantised
+135335,HuggingFaceM4/tiny-random-LlamaForCausalLM,text-generation,False,False,False,False,no typed relation
+135274,vectara/hallucination_evaluation_model,text-classification,True,True,False,True,fine-tune
+135238,MaziyarPanahi/gemma-3-4b-it-GGUF,text-generation,False,True,False,True,quantised
+134293,MaziyarPanahi/Llama-3-8B-Instruct-32k-v0.1-GGUF,text-generation,False,True,False,True,no typed relation
+134186,ReliquaryForge/qwen3-4b-base-dapo-v4,text-generation,True,False,False,True,no typed relation
+133783,unsloth/gemma-4-E4B-it-unsloth-bnb-4bit,image-text-to-text,True,True,False,True,quantised
+133666,huihui-ai/Huihui-Qwen3.5-27B-abliterated,image-text-to-text,True,True,False,True,fine-tune
+133314,MaziyarPanahi/Qwen2.5-7B-Instruct-GGUF,text-generation,False,True,False,True,quantised
+133042,StephanAkkerman/FinTwitBERT-sentiment,text-classification,True,True,True,True,fine-tune
+132723,QUASAR-QAT/Qwen3.8-27B-QUASAR-NVFP4,image-text-to-text,True,True,False,True,quantised
+132172,Qdrant/Splade_PP_en_v1,sentence-similarity,True,False,False,True,no typed relation
+132091,nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-NVFP4-DSpark,text-generation,True,True,False,True,quantised
+132076,MaziyarPanahi/QwQ-32B-GGUF,text-generation,False,True,False,True,quantised
+131924,MaziyarPanahi/Mistral-Small-24B-Instruct-2501-GGUF,text-generation,True,True,False,True,quantised
+131866,mlx-community/Kimi-K2.5,text-generation,True,True,False,True,quantised
+131717,j-hartmann/sentiment-roberta-large-english-3-classes,text-classification,False,False,False,True,no typed relation
+131598,MaziyarPanahi/DeepSeek-R1-0528-Qwen3-8B-GGUF,text-generation,False,True,False,True,quantised
+131356,Qwen/Qwen3-VL-2B-Instruct-GGUF,image-text-to-text,True,True,False,True,quantised
+130647,RadixArk/Qwen3.8-27B-DSpark,text-generation,True,True,False,True,fine-tune
+130171,dreamgen/lucid-v1-nemo,text-generation,True,True,False,True,fine-tune
+130168,google/gemma-3-4b-pt,image-text-to-text,True,False,False,True,no typed relation

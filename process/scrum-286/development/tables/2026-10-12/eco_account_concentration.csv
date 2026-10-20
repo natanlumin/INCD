@@ -1,0 +1,17 @@
+platform,top_n_accounts,models,share
+Hugging Face Hub,1,4566,0.0072
+Hugging Face Hub,10,35589,0.0564
+Hugging Face Hub,100,115223,0.1826
+Hugging Face Hub,1000,236223,0.3743
+Hugging Face Hub,10000,406318,0.6438
+Hugging Face Hub,number of accounts,131244,
+ModelScope,1,3670,0.0596
+ModelScope,10,21113,0.3427
+ModelScope,100,39070,0.6343
+ModelScope,1000,54627,0.8868
+ModelScope,number of accounts,5459,
+Kaggle Models,1,82,0.0051
+Kaggle Models,10,558,0.0346
+Kaggle Models,100,2124,0.1317
+Kaggle Models,1000,6501,0.4032
+Kaggle Models,number of accounts,8719,

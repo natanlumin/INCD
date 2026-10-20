@@ -1,0 +1,53 @@
+platform,year,task,models
+Hugging Face Hub,2022,feature-extraction,2240
+Hugging Face Hub,2022,image-text-to-text,229
+Hugging Face Hub,2022,sentence-similarity,1095
+Hugging Face Hub,2022,text-classification,12526
+Hugging Face Hub,2022,text-generation,8791
+Hugging Face Hub,2023,feature-extraction,3162
+Hugging Face Hub,2023,image-text-to-text,1578
+Hugging Face Hub,2023,sentence-similarity,1631
+Hugging Face Hub,2023,text-classification,29991
+Hugging Face Hub,2023,text-generation,32211
+Hugging Face Hub,2024,feature-extraction,4126
+Hugging Face Hub,2024,image-text-to-text,4206
+Hugging Face Hub,2024,sentence-similarity,4645
+Hugging Face Hub,2024,text-classification,32807
+Hugging Face Hub,2024,text-generation,114278
+Hugging Face Hub,2025,feature-extraction,5553
+Hugging Face Hub,2025,image-text-to-text,10922
+Hugging Face Hub,2025,sentence-similarity,7061
+Hugging Face Hub,2025,text-classification,31029
+Hugging Face Hub,2025,text-generation,138205
+Hugging Face Hub,2026,feature-extraction,6456
+Hugging Face Hub,2026,image-text-to-text,25208
+Hugging Face Hub,2026,sentence-similarity,5980
+Hugging Face Hub,2026,text-classification,17799
+Hugging Face Hub,2026,text-generation,129400
+Kaggle Models,2023,all,139
+Kaggle Models,2024,all,5872
+Kaggle Models,2025,all,97
+Kaggle Models,2026,all,10015
+ModelScope,2022,feature-extraction,1
+ModelScope,2022,sentence-similarity,13
+ModelScope,2022,text-classification,23
+ModelScope,2022,text-generation,31
+ModelScope,2023,feature-extraction,4
+ModelScope,2023,sentence-similarity,38
+ModelScope,2023,text-classification,34
+ModelScope,2023,text-generation,586
+ModelScope,2024,feature-extraction,329
+ModelScope,2024,image-text-to-text,518
+ModelScope,2024,sentence-similarity,266
+ModelScope,2024,text-classification,602
+ModelScope,2024,text-generation,7867
+ModelScope,2025,feature-extraction,639
+ModelScope,2025,image-text-to-text,3041
+ModelScope,2025,sentence-similarity,314
+ModelScope,2025,text-classification,1141
+ModelScope,2025,text-generation,25447
+ModelScope,2026,feature-extraction,300
+ModelScope,2026,image-text-to-text,5061
+ModelScope,2026,sentence-similarity,272
+ModelScope,2026,text-classification,607
+ModelScope,2026,text-generation,14466
