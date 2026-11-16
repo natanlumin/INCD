@@ -307,9 +307,10 @@ exists for an organisation that holds the file (SCRUM-281) and for one that hold
 | D4 robustness | discoverable | testable, outputs and internals | organisation | yes | outputs only | behavioural; dynamic | not rated: tested |
 | D5 latent contamination | discoverable | testable, outputs and internals | organisation | yes | outputs only | behavioural; dynamic | not rated: tested |
 
-Read down the strength column: the only strong evidence on the attestable side is the account that uploaded
-and a valid signature, and both say who published and that the files are unchanged. Nothing on the attestable
-side says what the model does. Read across the by-proxy column: an organisation that holds only a key keeps
+Two readings of Table 3 follow. Down the strength column: the only strong evidence on the attestable side is
+the account that uploaded the files, which says who uploaded them and when, and a valid signature, which says
+who published them and that they are unchanged since. Neither, and nothing else on the attestable side, says
+what the model does. Down the by-proxy column: an organisation that holds only a key keeps
 the declared statements and black-box behaviour, and loses every guarantee, every signature and every test of
 internals.
 
