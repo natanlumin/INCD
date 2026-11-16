@@ -111,7 +111,7 @@ edit of its numbers, is treated with fine-tune and LoRA tampering, because it is
 third route.
 
 **Where the frameworks name them.** Each threat is checked against three frameworks: the OWASP Top 10 for
-LLM Applications [TH-01]; MITRE ATLAS [TH-02]; and NIST AI 100-2, the adversarial machine learning taxonomy [TH-03]. The last column of
+LLM Applications [TH-01]; MITRE ATLAS [TH-02]; and NIST AI 100-2, the adversarial machine learning taxonomy (NIST AI 100-2) [TH-03]. The last column of
 Table 2 gives the entries or sections that name each threat, read from their own text. Ten of the thirteen
 are named by all three. Quantisation-induced drift and quantisation-triggered backdoors are named by NIST
 alone, in a closing discussion of quantised models rather than as attack classes of its taxonomy; no OWASP
@@ -265,7 +265,7 @@ Every entry has the same shape, so that the threats can be compared:
 embedding and generative model, with the image-and-text qualifier, against pickle checkpoint, safetensors,
 GGUF and ONNX, and the file kinds quantised model, adapter and merged model (SCRUM-281). The framework
 entries are those of the OWASP Top 10 for LLM Applications, MITRE ATLAS and NIST AI 100-2, in the editions
-recorded in the source log [TH-01, TH-02, TH-03].
+recorded in the source log (NIST AI 100-2) [TH-01, TH-02, TH-03].
 
 ## Part 2. Model-integrity threats
 
@@ -370,7 +370,7 @@ only what it sends, and a trigger is chosen so that ordinary inputs do not conta
   year is 2023 and exploitable code when it says 2024 kept the behaviour through supervised fine-tuning,
   reinforcement learning and adversarial training; adversarial training taught the models to recognise their
   trigger better, and persistence was strongest in the largest models (Hubinger et al. 2024, preprint)
-  [TH-11].
+  (Hubinger et al. 2024, preprint) [TH-11].
 - A search can find a trigger in a classifier. A scanner that inverts the words most likely to form a trigger,
   given only the model and a few benign samples, detected backdoors in 3,839 language classifiers of seven
   transformer structures, BERT and GPT among them, across 17 attack types, with over 0.9 detection accuracy
@@ -391,7 +391,7 @@ only what it sends, and a trigger is chosen so that ordinary inputs do not conta
 - A backdoor that arises without anyone planting it is theoretical. The persistent backdoors above were built
   deliberately, as studies of what such behaviour would do (Hubinger et al. 2024, preprint) [TH-11].
 - A method that finds an unknown trigger in a generative model reliably is not established: the search that
-  works on classifiers [TH-13] has no counterpart of that strength for generative models in the cited sources
+  works on classifiers (Liu et al., IEEE S&P 2022) [TH-13] has no counterpart of that strength for generative models in the cited sources
   (Yan et al., EMNLP 2025; Maloyan et al. 2024, preprint) [TH-12, TH-14].
 
 Organisation exposed: both; by proxy the organisation holds only black-box behaviour, e1.9, and a trigger it
@@ -407,6 +407,411 @@ taxonomy records backdoors in transformer classifiers for sentiment and toxic-co
 Framework: OWASP LLM04:2025 Data and Model Poisoning [TH-01]; MITRE ATLAS AML.T0018.000 Poison AI Model, under
 AML.T0018 Manipulate AI Model, and AML.T0020 Training Data Poisoning for the data route [TH-02].
 
+### T11. Fine-tune and LoRA tampering
+
+*Enters at: S1, through a third party that published a fine-tuned, adapted or abliterated copy, first
+answerable at Q1.6 on e1.9 and e1.10; or S2, through the organisation's own fine-tune or adapter, at Q2.3 on
+e2.5 against e1.9 and on e2.4 (SCRUM-284). Introduced by whoever changed the model after its producer
+(SCRUM-281).*
+
+A published model can be changed by anyone who holds its file. Three routes change it: further training on
+new examples, a fine-tune; a small adapter (SCRUM-281) loaded beside the model, of which LoRA is the common
+kind; and a direct edit of the numbers. The change can remove the safeguard (SCRUM-281), plant a behaviour,
+or both. The abliterated model (SCRUM-281) is the direct-edit route made public: a copy whose refusal was
+located and removed, then published. The adapter is also a file kind with its own delivery threat, the
+malicious adapter of the supply-chain document (Part 2.2, T6); this entry concerns what the adapter does to
+behaviour, not the code it may carry.
+
+**Demonstrated.**
+
+- Fine-tuning removes the safeguard cheaply, and can do so without intent. Ten harmful examples, submitted
+  through a production fine-tuning service, removed the safety alignment of the served model, and fine-tuning
+  on benign data also degraded it (Qi et al., ICLR 2024) [TH-15].
+- An adapter removes it on the largest open models. A LoRA adapter brought the refusal rate of a 70-billion
+  parameter chat model to about one per cent on two refusal benchmarks, on one GPU, keeping its other
+  capabilities (Lermen et al. 2023, preprint) [TH-16].
+- A direct edit removes it without training. Refusal in thirteen open chat models up to 72 billion parameters
+  is carried by a single direction inside the model, and a rank-one edit of the numbers that removes the
+  direction removes refusal (Arditi et al., NeurIPS 2024) [TH-17].
+- Abliterated copies are published. The primary model repository (SCRUM-281) lists repositories that name
+  themselves abliterated, under the platform's own search (Hugging Face Hub search) [TH-20].
+- Adapters can carry a backdoor that survives sharing. A backdoored LoRA adapter kept its behaviour when
+  combined with other adapters (Liu et al. 2024, preprint) [TH-18]; trojaned adapters made a model emit the
+  attacker's content or misuse its tools, running malware and writing spear-phishing, and none of three
+  defences tested removed the threat fully (Dong et al., NDSS 2025) [TH-19].
+
+**Theoretical or not established.**
+
+- How often published fine-tunes and adapters carry a planted behaviour, as opposed to a removed safeguard,
+  is not established: no measurement was found.
+- Whether a parent's assessment says anything about a derivative is not established in either direction; the
+  glossary therefore treats every derivative as a model of its own (SCRUM-281).
+
+Organisation exposed: both; by proxy the serving provider (SCRUM-281) may serve a fine-tune or adapter the
+organisation cannot inspect, and the organisation holds only behaviour, e1.9. Level: model level; the change
+is in the numbers or in the adapter loaded with them. Status: observed in deployment, for safeguard removal
+through a production fine-tuning service (Qi et al., ICLR 2024) [TH-15] and for published abliterated copies (Hugging Face Hub search) [TH-20]; demonstrated in
+research for planted adapter behaviour (Liu et al. 2024, preprint; Dong et al., NDSS 2025) [TH-18, TH-19]. Label: established (Qi et al., ICLR 2024; Arditi et al., NeurIPS 2024; Dong et al., NDSS 2025; Hugging Face Hub search) [TH-15, TH-17, TH-19, TH-20]; the
+adapter results on the largest models and on combined adapters emerging (Lermen et al. 2023, preprint; Liu et al. 2024, preprint) [TH-16, TH-18]. Applies to: the
+generative model row, instruct and chat models chiefly, since they carry the safeguard (SCRUM-281); the
+adapter file kind; every artefact format column; the classification and embedding rows not established in the
+cited sources. Framework: as Table 2.
+
+### T12. Quantisation-induced drift
+
+*Enters at: S1, through a third party that published a quantised copy, first answerable at Q1.6 on e1.9; or
+S2, through the organisation's own quantisation, at Q2.3 and Q2.4 on e2.5 against e1.9 (SCRUM-284).
+Introduced by whoever quantised the model, without intent.*
+
+A quantised model (SCRUM-281) stores the same model with less precise numbers, so that it runs on less
+memory. Its behaviour is close to its parent's and not identical, and nothing guarantees that the safeguard
+moves with the rest. Drift is the unintended difference: no one planted it, and no one checked it.
+
+**Demonstrated.**
+
+- The official taxonomy records the effect: quantised models inherit the weaknesses of the original and add
+  their own, since the loss of precision amplifies errors and weakens robustness to adversarial inputs, and
+  the effect on generative models has been studied less than on predictive ones (NIST AI 100-2, section 4.2.4)
+  (NIST AI 100-2) [TH-03].
+- On open generative models, fine-tuning raised jailbreak success while quantisation had mixed effects, in
+  either direction depending on the model and the method (Kumar et al. 2024, preprint) [TH-21].
+
+**Theoretical or not established.**
+
+- The direction and size of the drift for a given model and quantisation method cannot be predicted from the
+  parent: not established. It is measured per copy or not known.
+- That drift has caused harm in a deployment is not established.
+
+Organisation exposed: both; by proxy the serving provider chooses the precision it serves, and the
+organisation may not know it. Level: model level. Status: demonstrated in research. Label: established for
+the effect stated by the taxonomy (NIST AI 100-2) [TH-03]; its direction on generative models emerging (Kumar et al. 2024, preprint) [TH-21]. Applies to:
+the quantised model file kind, in every model type row; the GGUF column chiefly, where quantisation is the
+normal state of the file (SCRUM-280, Table 6). Framework: as Table 2.
+
+### T13. Quantisation-triggered backdoors
+
+*Enters at: S1, through the producer or a third party that published the full-precision model, first
+answerable once a quantised copy exists: at Q2.3 and Q2.4 on e2.5 against e1.9 when the organisation
+quantises at S2, or at Q1.6 when it selects a quantised copy (SCRUM-284). Introduced by whoever built the
+model.*
+
+A model can be built to behave well at full precision and badly once it is quantised. The behaviour is
+planted in the rounding: the full-precision numbers pass every test, and the quantised copy, which is what is
+deployed on smaller hardware, does what the attacker chose. This is T10 with quantisation as its trigger, and
+T12 made deliberate.
+
+**Demonstrated.**
+
+- On generative models, a full-precision model that appeared benign became malicious once quantised with
+  widely used methods, producing insecure code, injecting content or over-refusing (Egashira et al., NeurIPS
+  2024) [TH-22]; the official taxonomy records the result (NIST AI 100-2, section 4.2.4) [TH-03].
+- The same holds for the quantisation types of the GGUF format: across three generative models and nine GGUF
+  types, the quantised copies produced insecure code in 88.7 per cent and injected content in 85.0 per cent of
+  cases (Egashira et al., ICML 2025) [TH-23].
+- On classifiers, standard post-training quantisation in commercial deployment frameworks activated a dormant
+  backdoor with close to complete success (Ma et al. 2021, preprint) [TH-24], and training aware of
+  quantisation made quantisation cause accuracy loss, targeted errors or a backdoor (Hong et al., NeurIPS
+  2021) [TH-25].
+
+**Theoretical or not established.**
+
+- A published model carrying a quantisation-triggered backdoor is not established.
+- A test of the full-precision model alone cannot find it; it is found, if at all, by testing the quantised
+  copy against its parent, the comparison of 1.5.
+
+Organisation exposed: both; by proxy only behaviour exists, and the precision served is the serving
+provider's choice. Level: model level. Status: demonstrated in research. Label: established (NIST AI 100-2; Egashira et al., NeurIPS 2024;
+Egashira et al., ICML 2025; Hong et al., NeurIPS 2021) [TH-03, TH-22, TH-23, TH-25]; the commercial-framework result emerging (Ma et al. 2021, preprint) [TH-24]. Applies to: the quantised model file kind;
+the generative model row (Egashira et al., NeurIPS 2024; Egashira et al., ICML 2025) [TH-22, TH-23] and the classification row (Ma et al. 2021, preprint; Hong et al., NeurIPS 2021) [TH-24, TH-25]; the GGUF column
+demonstrated (Egashira et al., ICML 2025) [TH-23], other columns through the quantisation method rather than the container. Framework: as
+Table 2.
+
+### T14. Merge contamination
+
+*Enters at: S1, through a third party that published a merged model, first answerable at Q1.6 on e1.9; or
+S2, when the organisation merges models itself, at Q2.2 and Q2.3 on e2.5 against each parent's e1.9
+(SCRUM-284). Introduced by whoever published one of the parents.*
+
+A merged model (SCRUM-281) combines the numbers of two or more models. Each parent contributes what it
+carries, so a parent with a backdoor or an unwanted behaviour can pass it into the merge, and the merged model
+has no parent's assessment.
+
+**Demonstrated.**
+
+- One backdoored contributing model compromised the whole merged model, whatever the merging coefficients
+  (Zhang et al., ACM CCS 2024) [TH-26].
+- On generative models, a malicious model uploaded for others to merge passed its backdoor to the merged
+  model, which kept its usefulness, and the backdoor survived paraphrasing defences and fine-pruning (Yuan et
+  al., ACL 2025) [TH-27].
+- A model built to be merged raised the leakage of personal data and of training-set membership in the merged
+  result (Guo et al. 2025, preprint) [TH-28].
+- The industry framework records merging as a route around review, merged models being common and highly
+  ranked on public leaderboards (OWASP LLM03:2025) [TH-01].
+
+**Theoretical or not established.**
+
+- That a merged model inherits a parent's contamination of evaluation data, so that its benchmark scores
+  overstate it, is theoretical: no research or official source establishes it.
+- A published merged model carrying a planted backdoor is not established.
+
+Organisation exposed: both. Level: model level. Status: demonstrated in research for inherited backdoors and
+leakage; theoretical for inherited evaluation contamination. Label: established (Zhang et al., ACM CCS 2024; Yuan et al., ACL 2025) [TH-01, TH-26, TH-27];
+leakage emerging (Guo et al. 2025, preprint) [TH-28]. Applies to: the merged model file kind; the generative model row (Yuan et al., ACL 2025; Guo et al. 2025, preprint) [TH-27, TH-28];
+other rows not established in the cited sources; every artefact format column. Framework: as Table 2.
+
+## Part 3. Inference-time and runtime threats
+
+Seven threats act on a model in service through what reaches its input or what leaves its output. Each is
+defined in Table 2 (section 1.2) and treated below in that order, T15 to T21. All seven enter at S4, with
+their exposure fixed at S3 (1.4). Each has a part that goes with the file (SCRUM-281), the model's susceptibility, and a
+part that stays with the deployment, what the deployment lets the attacker reach; each entry names both.
+
+### T15. Direct prompt injection
+
+*Enters at: S4, through the person writing the input, first answerable at Q4.2 on e4.3; exposure fixed at S3,
+Q3.2, by the instructions and data the deployment places in front of the model (SCRUM-284).*
+
+A deployment gives the model instructions the user does not see: a system prompt, a role, rules. Direct
+injection is an input that overrides them, so that the model follows the user instead of the deployment, or
+reveals what the deployment put in front of it.
+
+**Demonstrated.**
+
+- Inputs that hijack the task and leak the hidden instructions worked against a production model's interface
+  (Perez and Ribeiro, NeurIPS ML Safety Workshop 2022) [TH-29].
+- Five attack kinds and ten defences evaluated on ten models showed the attacks succeed across models and no
+  defence stopped them fully (Liu et al., USENIX Security 2024) [TH-30].
+- Records of deployment: a service's prompt injection let a user take over its logic and leak its hard-coded
+  system prompt (CVE-2024-5184) [TH-31]; in an application framework, a prompt injection executed arbitrary
+  code through the component that ran the model's output (CVE-2023-29374) [TH-32].
+- Training the model to rank the deployment's instructions above the user's made it more robust, with some
+  over-refusal (Wallace et al. 2024, preprint) [TH-33]: the susceptibility is a property of the model.
+
+**Theoretical or not established.**
+
+- A model that cannot be directly injected is not established; the cited defences reduce the rate only.
+
+Organisation exposed: both. Level: model level for the susceptibility (Wallace et al. 2024, preprint) [TH-33]; system level for the
+consequence, which is whatever the deployment's instructions protect and its output can reach (CVE-2024-5184; CVE-2023-29374) [TH-31, TH-32].
+Status: observed in deployment. Label: established. Applies to: the generative model row, instruct and chat
+models; every artefact format column. Framework: as Table 2.
+
+### T16. Indirect prompt injection
+
+*Enters at: S4, through content the model reads, a page, a document, an e-mail, a tool's output, first
+answerable at Q4.2 on e4.3; exposure fixed at S3, Q3.2, by the retrieval and tools that bring content to the
+model (SCRUM-284).*
+
+When the model reads content the attacker wrote, instructions inside that content are followed as if they
+came from the user. The attacker never talks to the model; they place text where the model will read it.
+
+**Demonstrated.**
+
+- Instructions planted in content read by production assistants, a search-integrated chat and code
+  completion, led to data theft and to injections that spread themselves (Greshake et al., ACM AISec 2023)
+  (Greshake et al., ACM AISec 2023) [TH-34].
+- Records of deployment: an injection in an office assistant disclosed information over a network
+  (CVE-2025-32711) [TH-35]; in a coding agent, an indirect injection wrote the agent's tool configuration and
+  ran code without the user's approval (CVE-2025-54135) [TH-36]; in another coding assistant, a web-fetching
+  tool reached files outside the workspace, so that an indirect injection could exfiltrate them
+  (CVE-2025-66389) [TH-37].
+- The official taxonomy states that current mitigations do not fully protect against indirect injection, and
+  advises designing the system on the assumption that it will happen (NIST AI 100-2, section 3.4) [TH-03].
+
+**Theoretical or not established.**
+
+- A model that reliably separates instructions from the data it reads is not established.
+
+Organisation exposed: both. Level: model level for the susceptibility, which no cited model is free of;
+system level for the exposure and the consequence, which retrieval, tools and permissions decide. Status:
+observed in deployment. Label: established; that the deployment records, on hosted assistants, describe a
+susceptibility shared by open-source models (SCRUM-281) is an extension, emerging. Applies to: the generative
+model row, with the image-and-text qualifier where content arrives as images; every artefact format column.
+Framework: as Table 2.
+
+### T17. Jailbreaks
+
+*Enters at: S4, through the person writing the input, first answerable at Q4.2 on e4.3; exposure fixed at S3,
+Q3.2, by the serving settings and guards (SCRUM-284). For an open-source model the attacker can also hold the
+file, and prepare the jailbreak offline.*
+
+A jailbreak is an input that makes the model produce what its safeguard (SCRUM-281) was trained to refuse. It differs
+from T11 in that nothing in the model changes: the same file, given another input, refuses again.
+
+**Demonstrated.**
+
+- Safety training fails in two systematic ways, a request that sets the model's goals against each other and
+  one phrased where the training did not reach, and attacks built on them succeeded on production models
+  (Wei et al., NeurIPS 2023) [TH-38].
+- Suffixes optimised on open models transferred to production services (Zou et al. 2023, preprint) [TH-39];
+  hundreds of examples placed in a long input jailbroke widely used models, with success growing as a power
+  law of their number (Anil et al., NeurIPS 2024) [TH-40]; a template with random search reached complete
+  success on open and production models (Andriushchenko et al., ICLR 2025) [TH-41].
+- On open models, changing only the generation settings raised the success rate from near zero to over 95 per
+  cent on eleven models (Huang et al., ICLR 2024) [TH-42]; with the file, the refusal direction itself can be
+  removed at inference (Arditi et al., NeurIPS 2024) [TH-17].
+
+**Theoretical or not established.**
+
+- A safeguard that resists all jailbreaks is not established; every cited defence is broken by a later
+  attack in the cited work.
+
+Organisation exposed: both; in possession (SCRUM-281) the organisation also sets the generation settings that one route
+exploits (Huang et al., ICLR 2024) [TH-42]. Level: model level, since the safeguard is in the numbers; the generation-settings route
+is system level, set by the serving configuration. Status: observed in deployment, through research on
+production services (Wei et al., NeurIPS 2023; Andriushchenko et al., ICLR 2025) [TH-38, TH-41]. Label: established; transfer emerging (Zou et al. 2023, preprint) [TH-39]. Applies to: the generative
+model row, instruct and chat models; every artefact format column. Framework: as Table 2.
+
+### T18. Model extraction
+
+*Enters at: S4, through whoever can query the endpoint, first answerable at Q4.4 on e4.5, the access record;
+exposure fixed at S3, Q3.4, by who can reach the model and what its outputs expose (SCRUM-284).*
+
+Extraction reconstructs a model's parameters or behaviour from its outputs. An open-source model is already
+public, so extraction matters for what the organisation adds: a model it fine-tuned, adapted or merged at S2,
+served to others, is its own, and its outputs can rebuild it.
+
+**Demonstrated.**
+
+- Logistic regressions, neural networks and decision trees were extracted almost exactly through the
+  prediction interfaces of production machine-learning services (Tramèr et al., USENIX Security 2016)
+  (Tramèr et al., USENIX Security 2016) [TH-43].
+- Part of production language models, the final projection layer and the hidden size, was recovered through
+  their public interface at low cost (Carlini et al., ICML 2024) [TH-44].
+
+**Theoretical or not established.**
+
+- Full extraction of a large generative model's parameters through its interface is not established; the
+  cited work recovers one layer.
+
+Organisation exposed: by proxy (SCRUM-281) the serving provider (SCRUM-281) answers for the endpoint, never for the model, and the
+organisation that serves its own adjusted model is the party exposed. Level: system level; what can be
+extracted is decided by what the endpoint returns and to whom. Status: observed in deployment, through
+research on production services. Label: established. Applies to: every model type row, classification first
+(Tramèr et al., USENIX Security 2016) [TH-43], generative (Carlini et al., ICML 2024) [TH-44]; artefact formats do not apply, since the attack needs only outputs. Framework: as
+Table 2.
+
+### T19. Training-data extraction
+
+*Enters at: S4, through whoever can query the model, first answerable at Q4.2 on e4.3; exposure fixed at S2,
+when the organisation trains or fine-tunes on its own data, and at S3, Q3.4 (SCRUM-284).*
+
+A model can return data it was trained on, verbatim, or that data can be reconstructed from its outputs;
+inversion is the reconstruction case. For an open-source model the producer's data is at stake; for the
+organisation's own fine-tune, its own data is.
+
+**Demonstrated.**
+
+- Hundreds of verbatim training sequences, personal data among them, were extracted from a public generative
+  model (Carlini et al., USENIX Security 2021) [TH-45].
+- A production chat model was made to emit training data at about 150 times its normal rate, and thousands of
+  examples were recovered (Nasr et al., ICLR 2025) [TH-46].
+- Inversion reconstructed recognisable faces from a name and access to a face classifier's confidence values
+  (Fredrikson et al., ACM CCS 2015) [TH-47]; from text embeddings, 92 per cent of 32-token inputs were
+  recovered exactly, full names from clinical notes among them (Morris et al., EMNLP 2023) [TH-48].
+
+**Theoretical or not established.**
+
+- Which records of a given model can be extracted cannot be predicted from the data alone: not established.
+
+Organisation exposed: both. Level: model level for memorisation, which is in the numbers; system level for
+exposure, which the outputs returned and the access granted decide, embeddings stored and served included.
+Status: observed in deployment, through research on a production service (Nasr et al., ICLR 2025) [TH-46]. Label: established.
+Applies to: the generative model row (Carlini et al., USENIX Security 2021; Nasr et al., ICLR 2025) [TH-45, TH-46], the classification row (Fredrikson et al., ACM CCS 2015) [TH-47] and the embedding row
+(Morris et al., EMNLP 2023) [TH-48]; every artefact format column. Framework: as Table 2.
+
+### T20. Membership inference
+
+*Enters at: S4, through whoever can query the model, first answerable at Q4.2 on e4.3; exposure fixed at S2,
+by the data trained on, and at S3, Q3.4 and the outputs the endpoint returns (SCRUM-284).*
+
+Membership inference decides from a model's outputs whether a given record was in its training data. It
+reveals the fact of inclusion, a patient in a clinical dataset for example, without extracting the record.
+
+**Demonstrated.**
+
+- Shadow models trained to imitate the target inferred membership against classifiers built on production
+  machine-learning services, a hospital dataset among them (Shokri et al., IEEE S&P 2017) [TH-49].
+- On generative models trained on large public corpora, membership inference barely beat random guessing,
+  and apparent successes came from differences between the member and non-member data rather than from
+  membership (Duan et al., COLM 2024) [TH-50].
+
+**Theoretical or not established.**
+
+- Reliable membership inference against a large pre-trained generative model is not established (Duan et al., COLM 2024) [TH-50].
+  Whether it holds for a model fine-tuned on a small dataset is not established in the cited sources.
+
+Organisation exposed: both. Level: model level for what the numbers retain; system level for what the
+outputs expose, such as confidence values. Status: observed in deployment on classifiers, through research
+on production services (Shokri et al., IEEE S&P 2017) [TH-49]; not established on large generative models (Duan et al., COLM 2024) [TH-50]. Label: established.
+Applies to: the classification row (Shokri et al., IEEE S&P 2017) [TH-49]; the generative row with the limit above (Duan et al., COLM 2024) [TH-50]; every artefact
+format column. Framework: as Table 2.
+
+### T21. Agentic and tool-use abuse
+
+*Enters at: S4, through an input or content that reaches an agent, first answerable at Q4.2 on e4.3, the
+inputs and the actions returned; exposure fixed at S3, Q3.2 and Q3.4, by the tools, permissions and autonomy
+the deployment grants (SCRUM-284).*
+
+An agent is a deployment in which the model calls tools, browses, runs code or acts on the organisation's
+behalf. Agentic abuse makes it take an action no one authorised. It is usually reached through T15 or T16,
+and its consequence is whatever the tools allow.
+
+**Demonstrated.**
+
+- In a benchmark of 97 tasks and 629 security cases, injected content made agents take attacker-chosen
+  actions in a share of cases even against the best agents tested (Debenedetti et al., NeurIPS 2024) [TH-51];
+  across 30 agents, a tool-integrated agent built on a leading model was attacked successfully in about a
+  quarter of cases, and in about half with a reinforcing prompt (Zhan et al., Findings of ACL 2024) [TH-52].
+- Trojaned adapters made an agent run malware and send spear-phishing (Dong et al., NDSS 2025) [TH-19]: the
+  susceptibility can be planted in the model.
+- Records of deployment: an indirect injection made a coding agent change its own tool configuration and run
+  code without approval (CVE-2025-54135) [TH-36]; a web-fetching tool exposed files to exfiltration
+  (CVE-2025-66389) [TH-37].
+
+**Theoretical or not established.**
+
+- An agent design that prevents unauthorised actions without limiting its tools is not established; the
+  official taxonomy treats agents as exposed to every attack on the model plus those on their tools (NIST AI
+  100-2, section 3.5) [TH-03].
+
+Organisation exposed: both; by proxy the serving provider answers for its endpoint, and the organisation for
+the tools it connects. Level: system level, decided by the tools, permissions and autonomy granted; model
+level where the behaviour is planted (Dong et al., NDSS 2025) [TH-19]. Status: observed in deployment. Label: established. Applies to:
+the generative model row, instruct and chat models; every artefact format column. Framework: as Table 2.
+
+## Part 4. The boundary, applied
+
+Table 4 applies the test of 1.5 to each threat: the part that goes with the file (SCRUM-281), which examination before
+adoption can reveal and an acceptance criterion can require of the model, and the part that stays with the
+deployment, which only observation in service sees and only a deployment can be required to meet. The
+serving-side routes of the supply-chain document, plugins, custom operators and the compile cache
+(Part 2.3, T8), sit wholly on the system side and are not repeated here.
+
+**Table 4. Each threat on the boundary**
+
+| Threat | Model level: goes with the file | System level: stays with the deployment | Revealed before adoption by | Seen in service by |
+|---|---|---|---|---|
+| T9 training-data poisoning | the learned behaviour | none | behaviour and internals, Q1.6, Q2.2 | outputs, Q4.2 |
+| T10 backdoors and trojan triggers | the backdoor | none | trigger search, against the parent where one exists, Q1.6, Q2.2 | the trigger arriving, Q4.2 |
+| T11 fine-tune and LoRA tampering | the change, and the adapter loaded with it | which fine-tune or adapter the server loads | comparison with the parent, Q1.6, Q2.3 | outputs against deployment, Q4.3 |
+| T12 quantisation-induced drift | the drift | which precision is served | comparison with the parent, Q2.3, Q2.4 | outputs against deployment, Q4.3 |
+| T13 quantisation-triggered backdoors | the planted rounding behaviour | which precision is served | comparison of the quantised copy with full precision, Q2.3 | outputs, Q4.2 |
+| T14 merge contamination | the inherited behaviour | none | comparison with each parent, Q2.2, Q2.3 | outputs, Q4.2 |
+| T15 direct prompt injection | the susceptibility | what the deployment's instructions protect and its output reaches | behaviour, Q1.6 | inputs and outputs, Q4.2 |
+| T16 indirect prompt injection | the susceptibility | retrieval, tools and permissions | behaviour, Q1.6 | content arriving, Q4.2 |
+| T17 jailbreaks | the safeguard's resistance | generation settings and guards | behaviour and internals, Q1.6 | inputs and outputs, Q4.2 |
+| T18 model extraction | none | what the endpoint returns and to whom | none | access record, Q4.4 |
+| T19 training-data extraction | memorisation | outputs returned, access granted | behaviour, Q1.6, Q2.3 | outputs, Q4.2 |
+| T20 membership inference | what the numbers retain | outputs and confidence values exposed | behaviour, Q2.3 | outputs, Q4.2 |
+| T21 agentic and tool-use abuse | the susceptibility, and a planted behaviour | tools, permissions, autonomy | behaviour, Q1.6 | actions returned, Q4.2 |
+
+Three readings follow. Six threats are wholly or mainly model level, T9 to T14, and can be required of the
+model before it is selected or after it is adjusted. One, model extraction, is wholly system level. The other
+six are split: the model's susceptibility can be tested before adoption, and what it leads to is decided by
+the deployment, so for them a criterion on the model and a criterion on the deployment are both needed.
+
+
 ## Part 5. Register
 
 One row per threat, in the column order of the supply-chain document's register (Part 5, Table 6), with the stage tag and the status
@@ -421,31 +826,49 @@ framework editions and their verification as in the source log, TH-01 to TH-03)
 |---|---|---|---|---|---|---|---|---|---|---|
 | T9 training-data poisoning | model-integrity | S1 Q1.6; S2 Q2.2 | model | both; by proxy black-box only | classification and generative rows, image-and-text qualifier; embedding not established; every format | demonstrated in research; in deployment not established | established; constant count emerging | LLM04:2025; AML.T0020; NIST 2.3, 3.2.1 | TH-03 to TH-07 | |
 | T10 backdoors and trojan triggers | model-integrity | S1 Q1.6; S2 Q2.2 | model | both; by proxy black-box only, trigger unknown | classification and generative rows; embedding not established; every format | demonstrated in research; in deployment not established | established; persistence and generative trigger recovery emerging | LLM04:2025, LLM03:2025; AML.T0018, AML.T0018.000, AML.T0020; NIST 2.3.3, 3.2.2 | TH-03, TH-05, TH-08 to TH-14, SC-17 | |
+| T11 fine-tune and LoRA tampering | model-integrity | S1 Q1.6; S2 Q2.3 | model | both; by proxy black-box only | generative row, instruct and chat; adapter file kind; every format | observed in deployment for safeguard removal; demonstrated in research for planted adapter behaviour | established; largest-model and combined-adapter results emerging | LLM03:2025, LLM04:2025; AML.T0018.000, AML.T0054; NIST 3.1.3, 2.3.4 | TH-15 to TH-20 | |
+| T12 quantisation-induced drift | model-integrity | S1 Q1.6; S2 Q2.3, Q2.4 | model | both; by proxy precision unknown | quantised model file kind, every row; GGUF chiefly | demonstrated in research | established for the effect; direction emerging | none; none; NIST 4.2.4 | TH-03, TH-21 | |
+| T13 quantisation-triggered backdoors | model-integrity | S1, answerable at S2 Q2.3 or S1 Q1.6 on a quantised copy | model | both; by proxy black-box only | quantised model file kind; generative and classification rows; GGUF demonstrated | demonstrated in research | established; commercial-framework result emerging | none; none; NIST 4.2.4 | TH-03, TH-22 to TH-25 | |
+| T14 merge contamination | model-integrity | S1 Q1.6; S2 Q2.2, Q2.3 | model | both | merged model file kind; generative row; every format | demonstrated in research; inherited evaluation contamination theoretical | established; leakage emerging | LLM03:2025; none; none | TH-01, TH-26 to TH-28 | |
+| T15 direct prompt injection | inference-time and runtime | S4 Q4.2; exposure S3 Q3.2 | model susceptibility; system consequence | both | generative row, instruct and chat; every format | observed in deployment | established | LLM01:2025; AML.T0051.000; NIST 3.3 | TH-29 to TH-33 | |
+| T16 indirect prompt injection | inference-time and runtime | S4 Q4.2; exposure S3 Q3.2 | model susceptibility; system exposure and consequence | both | generative row, image-and-text qualifier; every format | observed in deployment | established; transfer to open-source models emerging | LLM01:2025; AML.T0051.001; NIST 3.4 | TH-03, TH-34 to TH-37 | |
+| T17 jailbreaks | inference-time and runtime | S4 Q4.2; exposure S3 Q3.2 | model; generation-settings route system | both; in possession the settings too | generative row, instruct and chat; every format | observed in deployment | established; transfer emerging | LLM01:2025; AML.T0054; NIST 3.3, 3.3.1 | TH-17, TH-38 to TH-42 | |
+| T18 model extraction | inference-time and runtime | S4 Q4.4; exposure S3 Q3.4 | system | the party serving an adjusted model | every model type row; formats not applicable | observed in deployment | established | LLM10:2025; AML.T0024.002; NIST 2.4.4 | TH-43, TH-44 | |
+| T19 training-data extraction | inference-time and runtime | S4 Q4.2; exposure S2 and S3 Q3.4 | model memorisation; system exposure | both | generative, classification and embedding rows; every format | observed in deployment | established | LLM02:2025; AML.T0024.001, AML.T0057; NIST 2.4.1, 3.3.2 | TH-45 to TH-48 | |
+| T20 membership inference | inference-time and runtime | S4 Q4.2; exposure S2 and S3 Q3.4 | model retention; system exposure | both | classification row; generative row not established as reliable; every format | observed in deployment on classifiers; not established on large generative models | established | LLM02:2025; AML.T0024.000; NIST 2.4.2 | TH-49, TH-50 | |
+| T21 agentic and tool-use abuse | inference-time and runtime | S4 Q4.2; exposure S3 Q3.2, Q3.4 | system; model where planted | both | generative row, instruct and chat; every format | observed in deployment | established | LLM06:2025; AML.T0053, AML.T0086; NIST 3.5 | TH-03, TH-19, TH-36, TH-37, TH-51, TH-52 | |
 
 ## Summary: the four questions answered
 
-**Which threats have been shown to work, and which are still argued?** The literature demonstrates both
-poisoning and backdoors in research, on models the researchers built, and does not establish either in a
-published open-source model (SCRUM-281). Poisoning works from a small and possibly near-constant number of examples and
-persists through the training that makes a chat model; a backdoor survives the victim's fine-tuning and, in
-deliberately built cases, safety training. What is theoretical is a backdoor that arises without being
-planted. Of the thirteen threats, ten are named by all three frameworks, the two quantisation threats by NIST
-alone, and merge contamination by OWASP alone (Table 2).
+**Which threats have been shown to work, and which are still argued?** Six of the thirteen are observed in
+deployment: safeguard (SCRUM-281) removal by fine-tuning, through a production service and in published abliterated
+copies (T11); direct and indirect prompt injection, recorded in security advisories (T15, T16); jailbreaks,
+model extraction and training-data extraction, shown against production services (T17 to T19); and agentic
+abuse, recorded in advisories (T21). Membership inference is observed on classifiers and not established as
+reliable on large generative models (T20). Five are demonstrated in research and not established in any
+published model: poisoning, backdoors, quantisation drift, quantisation-triggered backdoors and merged
+backdoors (T9, T10, T12 to T14). What is theoretical is narrower: a backdoor that arises without being planted
+(T10) and evaluation contamination inherited through a merge (T14). Ten threats are named by all three
+frameworks, the two quantisation threats by NIST alone, and merge contamination by OWASP alone (Table 2).
 
-**At which point does each threat enter?** Model-integrity threats enter at selection, with the model, or at
-adjustment, through the organisation's own change or one made on its behalf. Inference-time and runtime threats
-enter in service, with exposure fixed at deployment. Poisoning and backdoors enter at selection through the
-producer (SCRUM-281) or a third party, and at adjustment through data or a change the organisation commissions.
+**At which point does each threat enter?** The six model-integrity threats enter at selection, with the model,
+or at adjustment, through the organisation's own change or one made on its behalf; the quantisation-triggered
+backdoor enters at selection and can be answered only once a quantised copy exists. The seven inference-time
+and runtime threats enter in service, with their exposure fixed at deployment, and for training-data
+extraction and membership inference also at adjustment, by the data the organisation trains on (Table 3).
 
-**Can the threat be judged on the model, or only on the deployed system?** By one test: a threat that moves
-with the file (SCRUM-281) is model level and can be required of the model before it is selected; one that stays with the
-deployment is system level and can be required only of a deployment. Poisoning and backdoors are model level.
-Examination before adoption can search for a trigger and, in classifiers, find one, but cannot show that none
-is there, and recovering a planted trigger in a generative model is not reliable with any method the
-literature establishes; observation in service is therefore not optional for them.
+**Can the threat be judged on the model, or only on the deployed system?** By one test: what goes with the
+file is model level, what stays with the deployment is system level (1.5). T9 to T14 are model level and can
+be required of the model before it is selected or after it is adjusted. Model extraction is system level and
+can be required only of a deployment. The other six are split: the model's susceptibility can be tested before
+adoption, and what it leads to is decided by the deployment, so both a criterion on the model and a criterion
+on the deployment are needed (Table 4). Examination before adoption can search for a trigger and, in
+classifiers, find one, but cannot show that none is there, and recovering a planted trigger in a generative
+model is not reliable with any method the literature establishes; observation in service is therefore not
+optional.
 
-**Which threats must the classification and decision cycle decide on?** All thirteen, each with one register
-row in Table 3 carrying its family, entry stage, level, exposure, model types, status, confidence label (SCRUM-281),
+**Which threats must the threat classification and decision cycle decide on?** All thirteen, each with one
+row in Table 3 carrying its family, entry stage, level, exposure, model types, status, confidence label,
 framework entries and sources, and an empty Disposition column for the decision.
 
 ## Source log
@@ -474,6 +897,44 @@ The sources this document adds. Each row gives:
 | TH-12 | Research | Yan, Mo, Ren, Jia. "Rethinking Backdoor Detection Evaluation for Language Models". EMNLP 2025 | https://arxiv.org/abs/2409.00399 | [CHECKED] backdoor detectors fail when the training intensity of the poisoned model varies |
 | TH-13 | Research | Liu, Shen, Tao, An, Ma, Zhang. "Piccolo: Exposing Complex Backdoors in NLP Transformer Models". IEEE S&P 2022, pp. 2025-2042; DOI 10.1109/SP46214.2022.9833579 | https://par.nsf.gov/biblio/10335908 (accepted manuscript) | [CHECKED] abstract of the accepted manuscript: trigger-word inversion with word discriminativity analysis, given the subject model and a few benign samples; 3,839 NLP models from TrojAI and earlier work, 7 structures including BERT and GPT, 17 attack types; over 0.9 detection accuracy in most scenarios; top in 2 of 3 TrojAI NLP rounds. Venue and pages from the DOI record |
 | TH-14 | Research, preprint | Maloyan, Verma, Nutfullin, Ashinov. "Trojan Detection in Large Language Models: Insights from The Trojan Detection Challenge". arXiv:2404.13660 | https://arxiv.org/abs/2404.13660 | [CHECKED] abstract: Trojan Detection Competition 2023 on LLMs; top methods reach recall about 0.16, comparable to randomly sampling sentences similar to the training prefixes; difficulty separating intended from unintended triggers. Preprint: emerging |
+| TH-15 | Research | Qi, Zeng, Xie, Chen, Jia, Mittal, Henderson. "Fine-tuning Aligned Language Models Compromises Safety, Even When Users Do Not Intend To!". ICLR 2024 | https://arxiv.org/abs/2310.03693 | [CHECKED] ten harmful examples through a production fine-tuning API remove safety alignment; benign fine-tuning also degrades it; production service and an open chat model |
+| TH-16 | Research, preprint | Lermen, Rogers-Smith, Ladish. "LoRA Fine-tuning Efficiently Undoes Safety Training in Llama 2-Chat 70B". arXiv:2310.20624 | https://arxiv.org/abs/2310.20624 | [CHECKED] LoRA reduces the 70B model's refusal rate to about 1 per cent on two benchmarks, one GPU, capabilities kept. No venue found: emerging |
+| TH-17 | Research | Arditi, Obeso, Syed, Paleka, Panickssery, Gurnee, Nanda. "Refusal in Language Models Is Mediated by a Single Direction". NeurIPS 2024 | https://arxiv.org/abs/2406.11717 | [CHECKED] refusal mediated by one direction in 13 open chat models up to 72B; rank-one weight edit as a white-box jailbreak |
+| TH-18 | Research, preprint | Liu et al. "LoRATK: LoRA Once, Backdoor Everywhere in the Share-and-Play Ecosystem" (v1: "LoRA-as-an-Attack! Piercing LLM Safety Under The Share-and-Play Scenario"). arXiv:2403.00108 | https://arxiv.org/abs/2403.00108 | [CHECKED] backdoored shared LoRA modules; the backdoor persists when adapters are combined. No venue found: emerging |
+| TH-19 | Research | Dong, Xue, Chen, Holland, Meng, Li, Liu, Zhu. "The Philosopher's Stone: Trojaning Plugins of Large Language Models". NDSS 2025 | https://www.ndss-symposium.org/ndss-paper/the-philosophers-stone-trojaning-plugins-of-large-language-models/ | [CHECKED] trojaned LoRA adapters make a model emit attacker content or misuse tools, an agent running malware and spear-phishing; three defences tested, none fully effective |
+| TH-20 | Official | Hugging Face Hub model search, query "abliterated"; Hugging Face | https://huggingface.co/models?search=abliterated | [CHECKED] the platform's own listing returns repositories that name themselves abliterated; no count is used in the text |
+| TH-21 | Research, preprint | Kumar, Kumar, Agarwal, Harshangi. "Fine-Tuning, Quantization, and LLMs: Navigating Unintended Outcomes" (v1: "Increased LLM Vulnerabilities from Fine-tuning and Quantization"). arXiv:2404.04392 | https://arxiv.org/abs/2404.04392 | [CHECKED] fine-tuning raises jailbreak success; quantisation has mixed effects; open models. Industry preprint: emerging |
+| TH-22 | Research | Egashira, Vero, Staab, He, Vechev. "Exploiting LLM Quantization". NeurIPS 2024 | https://arxiv.org/abs/2405.18137 | [CHECKED] a full-precision model appears benign and is malicious once quantised: vulnerable code, content injection, over-refusal |
+| TH-23 | Research | Egashira, Staab, Vero, He, Vechev. "Mind the Gap: A Practical Attack on GGUF Quantization". ICML 2025, PMLR 267 | https://arxiv.org/abs/2505.23786 | [CHECKED] first attack on GGUF k-quants: 3 models, 9 GGUF types; 88.7 per cent insecure code, 85.0 per cent content injection |
+| TH-24 | Research, preprint | Ma, Qiu, Gao, Zhang, Abuadbba, Xue, Fu, Zhang, Al-Sarawi, Abbott. "Quantization Backdoors to Deep Learning Commercial Frameworks". arXiv:2108.09187 | https://arxiv.org/abs/2108.09187 | [CHECKED] a dormant backdoor activated by standard int8 post-training quantisation in TFLite and PyTorch Mobile, close to complete success. Journal publication stated by the authors, record not retrieved: cited as the preprint, emerging |
+| TH-25 | Research | Hong, Panaitescu-Liess, Kaya, Dumitraş. "Qu-ANTI-zation: Exploiting Quantization Artifacts for Achieving Adversarial Outcomes". NeurIPS 2021 | https://arxiv.org/abs/2110.13541 | [CHECKED] training makes quantisation cause accuracy loss, targeted misclassification or a backdoor; convolutional classifiers |
+| TH-26 | Research | Zhang, Chi, Li, Cai, Zhang, Tian. "BadMerging: Backdoor Attacks Against Model Merging". ACM CCS 2024; DOI 10.1145/3658644.3690284 | https://arxiv.org/abs/2408.07362 | [CHECKED] one backdoored task model compromises the merged model despite merging coefficients |
+| TH-27 | Research | Yuan, Xu, Shi, Zhou, Sun. "Merge Hijacking: Backdoor Attacks to Model Merging of Large Language Models". ACL 2025; DOI 10.18653/v1/2025.acl-long.1571 | https://arxiv.org/abs/2505.23561 | [CHECKED] an uploaded malicious model passes its backdoor to the merged LLM, which keeps utility; survives paraphrasing, CLEANGEN and fine-pruning; LLaMA-2, Qwen, Phi-3 |
+| TH-28 | Research, preprint | Guo et al. "Be Cautious When Merging Unfamiliar LLMs: A Phishing Model Capable of Stealing Privacy". arXiv:2502.11533 | https://arxiv.org/abs/2502.11533 | [CHECKED] a phishing model merged in raises personal-data and membership leakage of the merged model: emerging |
+| TH-29 | Research | Perez, Ribeiro. "Ignore Previous Prompt: Attack Techniques For Language Models". NeurIPS 2022 ML Safety Workshop | https://arxiv.org/abs/2211.09527 | [CHECKED] goal hijacking and prompt leaking against a production model's API |
+| TH-30 | Research | Liu, Jia, Geng, Jia, Gong. "Formalizing and Benchmarking Prompt Injection Attacks and Defenses". USENIX Security 2024 | https://arxiv.org/abs/2310.12815 | [CHECKED] 5 attacks, 10 defences, 10 models, 7 tasks |
+| TH-31 | Official | CVE-2024-5184, EmailGPT; NVD record | https://nvd.nist.gov/vuln/detail/CVE-2024-5184 | [CHECKED] prompt injection lets a user take over service logic and leak hard-coded system prompts; a direct injection |
+| TH-32 | Official | CVE-2023-29374, LangChain LLMMathChain; NVD record | https://nvd.nist.gov/vuln/detail/CVE-2023-29374 | [CHECKED] through 0.0.131, prompt injection executes arbitrary code via Python exec |
+| TH-33 | Research, preprint | Wallace, Xiao, Leike, Weng, Heidecke, Beutel. "The Instruction Hierarchy: Training LLMs to Prioritize Privileged Instructions". arXiv:2404.13208 | https://arxiv.org/abs/2404.13208 | [CHECKED] training a priority of system over user over tool output improves robustness, with some over-refusal: emerging |
+| TH-34 | Research | Greshake, Abdelnabi, Mishra, Endres, Holz, Fritz. "Not what you've signed up for: Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection". ACM AISec 2023 | https://arxiv.org/abs/2302.12173 | [CHECKED] indirect injection against production search-integrated chat and code completion; data theft, self-spreading injection |
+| TH-35 | Official | CVE-2025-32711, Microsoft 365 Copilot; NVD and Microsoft records | https://nvd.nist.gov/vuln/detail/CVE-2025-32711 | [CHECKED] "AI command injection in M365 Copilot allows an unauthorized attacker to disclose information over a network" |
+| TH-36 | Official | CVE-2025-54135, Cursor (advisory GHSA-4cxx-hrm3-49rm); NVD record | https://nvd.nist.gov/vuln/detail/CVE-2025-54135 | [CHECKED] below 1.3.9, an indirect prompt injection creates the agent's MCP configuration and runs code without user approval |
+| TH-37 | Official | CVE-2025-66389, GitHub Copilot; NVD record | https://nvd.nist.gov/vuln/detail/CVE-2025-66389 | [CHECKED] a fetch tool reaches files outside the workspace without approval, so that exfiltration could occur through indirect prompt injection |
+| TH-38 | Research | Wei, Haghtalab, Steinhardt. "Jailbroken: How Does LLM Safety Training Fail?". NeurIPS 2023 | https://arxiv.org/abs/2307.02483 | [CHECKED] competing objectives and mismatched generalisation; attacks succeed on production models |
+| TH-39 | Research, preprint | Zou, Wang, Carlini, Nasr, Kolter, Fredrikson. "Universal and Transferable Adversarial Attacks on Aligned Language Models". arXiv:2307.15043 | https://arxiv.org/abs/2307.15043 | [CHECKED] suffixes optimised on open models transfer to production services. No venue found: emerging |
+| TH-40 | Research | Anil et al. "Many-shot Jailbreaking". NeurIPS 2024; DOI 10.52202/079017-4121 | https://doi.org/10.52202/079017-4121 | [CHECKED] hundreds of in-context examples jailbreak widely used models; success follows a power law in their number |
+| TH-41 | Research | Andriushchenko, Croce, Flammarion. "Jailbreaking Leading Safety-Aligned LLMs with Simple Adaptive Attacks". ICLR 2025 | https://arxiv.org/abs/2404.02151 | [CHECKED] template plus random search: complete success on open and production models |
+| TH-42 | Research | Huang, Gupta, Xia, Li, Chen. "Catastrophic Jailbreak of Open-source LLMs via Exploiting Generation". ICLR 2024 | https://arxiv.org/abs/2310.06987 | [CHECKED] changing decoding settings alone raises success from near 0 to over 95 per cent on 11 open models |
+| TH-43 | Research | Tramèr, Zhang, Juels, Reiter, Ristenpart. "Stealing Machine Learning Models via Prediction APIs". USENIX Security 2016 | https://arxiv.org/abs/1609.02943 | [CHECKED] near-exact extraction of logistic regression, neural networks and decision trees through production prediction APIs |
+| TH-44 | Research | Carlini et al. "Stealing Part of a Production Language Model". ICML 2024, PMLR 235 | https://arxiv.org/abs/2403.06634 | [CHECKED] final projection layer and hidden dimension of production models recovered through the public API at low cost |
+| TH-45 | Research | Carlini et al. "Extracting Training Data from Large Language Models". USENIX Security 2021 | https://arxiv.org/abs/2012.07805 | [CHECKED] hundreds of verbatim training sequences, personal data among them, from a public model |
+| TH-46 | Research | Nasr et al. "Scalable Extraction of Training Data from Aligned, Production Language Models". ICLR 2025 | https://arxiv.org/abs/2311.17035 | [CHECKED] a divergence attack makes a production chat model emit training data at about 150 times the normal rate; thousands of examples |
+| TH-47 | Research | Fredrikson, Jha, Ristenpart. "Model Inversion Attacks that Exploit Confidence Information and Basic Countermeasures". ACM CCS 2015; DOI 10.1145/2810103.2813677 | https://doi.org/10.1145/2810103.2813677 | [CHECKED] recognisable faces reconstructed from a name and confidence values |
+| TH-48 | Research | Morris, Kuleshov, Shmatikov, Rush. "Text Embeddings Reveal (Almost) As Much As Text". EMNLP 2023 | https://arxiv.org/abs/2310.06816 | [CHECKED] 92 per cent of 32-token inputs recovered exactly from embeddings; full names from clinical notes |
+| TH-49 | Research | Shokri, Stronati, Song, Shmatikov. "Membership Inference Attacks against Machine Learning Models". IEEE S&P 2017 | https://arxiv.org/abs/1610.05820 | [CHECKED] shadow-model membership inference against classifiers trained on production ML services, a hospital dataset among them |
+| TH-50 | Research | Duan et al. "Do Membership Inference Attacks Work on Large Language Models?". COLM 2024 | https://arxiv.org/abs/2402.07841 | [CHECKED] membership inference barely beats random on models trained on a large public corpus, 160M to 12B; apparent success from distribution shift |
+| TH-51 | Research | Debenedetti, Zhang, Balunović, Beurer-Kellner, Fischer, Tramèr. "AgentDojo: A Dynamic Environment to Evaluate Prompt Injection Attacks and Defenses for LLM Agents". NeurIPS 2024 Datasets and Benchmarks | https://arxiv.org/abs/2406.13352 | [CHECKED] 97 tasks, 629 security cases; attacks succeed in a share of cases against the best agents |
+| TH-52 | Research | Zhan, Liang, Ying, Kang. "InjecAgent: Benchmarking Indirect Prompt Injections in Tool-Integrated Large Language Model Agents". Findings of ACL 2024 | https://arxiv.org/abs/2403.02691 | [CHECKED] 1,054 cases, 30 agents; a ReAct agent on a leading model attacked in 24 per cent of cases, 47 per cent with a reinforcing prompt |
 
 Sources read after
 the research cut-off are read for records that predate it: the ATLAS release in force at the cut-off, and

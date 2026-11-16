@@ -17,7 +17,7 @@ here belongs there.
 | `landscape/` | the sourced landscape research: platform comparison, producers, taxonomy evidence, source log | research complete at cut-off 2026-10-06 |
 | `landscape/serving-and-compiled-artefacts.md` | the layer between the file and the answer: inference servers, build toolchains, compiled engines, and the reader-facing passage explaining them | research complete at cut-off 2026-10-06 |
 | `report-sections/` | text meant to enter the report, named by its skeleton number; filled at assembly. Its README says where each drafted subsection currently lives | empty; 3.1 and 3.2 drafted in `process/scrum-280/scrum280.md` |
-| `process/` | Jira item drafts and decision sheets, one folder per item: `scrum-281/` (style guide), `scrum-280/` (platforms and taxonomy), `scrum-284/` (lifecycle assessment framework), `scrum-286/` (ecosystem quantification) and `scrum-288/` (THR-3, model-integrity and inference-time threats; Part 1, T9, T10, register and summary drafted), each with its subtask texts and its deliverable or working file; `scrum-280/development/` holds that item's superseded working files | SCRUM-281 and SCRUM-280 drafted; SCRUM-284 in progress; decision sheet needs v4 |
+| `process/` | Jira item drafts and decision sheets, one folder per item: `scrum-281/` (style guide), `scrum-280/` (platforms and taxonomy), `scrum-284/` (lifecycle assessment framework), `scrum-286/` (ecosystem quantification) and `scrum-288/` (THR-3, model-integrity and inference-time threats; drafted, pending Dan's review), each with its subtask texts and its deliverable or working file; `scrum-280/development/` holds that item's superseded working files | SCRUM-281 and SCRUM-280 drafted; SCRUM-284 in progress; decision sheet needs v4 |
 | `lay-package/` | the customer-facing explainer, cards, map, concept notes and writing brief | done |
 
 ## Map to the skeleton
@@ -34,8 +34,8 @@ Where the material answers a section of the report, and where it does not yet.
 | 3.4 Licensing and provenance in practice | `process/scrum-286/` (subtask 3) | planned |
 | 3.5 Ecosystem outlook | `process/scrum-286/` (subtask 4) | planned |
 | 4.2 Supply-chain and artefact-level threats | `process/huggingface/hub-supply-chain-threats.md`, T1 to T8 | drafted, pending review |
-| 4.3 Model-integrity threats | `process/scrum-288/scrum288.md` (SCRUM-288, THR-3), Part 2, T9 to T14 | drafting |
-| 4.4 Inference-time and runtime threats | `process/scrum-288/scrum288.md` Part 3, T15 to T21, and its boundary part; `landscape/serving-and-compiled-artefacts.md` for the serving layer | drafting |
+| 4.3 Model-integrity threats | `process/scrum-288/scrum288.md` (SCRUM-288, THR-3), Part 2, T9 to T14 | drafted, pending Dan's review |
+| 4.4 Inference-time and runtime threats | `process/scrum-288/scrum288.md` Part 3, T15 to T21, and its boundary part; `landscape/serving-and-compiled-artefacts.md` for the serving layer | drafted, pending Dan's review |
 | 4.5 Threat x model-type matrix | the frozen taxonomy supplies both axes | blocked on the freeze |
 | 5.3 Threat-to-control coverage | inherits the model-type axis from 4.5 | blocked |
 | 6.1 Lifecycle assessment framework | `process/scrum-284/scrum284.md` (subsection, figure, summary tables, source log) with `stage-tables.md` (full stage tables, method-to-stage mapping) | drafted |

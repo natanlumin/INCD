@@ -45,16 +45,23 @@ every Qn.k and en.k used exists in SCRUM-284's stage tables; source log, registe
 4.2 item's column layout. Glossary terms re-tagged (SCRUM-281) at first use in each part (14 tags added).
 Re-run the check after each new entry.
 
-## Acceptance criteria, state on 16 November
+## Acceptance criteria, state on 16 November (closing)
 
 | Criterion | State |
 |---|---|
-| Drafted subsections | 2 of 13 threats drafted (T9, T10); Part 1 frame complete |
-| Demonstrated in literature versus theoretical | in place for T9, T10; frame defines the three statuses |
-| Each threat tagged with the lifecycle stage it enters at | in place for T9, T10, in SCRUM-284's S, Q and e notation |
-| Model-level versus system-level boundary stated explicitly | stated as a test in 1.4; Part 4 (applied per threat) to write |
-| Every threat enters the ADV-2 classification cycle | register Table 3 has 2 of 13 rows; Disposition column left for ADV-2 |
-| Dan reviews for security correctness | pending; subtask 5 |
+| Threats to the model itself, as listed | met: T9 to T14, one entry each (Part 2) |
+| Threats at use, as listed | met: T15 to T21, one entry each (Part 3) |
+| Drafted subsections | met: Part 2 (4.3), Part 3 (4.4), with Part 1 frame, Part 4, Part 5, summary |
+| Demonstrated in literature versus theoretical | met: every entry has Demonstrated and Theoretical-or-not-established parts, a status and a label; all claims cited inline, TH-01 to TH-52 verified |
+| Each threat tagged with the lifecycle stage it enters at | met: every entry's Enters at line; Table 3 column |
+| Model-level versus system-level boundary stated explicitly | met: test in 1.5; per threat in every entry's Level; Table 4 sets all 13 on the boundary |
+| Every threat enters the ADV-2 classification cycle | met: 13 rows in Table 3 with an empty Disposition column, report-structure term and reference (2.3, Appendix A) |
+| Dan reviews for security correctness | pending: subtask 5. Points for Dan: T11 status "observed in deployment" (production fine-tuning API, published abliterated copies); T16 extension from hosted-assistant CVEs to open models labelled emerging; T18 judged wholly system level; T20 generative row not established |
+| Blocked by THR-1, LAND-1 | framework column filled provisionally (OWASP 2025, ATLAS 2026.09, NIST AI 100-2 E2025) for THR-1 to align; applies-to keyed to LAND-1 Table 4 as proposed, re-read at the freeze |
+
+Completion check run 16 Nov: 13 entries, 13 rows in Table 3, 13 rows in Table 4; every TH id cited has a row and
+every row is cited; SC-17 resolves; every Qn.k and en.k exists in SCRUM-284; glossary terms tagged per part; no
+em or en dashes.
 
 ## Bound to the existing files
 
@@ -72,10 +79,10 @@ Re-run the check after each new entry.
 
 | Subtask | Delivers | Estimate | State |
 |---|---|---|---|
-| Analyse the threats to the model itself | the six model-integrity entries with status, stage and level | Natan 0.5d | 2 of 6 drafted |
-| Analyse the threats at use | the seven inference-time entries with status, stage and level | Natan 0.5d | to write |
-| State the model-level versus system-level boundary | the boundary test and its application to every threat | Natan 0.25d | test stated; application to write |
-| Hand every threat to the classification cycle | the register table, one row per threat | Natan 0.25d | 2 of 13 rows |
+| Analyse the threats to the model itself | the six model-integrity entries with status, stage and level | Natan 0.5d | drafted |
+| Analyse the threats at use | the seven inference-time entries with status, stage and level | Natan 0.5d | drafted |
+| State the model-level versus system-level boundary | the boundary test and its application to every threat | Natan 0.25d | drafted (1.5, Table 4) |
+| Hand every threat to the classification cycle | the register table, one row per threat | Natan 0.25d | drafted (Table 3, 13 rows) |
 | Review for security correctness | Dan's review of the entries, statuses and the boundary | Dan 0.5d | pending |
 
 ## Decisions taken in drafting
