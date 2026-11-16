@@ -85,10 +85,10 @@ assessment gaps. The hand-offs below are for assembly and for Dan, in skeleton n
 routes (plugins, custom operators, compile cache) are the system level of the boundary 4.4 draws, and the
 skeleton places them there.
 
-**To 4.3, model-integrity threats.** The artefact layer is the delivery mechanism for a model whose numbers
+**To 4.3, model-integrity threats** (taken up by SCRUM-288, T9 to T14). The artefact layer is the delivery mechanism for a model whose numbers
 were altered; the alteration itself, and what it does, is that subsection's.
 
-**To 4.4, inference-time and runtime threats.** T8's server-side routes, plugins, custom operators and the
+**To 4.4, inference-time and runtime threats** (taken up by SCRUM-288, boundary part). T8's server-side routes, plugins, custom operators and the
 compile cache, are the system level of the boundary 4.4 draws, and the skeleton places them there. The
 loader's own release history, the defects in PyTorch, transformers and vLLM that T3 and T8 record, is a
 dependency 4.4 should carry as its own.
