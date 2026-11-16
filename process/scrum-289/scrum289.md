@@ -245,11 +245,14 @@ and the susceptibility half of direct injection and jailbreaks (T15, T17). The t
 
 Behaviour that appears only on a trigger the planter chose (T10), including one that appears only once the
 model is quantised (T13). No record carries it, since the only party who knows it is the one who planted it.
-A search can find a trigger in a classifier (Liu et al., IEEE S&P 2022) [TH-13]; in generative models,
-recovering a planted trigger is close to random (Maloyan et al. 2024, preprint) [TH-14], and detectors fail
-when the backdoor is trained differently (Yan et al., EMNLP 2025) [TH-12]. A quantisation trigger is found, if
-at all, by testing the quantised copy against full precision. The test can find a trigger; it cannot show
-that none is there.
+Statistical scanners exist for both. A search can find a trigger in a classifier (Liu et al., IEEE S&P 2022)
+[TH-13], and a scan that inverts the backdoor's target rather than its trigger finds backdoors in generative
+models with black-box access (Shen et al., IEEE S&P 2025) [TH-53]. Recovering the planted trigger itself in a
+generative model is close to random (Maloyan et al. 2024, preprint) [TH-14], and detectors fail when the
+backdoor is trained differently (Yan et al., EMNLP 2025) [TH-12]. A quantisation trigger is found, if at all,
+by testing the quantised copy against full precision. A scan gives evidence with an error rate, within the
+kinds of backdoor and the search it covers: it can find a backdoor, and a clean result lowers the likelihood
+of one, but it cannot show that none is there.
 
 ### D3. Capability boundaries
 
@@ -321,9 +324,12 @@ internals.
 > - **The training data actually used.** It is declared at best, in a summary if the law requires one
 >   (EU AI Act, Article 53; European Commission template) [AT-01, AT-02]; it cannot be read from the file (SCRUM-281); and testing whether a given record was used is not
 >   reliable on large generative models (Duan et al., COLM 2024) [TH-50].
-> - **That a generative model carries no trigger.** A search can find a trigger; no method reliably recovers
->   one in a generative model, and none can show absence (Maloyan et al. 2024, preprint; Yan et al., EMNLP
->   2025) [TH-14, TH-12].
+> - **That a model carries no trigger, as a certainty.** Statistical scanners exist and find backdoors in
+>   classifiers and generative models with the error rates their evaluations report (Liu et al., IEEE S&P 2022;
+>   Shen et al., IEEE S&P 2025) [TH-13, TH-53]. A clean scan is evidence within the kinds of backdoor and the
+>   search it covers, not proof: a planted trigger may not be recoverable, and detectors fail on backdoors
+>   trained differently (Maloyan et al. 2024, preprint; Yan et al., EMNLP 2025) [TH-14, TH-12]. Absence is
+>   testable statistically and attestable not at all.
 > - **The full extent of what a model can do.** A capability test gives a lower bound, and a model can be made
 >   to hide what it can do (van der Weij et al., ICLR 2025) [AT-24].
 > - **That benchmark scores were not inflated by contamination.** Detection methods can be evaded (Dekoninck
@@ -356,8 +362,8 @@ by the triggers a search can reach, by the capability a test can elicit, and by 
 **Which side of the line is each property on?** Six attestable, five discoverable (Table 3). By proxy the
 attestable side shrinks to statements and the discoverable side to outputs.
 
-**What can be established neither way today?** The training data used, the absence of a trigger in a
-generative model, the full extent of a capability, freedom from benchmark contamination, the safety of a signed
+**What can be established neither way today?** The training data used, the absence of a trigger as a
+certainty, which scanners can establish only statistically, the full extent of a capability, freedom from benchmark contamination, the safety of a signed
 model, the real parent of an undeclared derivative, and, by proxy (SCRUM-281), anything beyond statements and outputs
 (Part 5).
 

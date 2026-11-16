@@ -380,10 +380,14 @@ only what it sends, and a trigger is chosen so that ordinary inputs do not conta
 - Detection is fragile. Backdoor detectors evaluated for language models failed when the strength with which
   the backdoor was trained was varied, so a detector's published success does not carry to backdoors trained
   differently (Yan et al., EMNLP 2025) [TH-12].
-- In generative models, recovering a planted trigger is far harder. In a trigger-detection competition on
-  generative language models, the best methods recovered the planted triggers with a recall of about 0.16,
-  comparable to sampling sentences at random from inputs like the training prefixes (Maloyan et al. 2024,
-  preprint) [TH-14].
+- A scan can find a backdoor in a generative model without knowing its trigger. Inverting the backdoor's
+  target rather than its trigger, a scanner with only black-box access outperformed five baselines across 153
+  generative models of eight architectures and six attack types, and ranked first in the generative-model
+  round of a public trojan-detection competition (Shen et al., IEEE S&P 2025) [TH-53].
+- Recovering the planted trigger itself is far harder. In a trigger-detection competition on generative
+  language models, the best methods recovered the planted triggers with a recall of about 0.16, comparable to
+  sampling sentences at random from inputs like the training prefixes (Maloyan et al. 2024, preprint)
+  [TH-14].
 
 **Theoretical or not established.**
 
@@ -392,9 +396,12 @@ only what it sends, and a trigger is chosen so that ordinary inputs do not conta
   (Zhao et al., ASE 2024) [SC-17]; that is malicious serialisation, T3 of the supply-chain document (Part 2.2), and not this threat.
 - A backdoor that arises without anyone planting it is theoretical. The persistent backdoors above were built
   deliberately, as studies of what such behaviour would do (Hubinger et al. 2024, preprint) [TH-11].
-- A method that finds an unknown trigger in a generative model reliably is not established: the search that
-  works on classifiers (Liu et al., IEEE S&P 2022) [TH-13] has no counterpart of that strength for generative models in the cited sources
-  (Yan et al., EMNLP 2025; Maloyan et al. 2024, preprint) [TH-12, TH-14].
+- A method that shows a model carries no backdoor is not established. Scanners give statistical evidence: a
+  scan that finds nothing lowers the likelihood of a backdoor of the kinds and within the search it covers,
+  with the error rates its evaluation reports (Liu et al., IEEE S&P 2022; Shen et al., IEEE S&P 2025) [TH-13,
+  TH-53]; it is not a proof, a planted trigger may not be recoverable (Maloyan et al. 2024, preprint) [TH-14],
+  and a detector's success does not carry to backdoors trained differently (Yan et al., EMNLP 2025)
+  [TH-12].
 
 Organisation exposed: both; by proxy the organisation holds only black-box behaviour, e1.9, and a trigger it
 does not know is absent from its inputs by construction. Level: model level; the backdoor is in the numbers
@@ -827,7 +834,7 @@ framework editions and their verification as in the source log, TH-01 to TH-03)
 | Threat | Family | Enters at | Level | Organisation exposed | Applies to | Status | Label | Framework | Sources | Disposition |
 |---|---|---|---|---|---|---|---|---|---|---|
 | T9 training-data poisoning | model-integrity | S1 Q1.6; S2 Q2.2 | model | both; by proxy black-box only | classification and generative rows, image-and-text qualifier; embedding not established; every format | demonstrated in research; in deployment not established | established; constant count emerging | LLM04:2025; AML.T0020; NIST 2.3, 3.2.1 | TH-03 to TH-07 | |
-| T10 backdoors and trojan triggers | model-integrity | S1 Q1.6; S2 Q2.2 | model | both; by proxy black-box only, trigger unknown | classification and generative rows; embedding not established; every format | demonstrated in research; in deployment not established | established; persistence and generative trigger recovery emerging | LLM04:2025, LLM03:2025; AML.T0018, AML.T0018.000, AML.T0020; NIST 2.3.3, 3.2.2 | TH-03, TH-05, TH-08 to TH-14, SC-17 | |
+| T10 backdoors and trojan triggers | model-integrity | S1 Q1.6; S2 Q2.2 | model | both; by proxy black-box only, trigger unknown | classification and generative rows; embedding not established; every format | demonstrated in research; in deployment not established | established; persistence and generative trigger recovery emerging | LLM04:2025, LLM03:2025; AML.T0018, AML.T0018.000, AML.T0020; NIST 2.3.3, 3.2.2 | TH-03, TH-05, TH-08 to TH-14, TH-53, SC-17 | |
 | T11 fine-tune and LoRA tampering | model-integrity | S1 Q1.6; S2 Q2.3 | model | both; by proxy black-box only | generative row, instruct and chat; adapter file kind; every format | observed in deployment for safeguard removal; demonstrated in research for planted adapter behaviour | established; largest-model and combined-adapter results emerging | LLM03:2025, LLM04:2025; AML.T0018.000, AML.T0054; NIST 3.1.3, 2.3.4 | TH-15 to TH-20 | |
 | T12 quantisation-induced drift | model-integrity | S1 Q1.6; S2 Q2.3, Q2.4 | model | both; by proxy precision unknown | quantised model file kind, every row; GGUF chiefly | demonstrated in research | established for the effect; direction emerging | none; none; NIST 4.2.4 | TH-03, TH-21 | |
 | T13 quantisation-triggered backdoors | model-integrity | S1, answerable at S2 Q2.3 or S1 Q1.6 on a quantised copy | model | both; by proxy black-box only | quantised model file kind; generative and classification rows; GGUF demonstrated | demonstrated in research | established; commercial-framework result emerging | none; none; NIST 4.2.4 | TH-03, TH-22 to TH-25 | |
@@ -865,9 +872,9 @@ be required of the model before it is selected or after it is adjusted. Model ex
 can be required only of a deployment. The other six are split: the model's susceptibility can be tested before
 adoption, and what it leads to is decided by the deployment, so both a criterion on the model and a criterion
 on the deployment are needed (Table 4). Examination before adoption can search for a trigger and, in
-classifiers, find one, but cannot show that none is there, and recovering a planted trigger in a generative
-model is not reliable with any method the literature establishes; observation in service is therefore not
-optional.
+classifiers and generative models, find one with the error rates its evaluation reports; a scan that finds
+nothing is statistical evidence within the kinds of backdoor it covers, not a proof that none is there, so
+observation in service is not optional.
 
 **Which threats must the threat classification and decision cycle decide on?** All thirteen, each with one
 row in Table 3 carrying its family, entry stage, level, exposure, model types, status, confidence label,
@@ -967,6 +974,7 @@ The sources this document adds. Each row gives:
 | TH-50 | Research | Duan et al. "Do Membership Inference Attacks Work on Large Language Models?". COLM 2024 | https://arxiv.org/abs/2402.07841 | [CHECKED] membership inference barely beats random on models trained on a large public corpus, 160M to 12B; apparent success from distribution shift |
 | TH-51 | Research | Debenedetti, Zhang, Balunović, Beurer-Kellner, Fischer, Tramèr. "AgentDojo: A Dynamic Environment to Evaluate Prompt Injection Attacks and Defenses for LLM Agents". NeurIPS 2024 Datasets and Benchmarks | https://arxiv.org/abs/2406.13352 | [CHECKED] 97 tasks, 629 security cases; attacks succeed in a share of cases against the best agents |
 | TH-52 | Research | Zhan, Liang, Ying, Kang. "InjecAgent: Benchmarking Indirect Prompt Injections in Tool-Integrated Large Language Model Agents". Findings of ACL 2024 | https://arxiv.org/abs/2403.02691 | [CHECKED] 1,054 cases, 30 agents; a ReAct agent on a leading model attacked in 24 per cent of cases, 47 per cent with a reinforcing prompt |
+| TH-53 | Research | Shen, Cheng, Zhang, Tao, Zhang, Guo, Yan, Jin, An, Ma, Zhang. "BAIT: Large Language Model Backdoor Scanning by Inverting Attack Target". IEEE S&P 2025, pp. 1676-1694 | https://www.cs.purdue.edu/homes/cheng535/static/papers/sp25_bait.pdf (authors' copy) | [CHECKED] abstract: scans by inverting backdoor targets instead of triggers, without prior knowledge of trigger or target, with black-box access; evaluated on 153 LLMs, 8 architectures, 6 attack types; outperforms 5 baselines; top of the TrojAI LLM-round leaderboard. An independent preprint reports lower scores on code models, a different setting |
 
 Sources read after
 the research cut-off are read for records that predate it: the ATLAS release in force at the cut-off, and
