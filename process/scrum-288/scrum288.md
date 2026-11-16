@@ -62,7 +62,8 @@ done with the model once it answers.
 
 **Structure.** Part 1 sets out the two families and fixes how every threat is described. Part 2 gives the model-integrity threats, T9 to T14. Part 3
 gives the inference-time and runtime threats, T15 to T21. Part 4 applies the boundary threat by threat. Part
-5 is the register. A closing summary answers the four questions of Table 1.
+5 is the register. A closing summary answers the four questions of Table 1, and an annex gives
+the text of every lifecycle question and evidence item cited.
 
 **Symbols.** Terms, stage and question numbers, citation prefixes and table references that come from outside
 this document are listed, with where each is defined, in "Symbols from outside this document" after the
@@ -191,7 +192,8 @@ entry says which route it is. The tag gives four things:
 
 - **enters at**: the stage at which the threat enters;
 - **first answerable at**: the framework question at which it can first be answered, Qn.k (SCRUM-284), and
-  the evidence item that answers it, en.k (SCRUM-284);
+  the evidence item that answers it, en.k (SCRUM-284); every question and item used is given in full in the
+  annex, Table 5;
 - **introduced by**: the producer, a third party that published a derivative, the organisation's own
   adjustment, or whoever reaches the model's input;
 - **exposure fixed at**, where it differs from the entry stage: the earlier stage whose decisions decide
@@ -871,6 +873,36 @@ optional.
 row in Table 3 carrying its family, entry stage, level, exposure, model types, status, confidence label,
 framework entries and sources, and an empty Disposition column for the decision.
 
+## Annex. The lifecycle questions and evidence items this document uses
+
+The stage tags of every entry name a question, Qn.k, and an evidence item, en.k, of the lifecycle assessment
+framework (SCRUM-284). Table 5 gives the text of each one used here, in the framework's own words, so that a tag
+can be read without the framework at hand. n is the stage, S1 to S4; k numbers the questions or items of that
+stage. The evidence kind says who can produce the item and whether it exists by proxy (1.4).
+
+**Table 5. Questions and evidence items cited in the stage tags** (text as in SCRUM-284, stage tables)
+
+| Symbol | Stage | Question, or evidence item and its kind |
+|---|---|---|
+| Q1.6 | S1 selection | Does it behave as described, and is the safeguard present? |
+| Q2.2 | S2 adjustment | Did the change carry in anything we did not intend? |
+| Q2.3 | S2 adjustment | Is the safeguard still present after the change? |
+| Q2.4 | S2 adjustment | Is the adjusted artefact still what the segmentation says, and does it still do what the base was selected for? |
+| Q3.2 | S3 deployment | What surrounds the model, and does it change what the model does? |
+| Q3.4 | S3 deployment | Who can reach the model and its file? |
+| Q4.2 | S4 runtime detection | Are the inputs arriving in service turning the model against its use, and does it comply? |
+| Q4.3 | S4 runtime detection | Does the model still give the outputs it gave at deployment? |
+| Q4.4 | S4 runtime detection | Who is reaching the model and its file, and how much? |
+| e1.2 | S1 selection | declared: the model card: parent model, training data, organisation behind the account, what the model produces, modality |
+| e1.9 | S1 selection | testable, outputs: behaviour on the organisation's inputs |
+| e1.10 | S1 selection | testable, internals: the file's internals while it runs |
+| e2.2 | S2 adjustment | readable: the organisation's record of the change: training data, recipe, adapter or changed tensors |
+| e2.3 | S2 adjustment | declared: the account of the change, its base and the served format, from the party that made it |
+| e2.4 | S2 adjustment | testable, internals: the adjusted weights and activations against the base |
+| e2.5 | S2 adjustment | testable, outputs: behaviour on the adjusted model, same inputs as e1.9 |
+| e4.3 | S4 runtime detection | testable, outputs: the inputs arriving at the endpoint in service, user, retrieved content and tool outputs, and the outputs returned |
+| e4.5 | S4 runtime detection | readable: the organisation's access record for the endpoint, the file at rest and the container, against e3.6 |
+
 ## Source log
 
 The sources this document adds. Each row gives:
@@ -953,8 +985,8 @@ coverage motivated no claim here.
 | Official, Research | citation classes | SCRUM-281, section 2.2, Table 2.1 | governing/report-style-guide-and-glossary.md |
 | model level, system level | the level a threat acts at | SCRUM-281, section 1.4, threat | governing/report-style-guide-and-glossary.md |
 | S1 to S4 | lifecycle stages: selection, adjustment, deployment, runtime detection | glossary term: SCRUM-281, section 1.4; numbering and questions: SCRUM-284, section 1.3, Table 2, and Notation | governing/report-style-guide-and-glossary.md; process/scrum-284/scrum284.md; process/scrum-284/stage-tables.md |
-| Qn.k | lifecycle assessment question k at stage n; e.g. Q1.6 "Does it behave as described, and is the safeguard present?" | SCRUM-284, Table 2 and the stage question tables | process/scrum-284/scrum284.md and stage-tables.md |
-| en.k | evidence item k at stage n; e.g. e1.9 behaviour on the organisation's inputs | SCRUM-284, the stage evidence inventories E1 to E4 | process/scrum-284/stage-tables.md |
+| Qn.k | lifecycle assessment question k at stage n, those used given in full in Table 5; e.g. Q1.6 "Does it behave as described, and is the safeguard present?" | SCRUM-284, Table 2 and the stage question tables | process/scrum-284/scrum284.md and stage-tables.md |
+| en.k | evidence item k at stage n, those used given in full in Table 5; e.g. e1.9 behaviour on the organisation's inputs | SCRUM-284, the stage evidence inventories E1 to E4 | process/scrum-284/stage-tables.md |
 | declared | evidence a party states and nothing verifies | SCRUM-284, Table 1 | process/scrum-284/scrum284.md |
 | (SCRUM-284) Table 1 | the evidence kind decides who answers and what exists by proxy | SCRUM-284 | process/scrum-284/scrum284.md |
 | (SCRUM-280) Table 4 | the segmentation: model type against artefact format | SCRUM-280 | process/scrum-280/scrum280.md |
