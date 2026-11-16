@@ -12,16 +12,26 @@ AIBOM/SBOM, cryptographic signing and attestation, licence lineage. The compleme
 hidden triggers, capability boundaries, robustness and latent contamination that no metadata will reveal. The
 split is what makes the testing methodology necessary rather than optional.
 
-## Definition of done (acceptance criteria), with where the task will answer each
+## Definition of done (acceptance criteria), state on 16 November
 
-| Criterion | Planned answer | State |
+| Criterion | Where in `scrum289.md` | State |
 |---|---|---|
-| Drafted subsections | 6.2 attestable properties; 6.3 properties discoverable only by testing | not started |
-| An evidence-strength rating per attestable property | one row per property named by the Jira (publisher identity, training-data disclosure, model card, AIBOM/SBOM, signing and attestation, licence lineage), rated on ASM-1's evidence kinds: guaranteed (the platform enforces it), declared (stated, unverified), readable (read from the file), with the measured frequency of each declared field from LAND-2 cited by section, not by number | not started |
-| A clear public-versus-discoverable split table | one table: property, attestable or testable, evidence kind (ASM-1 Table 1), who answers, exists in possession, exists by proxy, test family | not started |
-| A blunt statement of what is currently neither attestable nor practically testable | a short boxed list, each item cited: e.g. an unknown trigger in a generative model (SCRUM-288 T10: TH-12, TH-14); training data actually used (declared only; SCRUM-288 T9); a model held only by proxy, whose file-side properties are neither attestable nor testable (ASM-1 Table 1) | not started |
-| "The split is what makes the testing methodology necessary" | the closing argument of 6.3, from the gap rule of ASM-1: every declared item is a gap | not started |
-| Blocked by ASM-1 and LAND-2 | ASM-1 = SCRUM-284, drafted; LAND-2 = SCRUM-286, drafted. Unblocked | met |
+| Attestable properties named by the Jira: publisher identity, training-data disclosure, model cards, AIBOM/SBOM, cryptographic signing and attestation, licence lineage | Part 2, P1 to P6, one entry each in the Jira's order | met (6 of 6) |
+| The complement: behavioural properties, hidden triggers, capability boundaries, robustness, latent contamination | Part 3, D1 to D5, one entry each | met (5 of 5) |
+| Drafted subsections | Part 2 (skeleton 6.2), Part 3 (6.3), with Part 1, Part 4, Part 5, summary, annex | met |
+| An evidence-strength rating per attestable property | scale in 1.3 (strong, moderate, weak, none); a rating with its reason and sources closing each of P1 to P6; Strength column of Table 3 | met (6 of 6) |
+| A clear public-versus-discoverable split table | Part 4, Table 3, 11 rows: side, evidence kind, who answers, in possession, by proxy, test family, strength | met |
+| A blunt statement of what is currently neither attestable nor practically testable | Part 5, Caution box, seven items, each cited | met |
+| The split makes the testing methodology necessary rather than optional | opening bullets; closing paragraph of Part 5, from SCRUM-284's gap rule | met |
+| Blocked by ASM-1, LAND-2 | SCRUM-284 and SCRUM-286, both drafted | met |
+| Dan reviews (0.25d) | subtask pending. Points for Dan: P1 rating split; P5 "strong where present, origin and integrity only"; AT-26 provenance testing labelled emerging | pending |
+
+Completion check run 16 Nov: 6 P entries, 5 D entries, 11 rows in Table 3; every AT id cited has a row and every
+row is cited; external ids SC-25, SC-29, HF-11, HF-15, CG-11, TH-03, TH-12, TH-13, TH-14, TH-42, TH-50 resolve
+in their logs; every Qn.k and en.k used exists in SCRUM-284 and is given in the annex, Table 4; glossary terms
+tagged at first use per part; inline citations at every use; no counts or dates from our own runs; no em or en
+dashes. Sources AT-01 to AT-26 verified 16 Nov (EU AI Act text read from a mirror; quote from EUR-Lex at
+assembly).
 
 ## Inputs, bound to the existing files
 
@@ -52,4 +62,5 @@ split is what makes the testing methodology necessary rather than optional.
 
 ## Files
 
-- `README.md`: this strategy. The task `scrum289.md` follows once SCRUM-288 is complete.
+- `scrum289.md`: the task. `scrum289.html`: its readable build.
+- `README.md`: this strategy.
