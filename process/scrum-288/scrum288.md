@@ -5,7 +5,7 @@
 An organisation that takes an open-source model (SCRUM-281) into use meets its threats in two states.
 
 - **Before adoption: the model as an object.**
-    - The organisation that holds the file studies the model's behaviour and its internals.
+    - The organisation that holds the file (SCRUM-281) studies the model's behaviour and its internals.
     - It compares the model with its parent, or with other candidates for the same use.
     - It tries to reveal what was done to the model before the model arrives in service.
     - This is where threats to the model itself are found, if they can be found at all.
@@ -72,7 +72,7 @@ source log.
 
 ### 1.1 What the organisation receives, and what can go wrong with it
 
-An organisation that adopts an open-source model receives a file it did not train, from a producer it does
+An organisation that adopts an open-source model (SCRUM-281) receives a file (SCRUM-281) it did not train, from a producer it does
 not control, and then runs that file on its own inputs. Three things can go wrong on that path.
 
 - **The file is not what it seems.** The account, the repository or the file itself carries something other
@@ -171,7 +171,7 @@ found, and is never inferred from a neighbouring case.
 
 ### 1.4 The lifecycle stage a threat enters at
 
-Each threat is tagged with the lifecycle stage at which it enters the organisation's hands. The stages are
+Each threat is tagged with the lifecycle stage (SCRUM-281) at which it enters the organisation's hands. The stages are
 the four the glossary defines as the points at which a question about a model is answered (SCRUM-281,
 section 1.4, lifecycle stage), and the report structure assesses at (report structure, section 6.1). The
 lifecycle assessment framework numbers them and fixes the questions answered at each (SCRUM-284, section 1.3,
@@ -211,7 +211,7 @@ families therefore enter at different points:
   be tested earlier, at S1 on the model's behaviour, Q1.6 on e1.9, but the threat itself enters only when
   the model is in service.
 
-Whether the organisation holds the file or only a key, in possession or by proxy (SCRUM-281), decides which
+Whether the organisation holds the file or only a key, in possession (SCRUM-281) or by proxy (SCRUM-281), decides which
 evidence exists to answer the question (SCRUM-284, Table 1); by proxy only declared statements and black-box
 behaviour exist. Each entry states both cases.
 
@@ -258,7 +258,7 @@ Every entry has the same shape, so that the threats can be compared:
   where it applies, in italics under the heading;
 - **Demonstrated**, the part the literature shows, with its sources;
 - **Theoretical or not established**, the part it does not;
-- a closing line with the organisation exposed, the level, the status, the confidence label, what the threat
+- a closing line with the organisation exposed, the level, the status, the confidence label (SCRUM-281), what the threat
   applies to, and the framework entries that name it.
 
 "Applies to" uses the row and column labels of the segmentation (SCRUM-280, Table 4): classification,
@@ -269,7 +269,7 @@ recorded in the source log [TH-01, TH-02, TH-03].
 
 ## Part 2. Model-integrity threats
 
-Six threats alter the model before the organisation runs it. Each leaves the file in a valid format,
+Six threats alter the model before the organisation runs it. Each leaves the file (SCRUM-281) in a valid format,
 loadable without error, so none is visible to the scans that look for executable content in a file; those
 belong to the supply-chain document, whose artefact layer is the route by which an altered file arrives
 (supply-chain document, Part 2.2, T3 to T7). What changes is behaviour.
@@ -284,7 +284,7 @@ The six are defined in Table 2 (section 1.2) and treated below in that order, T9
 
 ### T9. Training-data poisoning
 
-*Enters at: S1, through the producer's training, first answerable at Q1.6 on e1.9 and e1.10; or S2, through
+*Enters at: S1, through the training of the producer (SCRUM-281), first answerable at Q1.6 on e1.9 and e1.10; or S2, through
 data the organisation trains on itself, at Q2.2 on e2.2 and e2.5 (SCRUM-284). Introduced by whoever controls
 part of the training data.*
 
@@ -318,7 +318,7 @@ three on models the researchers trained themselves.
 
 **Theoretical or not established.**
 
-- That any published open-source model was poisoned through its training data is not established: no
+- That any published open-source model (SCRUM-281) was poisoned through its training data is not established: no
   official record and no research measurement was found.
 - Whether the near-constant count holds above 13 billion parameters is not established; the largest models
   in the cited study are below that size (Souly et al. 2025, preprint) [TH-07].
@@ -364,7 +364,8 @@ only what it sends, and a trigger is chosen so that ordinary inputs do not conta
   language models kept the attacker's behaviour after the downstream training that turns them into
   classifiers (Kurita et al., ACL 2020) [TH-10]. This is the case of an organisation that downloads a pre-trained model and adapts it.
 - A backdoor can be planted through preference data. Poisoned human feedback planted a trigger word that made
-  any prompt a jailbreak of the model's safeguard (Rando and Tramèr, ICLR 2024) [TH-08].
+  any prompt a jailbreak of the safeguard (SCRUM-281) the model was trained with (Rando and Tramèr, ICLR
+  2024) [TH-08].
 - A backdoor can persist through safety training. Models built to write secure code when the prompt says the
   year is 2023 and exploitable code when it says 2024 kept the behaviour through supervised fine-tuning,
   reinforcement learning and adversarial training; adversarial training taught the models to recognise their
@@ -425,7 +426,7 @@ framework editions and their verification as in the source log, TH-01 to TH-03)
 
 **Which threats have been shown to work, and which are still argued?** The literature demonstrates both
 poisoning and backdoors in research, on models the researchers built, and does not establish either in a
-published open-source model. Poisoning works from a small and possibly near-constant number of examples and
+published open-source model (SCRUM-281). Poisoning works from a small and possibly near-constant number of examples and
 persists through the training that makes a chat model; a backdoor survives the victim's fine-tuning and, in
 deliberately built cases, safety training. What is theoretical is a backdoor that arises without being
 planted. Of the thirteen threats, ten are named by all three frameworks, the two quantisation threats by NIST
@@ -434,17 +435,17 @@ alone, and merge contamination by OWASP alone (Table 2).
 **At which point does each threat enter?** Model-integrity threats enter at selection, with the model, or at
 adjustment, through the organisation's own change or one made on its behalf. Inference-time and runtime threats
 enter in service, with exposure fixed at deployment. Poisoning and backdoors enter at selection through the
-producer or a third party, and at adjustment through data or a change the organisation commissions.
+producer (SCRUM-281) or a third party, and at adjustment through data or a change the organisation commissions.
 
 **Can the threat be judged on the model, or only on the deployed system?** By one test: a threat that moves
-with the file is model level and can be required of the model before it is selected; one that stays with the
+with the file (SCRUM-281) is model level and can be required of the model before it is selected; one that stays with the
 deployment is system level and can be required only of a deployment. Poisoning and backdoors are model level.
 Examination before adoption can search for a trigger and, in classifiers, find one, but cannot show that none
 is there, and recovering a planted trigger in a generative model is not reliable with any method the
 literature establishes; observation in service is therefore not optional for them.
 
 **Which threats must the classification and decision cycle decide on?** All thirteen, each with one register
-row in Table 3 carrying its family, entry stage, level, exposure, model types, status, confidence label,
+row in Table 3 carrying its family, entry stage, level, exposure, model types, status, confidence label (SCRUM-281),
 framework entries and sources, and an empty Disposition column for the decision.
 
 ## Source log

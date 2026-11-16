@@ -37,6 +37,14 @@ PDF is built from the task only. Natan drafts, Dan reviews for security correctn
    stage (S4) with S3 as where exposure is fixed.
 6. **DONE 16 Nov (TH-13 PICCOLO, TH-14 TDC2023). T10 literature**: add PICCOLO (IEEE S&P 2022) and the Trojan Detection Challenge, after verification.
 
+## Reference and symbol audit, 16 November
+
+Scripted check of `scrum288.md`: every TH id cited has a source-log row and every row is cited; the external
+id SC-17 resolves in the 4.2 item's log; every SCRUM reference and citation prefix is in the symbols table;
+every Qn.k and en.k used exists in SCRUM-284's stage tables; source log, register and symbols table use the
+4.2 item's column layout. Glossary terms re-tagged (SCRUM-281) at first use in each part (14 tags added).
+Re-run the check after each new entry.
+
 ## Acceptance criteria, state on 16 November
 
 | Criterion | State |
@@ -128,6 +136,10 @@ PDF is built from the task only. Natan drafts, Dan reviews for security correctn
 - **To THR-1 (4.1):** the framework column of Table 3 (OWASP 2025, MITRE ATLAS) is given with its
   verification date; THR-1 owns the alignment and may replace it.
 - **To THR-4 (blocked by this item):** Table 3 and Table 4.
+- **To SCRUM-289 (ASM-2):** the testable side of its split: hidden triggers (T10 with TH-12 to TH-14:
+  searchable in classifiers, near random in generative models), latent contamination (T9, T13, T14),
+  behaviour and robustness (T17 and every threat's model-level part), and training data as declared only
+  (T9). Its "neither attestable nor practically testable" statement cites these entries.
 - **To ADV-2 (2.3 and Appendix A):** the thirteen register rows; the disposition column is ADV-2's to fill.
 - **To 4.5:** the "applies to" column of Table 3 keys on LAND-1's Table 4; re-read it when Table 4 is frozen.
 - **To 4.6:** orchestration ratings are not in the THR-3 Jira and are not drafted here (user, 16 Nov).
