@@ -30,7 +30,7 @@ Completion check run 16 Nov: 6 P entries, 5 D entries, 11 rows in Table 3; every
 row is cited; external ids SC-25, SC-29, HF-11, HF-15, CG-11, TH-03, TH-12, TH-13, TH-14, TH-42, TH-50 resolve
 in their logs; every Qn.k and en.k used exists in SCRUM-284 and is given in the annex, Table 4; glossary terms
 tagged at first use per part; inline citations at every use; no counts or dates from our own runs; no em or en
-dashes. Sources AT-01 to AT-26 verified 16 Nov (EU AI Act text read from a mirror; quote from EUR-Lex at
+dashes. Sources AT-01 to AT-29 verified 16 Nov (EU AI Act text read from a mirror; quote from EUR-Lex at
 assembly).
 
 ## Inputs, bound to the existing files

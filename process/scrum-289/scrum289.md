@@ -163,11 +163,26 @@ similarity (Nikolic et al. 2025, preprint) [AT-26].
 *Read at: S1, Q1.2, on e1.4 where it ships with the file, and S3, Q3.2, on e3.3 for what is deployed
 (SCRUM-284).*
 
-A bill of materials records what a delivered artefact consists of. Machine-learning models have been a
-component type of the CycloneDX format since version 1.5, with a model card section recording datasets,
-training parameters and provenance (CycloneDX ML-BOM) [SC-25, AT-06]. The SPDX format has an AI profile and a
-dataset profile recording training information, limitations, known bias and data collection (SPDX 3.0.1)
-[AT-07]. The secure development profile for generative and foundation models asks producers to track the
+**What it is.** A software bill of materials, SBOM, is "a formal record containing the details and supply chain
+relationships of various components used in building software"; its minimum data fields name each component,
+its supplier, its version, its other identifiers and its relationships, and it is meant to be generated and
+read by machine (NTIA, The Minimum Elements for a Software Bill of Materials, 2021) [AT-27]. An AI bill of
+materials, AIBOM, applies the same record to a model. The model becomes a component of its own, and the record adds
+what software has no equivalent for: the datasets the model was trained and evaluated on, its training
+parameters, its intended use and limitations, and its provenance (CycloneDX ML-BOM; SPDX 3.0.1 AI and
+Dataset profiles) [AT-06, AT-07].
+
+**The two formats.** A bill of materials is written in a standard format so that tools can produce and check
+it; the minimum-elements report names SPDX and CycloneDX among them [AT-27].
+
+- **CycloneDX**, published as an international standard by Ecma International (ECMA-424) [AT-28].
+  Machine-learning models have been a component type since its version 1.5, with a model card section recording
+  datasets, training parameters and provenance (CycloneDX ML-BOM) [SC-25, AT-06].
+- **SPDX**, published as an international standard by ISO and IEC (ISO/IEC 5962:2021, as its maintainers
+  state) [AT-29]. Its version 3.0.1 has an AI profile and a dataset profile recording training information,
+  limitations, known bias and data collection (SPDX 3.0.1) [AT-07].
+
+**Who asks for one, and who ships one.** The secure development profile for generative and foundation models asks producers to track the
 provenance of a model, its components and derivatives, and to consider disclosing the provenance of training
 data (NIST SP 800-218A, PS.3.2) [AT-09]. A vendor channel ships one with each image it publishes (NVIDIA NGC)
 [CG-11]. How many open-source models (SCRUM-281) ship one is not established.
@@ -420,6 +435,9 @@ The sources this document adds. Each row gives:
 | AT-24 | Research | van der Weij, Hofstätter, Jaffe, Brown, Ward. "AI Sandbagging: Language Models can Strategically Underperform on Evaluations". ICLR 2025 | https://proceedings.iclr.cc/paper_files/paper/2025/hash/b5e5753b0a0e440a6d8dc7e143617cec-Abstract-Conference.html | [CHECKED] capability evaluations are vulnerable to sandbagging; password-locked models hide capability, generalising to a hazardous-knowledge benchmark |
 | AT-25 | Research | Xu, Wang, Ma, Koh, Xiao, Chen. "Instructional Fingerprinting of Large Language Models". NAACL 2024; DOI 10.18653/v1/2024.naacl-long.180 | https://aclanthology.org/2024.naacl-long.180 | [CHECKED] the publisher implants a private key as an instruction backdoor; testable only where planted |
 | AT-26 | Research, preprint | Nikolic, Baluta, Saxena. "Model Provenance Testing for Large Language Models". arXiv:2502.00706 | https://arxiv.org/abs/2502.00706 | [CHECKED] black-box provenance testing; derivations preserve output similarity; 90 to 95 per cent precision and 80 to 90 per cent recall over more than 600 models. Conference proceedings appeared after the cut-off; cited as the preprint, which predates it: emerging |
+| AT-27 | Official | The Minimum Elements For a Software Bill of Materials (SBOM), pursuant to Executive Order 14028; United States Department of Commerce and NTIA, 12 July 2021 | https://www.ntia.doc.gov/files/ntia/publications/sbom_minimum_elements_report.pdf | [CHECKED] "An SBOM is a formal record containing the details and supply chain relationships of various components used in building software"; data fields: supplier name, component name, version, other unique identifiers, dependency relationship and others; automation support: "Data formats used to generate and consume SBOMs include SPDX, CycloneDX, and SWID tags" |
+| AT-28 | Official | ECMA-424, CycloneDX Bill of materials specification, 1st edition, June 2024; Ecma International, TC54 | https://ecma-international.org/publications-and-standards/standards/ecma-424/ | [CHECKED] the standard defines the CycloneDX bill of materials specification, "a structured format for representing detailed inventory information"; 1st edition June 2024 in the archive. A 2nd edition, December 2025, postdates the research cut-off and is not cited |
+| AT-29 | Official | SPDX overview; SPDX project, Linux Foundation; with the Linux Foundation announcement of 9 September 2021 | https://spdx.dev/about/overview/ ; https://www.linuxfoundation.org/press/featured/spdx-becomes-internationally-recognized-standard-for-software-bill-of-materials | [CHECKED] "The SPDX specification is recognized as the international open standard for security, license compliance, and other software supply chain artifacts as ISO/IEC 5962:2021"; published as ISO/IEC 5962:2021 in 2021. The ISO catalogue page refused automated access; the maintainers' statement is cited |
 
 Pages of platform documentation read after the research cut-off are cited for features the earlier logs record
 before it, as noted per row. Searched and not found, recorded for the log: a versioned OpenSSF Model Signing
