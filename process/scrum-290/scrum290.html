@@ -1,0 +1,2589 @@
+<!doctype html><html lang='en'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>Assessment tooling for open-source models: a desk survey and comparison</title><style>
+:root{--bg:#fff;--fg:#1d1d1f;--muted:#5f6368;--line:#d9dce1;--head:#f3f5f8;--accent:#1f4e79}
+@media (prefers-color-scheme:dark){:root{--bg:#16181c;--fg:#e6e6e6;--muted:#a0a4ab;--line:#33373e;--head:#1f232a;--accent:#8ab4f8}}
+body{background:var(--bg);color:var(--fg);font:16px/1.6 Georgia,'Times New Roman',serif;max-width:1000px;margin:0 auto;padding:32px 16px}
+h1{font-size:1.9em;color:var(--accent);margin-bottom:.2em}
+h2{font-size:1.4em;border-bottom:1px solid var(--line);padding-bottom:.2em;margin-top:2em;color:var(--accent)}
+h3{font-size:1.15em;margin-top:1.6em}
+table{border-collapse:collapse;width:100%;margin:1em 0;font:13.5px/1.45 -apple-system,Segoe UI,Helvetica,Arial,sans-serif;display:block;overflow-x:auto}
+th,td{border:1px solid var(--line);padding:6px 8px;vertical-align:top;text-align:left}
+th{background:var(--head)}
+td:first-child{min-width:170px;font-weight:600}
+blockquote{border-left:4px solid var(--accent);margin:1em 0;padding:.4em 1em;background:var(--head)}
+code{font-size:.9em}
+li{margin:.25em 0}
+@media print{body{max-width:none;font-size:11pt}table{display:table;font-size:9pt}}
+</style></head><body><h1>Assessment tooling for open-source models: a desk survey and comparison</h1>
+<h2>What this document answers</h2>
+<p>An organisation that takes an open-source model (SCRUM-281) into use meets it in two states, and in each it
+needs tools.</p>
+<ul>
+<li><strong>Before adoption: the file (SCRUM-281) is in hand.</strong><ul>
+<li>The organisation can read the file without running it: scan its format for code that runs on load,
+  and check that it is the file the producer (SCRUM-281) published.</li>
+<li>It can run the file and test it: send it inputs and judge the outputs, or read its internals while it
+  runs, looking for what no metadata shows.</li>
+</ul>
+</li>
+<li><strong>In service: the model answers requests.</strong><ul>
+<li>Guards sit in front of and behind the model and decide what reaches it and what leaves it.</li>
+<li>Monitors read what arrives and what is returned, and the same tests are run again to see whether the
+  model in service still gives the outputs it gave when it was assessed.</li>
+</ul>
+</li>
+<li><strong>Many tools exist, and they are not alike.</strong><ul>
+<li>They differ in what they cover, in the access they need, in how far their maintainers stand behind
+  them, and in what their licences allow.</li>
+<li>Some that are still cited are no longer maintained. Some that are cited in research
+  have no licence at all.</li>
+</ul>
+</li>
+</ul>
+<p>This document surveys the tools in each state and compares them on one table. It is a desk survey: every
+statement about a tool comes from the tool's own documentation or release record, and no tool was run.</p>
+<p><strong>Table 1. The questions this document answers, and where</strong></p>
+<table>
+<thead>
+<tr>
+<th>Question</th>
+<th>What the document gives</th>
+<th>Where</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Which kinds of tool exist, and where in the lifecycle does each work?</td>
+<td>six categories, each placed on the lifecycle stages by the rule of the lifecycle assessment framework</td>
+<td>Part 1, Table 2</td>
+</tr>
+<tr>
+<td>What does each tool cover, and what does it need?</td>
+<td>a table per category, Tables 3 to 8: for each tool what it reads, its method and the access it needs; for each category what it cannot do</td>
+<td>Part 2</td>
+</tr>
+<tr>
+<td>How do the tools compare?</td>
+<td>one table on coverage, lifecycle stage, maturity, licensing and operational fit, with the evaluation date and each version</td>
+<td>Part 3, Table 9</td>
+</tr>
+<tr>
+<td>Which threats and properties does no tool cover?</td>
+<td>the threats of the taxonomy and the testable properties, each with the tools that read for it, or none</td>
+<td>Part 4, Table 10</td>
+</tr>
+<tr>
+<td>Which tools should the demonstration set use, and why?</td>
+<td>proposals, each justified from its row of Table 9</td>
+<td>Part 5, Table 11</td>
+</tr>
+</tbody>
+</table>
+<p>The contributions, stated once:</p>
+<ul>
+<li><strong>One placement rule for every tool.</strong> Each tool is placed on the lifecycle stages by the evidence it
+  reads, the rule the lifecycle assessment framework fixes, so a reader can see when a tool can be used and
+  when it cannot.</li>
+<li><strong>One comparison table</strong>, on five comparison dimensions: coverage, lifecycle stage, maturity, licensing
+  and operational fit, the five the survey is asked for, each defined with its scale in 1.3. The word
+  "axis" is not used for them, because the glossary (SCRUM-281, section 1.2) keeps it for the two
+  axes of the segmentation, model type and artefact format. The table gives the version of every tool and the date the
+  versions were read, so the comparison can be repeated and its age is visible.</li>
+<li><strong>A coverage map against named threats</strong>: every threat of the taxonomy and every testable property,
+  with the tools that read for it. Where no tool does, the map says so.</li>
+<li><strong>Proposals for the demonstration set</strong>, each traced to a row of the table, and the reasons the other
+  tools are not proposed.</li>
+</ul>
+<p><strong>Scope.</strong> Open-source tools that assess an open-source model, the code shipped with it or the software
+that loads it, or that stand around it as a control, with a
+published version and a stated licence or a stated absence of one. Commercial services are named only where
+a platform documents its use of them, because they publish neither a version nor their method, and a row
+without a version cannot be compared. The threats are numbered as in two earlier documents: T1 to T8 are defined in the supply-chain
+document, "Supply-chain and artefact-level threats on the Hugging Face Hub", Part 2; T9 to T21 in the
+threats document, "Model-integrity and inference-time threats" (SCRUM-288), Parts 2 and 3. The properties
+are those of the attestable-and-testable document, "Attestable and testable properties of an open-source
+model" (SCRUM-289): P1 to P6 in its Part 2, D1 to D5 in its Part 3. Every number used here is listed with
+its name in the annex, Table 13. The lifecycle stages (SCRUM-281), test families (SCRUM-281) and evidence items are those of the
+lifecycle assessment framework (SCRUM-284).</p>
+<p><strong>Structure.</strong> Part 1 fixes the categories, the placement rule and the five comparison
+dimensions. Part 2 surveys the tools,
+one category per subsection, each with its own table. Part 3 is the comparison table. Part 4 maps coverage against the threats and
+properties. Part 5 proposes the tools for the demonstration set. A closing summary answers the five
+questions of Table 1, and an annex gives the text of every lifecycle question and evidence item cited.</p>
+<p><strong>Symbols.</strong> Terms, stage and question numbers, threat and property numbers, and citation prefixes that come
+from outside this document are listed, with where each is defined, in "Symbols from outside this document"
+after the source log.</p>
+<h2>Part 1. Categories, placement and the five comparison dimensions</h2>
+<h3>1.1 The categories</h3>
+<p>The survey covers six categories of tool.</p>
+<ul>
+<li><strong>Artefact and format scanners</strong> read statically, without loading or running anything, for code that
+  would run when the model is loaded. Three objects are read, at different stages: the file alone, the
+  code shipped with it, and the packages that code brings in; 2.1 takes them in turn.</li>
+<li><strong>Red-team and adversarial frameworks</strong> send inputs to the model and judge what comes back, or perturb
+  inputs to change a prediction.</li>
+<li><strong>Guardrail layers</strong> are guards (SCRUM-281): controls (SCRUM-281) placed in front of or behind the model
+  in service. They are not the model's safeguard (SCRUM-281), the refusal behaviour its publisher trained
+  into the file: the safeguard is not a category of tool but a property the tools assess, set out in 2.3.</li>
+<li><strong>Runtime monitors</strong> read the inputs that arrive and the outputs returned while the model is in service.</li>
+<li><strong>Provenance verifiers</strong> check a signature, an attestation or a hash, so that the file in use can be
+  shown to be the one published, by the one who published it.</li>
+<li><strong>White-box analysis</strong>: tools that read the model's internals, its weights and activations while
+  it runs, rather than its file format or its outputs. Their ground is mechanistic interpretability,
+  "reverse engineering the computational mechanisms and representations learned by neural networks into
+  human-understandable algorithms and concepts" (Bereska and Gavves, TMLR 2024) [TL-48]. Two uses matter
+  here: looking for a hidden trigger, by inverting the model's behaviour (T10; D2), and finding the
+  mechanism that carries the safeguard, such as the refusal direction (Arditi et al., NeurIPS 2024)
+  [TH‑17]. White-box analysis holds the only tools that read for
+  backdoors and trojan triggers, and the only way to check the safeguard from inside the model; without it
+  T10 would have no row, and Q2.3 only half of one.</li>
+</ul>
+<h3>1.2 Where each category works</h3>
+<p>The lifecycle stages (SCRUM-281) are four: S1 selection, S2 adjustment, S3 deployment and S4 runtime
+detection, labelled as in the lifecycle assessment framework (SCRUM-284, stage tables, notation). Each
+holds evidence items, written en.k for the k-th item of stage n, and questions, written Qn.k.</p>
+<p>The test families are four, named in the glossary (SCRUM-281, section 1.4) and each defined by the evidence kind it reads (SCRUM-284, section 1.1, Table 1):</p>
+<ul>
+<li><strong>static</strong> reads what is readable in the file or the deployment, without running the model;</li>
+<li><strong>dynamic</strong> reads the model's internals while it runs, white-box, so it needs the file;</li>
+<li><strong>behavioural</strong> reads the model's outputs on chosen inputs, black-box, so it works in possession and by
+  proxy;</li>
+<li><strong>provenance</strong> reads what the platform guarantees: account, upload date, hashes, gating.</li>
+</ul>
+<p>A tool reads one evidence kind, and it can be used at every lifecycle stage whose evidence includes that
+kind, where its access need is met (SCRUM-284, section 1.4). The lifecycle assessment framework placed the
+tooling kinds by this rule before any tool was named (SCRUM-284, stage tables, section M); Table 2 repeats
+that placement, and Part 3 places each tool by it. The text of every question and evidence item is in the
+annex, Table 12.</p>
+<p><strong>Table 2. Category to test family and stage</strong> (placement as in SCRUM-284, stage tables, section M)</p>
+<table>
+<thead>
+<tr>
+<th>Category</th>
+<th>Test family (SCRUM-281)</th>
+<th>Evidence it reads</th>
+<th>Stages</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Artefact and format scanners</td>
+<td>static</td>
+<td>e1.4, e1.6; e2.1; e3.3</td>
+<td>S1, S2, S3</td>
+</tr>
+<tr>
+<td>Red-team and adversarial frameworks</td>
+<td>behavioural</td>
+<td>e1.9, e2.5, e3.5, e4.4</td>
+<td>S1, S2, S3, S4</td>
+</tr>
+<tr>
+<td>Guardrail layers</td>
+<td>none: a control, not a method</td>
+<td>set as configuration in e3.3; their effect measured through e3.5 and e4.3</td>
+<td>S3 as a thing assessed; S4 as a thing watched</td>
+</tr>
+<tr>
+<td>Runtime monitors</td>
+<td>behavioural</td>
+<td>e4.3, e4.4</td>
+<td>S4</td>
+</tr>
+<tr>
+<td>Provenance verifiers</td>
+<td>provenance; static for the re-reads</td>
+<td>e1.1, e1.3, e1.8; e2.1, e3.1, e4.1 against e1.3</td>
+<td>S1; the re-reads at S2, S3, S4</td>
+</tr>
+<tr>
+<td>White-box analysis</td>
+<td>dynamic</td>
+<td>e1.10, e2.4</td>
+<td>S1, S2</td>
+</tr>
+</tbody>
+</table>
+<p>Two readings follow from Table 2.</p>
+<ul>
+<li><strong>Only the behavioural family works at every stage, and only it works by proxy (SCRUM-281).</strong> An
+  organisation that reaches the model through a serving provider (SCRUM-281) and never holds the file can
+  use a red-team framework and a monitor, and nothing else in this survey (SCRUM-284, section 1.4).</li>
+<li><strong>Static and white-box tools are front-loaded.</strong> They need the file, so they are used before the model is
+  put behind serving software; after that, only the re-read of a hash ties the model in service to the one
+  assessed (SCRUM-284, section 1.4).</li>
+</ul>
+<h3>1.3 The five comparison dimensions</h3>
+<p>Each tool is compared on the five comparison dimensions the survey is asked for. Each dimension has a fixed meaning and, where it
+is graded, a fixed scale.</p>
+<ul>
+<li><strong>Coverage.</strong> The threats the tool reads for, by number, T1 to T21; the testable properties, D1 to D5,
+  and the attestable ones, P1 to P6, where it reads one; and the rows of the segmentation it addresses,
+  classification, embedding or generative, the model-type axis (SCRUM-281, section 1.2, Axis A) as
+  segmented in SCRUM-280, Table 4. A tool covers a threat where its own
+  documentation names the threat or the technique; a claim of the maintainer that has not been tested
+  independently is marked emerging (SCRUM-281).</li>
+<li><strong>Lifecycle stage.</strong> The stages S1 to S4 at which the tool can be used, by the rule of 1.2 and the access
+  the tool needs.</li>
+<li><strong>Maturity.</strong> How far the maintainers stand behind the tool, read from published markers only, not from
+  any judgement of quality. Five grades:<ul>
+<li><em>stable</em>: a release at version 1.0 or above, or a stated "Production/Stable" status, and maintained;</li>
+<li><em>pre-release</em>: a stated alpha or beta status, or a version below 1.0, and maintained;</li>
+<li><em>research code</em>: code published with a paper, with no release process;</li>
+<li><em>dormant</em>: no change in the year before the evaluation date, and not archived;</li>
+<li><em>retired</em>: archived, or stated by its maintainers to be no longer maintained.
+A stated status takes precedence over a version number: a tool at 1.2 that states "Alpha" is graded
+pre-release.</li>
+</ul>
+</li>
+<li><strong>Licensing.</strong> The licence of the code, by its SPDX identifier, read from the licence file; the licence
+  of any model the tool ships, where it differs; or the absence of a licence. Without a licence, the
+  default copyright laws apply and "no one may reproduce, distribute, or create derivative works" from the
+  code (GitHub, licensing a repository) [TL-34].</li>
+<li><strong>Operational fit.</strong> What the tool needs to run: the file alone, the weights loaded with their hardware,
+  a running endpoint, keys or an identity; its interface, command line, library or continuous-integration
+  step; and any dependency on a third-party service.</li>
+</ul>
+<h3>1.4 What a desk survey can and cannot say</h3>
+<ul>
+<li><strong>It can say what the maintainers state</strong>: what the tool reads, how, with what access, under what
+  licence, at what version and with what status. Each statement here is cited to the tool's documentation
+  or release record, an Official source in the citation policy (SCRUM-281).</li>
+<li><strong>It cannot say how well a tool works.</strong> Detection rates, false-positive rates and resistance to evasion
+  are stated here only where a research paper measured them, and cited to that paper.</li>
+<li><strong>Its versions have a date.</strong> The versions, licences and statuses in Table 9 are those published on the
+  evaluation date stated in the table's caption. Tools change; the table is a record of that date, and the
+  method of 1.3 is what lets it be repeated.</li>
+</ul>
+<h2>Part 2. The tools</h2>
+<p>The earlier documents ask the questions this part answers with tools. The supply-chain document names the
+threats that ride on the file and the platform, T1 to T8. The threats document names the threats to the
+model itself and at use, T9 to T21, and states which are demonstrated in research and which are
+theoretical. The attestable-and-testable document separates what can be read about a model, P1 to P6, from
+what can only be tested, D1 to D5. The lifecycle assessment framework (SCRUM-284) fixes the stages S1 to S4
+and the evidence each stage holds. Part 1 placed each category of tool on those stages (Table 2) and fixed
+the five comparison dimensions on which tools are compared.</p>
+<p>This part takes each category in turn and asks, of every tool in it, which of those threats and properties
+it reads for, with what access, and what its maintainers say it does not do. Each section opens with a
+table of the category's tools, on the columns that matter for that category, then gives each tool with its
+sources, and closes with what the category cannot do. Part 3 brings every tool onto the five common comparison dimensions in
+one table, Table 9.</p>
+<h3>2.1 Artefact and format scanners</h3>
+<p>What a scanner reads has to be stated, because three different objects can be called "the model", and they
+enter at different stages and carry different threats.</p>
+<ul>
+<li><strong>The file alone.</strong> The weights container, the serialised objects inside it, its metadata and the
+  templates stored with it. Reading it is file analysis: nothing outside the file is involved. It is
+  readable at selection and after adjustment (e1.4, e2.1), and an own scan of it is e1.6. Malicious
+  serialisation (T3), malicious adapters (T6) and the template part of T5 live here.</li>
+<li><strong>The code shipped with the file.</strong> Custom modelling code, Python files uploaded with the weights, which
+  the loader runs only when the user allows it with trust_remote_code [SC‑08]: "the second path to code
+  execution beside pickle" (SCRUM-284, stage tables, Q1.3). It is readable at selection (e1.4), but reading
+  it is code analysis, not format analysis: the code part of T5.</li>
+<li><strong>What that code brings in.</strong> The third-party packages the shipped code imports, and the loader and
+  serving software that run it: software during loading (T8). It is first in hand when the organisation
+  builds the environment or container that will run the model, read at deployment (e3.3), where "the
+  object scanned is the container or engine contents, not the file alone" (SCRUM-284, stage tables,
+  section M), and re-read in service (e4.1).</li>
+</ul>
+<p>The category is surveyed in the same three groups. The first group is made for model files. The second and
+third are general software tools: they read Python code, packages and containers wherever these come from,
+and none of their READMEs mentions model files [TL-35 to TL-42]. They are included because the
+lifecycle assessment framework places code and container scanning in this category (SCRUM-284, stage
+tables, section M), and because without them the code part of T5 and all of T8 would have no tool.</p>
+<p><strong>Table 3. Artefact and format scanners, by the object they read</strong> (each fact from the tool's
+documentation; source log)</p>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Object read</th>
+<th>What it reads</th>
+<th>Method</th>
+<th>Limits stated by its maintainers</th>
+<th>Covers</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>picklescan</td>
+<td>the file</td>
+<td>pickle; PyTorch archives (.bin, .pt, .pth, .ckpt); NumPy; zip</td>
+<td>lists the globals a pickle imports and checks them against safe and unsafe lists</td>
+<td>none stated; bypasses published [SC‑15, SC‑16]</td>
+<td>T3, T6</td>
+<td>TL-01</td>
+</tr>
+<tr>
+<td>ModelScan</td>
+<td>the file</td>
+<td>H5, pickle, SavedModel</td>
+<td>byte search for unsafe code signatures</td>
+<td>none stated; GGUF, ONNX and safetensors not listed</td>
+<td>T3, T6</td>
+<td>TL-02</td>
+</tr>
+<tr>
+<td>fickling</td>
+<td>the file</td>
+<td>pickle; PyTorch and TorchScript variants</td>
+<td>symbolic execution of the pickle; a load-time hook with an import allow-list</td>
+<td>imports added to the allow-list are trusted</td>
+<td>T3, T6</td>
+<td>TL-03</td>
+</tr>
+<tr>
+<td>ModelAudit</td>
+<td>the file</td>
+<td>pickle, PyTorch, safetensors, GGUF, ONNX, Keras, SavedModel, chat templates, archives</td>
+<td>static analysis without loading; weight-anomaly indicators</td>
+<td>a clean scan is not "risk is zero"; runtime-only backdoors may not be visible</td>
+<td>T3, T5 templates, T6; P4</td>
+<td>TL-04, TL-05</td>
+</tr>
+<tr>
+<td>The Hub's scans (platform side)</td>
+<td>the file, every upload</td>
+<td>every file; pickle imports</td>
+<td>ClamAV; listing of pickle imports</td>
+<td>"not 100% foolproof"; lists kept "in a best-effort manner"</td>
+<td>T3 in part</td>
+<td>HF‑05 to HF‑08</td>
+</tr>
+<tr>
+<td>Bandit</td>
+<td>shipped code</td>
+<td>Python source files</td>
+<td>builds a syntax tree of each file and runs security plugins against it</td>
+<td>not stated</td>
+<td>T5 code</td>
+<td>TL-35</td>
+</tr>
+<tr>
+<td>Semgrep Community Edition</td>
+<td>shipped code</td>
+<td>source in 30 or more languages</td>
+<td>pattern-based static analysis</td>
+<td>"will miss many true positives as it can only analyze code within the boundaries of a single function or file"; registry rules report pseudonymous metrics</td>
+<td>T5 code</td>
+<td>TL-36</td>
+</tr>
+<tr>
+<td>GuardDog</td>
+<td>shipped code; packages</td>
+<td>packages from PyPI, npm and other registries; a local archive or directory; a requirements file</td>
+<td>YARA rules on package source; capabilities and threat indicators correlated into a risk score</td>
+<td>threat indicators alone "might be false positives"</td>
+<td>T5 code; T8 malicious packages</td>
+<td>TL-37</td>
+</tr>
+<tr>
+<td>pip-audit</td>
+<td>packages</td>
+<td>a Python environment or a requirements file</td>
+<td>matches packages against the Python Packaging Advisory Database</td>
+<td>"not a static code analyzer"; "If you wouldn't pip install it, you should not pip audit it"</td>
+<td>T8 known vulnerabilities</td>
+<td>TL-38</td>
+</tr>
+<tr>
+<td>OSV-Scanner</td>
+<td>packages; container</td>
+<td>lockfiles and manifests in 11 or more ecosystems; container images</td>
+<td>matches dependencies against the OSV database</td>
+<td>version 2 described as beta</td>
+<td>T8 known vulnerabilities</td>
+<td>TL-39</td>
+</tr>
+<tr>
+<td>Syft</td>
+<td>packages; container</td>
+<td>container images, filesystems, archives</td>
+<td>generates a software bill of materials, CycloneDX or SPDX; signed in-toto attestations</td>
+<td>not stated</td>
+<td>T8 inventory; P4 for software</td>
+<td>TL-40</td>
+</tr>
+<tr>
+<td>Grype</td>
+<td>packages; container</td>
+<td>container images, filesystems, bills of materials</td>
+<td>matches packages against vulnerability data</td>
+<td>not stated</td>
+<td>T8 known vulnerabilities</td>
+<td>TL-41</td>
+</tr>
+<tr>
+<td>Trivy</td>
+<td>packages; container</td>
+<td>container images, filesystems, repositories, virtual machine images, Kubernetes</td>
+<td>vulnerabilities, misconfigurations, secrets, licences, bill of materials</td>
+<td>its own release channel was compromised [TL-43]</td>
+<td>T8 known vulnerabilities</td>
+<td>TL-42, TL-43</td>
+</tr>
+</tbody>
+</table>
+<p><strong>The file alone.</strong></p>
+<ul>
+<li><strong>picklescan</strong> lists the globals a pickle imports and checks them against lists of safe and unsafe
+  imports; it reads pickle files, PyTorch archives and NumPy files, from local paths, URLs or Hugging Face
+  repositories, and returns an exit code for use in a pipeline (picklescan, README and source) [TL-01]. It
+  is the scanner the Hugging Face Hub's pickle scan builds on, and it has had published bypasses: an
+  installer call missing from its unsafe list [SC‑15], and a parsing flaw that its maintainer states "also
+  affects the online hugging face pickle scanners" [SC‑16].</li>
+<li><strong>ModelScan</strong> "currently supports: H5, Pickle, and SavedModel formats" and "reads the content of the file
+  one byte at a time just like a string, looking for code signatures that are unsafe"; it ranks findings in
+  four severities and is designed for continuous-integration use (Protect AI, ModelScan README) [TL-02;
+  SC‑26]. It does not list GGUF, ONNX or safetensors.</li>
+<li><strong>fickling</strong> is a "decompiler, static analyzer, and bytecode rewriter for Python pickle" that executes
+  the pickle symbolically rather than running it, and can hook the loader at run time with an allow-list of
+  imports from machine-learning libraries; imports the user adds to the list are trusted (Trail of Bits,
+  fickling README) [TL-03].</li>
+<li><strong>ModelAudit</strong> registers scanners across model, archive and configuration formats, among them pickle,
+  PyTorch, safetensors, GGUF, ONNX, Keras, SavedModel and chat templates, without loading or executing the
+  model, and can emit a CycloneDX bill of materials (Promptfoo, ModelAudit README) [TL-04]. It also reports
+  "potential backdoor indicators" from suspicious weight patterns and anomalous tensors [TL-04]; that is a
+  claim of the maintainer, not independently tested: emerging. Its security model states the limit plainly: a
+  clean scan means "no known indicators were found," not "risk is zero," and "runtime-only backdoors and
+  environment-triggered logic may not be visible" [TL-05]. Packaged installs enable telemetry by default
+  [TL-04]. Of the shipped files it reads the chat templates; its documentation does not state that it
+  analyses shipped Python modelling code [TL-04].</li>
+<li><strong>The Hub's own scans</strong> are platform-side controls (SCRUM-281), not tools an organisation adopts: ClamAV
+  on every file and a pickle-import scan on every pickled upload [HF‑05, HF‑06], and the Protect AI and
+  JFrog scanners on public repositories [HF‑07, HF‑08]. The Hub states that its lists are kept "in a
+  best-effort manner" and that the scan "is not 100% foolproof" [HF‑06]. Shipped code is reached only by
+  the antivirus signatures; to the Hub it is an ordinary file (supply-chain document, Table 4, row T5).</li>
+</ul>
+<p><strong>The code shipped with the file.</strong></p>
+<ul>
+<li><strong>Bandit</strong> "is a tool designed to find common security issues in Python code": it "processes each file,
+  builds an AST from it, and runs appropriate plugins against the AST nodes" (PyCQA, Bandit README)
+  [TL-35]. It reads the shipped modelling code as it reads any Python file, statically and file by file.</li>
+<li><strong>Semgrep Community Edition</strong> is a static analysis tool for 30 or more languages, driven by rules from a
+  registry; its maintainers state that "in security contexts, Semgrep Community Edition will miss many true
+  positives as it can only analyze code within the boundaries of a single function or file", and that
+  using registry rules "reports pseudonymous rule metrics to semgrep.dev" unless switched off (Semgrep,
+  README) [TL-36]. Its licence is LGPL-2.1 [TL-36].</li>
+<li><strong>GuardDog</strong> "identifies malicious PyPI and npm packages" and packages of other registries; it "runs
+  static analysis on package source code (through YARA rules)" and correlates what code can do with
+  threat indicators, because indicators alone "might be false positives"; it scans a registry package, a
+  local archive or directory, or every package in a requirements file (Datadog, GuardDog README) [TL-37].
+  It is the one tool here that reads for intent, malicious code, rather than for flaws.</li>
+</ul>
+<p><strong>What that code brings in.</strong></p>
+<ul>
+<li><strong>pip-audit</strong> scans "Python environments for packages with known vulnerabilities" from the Python
+  Packaging Advisory Database, an environment or a requirements file; its security model states that it
+  "is not a static code analyzer. It analyzes dependency trees, not code", and "If you wouldn't pip install
+  it, you should not pip audit it" (PyPA, pip-audit README) [TL-38].</li>
+<li><strong>OSV-Scanner</strong> finds "existing vulnerabilities affecting your project's dependencies" from lockfiles and
+  manifests and in container images, against the OSV database; its README describes its current version
+  as beta (Google, OSV-Scanner README) [TL-39].</li>
+<li><strong>Syft</strong> generates "a Software Bill of Materials (SBOM) from container images and filesystems" in
+  CycloneDX or SPDX, and can sign it as an in-toto attestation; <strong>Grype</strong> scans "container images,
+  filesystems, and SBOMs for known vulnerabilities" (Anchore, READMEs) [TL-40, TL-41]. Together they
+  inventory the container in which a model is served and match it against known vulnerabilities.</li>
+<li><strong>Trivy</strong> scans container images, filesystems, repositories and clusters for vulnerabilities,
+  misconfigurations, secrets and licences, and produces a bill of materials (Aqua Security, README)
+  [TL-42]. Its maintainers' advisory records that a threat actor "used compromised credentials to publish
+  a malicious Trivy v0.69.4 release" and malicious images (Aqua Security, GHSA-69fq-xp46-6x23) [TL-43]:
+  an assessment tool is itself software in the supply chain, and the same provenance checks apply to it.</li>
+</ul>
+<p>What the category cannot do.</p>
+<ul>
+<li><strong>File scanners read code paths, not behaviour.</strong> They read what runs on load, not what the weights do.
+  A research evaluation found the scanners it tested missed known malicious models (Kellas et al., ACM CCS
+  2025) [SC‑18]. No scanner in this survey reads for a parser exploit in a weight format (T4) by name.</li>
+<li><strong>Code scanners do not know they are reading model code.</strong> They find patterns and known flaws in Python
+  files; none states a rule for what modelling code should or should not do [TL-35 to TL-37].</li>
+<li><strong>Dependency scanners report known vulnerabilities, not intent.</strong> A package without a published advisory
+  passes pip-audit, OSV-Scanner, Grype and Trivy; only GuardDog reads package code for malicious
+  behaviour [TL-37, TL-38].</li>
+<li><strong>The import chain is not resolved from the file.</strong> No tool here starts from a model repository and
+  follows what its shipped code imports. The packages are known only once an environment or container is
+  built, which is why the third object is read at deployment (e3.3), not at selection.</li>
+</ul>
+<h3>2.2 Red-team and adversarial frameworks</h3>
+<p>These tools send inputs and judge outputs, so they read behaviour (D1) and work at every stage, by proxy as
+well as in possession (Table 2). The generative frameworks address prompt injection (T15, T16),
+jailbreaks (T17) and agentic abuse (T21); the adversarial libraries address the classification row.</p>
+<p><strong>Table 4. Red-team and adversarial frameworks</strong> (each fact from the tool's documentation; source log)</p>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Attacks and tests</th>
+<th>Model rows</th>
+<th>Access</th>
+<th>How outputs are judged</th>
+<th>Covers</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>garak</td>
+<td>probes for prompt injection, jailbreaks, data leakage, training-data replay, toxicity</td>
+<td>generative</td>
+<td>endpoint over REST, or a local model</td>
+<td>the detectors each probe recommends; a failure rate per probe</td>
+<td>T15, T17, T19; D1, D4</td>
+<td>TL-11</td>
+</tr>
+<tr>
+<td>PyRIT</td>
+<td>single- and multi-turn attacks (Crescendo, TAP); content harms, data leakage</td>
+<td>generative</td>
+<td>provider API, application endpoint, browser</td>
+<td>scorers: true or false, Likert, classification; by a model, a content-safety service or custom logic</td>
+<td>T15, T17; D1</td>
+<td>TL-12</td>
+</tr>
+<tr>
+<td>promptfoo</td>
+<td>indirect prompt injection, personal data leaked from context, misuse of connected APIs</td>
+<td>generative; retrieval pipelines; agents</td>
+<td>HTTP API, browser or direct model access</td>
+<td>deterministic and model-graded metrics</td>
+<td>T15, T16, T17, T21; D1</td>
+<td>TL-13</td>
+</tr>
+<tr>
+<td>Inspect, inspect_evals</td>
+<td>agent security (AgentDojo, AgentHarm); jailbreak (StrongREJECT); capability (Cybench, CyberSecEval, WMDP)</td>
+<td>generative</td>
+<td>provider API or local engine</td>
+<td>model-graded and task-defined</td>
+<td>T16, T17, T21; D1, D3</td>
+<td>TL-14, TL-15</td>
+</tr>
+<tr>
+<td>DeepTeam</td>
+<td>jailbreak, prompt injection, multi-turn, excessive agency, tool-metadata poisoning</td>
+<td>generative; agents; retrieval pipelines</td>
+<td>callback to the system under test</td>
+<td>a model as judge</td>
+<td>T15, T16, T17, T21; D1</td>
+<td>TL-16</td>
+</tr>
+<tr>
+<td>AgentDojo</td>
+<td>indirect prompt injection against tool-using agents, with defences</td>
+<td>generative, agents</td>
+<td>model API</td>
+<td>the benchmark's task and security cases [TH‑51]</td>
+<td>T16, T21</td>
+<td>TL-21</td>
+</tr>
+<tr>
+<td>ART</td>
+<td>evasion, poisoning, extraction, inference</td>
+<td>classification; large language models not named</td>
+<td>the model object (white-box) or its predictions</td>
+<td>the attack's effect on predictions</td>
+<td>T9, T18, T20; D4</td>
+<td>TL-17</td>
+</tr>
+<tr>
+<td>TextAttack</td>
+<td>attack recipes on text, including gradient-based search</td>
+<td>classification, sequence-to-sequence</td>
+<td>local model</td>
+<td>the attack's effect on predictions</td>
+<td>D4</td>
+<td>TL-18</td>
+</tr>
+<tr>
+<td>HarmBench</td>
+<td>red-team methods against standard, contextual and multimodal behaviours</td>
+<td>generative; image and text</td>
+<td>local model or API</td>
+<td>its own judge classifiers</td>
+<td>T17; D1</td>
+<td>TL-19</td>
+</tr>
+<tr>
+<td>Counterfit</td>
+<td>wraps existing adversarial frameworks</td>
+<td>classification</td>
+<td>archived</td>
+<td>not applicable</td>
+<td>T18, T20</td>
+<td>TL-20</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>garak</strong> "probes for hallucination, data leakage, prompt injection, misinformation, toxicity
+  generation, jailbreaks, and many other weaknesses", against "pretty much anything accessible via REST" or
+  a local Hugging Face model, and writes a report of every probe and hit (NVIDIA, garak README) [TL-11].
+  Among its probes is a replay probe for training data, which reads for training-data extraction (T19)
+  [TL-11]. Its package states "Alpha" status [TL-11].</li>
+<li><strong>PyRIT</strong> finds "security and safety weaknesses in generative AI systems through automated scans,
+  adaptive multi-turn attacks, and human-led testing", including multi-turn strategies such as Crescendo
+  and TAP, against provider APIs or application endpoints over HTTP, WebSockets or a browser (Microsoft AI
+  Red Team, PyRIT documentation) [TL-12]. Its former repository is archived with the notice "PyRIT has
+  moved!" [TL-12]. Its package states "Alpha" status despite a version above 1.0 [TL-12].</li>
+<li><strong>promptfoo</strong> in red-team mode tests applications, retrieval pipelines and agents for indirect prompt
+  injection, leaks of personal data from context and "misuse of connected APIs or databases (in agents)",
+  through an HTTP API, a browser or direct model access, configured in YAML (promptfoo, red-team
+  documentation) [TL-13]. Its README states "Promptfoo is now part of OpenAI. Promptfoo remains open source
+  and MIT licensed." [TL-13].</li>
+<li><strong>Inspect</strong> is "a framework for large language model evaluations created by the UK AI Security
+  Institute" (Inspect README) [TL-14]. Its companion collection, inspect_evals, includes agent-security
+  tasks (AgentDojo, AgentHarm), jailbreak tasks (StrongREJECT) and capability tasks for offensive cyber and
+  hazardous knowledge (Cybench, CyberSecEval, WMDP) [TL-15], so it is the one framework here that reads for
+  capability boundaries (D3) as well as behaviour.</li>
+<li><strong>DeepTeam</strong> simulates "jailbreaking, prompt injection, multi-turn exploitation" against agents,
+  retrieval pipelines and chat applications through a callback, judging outputs with an LLM, and names
+  excessive agency and tool-metadata poisoning among its vulnerability types (Confident AI, DeepTeam
+  README) [TL-16]. It also offers a guard mode [TL-16].</li>
+<li><strong>AgentDojo</strong> is "a dynamic environment to evaluate prompt injection attacks and defenses for LLM
+  agents" (ETH Zurich and Invariant Labs, AgentDojo README) [TL-21]; its benchmark is the research result
+  cited for indirect injection against agents (Debenedetti et al., NeurIPS 2024) [TH‑51]. Its maintainers
+  state that "the API of the package is still under development and might change" [TL-21].</li>
+<li><strong>Adversarial Robustness Toolbox (ART)</strong> implements "Evasion, Poisoning, Extraction, and Inference"
+  attacks for classification, object detection, speech recognition and generation, across TensorFlow,
+  PyTorch, scikit-learn and others, under the Linux Foundation AI &amp; Data Foundation (ART README) [TL-17].
+  It is the only maintained tool here that reads for model extraction (T18) and membership inference (T20),
+  and for poisoning (T9) on the classification row. Its documentation does not name large language
+  models [TL-17]. Some of its attacks need the model object, white-box, and so the file [TL-17].</li>
+<li><strong>TextAttack</strong> runs "adversarial attacks, data augmentation, and model training in NLP" on
+  classification and sequence-to-sequence models loaded in process, including gradient-based search
+  (TextAttack README and documentation) [TL-18]: robustness (D4) on the classification row.</li>
+<li><strong>HarmBench</strong> is a benchmark "for evaluating automated red teaming methods and LLM attacks/defenses",
+  with behaviours, attack methods and judge classifiers (Center for AI Safety, HarmBench README) [TL-19].
+  It has no release, and no change in the year before the evaluation date [TL-19].</li>
+<li><strong>Counterfit</strong> brought "several existing adversarial frameworks under one tool" for classical models;
+  its repository is archived and names no successor (Microsoft, Counterfit) [TL-20].</li>
+</ul>
+<p>What the category cannot do. A red-team result is a judgement of outputs on chosen inputs; it finds a
+trigger only if an input happens to contain it, and its verdicts are as good as the judge that scores
+them, which several of these frameworks delegate to another model [TL-16, TL-19]. No framework here reads
+for quantisation drift (T12), quantisation-triggered backdoors (T13) or merge contamination (T14) by name;
+each can be pointed at the changed file and compared with the base, which is the measurement chain of the
+lifecycle assessment framework (e1.9, e2.5), not a feature of any tool.</p>
+<h3>2.3 Guardrail layers</h3>
+<p>A guard (SCRUM-281) is a control (SCRUM-281) assessed with the model, not a method that assesses it
+(SCRUM-284, section 1.4). The
+survey compares guards because the organisation chooses one, and the choice is set at S3 (e3.3) and
+measured through the behaviour of the deployed system (e3.5, e4.3).</p>
+<p>A guard is not the safeguard (SCRUM-281). The glossary separates the two: the safeguard is "the model's own
+refusal behaviour, trained in by its publisher, inside the file"; a guard is "a control placed around the
+model, in front of or behind it", and the word "guardrail" is not used for the model's own refusal
+(SCRUM-281, section 1.3). The safeguard is therefore not surveyed here as a category. It is a property the
+tools assess, at two questions of the lifecycle assessment framework: whether it is present at selection
+(Q1.6) and whether it is still present after an adjustment (Q2.3), where fine-tuning, adapters,
+quantisation and merging can weaken it (T11, T12, T14) and an abliterated model (SCRUM-281) has had it
+removed on purpose. Two kinds of tool read it:</p>
+<ul>
+<li><strong>From outputs</strong>, the red-team frameworks of 2.2, which measure whether the model refuses (e1.9, e2.5).</li>
+<li><strong>From internals</strong>, the white-box tools of 2.6, which look for the refusal mechanism itself, the
+  direction in the model's activations that mediates refusal (Arditi et al., NeurIPS 2024) [TH‑17]
+  (e1.10, e2.4).</li>
+</ul>
+<p>A guard can stand in for a weak safeguard in service; it cannot show that the safeguard is there.</p>
+<p><strong>Table 5. Guardrail layers</strong> (each fact from the tool's documentation; source log)</p>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Where it sits</th>
+<th>What it checks</th>
+<th>Model inside it, and its licence</th>
+<th>Covers</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NeMo Guardrails</td>
+<td>at the points the application chooses; library or server</td>
+<td>jailbreaks, injected instructions, unsafe tool calls</td>
+<td>models the user configures</td>
+<td>T15, T16, T17, T21</td>
+<td>TL-22</td>
+</tr>
+<tr>
+<td>LlamaFirewall</td>
+<td>user input, agent reasoning, generated code; conversation traces</td>
+<td>direct injection (Prompt Guard 2); goal hijacking and indirect injection (AlignmentCheck); insecure code (CodeShield)</td>
+<td>Prompt Guard 2, Llama 4 Community Licence; code MIT</td>
+<td>T15, T16, T21</td>
+<td>TL-23, TL-24</td>
+</tr>
+<tr>
+<td>Llama Prompt Guard 2</td>
+<td>a classifier in the path</td>
+<td>prompt injection and jailbreaks, without a separate injection label</td>
+<td>itself, 86M or 22M; Llama 4 Community Licence</td>
+<td>T15, T17</td>
+<td>TL-24</td>
+</tr>
+<tr>
+<td>Llama Guard 4</td>
+<td>a classifier in the path</td>
+<td>content safety, image and text</td>
+<td>itself, 12B; Llama 4 Community Licence</td>
+<td>harmful content</td>
+<td>TL-25</td>
+</tr>
+<tr>
+<td>Guardrails AI</td>
+<td>input and output</td>
+<td>validators, one per risk</td>
+<td>validators, moving from hosted inference to packages</td>
+<td>per validator</td>
+<td>TL-26</td>
+</tr>
+<tr>
+<td>LLM Guard</td>
+<td>input and output</td>
+<td>injection, secrets, personal data, toxicity</td>
+<td>its own models, no longer maintained</td>
+<td>T15</td>
+<td>TL-27</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>NeMo Guardrails</strong> adds "model-backed checks for jailbreaks, injected instructions, and unsafe tool
+  calls", configured in YAML, as a library or a server in the request path (NVIDIA, NeMo Guardrails README)
+  [TL-22]. Its package states "Beta" status [TL-22].</li>
+<li><strong>LlamaFirewall</strong> is "a flexible, real-time guardrail framework" with three components: Prompt Guard 2,
+  which "detects direct prompt injection attempts"; AlignmentCheck, which looks for "goal hijacking,
+  indirect prompt injections, and signs of agent misalignment"; and CodeShield, static analysis of generated
+  code (Meta, LlamaFirewall README) [TL-23]. Its code is MIT; the models it uses carry their own licences
+  [TL-23].</li>
+<li><strong>Llama Prompt Guard 2 and Llama Guard 4</strong> are the classifier models behind such guards: Prompt Guard 2
+  to "detect both prompt injection and jailbreaking attacks", whose model card names its "vulnerability to
+  adaptive attacks" (Meta, model card) [TL-24]; Llama Guard 4 a "natively multimodal safety classifier with
+  12 billion parameters" (Meta, model card) [TL-25]. Both are under the Llama 4 Community Licence [TL-24,
+  TL-25].</li>
+<li><strong>Guardrails AI</strong> runs input and output guards "that detect, quantify and mitigate the presence of
+  specific types of risks", built from validators, as a library or a server (Guardrails AI README) [TL-26].
+  Its maintainers have announced the end of their hosted inference for validators [TL-26].</li>
+<li><strong>LLM Guard</strong> scanned prompts and outputs for injection, secrets, personal data and toxicity; its README
+  states "THIS PROJECT HAS BEEN ARCHIVED" and that it and its models "are no longer under active
+  development or maintained" (Protect AI, LLM Guard README) [TL-27].</li>
+</ul>
+<p>What the category cannot do. A guard reads text at the boundary of the model; it does not change what is in
+the file, so it does not remove a trigger, and a classifier guard is itself a model that an adaptive input
+can evade, as its own card states [TL-24].</p>
+<h3>2.4 Runtime monitors</h3>
+<p>A monitor reads e4.3, the inputs that arrive and the outputs returned, at S4. It is where indirect
+injection (T16) and agentic abuse (T21) are seen in service (SCRUM-284, stage tables, section M).</p>
+<p><strong>Table 6. Runtime monitors</strong> (each fact from the tool's documentation; source log)</p>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>What it reads</th>
+<th>Method</th>
+<th>Status</th>
+<th>Covers</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LangKit</td>
+<td>prompts and responses, as metrics in logs</td>
+<td>similarity to known jailbreaks and injections; patterns; refusal and toxicity metrics</td>
+<td>dormant; its maintaining company is discontinuing operations</td>
+<td>T15, T17</td>
+<td>TL-30, TL-31</td>
+</tr>
+<tr>
+<td>Vigil</td>
+<td>prompts and responses</td>
+<td>vector similarity, YARA rules, a classifier, canary tokens</td>
+<td>alpha; dormant</td>
+<td>T15, T17</td>
+<td>TL-29</td>
+</tr>
+<tr>
+<td>Rebuff</td>
+<td>prompts</td>
+<td>heuristics, a model, a vector store, canary tokens</td>
+<td>retired</td>
+<td>T15</td>
+<td>TL-28</td>
+</tr>
+<tr>
+<td>LlamaFirewall, as a monitor</td>
+<td>conversation traces</td>
+<td>as in Table 5</td>
+<td>maintained</td>
+<td>T16, T21</td>
+<td>TL-23</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>LangKit</strong> is an "open-source text metrics toolkit for monitoring language models", with similarity
+  scores for jailbreak and injection, refusal and toxicity metrics, logged through whylogs (WhyLabs,
+  LangKit README) [TL-30]. Its maintaining company states that it "is discontinuing operations" and has
+  open-sourced its platform [TL-31]; the toolkit itself has had no change in the year before the
+  evaluation date [TL-30].</li>
+<li><strong>Vigil</strong> assesses "Large Language Model prompts and responses against a set of scanners", by vector
+  similarity, YARA rules, a classifier and canary tokens, and states that it is "currently in an alpha
+  state and should be considered experimental / for research purposes" (Vigil README) [TL-29].</li>
+<li><strong>Rebuff</strong> detected prompt injection by heuristics, a model, a vector store and canary tokens, and
+  depended on third-party model and vector-store services; its repository is archived and its README calls
+  it "still a prototype" (Protect AI, Rebuff README) [TL-28].</li>
+<li><strong>Guards that log</strong> also serve as monitors: LlamaFirewall can "scan entire conversation traces" [TL-23],
+  and NeMo Guardrails and DeepTeam's guard mode sit in the same path [TL-22, TL-16].</li>
+</ul>
+<p>What the category cannot do. Among the open-source tools surveyed, no dedicated monitor is maintained:
+each is dormant, alpha or retired, and the maintained candidates are guards used for monitoring. A monitor
+sees the system, not the file; a hidden trigger is visible to it only when an input carries it.</p>
+<h3>2.5 Provenance verifiers</h3>
+<p>These tools establish who published the file and that it has not changed since: cryptographic signing and
+attestation (P5), and the re-reads that tie the model in service to the one assessed (Q3.1, Q4.1). They
+address revision drift (T7) wherever the producer signs.</p>
+<p><strong>Table 7. Provenance verifiers</strong> (each fact from the tool's documentation; source log)</p>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>What it signs or verifies</th>
+<th>Identity</th>
+<th>Where it re-reads</th>
+<th>Covers</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>model-signing</td>
+<td>a model directory, file by file, as (path, digest) pairs</td>
+<td>keyless identity, keys, certificates, hardware tokens</td>
+<td>S1; S2 to S4 by recomputing the hashes</td>
+<td>T7; P5</td>
+<td>TL-06</td>
+</tr>
+<tr>
+<td>cosign</td>
+<td>containers and other artefacts; in-toto attestations</td>
+<td>keyless identity, key management service, key pair</td>
+<td>S3, S4: the container in service</td>
+<td>T7 for containers; P5</td>
+<td>TL-07</td>
+</tr>
+<tr>
+<td>in-toto</td>
+<td>the steps of a supply chain, against a signed layout</td>
+<td>keys per step</td>
+<td>each recorded step</td>
+<td>T7, T8 in part; P5</td>
+<td>TL-09</td>
+</tr>
+<tr>
+<td>slsa-verifier</td>
+<td>the build provenance of an artefact</td>
+<td>the expected builder</td>
+<td>none: no longer maintained</td>
+<td>P5</td>
+<td>TL-08</td>
+</tr>
+<tr>
+<td>cyclonedx-python</td>
+<td>an inventory of a Python environment; no model</td>
+<td>none</td>
+<td>S2, S3</td>
+<td>T8 as inventory; P4 for software only</td>
+<td>TL-10</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>model-signing</strong> signs a model directory as "a list of (file path, digest) pairs" in an in-toto
+  statement inside a Sigstore bundle, keyless through an identity provider or with keys, certificates or
+  hardware tokens, and verifies by checking the signature and computing "the model's file hashes again"
+  (Sigstore, model-transparency README) [TL-06; SC‑24]. It claims "integrity and provenance" only [TL-06].
+  Its package states "Alpha" status [TL-06].</li>
+<li><strong>cosign</strong> signs "OCI containers (and other artifacts)" with built-in support for in-toto attestations
+  (Sigstore, cosign README) [TL-07]: the container in which a model is served (e3.1, e4.1). Its README notes
+  that signatures keep "only a weak reference back to the object they sign" [TL-07].</li>
+<li><strong>in-toto</strong> verifies "that each task in the chain is carried out as planned, by authorized personnel
+  only", from a signed layout and signed records of each step; by default it allows artefacts not
+  explicitly disallowed (in-toto README) [TL-09].</li>
+<li><strong>slsa-verifier</strong> checks the signature on build provenance; its README states "This project is no
+  longer actively maintained" (SLSA, slsa-verifier README) [TL-08].</li>
+<li><strong>cyclonedx-python</strong> generates a bill of materials from a Python environment or its manifests
+  (CycloneDX, README) [TL-10]: the software around the model, not the model. Its documentation does not
+  mention machine-learning models [TL-10], so it records the inventory against software during loading (T8)
+  and does not produce the AI bill of materials (P4). Among the tools surveyed, ModelAudit is the one that
+  emits a bill of materials from a model file [TL-04].</li>
+</ul>
+<p>What the category cannot do. A verifier shows origin and integrity, not safety: the Hub's own documentation
+says a signed commit "does not guarantee that your file is safe, but it does guarantee the origin of the
+file" [HF‑06]. Signing works only where the producer signed; where nothing is signed, the hash at S1 is
+the strongest anchor the later re-reads have (SCRUM-284, section 1.4).</p>
+<h3>2.6 White-box analysis</h3>
+<p>These tools read the model's internals. They need the file and its hardware, so they work in possession
+at S1 and S2 (Table 2). Two things are read for: a hidden trigger (T10; D2), and the refusal mechanism that
+carries the safeguard (Q1.6, Q2.3; 2.3).</p>
+<p><strong>Table 8. White-box analysis</strong> (each fact from the tool's repository and paper; source log)</p>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Method</th>
+<th>Model rows</th>
+<th>Access and hardware</th>
+<th>Licence</th>
+<th>Covers</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BAIT</td>
+<td>inverts the attack target; a second model judges the inverted sequence</td>
+<td>generative</td>
+<td>local model, several GPUs, a key for a third-party model service</td>
+<td>none</td>
+<td>T10; D2</td>
+<td>TL-32, TH‑53</td>
+</tr>
+<tr>
+<td>PICCOLO</td>
+<td>inverts trigger words</td>
+<td>classification, transformer text models</td>
+<td>local model</td>
+<td>none</td>
+<td>T10; D2</td>
+<td>TL-33, TH‑13</td>
+</tr>
+<tr>
+<td>refusal_direction</td>
+<td>computes the refusal direction of its paper and reproduces its results</td>
+<td>generative</td>
+<td>local model and GPU</td>
+<td>Apache-2.0</td>
+<td>the safeguard's mechanism, Q1.6, Q2.3; T11</td>
+<td>TL-44, TH‑17</td>
+</tr>
+<tr>
+<td>TransformerLens</td>
+<td>a library for reading and changing a model's internals; no safeguard check of its own</td>
+<td>generative</td>
+<td>local model and GPU</td>
+<td>MIT</td>
+<td>none by itself</td>
+<td>TL-45</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>BAIT</strong> decides whether a large language model is backdoored "by inverting backdoor targets" rather than
+  triggers, and uses "a secondary LLM to evaluate whether inverted target sequences contain potentially
+  malicious content" (BAIT repository) [TL-32]. Its paper reports top results on the TrojAI model round with
+  black-box access (Shen et al., IEEE S&amp;P 2025) [TH‑53]; its code runs on local model directories with
+  several GPUs and a key for a third-party model service [TL-32]. The repository has no licence [TL-32].</li>
+<li>
+<p><strong>PICCOLO</strong> inverts trigger words in transformer classifiers (Liu et al., IEEE S&amp;P 2022) [TH‑13]; its
+  public code is the authors' competition submission, with no licence and no change since its publication
+  (PurduePAML, PICCOLO repository) [TL-33].</p>
+</li>
+<li>
+<p><strong>refusal_direction</strong> is the code that accompanies the paper showing that refusal is mediated by a
+  single direction, provided "to reproduce the main results from the paper" (Arditi et al., repository)
+  [TL-44; TH‑17]. Applied to a selected file and to its adjusted copy, it reads whether the refusal
+  mechanism is still there, the internals half of Q2.3. It is research code with no change in the year
+  before the evaluation date [TL-44].</p>
+</li>
+<li><strong>TransformerLens</strong> is "a library for mechanistic interpretability of generative language models",
+  maintained (TransformerLens README) [TL-45]. It gives access to activations; a safeguard check has to be
+  written on it.</li>
+<li><strong>Removal tools are not assessment tools.</strong> The maintained open-source tools that locate refusal
+  directions do so to remove them: OBLITERATUS describes itself as a toolkit "for understanding and
+  removing refusal behaviors" and Heretic's default action is to "suppress refusals" (READMEs) [TL-46,
+  TL-47]. Both are AGPL-3.0. They are how an abliterated model is made, the threat side of Q2.3, and are
+  not rows of Table 9.</li>
+</ul>
+<p>What the category cannot do. Detection results vary with how the poisoned model was trained (Yan et al.,
+EMNLP 2025) [TH‑12], and on large language models the best entries of a detection competition were close
+to random sampling (Maloyan et al., 2024, preprint) [TH‑14]. A scanner gives a statistical verdict with an
+error rate, not proof that no trigger is present (threats document, T10).</p>
+<h2>Part 3. The comparison table</h2>
+<p>Table 9 gives every tool surveyed on the five comparison dimensions of 1.3. The versions, licences and statuses are those
+published on the evaluation date; each is cited to its source in the source log.</p>
+<p><strong>Table 9. Assessment tooling compared</strong> (evaluation date 18 November 2026; versions as published on that
+date, from the package index or the release record named in the source log)</p>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Category</th>
+<th>Version</th>
+<th>Licence</th>
+<th>Maturity</th>
+<th>Coverage: threats</th>
+<th>Coverage: properties and rows</th>
+<th>Stages</th>
+<th>Operational fit</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>picklescan</td>
+<td>scanner</td>
+<td>1.0.5</td>
+<td>MIT</td>
+<td>stable</td>
+<td>T3, T6 (pickle); bypasses published [SC‑15, SC‑16]</td>
+<td>every row; pickle and PyTorch archives</td>
+<td>S1, S2, S3</td>
+<td>file only; CLI, library, exit codes</td>
+<td>TL-01</td>
+</tr>
+<tr>
+<td>ModelScan</td>
+<td>scanner</td>
+<td>0.8.8</td>
+<td>Apache-2.0</td>
+<td>pre-release</td>
+<td>T3, T6 (pickle, H5, SavedModel)</td>
+<td>every row; no GGUF, ONNX, safetensors</td>
+<td>S1, S2, S3</td>
+<td>file only; CLI, library, CI</td>
+<td>TL-02</td>
+</tr>
+<tr>
+<td>fickling</td>
+<td>scanner</td>
+<td>0.1.13</td>
+<td>LGPL-3.0</td>
+<td>pre-release (beta)</td>
+<td>T3, T6 (pickle)</td>
+<td>every row; pickle and PyTorch variants</td>
+<td>S1, S2, S3; load-time hook</td>
+<td>file only; CLI, library</td>
+<td>TL-03</td>
+</tr>
+<tr>
+<td>ModelAudit</td>
+<td>scanner</td>
+<td>0.2.56</td>
+<td>MIT</td>
+<td>pre-release (beta)</td>
+<td>T3, T5, T6; backdoor indicators claimed, emerging</td>
+<td>P4 (emits CycloneDX); every row; pickle, safetensors, GGUF, ONNX, Keras, SavedModel, templates</td>
+<td>S1, S2, S3</td>
+<td>file only, credentials for remote stores; CLI, CI; telemetry on by default</td>
+<td>TL-04, TL-05</td>
+</tr>
+<tr>
+<td>Bandit</td>
+<td>scanner (shipped code)</td>
+<td>1.9.4</td>
+<td>Apache-2.0</td>
+<td>stable</td>
+<td>T5 code</td>
+<td>Python files; every row</td>
+<td>S1</td>
+<td>the shipped code only; CLI</td>
+<td>TL-35</td>
+</tr>
+<tr>
+<td>Semgrep Community Edition</td>
+<td>scanner (shipped code)</td>
+<td>1.186.0</td>
+<td>LGPL-2.1</td>
+<td>stable</td>
+<td>T5 code</td>
+<td>30 or more languages; every row</td>
+<td>S1</td>
+<td>the shipped code only; CLI; registry rules report metrics unless switched off</td>
+<td>TL-36</td>
+</tr>
+<tr>
+<td>GuardDog</td>
+<td>scanner (shipped code, packages)</td>
+<td>3.2.0</td>
+<td>Apache-2.0</td>
+<td>stable</td>
+<td>T5 code; T8 malicious packages</td>
+<td>every row</td>
+<td>S1; S3</td>
+<td>package, directory or requirements file; registry access; CLI</td>
+<td>TL-37</td>
+</tr>
+<tr>
+<td>pip-audit</td>
+<td>scanner (packages)</td>
+<td>2.10.1</td>
+<td>Apache-2.0</td>
+<td>stable</td>
+<td>T8 known vulnerabilities</td>
+<td>Python environment; every row</td>
+<td>S3; re-read S4</td>
+<td>environment or requirements file; advisory database; CLI, CI</td>
+<td>TL-38</td>
+</tr>
+<tr>
+<td>OSV-Scanner</td>
+<td>scanner (packages, container)</td>
+<td>2.7.1</td>
+<td>Apache-2.0</td>
+<td>pre-release (beta)</td>
+<td>T8 known vulnerabilities</td>
+<td>11 or more ecosystems; every row</td>
+<td>S3; re-read S4</td>
+<td>lockfiles, manifests or image; OSV database; CLI</td>
+<td>TL-39</td>
+</tr>
+<tr>
+<td>Syft</td>
+<td>scanner (packages, container)</td>
+<td>1.57.2</td>
+<td>Apache-2.0</td>
+<td>stable</td>
+<td>T8 inventory</td>
+<td>P4 for software; every row</td>
+<td>S3; re-read S4</td>
+<td>image or filesystem; CLI, library</td>
+<td>TL-40</td>
+</tr>
+<tr>
+<td>Grype</td>
+<td>scanner (packages, container)</td>
+<td>0.122.1</td>
+<td>Apache-2.0</td>
+<td>pre-release</td>
+<td>T8 known vulnerabilities</td>
+<td>every row</td>
+<td>S3; re-read S4</td>
+<td>image, filesystem or bill of materials; vulnerability database; CLI</td>
+<td>TL-41</td>
+</tr>
+<tr>
+<td>Trivy</td>
+<td>scanner (packages, container)</td>
+<td>0.76.2</td>
+<td>Apache-2.0</td>
+<td>pre-release</td>
+<td>T8 known vulnerabilities</td>
+<td>every row</td>
+<td>S3; re-read S4</td>
+<td>image, filesystem or cluster; vulnerability database; CLI; its release channel was compromised once [TL-43]</td>
+<td>TL-42, TL-43</td>
+</tr>
+<tr>
+<td>garak</td>
+<td>red-team</td>
+<td>0.17.1</td>
+<td>Apache-2.0</td>
+<td>pre-release (alpha)</td>
+<td>T15, T17, T19</td>
+<td>D1, D4; generative row</td>
+<td>S1 to S4; by proxy</td>
+<td>endpoint or local model; CLI</td>
+<td>TL-11</td>
+</tr>
+<tr>
+<td>PyRIT</td>
+<td>red-team</td>
+<td>1.2.1</td>
+<td>MIT</td>
+<td>pre-release (alpha)</td>
+<td>T15, T17; multi-turn</td>
+<td>D1; generative row</td>
+<td>S1 to S4; by proxy</td>
+<td>endpoint, application or browser; CLI, library, GUI</td>
+<td>TL-12</td>
+</tr>
+<tr>
+<td>promptfoo</td>
+<td>red-team</td>
+<td>0.125.1</td>
+<td>MIT</td>
+<td>pre-release</td>
+<td>T15, T16, T17, T21</td>
+<td>D1; generative row</td>
+<td>S1 to S4; by proxy</td>
+<td>endpoint, browser or model; CLI, YAML</td>
+<td>TL-13</td>
+</tr>
+<tr>
+<td>Inspect, inspect_evals</td>
+<td>red-team</td>
+<td>0.3.291; 0.29.0</td>
+<td>MIT</td>
+<td>pre-release (beta)</td>
+<td>T16, T17, T21</td>
+<td>D1, D3; generative row</td>
+<td>S1 to S4; by proxy</td>
+<td>provider API or local engine; CLI, library</td>
+<td>TL-14, TL-15</td>
+</tr>
+<tr>
+<td>DeepTeam</td>
+<td>red-team</td>
+<td>1.0.10</td>
+<td>Apache-2.0</td>
+<td>stable</td>
+<td>T15, T16, T17, T21</td>
+<td>D1; generative row</td>
+<td>S1 to S4; by proxy</td>
+<td>callback to the system; LLM judge; CLI, YAML, library</td>
+<td>TL-16</td>
+</tr>
+<tr>
+<td>AgentDojo</td>
+<td>red-team</td>
+<td>0.1.35</td>
+<td>MIT</td>
+<td>pre-release (beta)</td>
+<td>T16, T21</td>
+<td>D1; generative row, agents</td>
+<td>S1 to S4; by proxy</td>
+<td>model API; CLI, library</td>
+<td>TL-21</td>
+</tr>
+<tr>
+<td>ART</td>
+<td>adversarial</td>
+<td>1.20.1</td>
+<td>MIT</td>
+<td>pre-release (alpha)</td>
+<td>T9, T18, T20 on the classification row; evasion</td>
+<td>D4; classification row; large language models not named</td>
+<td>S1, S2 white-box; S1 to S4 black-box</td>
+<td>model object or endpoint; library</td>
+<td>TL-17</td>
+</tr>
+<tr>
+<td>TextAttack</td>
+<td>adversarial</td>
+<td>0.3.11</td>
+<td>MIT</td>
+<td>pre-release</td>
+<td>evasion of text classifiers</td>
+<td>D4; classification row</td>
+<td>S1, S2</td>
+<td>local model; CLI, library</td>
+<td>TL-18</td>
+</tr>
+<tr>
+<td>HarmBench</td>
+<td>red-team benchmark</td>
+<td>no release</td>
+<td>MIT</td>
+<td>dormant</td>
+<td>T17</td>
+<td>D1; generative row, image and text</td>
+<td>S1 to S4</td>
+<td>local model or API; scripts, YAML</td>
+<td>TL-19</td>
+</tr>
+<tr>
+<td>Counterfit</td>
+<td>adversarial</td>
+<td>1.1.0</td>
+<td>MIT</td>
+<td>retired</td>
+<td>T18, T20; evasion</td>
+<td>classification row</td>
+<td>none: archived</td>
+<td>CLI</td>
+<td>TL-20</td>
+</tr>
+<tr>
+<td>NeMo Guardrails</td>
+<td>guard</td>
+<td>0.24.1</td>
+<td>Apache-2.0</td>
+<td>pre-release (beta)</td>
+<td>T15, T16, T17, T21</td>
+<td>generative row</td>
+<td>S3 assessed; S4 watched</td>
+<td>request path; library, server, YAML</td>
+<td>TL-22</td>
+</tr>
+<tr>
+<td>LlamaFirewall</td>
+<td>guard</td>
+<td>1.0.3</td>
+<td>MIT (code); Llama 4 Community (models)</td>
+<td>stable</td>
+<td>T15, T16, T21; generated code</td>
+<td>generative row</td>
+<td>S3 assessed; S4 watched</td>
+<td>request and agent path; library</td>
+<td>TL-23</td>
+</tr>
+<tr>
+<td>Llama Prompt Guard 2; Llama Guard 4</td>
+<td>guard (models)</td>
+<td>86M, 22M; 12B</td>
+<td>Llama 4 Community</td>
+<td>model release: grade not applicable</td>
+<td>T15, T17; harmful content</td>
+<td>generative row; Guard 4 image and text</td>
+<td>S3 assessed; S4 watched</td>
+<td>classifier in the path; GPU for 12B</td>
+<td>TL-24, TL-25</td>
+</tr>
+<tr>
+<td>Guardrails AI</td>
+<td>guard</td>
+<td>0.11.0</td>
+<td>Apache-2.0</td>
+<td>pre-release</td>
+<td>validators per risk</td>
+<td>generative row</td>
+<td>S3 assessed; S4 watched</td>
+<td>request path; library, server</td>
+<td>TL-26</td>
+</tr>
+<tr>
+<td>LLM Guard</td>
+<td>guard</td>
+<td>0.3.16</td>
+<td>MIT</td>
+<td>retired</td>
+<td>T15; data leakage</td>
+<td>generative row</td>
+<td>none: archived</td>
+<td>library, API</td>
+<td>TL-27</td>
+</tr>
+<tr>
+<td>LangKit</td>
+<td>monitor</td>
+<td>0.0.35</td>
+<td>Apache-2.0</td>
+<td>dormant</td>
+<td>T15, T17 by similarity</td>
+<td>generative row</td>
+<td>S4</td>
+<td>logging through whylogs</td>
+<td>TL-30, TL-31</td>
+</tr>
+<tr>
+<td>Vigil</td>
+<td>monitor</td>
+<td>0.10.3-alpha</td>
+<td>Apache-2.0</td>
+<td>dormant (alpha)</td>
+<td>T15, T17</td>
+<td>generative row</td>
+<td>S4</td>
+<td>library, REST API</td>
+<td>TL-29</td>
+</tr>
+<tr>
+<td>Rebuff</td>
+<td>monitor</td>
+<td>0.1.1</td>
+<td>Apache-2.0</td>
+<td>retired</td>
+<td>T15</td>
+<td>generative row</td>
+<td>none: archived</td>
+<td>third-party model and vector-store services</td>
+<td>TL-28</td>
+</tr>
+<tr>
+<td>model-signing</td>
+<td>provenance</td>
+<td>1.1.1</td>
+<td>Apache-2.0</td>
+<td>pre-release (alpha)</td>
+<td>T7</td>
+<td>P5; every row, every format</td>
+<td>S1; re-reads S2 to S4</td>
+<td>files and an identity or key; CLI, library</td>
+<td>TL-06</td>
+</tr>
+<tr>
+<td>cosign</td>
+<td>provenance</td>
+<td>3.1.4</td>
+<td>Apache-2.0</td>
+<td>stable</td>
+<td>T7 for containers</td>
+<td>P5; the container in service</td>
+<td>S3, S4</td>
+<td>identity or key; CLI</td>
+<td>TL-07</td>
+</tr>
+<tr>
+<td>in-toto</td>
+<td>provenance</td>
+<td>3.1.0</td>
+<td>Apache-2.0</td>
+<td>stable</td>
+<td>T7, T8 in part (steps of the chain)</td>
+<td>P5</td>
+<td>S1 to S4, where each step is recorded</td>
+<td>keys per step; CLI, library</td>
+<td>TL-09</td>
+</tr>
+<tr>
+<td>slsa-verifier</td>
+<td>provenance</td>
+<td>2.7.1</td>
+<td>Apache-2.0</td>
+<td>retired</td>
+<td>T7 for build outputs</td>
+<td>P5</td>
+<td>none: unmaintained</td>
+<td>CLI</td>
+<td>TL-08</td>
+</tr>
+<tr>
+<td>cyclonedx-python</td>
+<td>provenance (inventory)</td>
+<td>8.0.1</td>
+<td>Apache-2.0</td>
+<td>stable</td>
+<td>T8 inventory only</td>
+<td>P4 for software, not the model</td>
+<td>S2, S3</td>
+<td>Python environment; CLI</td>
+<td>TL-10</td>
+</tr>
+<tr>
+<td>BAIT</td>
+<td>white-box</td>
+<td>no release</td>
+<td>none</td>
+<td>research code</td>
+<td>T10; T13 in principle</td>
+<td>D2; generative row</td>
+<td>S1, S2</td>
+<td>local model, several GPUs, third-party model key</td>
+<td>TL-32, TH‑53</td>
+</tr>
+<tr>
+<td>PICCOLO</td>
+<td>white-box</td>
+<td>no release</td>
+<td>none</td>
+<td>research code, dormant</td>
+<td>T10</td>
+<td>D2; classification row</td>
+<td>S1, S2</td>
+<td>local model; competition code</td>
+<td>TL-33, TH‑13</td>
+</tr>
+<tr>
+<td>refusal_direction</td>
+<td>white-box</td>
+<td>no release</td>
+<td>Apache-2.0</td>
+<td>research code, dormant</td>
+<td>T11, the safeguard removed or weakened</td>
+<td>Q1.6, Q2.3 internals; generative row</td>
+<td>S1, S2</td>
+<td>local model and GPU; paper code</td>
+<td>TL-44, TH‑17</td>
+</tr>
+<tr>
+<td>TransformerLens</td>
+<td>white-box (library)</td>
+<td>4.4.0</td>
+<td>MIT</td>
+<td>stable</td>
+<td>none by itself</td>
+<td>generative row</td>
+<td>S1, S2</td>
+<td>local model and GPU; library</td>
+<td>TL-45</td>
+</tr>
+</tbody>
+</table>
+<p>Three readings of Table 9 follow.</p>
+<ul>
+<li><strong>Maturity is low across the board.</strong> Most maintained tools state an alpha or beta status or sit below
+  version 1.0. The stable ones are the general-purpose signing and inventory tools (cosign, in-toto,
+  cyclonedx-python), the general code and dependency scanners except OSV-Scanner, Grype and Trivy,
+  picklescan, DeepTeam and LlamaFirewall; none of the model-specific provenance or
+  white-box tools is stable.</li>
+<li><strong>Licensing is permissive where code is maintained.</strong> MIT and Apache-2.0 dominate; fickling is LGPL-3.0;
+  guard models carry the Llama licence; two of the four white-box tools, BAIT and PICCOLO, carry none, so no organisation may adopt
+  them as published [TL-34]; refusal_direction is Apache-2.0 and TransformerLens MIT.</li>
+<li><strong>Operational fit divides by access.</strong> File scanners and verifiers need only the file; code scanners need only
+  the shipped code; dependency scanners need the built environment or container, and an advisory database; red-team frameworks need
+  only an endpoint; white-box tools need the file, the hardware to run it and, for BAIT, a third-party
+  service. Several red-team frameworks and the white-box scanner rely on another model as a judge.</li>
+</ul>
+<h2>Part 4. What the tools cover, and what they do not</h2>
+<p>Table 10 reads Table 9 the other way: for each threat and testable property, the tools that read for it.
+"None" means no tool surveyed names it; "by the chain" means it can be measured only by running a
+behavioural tool on the changed file and on its base, and comparing.</p>
+<p><strong>Table 10. Coverage by threat and property</strong></p>
+<table>
+<thead>
+<tr>
+<th>Threat or property</th>
+<th>Tools that read for it (maintained)</th>
+<th>State</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>T1 name confusion; T2 account takeover</td>
+<td>none</td>
+<td>none: platform side, outside these tools</td>
+</tr>
+<tr>
+<td>T3 malicious serialisation</td>
+<td>picklescan, ModelScan, fickling, ModelAudit</td>
+<td>covered, evadable [SC‑15, SC‑16, SC‑18]</td>
+</tr>
+<tr>
+<td>T4 parser exploits</td>
+<td>none by name</td>
+<td>none</td>
+</tr>
+<tr>
+<td>T5 code and templates</td>
+<td>ModelAudit, for chat templates; Bandit, Semgrep, GuardDog, for shipped code as ordinary Python</td>
+<td>in part: general code tools, none specific to model code</td>
+</tr>
+<tr>
+<td>T6 malicious adapters</td>
+<td>the T3 scanners, for pickle adapters</td>
+<td>in part</td>
+</tr>
+<tr>
+<td>T7 revision drift</td>
+<td>model-signing, cosign, in-toto</td>
+<td>covered where the producer signs</td>
+</tr>
+<tr>
+<td>T8 software during loading</td>
+<td>pip-audit, OSV-Scanner, Grype, Trivy, for known vulnerabilities; GuardDog, for malicious packages; Syft, cyclonedx-python, in-toto, for inventory</td>
+<td>covered for known vulnerabilities; in part for malicious packages; only once the environment is built (S3)</td>
+</tr>
+<tr>
+<td>T9 training-data poisoning</td>
+<td>ART, on the classification row</td>
+<td>none for generative models</td>
+</tr>
+<tr>
+<td>T10 backdoors and trojan triggers</td>
+<td>BAIT, PICCOLO, unlicensed research code; ModelAudit indicators, emerging</td>
+<td>no adoptable tool</td>
+</tr>
+<tr>
+<td>T11 fine-tune and LoRA tampering</td>
+<td>any red-team framework, by the chain</td>
+<td>by the chain</td>
+</tr>
+<tr>
+<td>T12 quantisation-induced drift</td>
+<td>any red-team framework, by the chain</td>
+<td>by the chain</td>
+</tr>
+<tr>
+<td>T13 quantisation-triggered backdoors</td>
+<td>BAIT in principle</td>
+<td>no adoptable tool</td>
+</tr>
+<tr>
+<td>T14 merge contamination</td>
+<td>any red-team framework, by the chain</td>
+<td>by the chain</td>
+</tr>
+<tr>
+<td>T15 direct prompt injection</td>
+<td>garak, PyRIT, promptfoo, DeepTeam; guards</td>
+<td>covered</td>
+</tr>
+<tr>
+<td>T16 indirect prompt injection</td>
+<td>promptfoo, DeepTeam, AgentDojo, Inspect; LlamaFirewall</td>
+<td>covered</td>
+</tr>
+<tr>
+<td>T17 jailbreaks</td>
+<td>garak, PyRIT, promptfoo, DeepTeam, Inspect</td>
+<td>covered</td>
+</tr>
+<tr>
+<td>T18 model extraction</td>
+<td>ART</td>
+<td>classification row only</td>
+</tr>
+<tr>
+<td>T19 training-data extraction</td>
+<td>garak replay probe</td>
+<td>in part</td>
+</tr>
+<tr>
+<td>T20 membership inference</td>
+<td>ART</td>
+<td>classification row only; unreliable on large generative models [TH‑50]</td>
+</tr>
+<tr>
+<td>T21 agentic and tool-use abuse</td>
+<td>promptfoo, DeepTeam, AgentDojo, Inspect; LlamaFirewall</td>
+<td>covered</td>
+</tr>
+<tr>
+<td>D1 behavioural properties</td>
+<td>every red-team framework</td>
+<td>covered</td>
+</tr>
+<tr>
+<td>D2 hidden triggers</td>
+<td>as T10</td>
+<td>no adoptable tool</td>
+</tr>
+<tr>
+<td>D3 capability boundaries</td>
+<td>Inspect, through inspect_evals</td>
+<td>in part</td>
+</tr>
+<tr>
+<td>D4 robustness</td>
+<td>ART, TextAttack, garak</td>
+<td>covered for classifiers; in part for generative</td>
+</tr>
+<tr>
+<td>D5 latent contamination</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>The safeguard: present (Q1.6), still present after a change (Q2.3)</td>
+<td>outputs: every red-team framework; internals: refusal_direction, research code; TransformerLens, a library without a check</td>
+<td>outputs covered; internals: no maintained tool</td>
+</tr>
+<tr>
+<td>P4 AI bill of materials</td>
+<td>ModelAudit</td>
+<td>in part</td>
+</tr>
+<tr>
+<td>P5 signing and attestation</td>
+<td>model-signing, cosign, in-toto</td>
+<td>covered where adopted</td>
+</tr>
+<tr>
+<td>Runtime monitoring at S4</td>
+<td>guards used as monitors</td>
+<td>no maintained dedicated monitor</td>
+</tr>
+</tbody>
+</table>
+<p>Four gaps stand out, and each is a gap (SCRUM-281) in the sense of the lifecycle assessment framework, a question no
+available evidence answers (SCRUM-284, section 2):</p>
+<ul>
+<li><strong>The model-integrity threats have no adoptable tool.</strong> For backdoors and quantisation-triggered
+  backdoors the tools that exist are research code without a licence; for poisoning, tampering and merging
+  the only measurement is the chain of behavioural tests across the change.</li>
+<li><strong>The embedding row has no tool.</strong> No tool surveyed names embedding models.</li>
+<li><strong>Runtime monitoring has no maintained dedicated tool.</strong> What an organisation can deploy at S4 is a guard
+  that logs.</li>
+<li><strong>The safeguard can be checked from outputs only.</strong> Whether the refusal mechanism is still in the
+  weights after an adjustment has no maintained tool; the open tools that find it are made to remove it.</li>
+</ul>
+<h2>Part 5. Tools proposed for the demonstration set</h2>
+<p>The demonstration set (SCRUM-281) is the techniques executed for the report. A tool is proposed for it only
+if its row in Table 9 meets four conditions:</p>
+<ol>
+<li>it is maintained: graded stable or pre-release, not dormant, retired or research code;</li>
+<li>its licence allows an organisation to run it;</li>
+<li>it covers a threat or property of Table 10 at a stage where the demonstration can meet its access need;</li>
+<li>no other maintained tool in its category covers the same threats with fewer dependencies.</li>
+</ol>
+<p><strong>Table 11. Proposals, justified from Table 9</strong></p>
+<table>
+<thead>
+<tr>
+<th>Proposed tool</th>
+<th>Category</th>
+<th>Why, from its Table 9 row</th>
+<th>Threats and properties it demonstrates</th>
+<th>Stage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ModelAudit</td>
+<td>scanner</td>
+<td>widest format coverage, including GGUF, safetensors, ONNX and templates; MIT; maintained</td>
+<td>T3, T5, T6; P4</td>
+<td>S1, S2</td>
+</tr>
+<tr>
+<td>picklescan</td>
+<td>scanner</td>
+<td>the scanner the Hub builds on, so its result is the platform's baseline; MIT; stable</td>
+<td>T3, T6</td>
+<td>S1</td>
+</tr>
+<tr>
+<td>Bandit</td>
+<td>scanner (shipped code)</td>
+<td>reads the shipped modelling code, which is Python [SC‑08]; stable; Apache-2.0; no external service</td>
+<td>T5 code</td>
+<td>S1</td>
+</tr>
+<tr>
+<td>GuardDog</td>
+<td>scanner (shipped code, packages)</td>
+<td>the only tool that reads package code for malicious behaviour rather than known flaws; stable; Apache-2.0</td>
+<td>T8 malicious packages; T5 code</td>
+<td>S1, S3</td>
+</tr>
+<tr>
+<td>pip-audit</td>
+<td>scanner (packages)</td>
+<td>known vulnerabilities in the Python environment that loads the model; stable; Apache-2.0; maintained under the Python Packaging Authority</td>
+<td>T8 known vulnerabilities</td>
+<td>S3, re-read S4</td>
+</tr>
+<tr>
+<td>model-signing</td>
+<td>provenance</td>
+<td>the only tool that signs and verifies a model directory file by file; Apache-2.0; maintained</td>
+<td>T7; P5; Q1.2, Q3.1</td>
+<td>S1, re-read S3</td>
+</tr>
+<tr>
+<td>garak</td>
+<td>red-team</td>
+<td>endpoint or local model, single-turn probes including training-data replay; Apache-2.0; maintained</td>
+<td>T15, T17, T19; D1, D4</td>
+<td>S1 to S4</td>
+</tr>
+<tr>
+<td>PyRIT</td>
+<td>red-team</td>
+<td>the multi-turn strategies no other framework here offers; MIT; maintained</td>
+<td>T15, T17; D1</td>
+<td>S1 to S4</td>
+</tr>
+<tr>
+<td>AgentDojo</td>
+<td>red-team</td>
+<td>the agent benchmark behind the research result for indirect injection [TH‑51]; MIT; maintained</td>
+<td>T16, T21</td>
+<td>S3, S4</td>
+</tr>
+<tr>
+<td>ART</td>
+<td>adversarial</td>
+<td>the only maintained tool for extraction and membership inference, on the classification row; MIT</td>
+<td>T9, T18, T20; D4</td>
+<td>S1, S2</td>
+</tr>
+<tr>
+<td>LlamaFirewall</td>
+<td>guard</td>
+<td>code under MIT, components for direct and indirect injection and agent alignment; stable</td>
+<td>T15, T16, T21 as a control assessed at S3</td>
+<td>S3, S4</td>
+</tr>
+</tbody>
+</table>
+<p>Not proposed, with the condition each fails:</p>
+<ul>
+<li><strong>Retired</strong>: Counterfit, LLM Guard, Rebuff, slsa-verifier (condition 1).</li>
+<li><strong>Dormant</strong>: HarmBench, LangKit, Vigil (condition 1). HarmBench's behaviours remain citable as a research
+  dataset, not as a maintained tool.</li>
+<li><strong>Dormant research code</strong>: refusal_direction (condition 1); the internals half of Q2.3 is therefore
+  demonstrated with a technique reimplemented from its paper [TH‑17]. TransformerLens is a library on
+  which such a check can be built, not a check (condition 3).</li>
+<li><strong>Unlicensed research code</strong>: BAIT, PICCOLO (conditions 1 and 2). The demonstration of T10 therefore
+  rests on a technique reimplemented from the published paper, or on a licence obtained from the authors,
+  not on these repositories as published.</li>
+<li><strong>Covered by a proposed tool with fewer dependencies</strong>: ModelScan and fickling (by ModelAudit and
+  picklescan); Semgrep (by Bandit, for Python, without registry metrics); OSV-Scanner, Grype and Trivy (by
+  pip-audit for the Python environment); Syft (inventory without detection); promptfoo, DeepTeam and Inspect (by garak, PyRIT and AgentDojo for the same threats);
+  NeMo Guardrails and Guardrails AI (by LlamaFirewall); TextAttack (by ART); cosign, in-toto and
+  cyclonedx-python (they sign or inventory the software around the model, not the model) (conditions 3
+  and 4).</li>
+</ul>
+<h2>Summary: the five questions answered</h2>
+<p>The survey is desk-based: every statement about a tool is taken from the tool's own documentation or
+release record, and no tool was run (1.4).</p>
+<ul>
+<li><strong>Which kinds of tool exist, and where does each work?</strong> Six categories: the five the survey is asked
+  for, artefact and format scanners, red-team and adversarial frameworks, guardrail layers, runtime
+  monitors and provenance verifiers, and white-box analysis, which holds the only tools that read a
+  model's internals for hidden triggers. Each is placed on the lifecycle stages by the evidence it reads
+  (Table 2).<ul>
+<li>Red-team frameworks are the only category that works at every stage, S1 to S4, and by proxy.</li>
+<li>Runtime monitors work at S4.</li>
+<li>Scanners work at S1 to S3, on the file, the shipped code, or the packages and container; the package
+  scanners re-read at S4.</li>
+<li>White-box tools need the file and the hardware to run it, and work at S1 and S2.</li>
+<li>Provenance verifiers anchor at S1 and re-read at S2 to S4.</li>
+<li>Guardrail layers are controls, assessed with the model at S3 and watched at S4, not methods.</li>
+</ul>
+</li>
+<li><strong>What does each tool cover, and what does it need?</strong> Part 2, one table per category, Tables 3 to 8:
+  for each tool what it reads, its method and the access it needs, each cited to the tool's own
+  documentation. Each category closes with what it cannot do.</li>
+<li><strong>How do the tools compare?</strong> Table 9 compares every tool surveyed on the five comparison dimensions,
+  coverage, lifecycle stage, maturity, licensing and operational fit, with the version of each tool as
+  published on the evaluation date, 18 November 2026.<ul>
+<li>Maturity is low: most maintained tools state an alpha or beta status or sit below version 1.0.</li>
+<li>Licences are permissive, mostly MIT and Apache-2.0, where code is maintained. Two of the four
+  white-box tools, BAIT and PICCOLO, carry no licence and cannot be adopted as published.</li>
+<li>Operational fit divides by access: the file, the shipped code, the built environment, or an
+  endpoint.</li>
+</ul>
+</li>
+<li><strong>What does no tool cover?</strong> Four gaps (Table 10): the model-integrity threats have no adoptable tool;
+  the embedding row has no tool; runtime monitoring has no maintained dedicated tool; and the safeguard
+  can be checked from outputs only.</li>
+<li><strong>Which tools should the demonstration set use?</strong> Eleven: ModelAudit, picklescan, Bandit, GuardDog,
+  pip-audit, model-signing, garak, PyRIT, AgentDojo, ART and LlamaFirewall. Each is justified from its row
+  of Table 9 against four stated conditions (Table 11), and every tool not proposed is listed with the
+  condition it fails. Two demonstrations have no adoptable tool:<ul>
+<li>hidden triggers (T10): BAIT and PICCOLO are unlicensed research code, so the demonstration rests on
+  a technique reimplemented from the published paper, or on a licence obtained from the authors;</li>
+<li>the safeguard read from internals (Q2.3): refusal_direction is dormant research code, so the check
+  is reimplemented from its paper [TH‑17].</li>
+</ul>
+</li>
+</ul>
+<h2>Annex. The lifecycle questions and evidence items this document uses</h2>
+<p>The placement of every tool names evidence items, en.k, and some proposals name questions, Qn.k, of the
+lifecycle assessment framework (SCRUM-284). Table 12 gives the text of each one used here, in the
+framework's own words. n is the stage, S1 to S4; k numbers the questions or items of that stage.</p>
+<p><strong>Table 12. Questions and evidence items cited</strong> (text as in SCRUM-284, stage tables)</p>
+<table>
+<thead>
+<tr>
+<th>Symbol</th>
+<th>Stage</th>
+<th>Question, or evidence item and its kind</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Q1.2</td>
+<td>S1 selection</td>
+<td>Is the file what the page says it is?</td>
+</tr>
+<tr>
+<td>Q1.3</td>
+<td>S1 selection</td>
+<td>Can loading it harm us?</td>
+</tr>
+<tr>
+<td>Q1.6</td>
+<td>S1 selection</td>
+<td>Does it behave as described, and is the safeguard present?</td>
+</tr>
+<tr>
+<td>Q2.3</td>
+<td>S2 adjustment</td>
+<td>Is the safeguard still present after the change?</td>
+</tr>
+<tr>
+<td>Q3.1</td>
+<td>S3 deployment</td>
+<td>Is the model in service the model we assessed?</td>
+</tr>
+<tr>
+<td>Q4.1</td>
+<td>S4 runtime detection</td>
+<td>Has what deployment fixed been changed since, the model, its serving software or its configuration?</td>
+</tr>
+<tr>
+<td>e1.1</td>
+<td>S1 selection</td>
+<td>guaranteed: producer account, upload date, file hashes</td>
+</tr>
+<tr>
+<td>e1.3</td>
+<td>S1 selection</td>
+<td>guaranteed: the downloaded file's hash or signature against the page</td>
+</tr>
+<tr>
+<td>e1.4</td>
+<td>S1 selection</td>
+<td>readable: format, whole model or adapter, precision, configuration, and the code and templates that ship with the file: custom modelling code, tokenizer, chat template, generation defaults</td>
+</tr>
+<tr>
+<td>e1.6</td>
+<td>S1 selection</td>
+<td>readable: the organisation's own scan of the file</td>
+</tr>
+<tr>
+<td>e1.8</td>
+<td>S1 selection</td>
+<td>guaranteed: gating, where the platform enforces it</td>
+</tr>
+<tr>
+<td>e1.9</td>
+<td>S1 selection</td>
+<td>testable, outputs: behaviour on the organisation's inputs</td>
+</tr>
+<tr>
+<td>e1.10</td>
+<td>S1 selection</td>
+<td>testable, internals: the file's internals while it runs</td>
+</tr>
+<tr>
+<td>e2.1</td>
+<td>S2 adjustment</td>
+<td>readable: the adjusted artefact: format, completeness, precision, and its base hash against e1.3</td>
+</tr>
+<tr>
+<td>e2.4</td>
+<td>S2 adjustment</td>
+<td>testable, internals: the adjusted weights and activations against the base</td>
+</tr>
+<tr>
+<td>e2.5</td>
+<td>S2 adjustment</td>
+<td>testable, outputs: behaviour on the adjusted model, same inputs as e1.9</td>
+</tr>
+<tr>
+<td>e3.1</td>
+<td>S3 deployment</td>
+<td>readable: the served artefact's hash, against the file assessed at S1 or S2</td>
+</tr>
+<tr>
+<td>e3.3</td>
+<td>S3 deployment</td>
+<td>readable: the serving software and its version; the container base image and drivers, or the compiled engine and its hardware target; and the configuration around the model: system prompt, retrieval, tools, guards, serving settings</td>
+</tr>
+<tr>
+<td>e3.5</td>
+<td>S3 deployment</td>
+<td>testable, outputs: behaviour through the deployed endpoint on the organisation's inputs, configuration in place</td>
+</tr>
+<tr>
+<td>e4.1</td>
+<td>S4 runtime detection</td>
+<td>readable: the served artefact's hash, the serving software and the configuration, re-read in service, against e3.1 and e3.3</td>
+</tr>
+<tr>
+<td>e4.3</td>
+<td>S4 runtime detection</td>
+<td>testable, outputs: the inputs arriving at the endpoint in service, user, retrieved content and tool outputs, and the outputs returned</td>
+</tr>
+<tr>
+<td>e4.4</td>
+<td>S4 runtime detection</td>
+<td>testable, outputs: behaviour on the inputs of e3.5, measured again, against e3.5</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Table 13. Threats and properties cited, with where each is defined</strong></p>
+<table>
+<thead>
+<tr>
+<th>Symbol</th>
+<th>Name</th>
+<th>Defined in</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>T1</td>
+<td>name confusion and typosquatting</td>
+<td>supply-chain document, Part 2, 2.1</td>
+</tr>
+<tr>
+<td>T2</td>
+<td>account and name takeover</td>
+<td>supply-chain document, Part 2, 2.1</td>
+</tr>
+<tr>
+<td>T3</td>
+<td>malicious serialisation</td>
+<td>supply-chain document, Part 2, 2.2</td>
+</tr>
+<tr>
+<td>T4</td>
+<td>format and parser exploits</td>
+<td>supply-chain document, Part 2, 2.2</td>
+</tr>
+<tr>
+<td>T5</td>
+<td>code and templates that ship with the model</td>
+<td>supply-chain document, Part 2, 2.2</td>
+</tr>
+<tr>
+<td>T6</td>
+<td>malicious adapters</td>
+<td>supply-chain document, Part 2, 2.2</td>
+</tr>
+<tr>
+<td>T7</td>
+<td>revision drift</td>
+<td>supply-chain document, Part 2, 2.2</td>
+</tr>
+<tr>
+<td>T8</td>
+<td>software installed or executed during loading</td>
+<td>supply-chain document, Part 2, 2.3</td>
+</tr>
+<tr>
+<td>T9</td>
+<td>training-data poisoning</td>
+<td>threats document (SCRUM-288), Part 2</td>
+</tr>
+<tr>
+<td>T10</td>
+<td>backdoors and trojan triggers</td>
+<td>threats document (SCRUM-288), Part 2</td>
+</tr>
+<tr>
+<td>T11</td>
+<td>fine-tune and LoRA tampering</td>
+<td>threats document (SCRUM-288), Part 2</td>
+</tr>
+<tr>
+<td>T12</td>
+<td>quantisation-induced drift</td>
+<td>threats document (SCRUM-288), Part 2</td>
+</tr>
+<tr>
+<td>T13</td>
+<td>quantisation-triggered backdoors</td>
+<td>threats document (SCRUM-288), Part 2</td>
+</tr>
+<tr>
+<td>T14</td>
+<td>merge contamination</td>
+<td>threats document (SCRUM-288), Part 2</td>
+</tr>
+<tr>
+<td>T15</td>
+<td>direct prompt injection</td>
+<td>threats document (SCRUM-288), Part 3</td>
+</tr>
+<tr>
+<td>T16</td>
+<td>indirect prompt injection</td>
+<td>threats document (SCRUM-288), Part 3</td>
+</tr>
+<tr>
+<td>T17</td>
+<td>jailbreaks</td>
+<td>threats document (SCRUM-288), Part 3</td>
+</tr>
+<tr>
+<td>T18</td>
+<td>model extraction</td>
+<td>threats document (SCRUM-288), Part 3</td>
+</tr>
+<tr>
+<td>T19</td>
+<td>training-data extraction</td>
+<td>threats document (SCRUM-288), Part 3</td>
+</tr>
+<tr>
+<td>T20</td>
+<td>membership inference</td>
+<td>threats document (SCRUM-288), Part 3</td>
+</tr>
+<tr>
+<td>T21</td>
+<td>agentic and tool-use abuse</td>
+<td>threats document (SCRUM-288), Part 3</td>
+</tr>
+<tr>
+<td>P1</td>
+<td>publisher identity</td>
+<td>attestable-and-testable document (SCRUM-289), Part 2</td>
+</tr>
+<tr>
+<td>P2</td>
+<td>training-data disclosure</td>
+<td>attestable-and-testable document (SCRUM-289), Part 2</td>
+</tr>
+<tr>
+<td>P3</td>
+<td>model card</td>
+<td>attestable-and-testable document (SCRUM-289), Part 2</td>
+</tr>
+<tr>
+<td>P4</td>
+<td>AI bill of materials</td>
+<td>attestable-and-testable document (SCRUM-289), Part 2</td>
+</tr>
+<tr>
+<td>P5</td>
+<td>cryptographic signing and attestation</td>
+<td>attestable-and-testable document (SCRUM-289), Part 2</td>
+</tr>
+<tr>
+<td>P6</td>
+<td>licence lineage</td>
+<td>attestable-and-testable document (SCRUM-289), Part 2</td>
+</tr>
+<tr>
+<td>D1</td>
+<td>behavioural properties</td>
+<td>attestable-and-testable document (SCRUM-289), Part 3</td>
+</tr>
+<tr>
+<td>D2</td>
+<td>hidden triggers</td>
+<td>attestable-and-testable document (SCRUM-289), Part 3</td>
+</tr>
+<tr>
+<td>D3</td>
+<td>capability boundaries</td>
+<td>attestable-and-testable document (SCRUM-289), Part 3</td>
+</tr>
+<tr>
+<td>D4</td>
+<td>robustness</td>
+<td>attestable-and-testable document (SCRUM-289), Part 3</td>
+</tr>
+<tr>
+<td>D5</td>
+<td>latent contamination</td>
+<td>attestable-and-testable document (SCRUM-289), Part 3</td>
+</tr>
+</tbody>
+</table>
+<h2>Source log</h2>
+<p>The sources this document adds. Each row gives:</p>
+<ul>
+<li><strong>ID</strong>: the citation key used in the text.</li>
+<li><strong>Class</strong> (SCRUM-281): <em>Official</em>, a standards or framework body, a regulator, or a party writing about its
+  own artefact or service; or <em>Research</em>, a paper at an accepted venue, or a preprint labelled as such.</li>
+<li><strong>Source</strong> and <strong>URL</strong>: what was read and where.</li>
+<li><strong>Verified</strong>: what was checked in it, and the statement the citation rests on. Every tool row was read on
+  the evaluation date, 18 November 2026; its version is the one on the package index or release record named.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Class (SCRUM-281)</th>
+<th>Source</th>
+<th>URL</th>
+<th>Verified</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TL-01</td>
+<td>Official</td>
+<td>picklescan, README and src/picklescan/scanner.py</td>
+<td>https://github.com/mmaitre314/picklescan</td>
+<td>[CHECKED] scans "Pickles from local files, directories, URLs, and zip archives"; safe and unsafe globals lists in the source; CLI exit codes; licence MIT; version 1.0.5 on PyPI; no status classifier</td>
+</tr>
+<tr>
+<td>TL-02</td>
+<td>Official</td>
+<td>ModelScan, Protect AI, README</td>
+<td>https://github.com/protectai/modelscan</td>
+<td>[CHECKED] "ModelScan currently supports: H5, Pickle, and SavedModel formats"; reads the file "one byte at a time"; four severities; CI use; Apache-2.0; version 0.8.8 on PyPI</td>
+</tr>
+<tr>
+<td>TL-03</td>
+<td>Official</td>
+<td>fickling, Trail of Bits, README and pyproject.toml</td>
+<td>https://github.com/trailofbits/fickling</td>
+<td>[CHECKED] "decompiler, static analyzer, and bytecode rewriter for Python pickle"; symbolic execution; load-time hook with an allow-list; manually added imports trusted; LGPL-3.0; version 0.1.13; "Development Status :: 4 - Beta"</td>
+</tr>
+<tr>
+<td>TL-04</td>
+<td>Official</td>
+<td>ModelAudit, Promptfoo, README and pyproject.toml</td>
+<td>https://github.com/promptfoo/modelaudit</td>
+<td>[CHECKED] scanners across model, archive and configuration formats incl. pickle, PyTorch, safetensors, GGUF, ONNX, Keras, SavedModel, Jinja2 templates; "No model is ever loaded, unpickled, or executed"; "Potential backdoor indicators"; <code>--sbom</code> CycloneDX; "Packaged installs enable telemetry by default"; MIT; version 0.2.56 on PyPI; "4 - Beta"</td>
+</tr>
+<tr>
+<td>TL-05</td>
+<td>Official</td>
+<td>ModelAudit security model, Promptfoo</td>
+<td>https://github.com/promptfoo/modelaudit/blob/main/docs/user/security-model.md</td>
+<td>[CHECKED] "A clean scan means "no known indicators were found," not "risk is zero.""; "runtime-only backdoors and environment-triggered logic may not be visible"</td>
+</tr>
+<tr>
+<td>TL-06</td>
+<td>Official</td>
+<td>model-transparency (model-signing), Sigstore, README and pyproject.toml</td>
+<td>https://github.com/sigstore/model-transparency</td>
+<td>[CHECKED] "a list of (file path, digest) pairs"; verification recomputes "the model's file hashes again"; OIDC, keys, certificates, PKCS #11; "integrity and provenance"; Apache-2.0; version 1.1.1 on PyPI; "3 - Alpha"</td>
+</tr>
+<tr>
+<td>TL-07</td>
+<td>Official</td>
+<td>cosign, Sigstore, README</td>
+<td>https://github.com/sigstore/cosign</td>
+<td>[CHECKED] "Signing OCI containers (and other artifacts)"; in-toto attestations; keyless by default; "only a weak reference back to the object they "sign""; Apache-2.0; release v3.1.4</td>
+</tr>
+<tr>
+<td>TL-08</td>
+<td>Official</td>
+<td>slsa-verifier, SLSA, README</td>
+<td>https://github.com/slsa-framework/slsa-verifier</td>
+<td>[CHECKED] verifies "the cryptographic signatures on provenance"; "This project is no longer actively maintained."; Apache-2.0; release v2.7.1</td>
+</tr>
+<tr>
+<td>TL-09</td>
+<td>Official</td>
+<td>in-toto (Python reference implementation), README, LICENSE and pyproject.toml</td>
+<td>https://github.com/in-toto/in-toto</td>
+<td>[CHECKED] "verifying that each task in the chain is carried out as planned, by authorized personnel only"; artefacts allowed unless disallowed; licence file Apache-2.0 (the GitHub API reports NOASSERTION); release v3.1.0; "5 - Production/Stable"</td>
+</tr>
+<tr>
+<td>TL-10</td>
+<td>Official</td>
+<td>cyclonedx-python, OWASP CycloneDX, README</td>
+<td>https://github.com/CycloneDX/cyclonedx-python</td>
+<td>[CHECKED] data sources: Python environment, Poetry, Pipenv, requirements.txt; no mention of machine-learning models; Apache-2.0; release v8.0.1; "5 - Production/Stable"</td>
+</tr>
+<tr>
+<td>TL-11</td>
+<td>Official</td>
+<td>garak, NVIDIA, README and PyPI</td>
+<td>https://github.com/NVIDIA/garak</td>
+<td>[CHECKED] "probes for hallucination, data leakage, prompt injection, misinformation, toxicity generation, jailbreaks"; REST or local Hugging Face model; leakreplay probe; "using the vulnerability detectors recommended by each probe", a failure rate per probe; report and hit log; Apache-2.0; version 0.17.1; "3 - Alpha"</td>
+</tr>
+<tr>
+<td>TL-12</td>
+<td>Official</td>
+<td>PyRIT, Microsoft AI Red Team, README, documentation and the archived former repository</td>
+<td>https://github.com/microsoft/PyRIT ; https://microsoft.github.io/PyRIT/latest/ ; https://github.com/Azure/PyRIT</td>
+<td>[CHECKED] "security and safety weaknesses in generative AI systems through automated scans, adaptive multi-turn attacks, and human-led testing"; Crescendo, TAP; HTTP, WebSockets, Playwright; scorers "true/false, Likert scale, classification, and custom scorers, powered by LLMs, Azure AI Content Safety, or your own logic"; former repository archived, "PyRIT has moved!"; MIT; version 1.2.1 on PyPI; "3 - Alpha"</td>
+</tr>
+<tr>
+<td>TL-13</td>
+<td>Official</td>
+<td>promptfoo, red-team documentation and README</td>
+<td>https://www.promptfoo.dev/docs/red-team/ ; https://github.com/promptfoo/promptfoo</td>
+<td>[CHECKED] indirect prompt injections; PII leaks from context; "misuse of connected APIs or databases (in agents)"; HTTP API, browser or direct model access; YAML configuration; outputs evaluated "using deterministic and model-graded metrics"; "Promptfoo is now part of OpenAI. Promptfoo remains open source and MIT licensed."; version 0.125.1 on npm</td>
+</tr>
+<tr>
+<td>TL-14</td>
+<td>Official</td>
+<td>Inspect, UK AI Security Institute, README</td>
+<td>https://github.com/UKGovernmentBEIS/inspect_ai</td>
+<td>[CHECKED] "a framework for large language model evaluations created by the UK AI Security Institute"; tool use, multi-turn, model-graded evaluations; MIT; version 0.3.291 on PyPI; "4 - Beta"</td>
+</tr>
+<tr>
+<td>TL-15</td>
+<td>Official</td>
+<td>inspect_evals, README and task directory</td>
+<td>https://github.com/UKGovernmentBEIS/inspect_evals</td>
+<td>[CHECKED] tasks incl. agentdojo, agentharm, strong_reject, cyberseceval_2 to 4, cybench, wmdp; MIT; version 0.29.0 on PyPI; "4 - Beta"</td>
+</tr>
+<tr>
+<td>TL-16</td>
+<td>Official</td>
+<td>DeepTeam, Confident AI, README</td>
+<td>https://github.com/confident-ai/deepteam</td>
+<td>[CHECKED] "jailbreaking, prompt injection, multi-turn exploitation … in your AI agents, RAG pipelines, and chatbots"; excessive agency, tool metadata poisoning; <code>model_callback</code>; "LLM-as-a-Judge metrics"; guardrails mode; Apache-2.0; version 1.0.10 on PyPI</td>
+</tr>
+<tr>
+<td>TL-17</td>
+<td>Official</td>
+<td>Adversarial Robustness Toolbox, LF AI &amp; Data, README and attacks documentation</td>
+<td>https://github.com/Trusted-AI/adversarial-robustness-toolbox ; https://adversarial-robustness-toolbox.readthedocs.io/en/latest/modules/attacks.html</td>
+<td>[CHECKED] "Evasion, Poisoning, Extraction, and Inference … (classification, object detection, speech recognition, generation, certification, etc.)"; large language models not named; white-box and no-access attacks distinguished; MIT; version 1.20.1; "3 - Alpha"</td>
+</tr>
+<tr>
+<td>TL-18</td>
+<td>Official</td>
+<td>TextAttack, QData, README and documentation</td>
+<td>https://github.com/QData/TextAttack</td>
+<td>[CHECKED] "adversarial attacks, data augmentation, and model training in NLP"; classification and sequence-to-sequence; gradient-based search among recipes; MIT; release v0.3.11</td>
+</tr>
+<tr>
+<td>TL-19</td>
+<td>Official</td>
+<td>HarmBench, Center for AI Safety, README</td>
+<td>https://github.com/centerforaisafety/HarmBench</td>
+<td>[CHECKED] "evaluating automated red teaming methods and LLM attacks/defenses"; transformers models, closed APIs, multimodal models; judge classifiers; no release; last change August 2024; MIT</td>
+</tr>
+<tr>
+<td>TL-20</td>
+<td>Official</td>
+<td>Counterfit, Microsoft, README</td>
+<td>https://github.com/Azure/counterfit</td>
+<td>[CHECKED] "brings several existing adversarial frameworks under one tool"; repository archived; no successor named; MIT; release v1.1.0</td>
+</tr>
+<tr>
+<td>TL-21</td>
+<td>Official</td>
+<td>AgentDojo, ETH Zurich and Invariant Labs, README</td>
+<td>https://github.com/ethz-spylab/agentdojo</td>
+<td>[CHECKED] "A Dynamic Environment to Evaluate Prompt Injection Attacks and Defenses for LLM Agents"; "the API of the package is still under development and might change in the future"; MIT; release v0.1.35; "4 - Beta"</td>
+</tr>
+<tr>
+<td>TL-22</td>
+<td>Official</td>
+<td>NeMo Guardrails, NVIDIA, README and LICENSE</td>
+<td>https://github.com/NVIDIA-NeMo/Guardrails</td>
+<td>[CHECKED] "model-backed checks for jailbreaks, injected instructions, and unsafe tool calls"; YAML rails, Python actions; library or server; licence file Apache-2.0 (the GitHub API reports NOASSERTION); version 0.24.1; "4 - Beta"</td>
+</tr>
+<tr>
+<td>TL-23</td>
+<td>Official</td>
+<td>LlamaFirewall, Meta, README and LICENSE in PurpleLlama</td>
+<td>https://github.com/meta-llama/PurpleLlama/tree/main/LlamaFirewall</td>
+<td>[CHECKED] "flexible, real-time guardrail framework"; Prompt Guard 2 "detects direct prompt injection attempts"; AlignmentCheck "goal hijacking, indirect prompt injections, and signs of agent misalignment"; CodeShield; can "scan entire conversation traces"; code MIT, models under their Llama licences; version 1.0.3 on PyPI</td>
+</tr>
+<tr>
+<td>TL-24</td>
+<td>Official</td>
+<td>Llama Prompt Guard 2, Meta, model card and LICENSE</td>
+<td>https://github.com/meta-llama/PurpleLlama/tree/main/Llama-Prompt-Guard-2</td>
+<td>[CHECKED] 86M and 22M classifiers to "detect both prompt injection and jailbreaking attacks"; "Vulnerability to Adaptive Attacks"; Llama 4 Community Licence</td>
+</tr>
+<tr>
+<td>TL-25</td>
+<td>Official</td>
+<td>Llama Guard 4, Meta, model card and LICENSE</td>
+<td>https://github.com/meta-llama/PurpleLlama/tree/main/Llama-Guard4</td>
+<td>[CHECKED] "natively multimodal safety classifier with 12 billion parameters"; Llama 4 Community Licence</td>
+</tr>
+<tr>
+<td>TL-26</td>
+<td>Official</td>
+<td>Guardrails AI, README</td>
+<td>https://github.com/guardrails-ai/guardrails</td>
+<td>[CHECKED] "Input/Output Guards in your application that detect, quantify and mitigate the presence of specific types of risks"; library or server; notice discontinuing hosted remote inference; Apache-2.0; release v0.11.0</td>
+</tr>
+<tr>
+<td>TL-27</td>
+<td>Official</td>
+<td>LLM Guard, Protect AI, README</td>
+<td>https://github.com/protectai/llm-guard</td>
+<td>[CHECKED] "THIS PROJECT HAS BEEN ARCHIVED"; "no longer under active development or maintained"; repository archived; MIT; version 0.3.16 on PyPI</td>
+</tr>
+<tr>
+<td>TL-28</td>
+<td>Official</td>
+<td>Rebuff, Protect AI, README</td>
+<td>https://github.com/protectai/rebuff</td>
+<td>[CHECKED] heuristics, model-based detection, vector store, canary tokens; OpenAI and Pinecone keys; "still a prototype"; repository archived; Apache-2.0; release v0.1.1</td>
+</tr>
+<tr>
+<td>TL-29</td>
+<td>Official</td>
+<td>Vigil, README</td>
+<td>https://github.com/deadbits/vigil-llm</td>
+<td>[CHECKED] "assessing Large Language Model prompts and responses against a set of scanners"; "currently in an alpha state and should be considered experimental / for research purposes"; last change January 2024; Apache-2.0; release v0.10.3-alpha</td>
+</tr>
+<tr>
+<td>TL-30</td>
+<td>Official</td>
+<td>LangKit, WhyLabs, README</td>
+<td>https://github.com/whylabs/langkit</td>
+<td>[CHECKED] "open-source text metrics toolkit for monitoring language models"; whylogs; last change November 2024; not archived; Apache-2.0; version 0.0.35</td>
+</tr>
+<tr>
+<td>TL-31</td>
+<td>Official</td>
+<td>WhyLabs, company website</td>
+<td>https://whylabs.ai</td>
+<td>[CHECKED] "WhyLabs, Inc. is discontinuing operations"; platform open-sourced</td>
+</tr>
+<tr>
+<td>TL-32</td>
+<td>Official</td>
+<td>BAIT, authors' repository, README and doc/UPDATE.md</td>
+<td>https://github.com/SolidShen/BAIT</td>
+<td>[CHECKED] "by inverting backdoor targets"; "a secondary LLM to evaluate whether inverted target sequences contain potentially malicious content"; local model directories, GPUs, OpenAI API key; no licence file; no release; setup.py version 2.0.0</td>
+</tr>
+<tr>
+<td>TL-33</td>
+<td>Official</td>
+<td>PICCOLO, PurduePAML, README</td>
+<td>https://github.com/PurduePAML/PICCOLO</td>
+<td>[CHECKED] "the code of PICCOLO submission to TrojAI rounds 5 to 7"; no licence; last change December 2022</td>
+</tr>
+<tr>
+<td>TL-34</td>
+<td>Official</td>
+<td>Licensing a repository, GitHub Docs</td>
+<td>https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/licensing-a-repository</td>
+<td>[CHECKED] "without a license, the default copyright laws apply, meaning that you retain all rights to your source code and no one may reproduce, distribute, or create derivative works from your work"</td>
+</tr>
+<tr>
+<td>TL-35</td>
+<td>Official</td>
+<td>Bandit, PyCQA, README and PyPI</td>
+<td>https://github.com/PyCQA/bandit</td>
+<td>[CHECKED] "a tool designed to find common security issues in Python code"; "processes each file, builds an AST from it, and runs appropriate plugins against the AST nodes"; Apache-2.0; version 1.9.4 on PyPI; "5 - Production/Stable"; no mention of model files</td>
+</tr>
+<tr>
+<td>TL-36</td>
+<td>Official</td>
+<td>Semgrep, README and PyPI</td>
+<td>https://github.com/semgrep/semgrep</td>
+<td>[CHECKED] 30 or more languages; "Semgrep Community Edition will miss many true positives as it can only analyze code within the boundaries of a single function or file"; registry configuration "reports pseudonymous rule metrics to semgrep.dev", <code>--metrics=off</code>; LGPL-2.1; version 1.186.0 on PyPI; no mention of model files</td>
+</tr>
+<tr>
+<td>TL-37</td>
+<td>Official</td>
+<td>GuardDog, Datadog, README</td>
+<td>https://github.com/DataDog/guarddog</td>
+<td>[CHECKED] "identifies malicious PyPI and npm packages, Go modules, Rust crates, RubyGems, GitHub actions, or VSCode extensions"; "static analysis on package source code (through YARA rules)"; threat indicators alone "might be false positives"; local archive, directory and requirements-file scans; Apache-2.0; version 3.2.0 on PyPI; no mention of model files</td>
+</tr>
+<tr>
+<td>TL-38</td>
+<td>Official</td>
+<td>pip-audit, Python Packaging Authority, README</td>
+<td>https://github.com/pypa/pip-audit</td>
+<td>[CHECKED] "scanning Python environments for packages with known vulnerabilities"; Python Packaging Advisory Database; environments and requirements files; security model: "not a static code analyzer. It analyzes dependency trees, not code"; "If you wouldn't <code>pip install</code> it, you should not <code>pip audit</code> it"; Apache-2.0; version 2.10.1 on PyPI; "5 - Production/Stable"</td>
+</tr>
+<tr>
+<td>TL-39</td>
+<td>Official</td>
+<td>OSV-Scanner, Google, README</td>
+<td>https://github.com/google/osv-scanner</td>
+<td>[CHECKED] "find existing vulnerabilities affecting your project's dependencies"; lockfiles, manifests, container images; OSV database; "the latest OSV-Scanner V2 beta"; Apache-2.0; release v2.7.1</td>
+</tr>
+<tr>
+<td>TL-40</td>
+<td>Official</td>
+<td>Syft, Anchore, README</td>
+<td>https://github.com/anchore/syft</td>
+<td>[CHECKED] "generating a Software Bill of Materials (SBOM) from container images and filesystems"; CycloneDX, SPDX; "signed SBOM attestations using the in-toto specification"; Apache-2.0; release v1.57.2</td>
+</tr>
+<tr>
+<td>TL-41</td>
+<td>Official</td>
+<td>Grype, Anchore, README</td>
+<td>https://github.com/anchore/grype</td>
+<td>[CHECKED] "Scan container images, filesystems, and SBOMs for known vulnerabilities"; Apache-2.0; release v0.122.1</td>
+</tr>
+<tr>
+<td>TL-42</td>
+<td>Official</td>
+<td>Trivy, Aqua Security, README</td>
+<td>https://github.com/aquasecurity/trivy</td>
+<td>[CHECKED] targets: container image, filesystem, Git repository, virtual machine image, Kubernetes; finds packages (SBOM), vulnerabilities, misconfigurations, secrets, licences; Apache-2.0; release v0.76.2</td>
+</tr>
+<tr>
+<td>TL-43</td>
+<td>Official</td>
+<td>GHSA-69fq-xp46-6x23, "Trivy ecosystem supply chain temporarily compromised"; Aqua Security</td>
+<td>https://github.com/aquasecurity/trivy/security/advisories/GHSA-69fq-xp46-6x23</td>
+<td>[CHECKED] "a threat actor used compromised credentials to publish a malicious Trivy v0.69.4 release", force-pushed version tags of trivy-action to credential-stealing malware, and published malicious container images; malicious components removed</td>
+</tr>
+<tr>
+<td>TL-44</td>
+<td>Official</td>
+<td>refusal_direction, authors' repository (Arditi et al.), README</td>
+<td>https://github.com/andyrdt/refusal_direction</td>
+<td>[CHECKED] "code and results accompanying the paper "Refusal in Language Models Is Mediated by a Single Direction""; "we provide code to reproduce the main results from the paper"; Apache-2.0; no release; last change June 2025</td>
+</tr>
+<tr>
+<td>TL-45</td>
+<td>Official</td>
+<td>TransformerLens, README and PyPI</td>
+<td>https://github.com/TransformerLensOrg/TransformerLens</td>
+<td>[CHECKED] "A Library for Mechanistic Interpretability of Generative Language Models"; MIT; version 4.4.0 on PyPI; no status classifier</td>
+</tr>
+<tr>
+<td>TL-46</td>
+<td>Official</td>
+<td>OBLITERATUS, README</td>
+<td>https://github.com/elder-plinius/OBLITERATUS</td>
+<td>[CHECKED] "toolkit for understanding and removing refusal behaviors from large language models"; probes hidden states "to locate refusal directions"; AGPL-3.0; release v0.1.4</td>
+</tr>
+<tr>
+<td>TL-47</td>
+<td>Official</td>
+<td>Heretic, README</td>
+<td>https://github.com/p-e-w/heretic</td>
+<td>[CHECKED] "Remove censorship"; "Suppress refusals/remove censorship" as the default action; AGPL-3.0; release v2.1.0</td>
+</tr>
+<tr>
+<td>TL-48</td>
+<td>Research</td>
+<td>Bereska, Gavves. "Mechanistic Interpretability for AI Safety: A Review". Transactions on Machine Learning Research (TMLR) 2024; arXiv:2404.14082</td>
+<td>https://arxiv.org/abs/2404.14082</td>
+<td>[CHECKED] abstract: mechanistic interpretability is "reverse engineering the computational mechanisms and representations learned by neural networks into human-understandable algorithms and concepts"; reviews its relevance to AI safety, and its challenges of scalability and automation; accepted to TMLR per the arXiv record</td>
+</tr>
+</tbody>
+</table>
+<h2>Symbols from outside this document</h2>
+<table>
+<thead>
+<tr>
+<th>Symbol</th>
+<th>Meaning</th>
+<th>Defined in</th>
+<th>File</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>(SCRUM-281) after a term</td>
+<td>the term is a glossary term; shown at its first use in each part</td>
+<td>SCRUM-281, report style guide and glossary, version 1.3, section 1</td>
+<td>governing/report-style-guide-and-glossary.md</td>
+</tr>
+<tr>
+<td>established, emerging, forecast; Official, Research</td>
+<td>confidence labels; citation classes</td>
+<td>SCRUM-281, sections 2.2 and 2.3</td>
+<td>governing/report-style-guide-and-glossary.md</td>
+</tr>
+<tr>
+<td>static, dynamic, behavioural, provenance</td>
+<td>test families</td>
+<td>SCRUM-281, section 1.4; placed on stages in SCRUM-284, section 1.4, Table 3</td>
+<td>process/scrum-284/scrum284.md</td>
+</tr>
+<tr>
+<td>S1 to S4; Qn.k; en.k</td>
+<td>lifecycle stages, questions and evidence items; those used given in full in Table 12</td>
+<td>SCRUM-284, Notation and stage tables</td>
+<td>process/scrum-284/stage-tables.md</td>
+</tr>
+<tr>
+<td>(SCRUM-284) section 1.4; stage tables, section M</td>
+<td>the mapping rule; the tooling kinds placed on stages</td>
+<td>SCRUM-284</td>
+<td>process/scrum-284/scrum284.md; process/scrum-284/stage-tables.md</td>
+</tr>
+<tr>
+<td>(SCRUM-284) section 2</td>
+<td>the gap rule</td>
+<td>SCRUM-284</td>
+<td>process/scrum-284/scrum284.md</td>
+</tr>
+<tr>
+<td>classification, embedding, generative rows</td>
+<td>segmentation of model types</td>
+<td>SCRUM-280, Table 4</td>
+<td>process/scrum-280/scrum280.md</td>
+</tr>
+<tr>
+<td>T1 to T8; "the supply-chain document"; [SC‑nn]</td>
+<td>supply-chain threats and their sources</td>
+<td>supply-chain document</td>
+<td>process/huggingface/hub-supply-chain-threats.md</td>
+</tr>
+<tr>
+<td>T9 to T21; "the threats document"; [TH‑nn]</td>
+<td>model-integrity and inference-time threats and their sources</td>
+<td>SCRUM-288</td>
+<td>process/scrum-288/scrum288.md</td>
+</tr>
+<tr>
+<td>P1 to P6; D1 to D5; "the attestable-and-testable document"</td>
+<td>attestable properties; properties discoverable only by testing</td>
+<td>SCRUM-289</td>
+<td>process/scrum-289/scrum289.md</td>
+</tr>
+<tr>
+<td>[HF‑nn]</td>
+<td>Hugging Face sources</td>
+<td>SCRUM-280</td>
+<td>process/scrum-280/scrum280.md</td>
+</tr>
+</tbody>
+</table></body></html>
