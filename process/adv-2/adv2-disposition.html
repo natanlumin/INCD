@@ -1,0 +1,202 @@
+<title>ADV-2 Disposition Table</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Serif:wght@500;600&display=swap">
+<style>
+/* Layout: a register document. Summary strip, the gate, then the signed table; ledger-like, dense, readable. */
+:root{
+  --bg:#f6f7f5; --panel:#ffffff; --fg:#1b1f1d; --muted:#5d6661; --line:#d9ddd9;
+  --accent:#1f5c4a;
+  --theo:#6b6f74; --theo-bg:#eceef0;
+  --demo:#1d4f91; --demo-bg:#e3ecf8;
+  --adv:#1f6b47; --adv-bg:#e1f1e7;
+  --both:#5a3d8a; --both-bg:#ece5f6;
+  --disp:#9a5b00; --disp-bg:#fbeed6;
+  --serif:"IBM Plex Serif",Georgia,serif; --sans:"IBM Plex Sans",system-ui,sans-serif; --mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#121614; --panel:#1a1f1c; --fg:#e6ebe8; --muted:#9aa49f; --line:#2d3531; --accent:#7cc8ad;
+  --theo:#b3b8bd; --theo-bg:#262a2e; --demo:#8db8f0; --demo-bg:#1a2a40; --adv:#86d3a8; --adv-bg:#173023;
+  --both:#c2a8ee; --both-bg:#2a2140; --disp:#f0b860; --disp-bg:#3a2b12; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#121614; --panel:#1a1f1c; --fg:#e6ebe8; --muted:#9aa49f; --line:#2d3531; --accent:#7cc8ad;
+  --theo:#b3b8bd; --theo-bg:#262a2e; --demo:#8db8f0; --demo-bg:#1a2a40; --adv:#86d3a8; --adv-bg:#173023;
+  --both:#c2a8ee; --both-bg:#2a2140; --disp:#f0b860; --disp-bg:#3a2b12; color-scheme:dark}
+body{background:var(--bg);color:var(--fg);font-family:var(--sans);font-size:14px;line-height:1.5}
+.wrap{max-width:1280px;margin:0 auto;padding-block:32px 64px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:grid;gap:28px}
+header{display:grid;gap:8px}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:var(--serif);font-weight:600;font-size:clamp(24px,3.4vw,34px);line-height:1.15;margin:0;text-wrap:balance}
+h2{font-family:var(--serif);font-weight:600;font-size:20px;margin:0 0 10px}
+p{margin:0;max-width:72ch}
+.muted{color:var(--muted)}
+.strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.stat{background:var(--panel);padding:14px 16px;display:grid;gap:2px}
+.stat b{font-family:var(--mono);font-size:26px;font-weight:500;font-variant-numeric:tabular-nums}
+.stat span{font-size:12px;color:var(--muted)}
+.stat.ok b{color:var(--adv)}
+.pill{display:inline-block;font-size:12px;font-weight:500;padding:2px 8px;border-radius:999px;white-space:nowrap}
+.p-theo{color:var(--theo);background:var(--theo-bg)} .p-demo{color:var(--demo);background:var(--demo-bg)}
+.p-adv{color:var(--adv);background:var(--adv-bg)} .p-both{color:var(--both);background:var(--both-bg)}
+.p-disp{color:var(--disp);background:var(--disp-bg)}
+.tag{font-family:var(--mono);font-size:11px;border:1px solid var(--line);border-radius:4px;padding:1px 6px;white-space:nowrap}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
+.box{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:18px 20px;display:grid;gap:10px;min-width:0}
+.gate{display:grid;gap:8px}
+.gate div{display:grid;grid-template-columns:170px 1fr;gap:10px;align-items:start}
+@media (max-width:520px){.gate div{grid-template-columns:1fr}}
+ul{margin:0;padding-left:18px;display:grid;gap:4px}
+.ac li{list-style:none;margin-left:-18px;display:flex;gap:8px}
+.ac .m{font-family:var(--mono);font-size:12px;min-width:56px}
+.ac .yes{color:var(--adv)} .ac .open{color:var(--disp)}
+.filters{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.filters button{font:inherit;font-size:13px;padding:5px 12px;border-radius:999px;border:1px solid var(--line);background:var(--panel);color:var(--fg);cursor:pointer}
+.filters button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+.filters button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:6px;background:var(--panel)}
+table{border-collapse:collapse;width:100%;min-width:1100px}
+th,td{text-align:left;vertical-align:top;padding:10px 12px;border-bottom:1px solid var(--line)}
+th{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:500;background:var(--panel);position:sticky;top:0}
+tbody tr:last-child td{border-bottom:0}
+tr.fam td{background:var(--bg);font-family:var(--mono);font-size:12px;color:var(--muted);padding:6px 12px}
+td.id{font-family:var(--mono);font-weight:500;white-space:nowrap}
+td .nm{font-weight:600;display:block}
+td .st{font-size:12px;color:var(--muted)}
+td.rat{max-width:340px}
+td.need{max-width:300px;font-size:13px}
+td code{font-family:var(--mono);font-size:12px}
+.chk{display:flex;flex-wrap:wrap;gap:4px;margin-top:4px}
+.chk code{background:var(--adv-bg);color:var(--adv);padding:1px 5px;border-radius:3px}
+.chk code.tool{background:var(--demo-bg);color:var(--demo)}
+.dispute{margin-top:6px;font-size:12px;color:var(--disp)}
+td.date{font-family:var(--mono);font-size:12px;white-space:nowrap;font-variant-numeric:tabular-nums}
+.sign{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.line{border-bottom:1px solid var(--fg);height:34px}
+.small{font-size:12px}
+</style>
+
+<div class="wrap">
+<header>
+  <div class="eyebrow">SCRUM-294 · ADV-2 · Wave 4 · report 2.3 and Appendix A</div>
+  <h1>Every threat through the classification gate</h1>
+  <p class="muted">Each of the 21 threats on the register has a recorded disposition, rationale and decision date. Threats promoted to the demonstration set or to Advisor candidacy carry a blackbox or whitebox tag and what running them needs. Natan proposed these decisions on 25 November 2026; Dan adjudicates the three disputed rows and signs the table.</p>
+</header>
+
+<section class="strip" aria-label="Summary">
+  <div class="stat ok"><b>21 / 21</b><span>rows with a disposition</span></div>
+  <div class="stat ok"><b>0</b><span>unclassified rows</span></div>
+  <div class="stat"><b id="n-both">9</b><span>Demonstration and Advisor</span></div>
+  <div class="stat"><b id="n-adv">3</b><span>Advisor candidate</span></div>
+  <div class="stat"><b id="n-demo">5</b><span>Demonstration</span></div>
+  <div class="stat"><b id="n-theo">4</b><span>Theoretical only</span></div>
+  <div class="stat"><b id="n-disp" style="color:var(--disp)">3</b><span>disputed, for Dan</span></div>
+</section>
+
+<div class="grid2">
+  <section class="box">
+    <h2>The gate</h2>
+    <p class="small muted">Proposed here, because ADV-1 (SCRUM-283) is not in the repository. Read it against ADV-1 once ADV-1 is published.</p>
+    <div class="gate">
+      <div><span class="pill p-theo">Theoretical only</span><span>Treated in the report text from its sources and not executed. This is the default, so no row can block on indecision.</span></div>
+      <div><span class="pill p-demo">Demonstration</span><span>Executed in the qualified demonstration set (ADV-3, ADV-4) and reported in Appendix B, with what it shows and what it does not.</span></div>
+      <div><span class="pill p-adv">Advisor candidate</span><span>A check that LuminAI Advisor can run on a model before adoption. The threat must be model-level, or model-level for its susceptibility (SCRUM-288, Part 4).</span></div>
+      <div><span class="pill p-both">Demonstration and Advisor</span><span>Both of the above.</span></div>
+    </div>
+    <p class="small"><b>Promotion test.</b> Promote a threat only when all three hold: (1) the status is demonstrated in research or observed in deployment (SCRUM-288, Table 3); (2) running it needs no attack on a real third party and publishes no working exploit; (3) a tool exists, or an Advisor check exists or can be built, to run it.</p>
+  </section>
+
+  <section class="box">
+    <h2>Acceptance criteria</h2>
+    <ul class="ac">
+      <li><span class="m yes">met</span><span>The disposition table covers 100% of the inventory available: T1 to T21, with no unclassified rows.</span></li>
+      <li><span class="m yes">met</span><span>Every promotion has a written rationale, a blackbox or whitebox tag, and what running it would need.</span></li>
+      <li><span class="m open">open</span><span>THR-4 (SCRUM-293) is not published. The inventory used here is the register in the supply-chain document (T1 to T8, Table 6) and in SCRUM-288 (T9 to T21, Table 3). Re-read it against THR-4; any new row gets a disposition before Dan signs.</span></li>
+      <li><span class="m open">open</span><span>Dan adjudicates T4, T9 and T20. Each has a proposed decision, so none is left without one.</span></li>
+      <li><span class="m open">open</span><span>Dan signs the completed table.</span></li>
+    </ul>
+  </section>
+</div>
+
+<section>
+  <h2>Disposition table</h2>
+  <div class="filters" role="group" aria-label="Filter rows">
+    <button id="f-all" data-f="all" aria-pressed="true">All 21</button>
+    <button id="f-both" data-f="both" aria-pressed="false">Demonstration and Advisor</button>
+    <button id="f-adv" data-f="adv" aria-pressed="false">Advisor candidate</button>
+    <button id="f-demo" data-f="demo" aria-pressed="false">Demonstration</button>
+    <button id="f-theo" data-f="theo" aria-pressed="false">Theoretical only</button>
+    <button id="f-disp" data-f="disp" aria-pressed="false">Disputed</button>
+  </div>
+</section>
+
+<div class="tbl">
+<table>
+  <thead><tr><th>Threat</th><th>Disposition</th><th>Mode</th><th>Rationale</th><th>What running it needs</th><th>Tools and Advisor checks</th><th>Decided</th></tr></thead>
+  <tbody id="rows"></tbody>
+</table>
+</div>
+<p class="small muted">Advisor checks named here exist in Sabre's test profiles on dev (25 November 2026), with tier and rank. Tools come from SCRUM-290, Table 11. Status comes from the register. Tags: <span class="tag">whitebox</span> means it needs the files or weights; <span class="tag">blackbox</span> means it needs only prompts and answers.</p>
+
+<section class="box">
+  <h2>Sign-off</h2>
+  <p class="small muted">This table is the one place where "every threat got a decision" is either true or not. Sign once THR-4 is reconciled and the disputed rows are settled.</p>
+  <div class="sign">
+    <div><div class="line"></div><span class="small">Dan, adjudicator</span></div>
+    <div><div class="line"></div><span class="small">Date</span></div>
+    <div><div class="line"></div><span class="small">Natan, accountable</span></div>
+  </div>
+</section>
+</div>
+
+<script>
+const R=[
+ {f:"Supply chain and artefact (report 4.2)"},
+ {id:"T1",n:"Name confusion and typosquatting",s:"established on the Hub",d:"theo",m:"",r:"Nothing to execute on a model: the failure is in selection. The counter is a selection rule (verified producer namespace, pinned revision), stated in the report.",need:"A squatted repository on a public hub, which would publish a lure. Out of scope.",k:[]},
+ {id:"T2",n:"Account and name takeover",s:"established for the routes",d:"theo",m:"",r:"Running it means compromising a real producer account. The documented incidents are the evidence.",need:"Not run.",k:[]},
+ {id:"T3",n:"Malicious serialisation",s:"established",d:"both",m:"whitebox",r:"Shown in the wild, and the Hub's scan has missed new payloads. A benign payload shows exactly what a scanner catches and what it misses.",need:"A benign pickle (writes a marker file, no network) built offline; isolated loader; no GPU.",t:["ModelAudit","picklescan"],k:["SerializationScan T0·20"]},
+ {id:"T4",n:"Format and parser exploits",s:"established for GGUF, ONNX",d:"theo",dis:"Proposed: theoretical only. Alternative for Dan: demonstrate the published llama.cpp crash on a patched and an unpatched build.",m:"",r:"A crafted file exploits one engine version. No scanner reads for it, so a demonstration would amount to releasing an exploit.",need:"A memory-corruption file per engine version, run in a sandbox.",k:[]},
+ {id:"T5",n:"Code and templates shipped with the model",s:"established",d:"both",m:"whitebox",r:"Custom code and chat templates run on load or on prompt. Readable before running, and checkable without executing.",need:"The repository files; a template sandbox for the Jinja route; no GPU.",t:["Bandit","GuardDog"],k:["ArtifactExecutionAudit T0·20","TokenizerAudit T0·15","GenerationConfigAudit T0·10"]},
+ {id:"T6",n:"Malicious adapters",s:"established",d:"both",m:"whitebox",r:"The pair of adapter and base, not the file alone, has to be tested, and the declared base is not checked by the Hub. Advisor checks the pair.",need:"Adapter plus its declared base weights; a small GPU for the projection.",t:["ModelAudit"],k:["AdapterMergeConfigAudit T0·9","DeclaredBaseMismatch T0·12","SafeLoRAProjection T1·11"]},
+ {id:"T7",n:"Revision drift",s:"established for the mechanism",d:"both",m:"whitebox",r:"A change after adoption is detectable by hash, and signing makes it verifiable.",need:"Repository history and the hashes recorded at adoption; no GPU.",t:["model-signing"],k:["RevisionRugPull T0·14"]},
+ {id:"T8",n:"Software installed or executed during loading",s:"established",d:"demo",m:"whitebox",r:"The risk sits in the loader and its environment, not in the model, so Advisor does not cover it. Package scanners can show it.",need:"The loading environment (requirements, container); no GPU.",t:["pip-audit","GuardDog"],k:[]},
+ {f:"Model integrity (report 4.3)"},
+ {id:"T9",n:"Training-data poisoning",s:"demonstrated in research",d:"demo",dis:"Proposed: demonstration on the classification row only. Alternative for Dan: theoretical only, since untargeted poisoning leaves no model-level signature that Advisor could check.",m:"whitebox",r:"Shown in research. Poisoning that plants a trigger is handled under T10; untargeted drift has no adoption-time test.",need:"A small classifier, its training data and one training run.",t:["ART"],k:[]},
+ {id:"T10",n:"Backdoors and trojan triggers",s:"demonstrated in research",d:"both",m:"whitebox",r:"The model-level threat the Advisor is built for. A planted-trigger model is the positive control, and a clean population sets the thresholds.",need:"Weights; a large GPU tier; a planted-trigger model; clean reference models.",t:[],k:["TriggerSearch T2·16","BackdoorDetectionV1 T2·15","CallHomeScan T2·15","TriggerWordSweep T2·13","SequenceLock T2·13","UniversalPerturbationRadius T2·11"]},
+ {id:"T11",n:"Fine-tune and LoRA tampering",s:"observed in deployment",d:"both",m:"whitebox",r:"Safeguard removal is observed in published abliterated copies. The delta from the declared base shows it.",need:"Weights plus the declared base; GPU; a published abliterated copy and its base for the demonstration.",t:[],k:["AlignmentDeltaEnergy T2·15","FinetuneDeltaForensics T1·11","SafeLoRAProjection T1·11","BaselineHarmfulCompliance"]},
+ {id:"T12",n:"Quantisation-induced drift",s:"demonstrated in research",d:"adv",m:"whitebox",r:"Measurable on the quantised copy against full precision. Not worth a separate demonstration from Advisor's own run.",need:"Full-precision and quantised copies; GPU.",t:[],k:["PublishedQuantResidualBound T1·12","QuantBehaviorDeltaMatrix Esc·14"]},
+ {id:"T13",n:"Quantisation-triggered backdoors",s:"demonstrated in research",d:"adv",m:"whitebox",r:"Testable only once a quantised copy exists. Building the attack for a demonstration would reproduce the published attack code.",need:"Full-precision and quantised copies; GPU.",t:[],k:["QuantBehaviorDeltaMatrix Esc·14","QuantNoiseSensitivity Esc·12","QuantBinEdgeTest T1·4 (advisory)"]},
+ {id:"T14",n:"Merge contamination",s:"demonstrated in research",d:"adv",m:"whitebox",r:"Merged weights can be checked against their declared parents. Contamination of evaluations inherited through a merge stays theoretical.",need:"The merged model and the parents named in the merge recipe.",t:[],k:["MergeProvenanceDelta T1·8","AdapterMergeConfigAudit T0·9"]},
+ {f:"Inference time and runtime (report 4.4)"},
+ {id:"T15",n:"Direct prompt injection",s:"observed in deployment",d:"both",m:"blackbox",r:"Model susceptibility is testable before adoption; the consequence is the deployment's.",need:"An endpoint or a local model; instruct and chat models only.",t:["garak","PyRIT"],k:["SystemPromptAdherenceLogit T2·9","SystemPromptLeakAttack T3"]},
+ {id:"T16",n:"Indirect prompt injection",s:"observed in deployment",d:"demo",m:"blackbox",r:"The exposure comes from the deployment's tools and documents, so the model alone is not the unit. Demonstrated with an agent benchmark.",need:"An agent harness with tools and a document channel.",t:["AgentDojo","LlamaFirewall"],k:[]},
+ {id:"T17",n:"Jailbreaks",s:"observed in deployment",d:"both",m:"blackbox",r:"Observed in deployment, and the model-level part is what Advisor measures. GCG adds a whitebox route.",need:"An endpoint or local model; a judge model; GPU for GCG.",t:["garak","PyRIT"],k:["BaselineHarmfulCompliance","HarmfulComplianceAttack T3","GCGSuffixScanner T3 (whitebox)"]},
+ {id:"T18",n:"Model extraction",s:"observed in deployment",d:"theo",m:"",r:"System level. It needs a deployment and a query budget, and says nothing about the model before adoption.",need:"Not run.",k:[]},
+ {id:"T19",n:"Training-data extraction",s:"observed in deployment",d:"both",m:"blackbox",r:"Memorisation is a model property and testable before adoption. Exposure depends on the data the organisation trains on.",need:"Known training text or planted canaries, to confirm what is extracted.",t:["garak"],k:["MemorizationAttack T3"]},
+ {id:"T20",n:"Membership inference",s:"observed on classifiers",d:"demo",dis:"Proposed: demonstration on the classification row; theoretical for generative models, where reliability is not established. Dan to confirm the split.",m:"whitebox",r:"Reliable on classifiers, not established on large generative models.",need:"A classifier with known member and non-member data.",t:["ART"],k:[]},
+ {id:"T21",n:"Agentic and tool-use abuse",s:"observed in deployment",d:"demo",m:"blackbox",r:"The consequence is decided by the tools the deployment grants, so it is shown in an agent harness. A planted call-home is covered under T10.",need:"An agent harness with tools.",t:["AgentDojo","LlamaFirewall"],k:[]},
+];
+const L={theo:["Theoretical only","p-theo"],demo:["Demonstration","p-demo"],adv:["Advisor candidate","p-adv"],both:["Demonstration and Advisor","p-both"]};
+const esc=s=>s.replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+function render(f){
+  const tb=document.getElementById('rows');let h='';let fam=null;
+  for(const r of R){
+    if(r.f){fam=r.f;continue}
+    if(!(f==='all'||r.d===f||(f==='disp'&&r.dis)))continue;
+    if(fam){h+=`<tr class="fam"><td colspan="7">${esc(fam)}</td></tr>`;fam=null}
+    const [lab,cls]=L[r.d];
+    const tools=(r.t||[]).map(x=>`<code class="tool">${esc(x)}</code>`).join('');
+    const chks=r.k.map(x=>`<code>${esc(x)}</code>`).join('');
+    h+=`<tr><td class="id">${r.id}<span class="nm">${esc(r.n)}</span><span class="st">${esc(r.s)}</span></td>
+    <td><span class="pill ${cls}">${lab}</span>${r.dis?`<div class="dispute"><span class="pill p-disp">disputed</span><br>${esc(r.dis)}</div>`:''}</td>
+    <td>${r.m?`<span class="tag">${r.m}</span>`:'<span class="muted">n/a</span>'}</td>
+    <td class="rat">${esc(r.r)}</td><td class="need">${esc(r.need)}</td>
+    <td>${tools||chks?`<div class="chk">${tools}${chks}</div>`:'<span class="muted">none</span>'}</td>
+    <td class="date">2026-11-25</td></tr>`;
+  }
+  tb.innerHTML=h;
+}
+document.querySelectorAll('.filters button').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('.filters button').forEach(x=>x.setAttribute('aria-pressed',x===b?'true':'false'));
+  render(b.dataset.f);
+}));
+render('all');
+</script>
